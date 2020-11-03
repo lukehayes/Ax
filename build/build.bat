@@ -10,10 +10,10 @@ REM Compiler Flags
 set compileFlags=/MD /Feapp.exe
 
 REM Link Libraries
-set libs=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib 
+set libs=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib
 
 
-cl /MD /Feapp.exe ../main.c -I ../include /link %libs% /LIBPATH:../libs /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
+cl /MD /Feapp.exe ../main.c ../deps\win\src\glad.c -I ../include -I ../deps\win\include /link %libs% /LIBPATH:../libs /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
 
 app.exe
 
