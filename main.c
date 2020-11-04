@@ -1,17 +1,13 @@
 #include <GLFW/glfw3.h>
-
-typedef struct Engine
-{
-    int width;
-    int height;
-    const char* title;
-} Engine;
+#include "graphics/buffer.h"
+#include "engine.h"
 
 int main(void)
 {
+
     GLFWwindow* window;
 
-    Engine e = { 800,600, "Game" };
+    Engine e = CG_CreateEngine();
 
     /* Initialize the library */
     if (!glfwInit())
