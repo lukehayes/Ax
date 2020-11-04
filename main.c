@@ -1,3 +1,9 @@
+#ifdef LINUX
+#include <GL/gl.h>
+#elif _WIN32
+#include <glad/glad.h>
+#endif
+
 #include <GLFW/glfw3.h>
 #include "graphics/buffer.h"
 #include "engine.h"
@@ -21,6 +27,7 @@ int main(void)
         return -1;
     }
 
+
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
@@ -29,6 +36,7 @@ int main(void)
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
+
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
