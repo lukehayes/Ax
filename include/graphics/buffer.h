@@ -20,12 +20,11 @@ CG_CreateBuffer(Buffer* buffer)
        0.0f,  1.0f, 0.0f,
     };
 
-    for(int i = 0; i<=9; i++)
+    for(int i = 0; i<9; i++)
     {
         buffer->verticies[i] = arr[i];
+        printf("%i", i);
     }
-
-    printf("Creating BUffer");
 }
 
 #endif
