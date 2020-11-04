@@ -1,5 +1,12 @@
+rm -rf bin
+mkdir -p bin
 
+SRC="main.c"
+INC_DIRS="-I include"
+LINK_DIRS="-L/usr/local/lib/GLFW"
+LIBS="-lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl"
+OUTPUT="-o bin/app"
 
-gcc main.c -o app -I include -L/usr/local/lib/GLFW -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl
+gcc $SRC $OUTPUT $INC_DIRS $LINK_DIRS $LIBS
 
-./app
+./bin/app
