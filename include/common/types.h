@@ -53,6 +53,7 @@ typedef uint64_t		u64;
 typedef int64_t			s64;
 typedef float 	 		f32;
 typedef double			f64;
+typedef char* 	        str;
 typedef const char* 	const_str;
 
 #define u16_max 		UINT16_MAX
