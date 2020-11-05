@@ -1,5 +1,5 @@
 #ifdef LINUX
-#include <GL/gl.h>
+#include <GL/gl3.h>
 #elif _WIN32
 #include <glad/glad.h>
 #endif
@@ -19,6 +19,9 @@ int main(void)
     if (!glfwInit())
         return -1;
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(e.width, e.height, e.title, NULL, NULL);
     if (!window)
@@ -26,7 +29,6 @@ int main(void)
         glfwTerminate();
         return -1;
     }
-
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
@@ -36,6 +38,7 @@ int main(void)
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.0f,0.8f, 0.7f, 1.0f);
 
 
         /* Swap front and back buffers */
