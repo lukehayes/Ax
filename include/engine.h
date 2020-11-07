@@ -8,6 +8,9 @@ typedef struct Engine
     const char* title;
 
     void (*init)();
+    GLFWwindow* window;
+
+
 } Engine;
 
 void init()
