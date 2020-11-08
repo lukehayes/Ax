@@ -14,6 +14,12 @@ void Error_Callback(int error, const char* description)
     fprintf(stderr, "Error: %s\n", description);
 }
 
+void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GLFW_TRUE);
+}
+
 int main(void)
 {
 
@@ -35,6 +41,9 @@ int main(void)
         glfwTerminate();
         return -1;
     }
+
+    /* Get Key Input*/
+    glfwSetKeyCallback(e.window, Key_Callback);
 
     /* Make the window's context current */
     glfwMakeContextCurrent(e.window);
