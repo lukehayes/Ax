@@ -8,10 +8,18 @@
 #include "graphics/buffer.h"
 #include "engine.h"
 
+void Error_Callback(int error, const char* description)
+{
+    printf("Error: \n");
+    fprintf(stderr, "Error: %s\n", description);
+}
+
 int main(void)
 {
 
     Engine e = CG_CreateEngine();
+
+    glfwSetErrorCallback(Error_Callback);
 
     /* Initialize the library */
     if (!glfwInit())
