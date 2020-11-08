@@ -3,12 +3,14 @@
 
 typedef struct Engine
 {
+    // Properties
     int width;
     int height;
     const char* title;
-
-    void (*init)();
     GLFWwindow* window;
+
+    // Function Pointers
+    void (*init)();
 
 
 } Engine;
@@ -17,6 +19,11 @@ void init()
 {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+}
+
+void error_callback(int error, const char* description)
+{
+    fprintf(stderr, "Error: %s\n", description);
 }
 
 Engine CG_CreateEngine()
