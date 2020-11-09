@@ -1,12 +1,12 @@
 CC = gcc
-CFLAGS = -Wall
-IDFLAGS = -I include
-LDFLAGS = -L/usr/local/lib/GLFW
-LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl
-TARGET = -o bin/app
+CFLAGS = -Wall -g
+IDFLAGS = -I include -I deps/GLEW
+LDFLAGS = -L/usr/local/lib/GLFW -L deps/GLEW/lib
+LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW
+TARGET = -o bin/$@
 ENTRY = main.c
 
-compile:
+app:
 	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
 
 clean:
