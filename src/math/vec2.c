@@ -1,5 +1,5 @@
-#include "math/vec2.h"
 #include <math.h>
+#include "math/vec2.h"
 
 IV2 
 CG_IV2_Add(const IV2 a, const IV2 b)
@@ -28,8 +28,14 @@ CG_IV2_Mul_Scalar(const IV2 a, const s32 scalar)
     return result;
 }
 
-inline s32
+s32
 CG_IV2_Length(const IV2 a) 
 {
     return sqrt(a.x * a.x + a.y * a.y);
+}
+
+u8
+CG_IV2_Normalize(const IV2 a)
+{
+    return 1;
 }

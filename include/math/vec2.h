@@ -33,5 +33,8 @@ CG_IV2_Div(const IV2, const IV2);
 s32
 CG_IV2_Length(const IV2);
 
+u8
+CG_IV2_Normalize(const IV2);
+
 #endif
 
