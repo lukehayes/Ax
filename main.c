@@ -7,6 +7,8 @@
 #include "engine.h"
 #include "linmath.h"
 
+#include "math/vec2.h"
+
 
 GLuint vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
@@ -91,6 +93,21 @@ void setup()
 int main(void)
 {
 
+    IV2 a = {2,3};
+    IV2 b = {4,9};
+
+    fprintf(stderr, "There was an roor");
+
+    struct IV2 res = CG_IV2_Add(a,b);
+    s32 res2 = CG_IV2_Length(a);
+
+    printf("Result: %i, %i \n", res.x, res.y);
+
+
+    printf("Result: %i \n", res2);
+
+
+
     Engine e = CG_CreateEngine();
 
     glfwSetErrorCallback(Error_Callback);
@@ -100,7 +117,6 @@ int main(void)
         return -1;
 
     // Initialize GLFW Context etc
-    e.init();
 
     /* Create a windowed mode window and its OpenGL context */
     e.window = glfwCreateWindow(e.width, e.height, e.title, NULL, NULL);
@@ -115,6 +131,8 @@ int main(void)
 
     /* Make the window's context current */
     glfwMakeContextCurrent(e.window);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
     /* Glew MUST be initialized after context creation*/
     GLenum err = glewInit();
