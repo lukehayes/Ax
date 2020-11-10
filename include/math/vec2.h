@@ -2,17 +2,17 @@
 #define _CG_VEC2_H_
 
 /** Structs **/
-typedef struct IVec2
+typedef struct IV2
 {
     s32 x;
     s32 y;
-} IVec2;
+} IV2;
 
-typedef struct FVec2
+typedef struct FV2
 {
     f32 x;
     f32 y;
-} FVec2;
+} FV2;
 
 /** Functions **/
 
