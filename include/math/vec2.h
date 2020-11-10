@@ -1,6 +1,8 @@
 #ifndef _CG_VEC2_H_
 #define _CG_VEC2_H_
 
+#include "common/types.h"
+
 /** Structs **/
 typedef struct IV2
 {
@@ -16,6 +18,20 @@ typedef struct FV2
 
 /** Functions **/
 
+IV2 
+CG_IV2_Add(const IV2, const IV2);
+
+IV2 
+CG_IV2_Sub(const IV2, const IV2);
+
+IV2 
+CG_IV2_Mul_Scalar(const IV2, const s32);
+
+IV2 
+CG_IV2_Div(const IV2, const IV2);
+
+s32
+CG_IV2_Length(const IV2);
 
 #endif
 
