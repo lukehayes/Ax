@@ -3,6 +3,9 @@
 
 #include "common/types.h"
 
+#define Add_V2(a,b, Type) \
+    CG_Add_##Type( (a),(b) );
+
 /** Structs **/
 typedef struct IV2
 {
@@ -19,7 +22,7 @@ typedef struct FV2
 /** Functions **/
 
 IV2 
-CG_IV2_Add(const IV2, const IV2);
+CG_Add_IV2(const IV2, const IV2);
 
 IV2 
 CG_IV2_Sub(const IV2, const IV2);
