@@ -2,6 +2,8 @@
 #include <math.h>
 #include <stdio.h>
 
+/** Integer Vector **/
+
 IV2 
 CG_Add_IV2(const IV2 a, const IV2 b)
 {
@@ -45,10 +47,7 @@ CG_IV2_Normalize(const IV2 a)
     return result;
 }
 
-
-
-
-
+/** Float Vector **/
 
 FV2 
 CG_Add_FV2(const FV2 a, const FV2 b)
