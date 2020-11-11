@@ -3,16 +3,24 @@ CFLAGS = -Wall
 IDFLAGS = -I include -I deps/GLEW
 SRCDIR = src
 SRCFLAGS = src/math/vec2.c
-LDFLAGS = -L/usr/local/lib/GLFW -L deps/GLEW/lib -L .
-LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW -lCG-Math
+LDFLAGS = -L/usr/local/lib/GLFW -L deps/GLEW/lib -L ..
+LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW
 TARGET = -o bin/app
 ENTRY = main.c
 
-all: libCG-Math.so
-	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
+#Bundle all source code into a single binary
+all:
+	$(CC) $(ENTRY) src/*/*.c $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
 
-CG-Math.o: $(wildcard src/math/*.c)
-	$(CC) -c $^  $(IDFLAGS)
+build-static: libCG-Math-Static.a
+	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS) -lCG-Math-Static
+
+CG-Math-Static.o:
+	$(CC) -c src/math/*.c $(IDFLAGS)
+
+
+libCG-Math.a: *.o
+	ar -rcs $@ $^
 
 libCG-Math.so: $(wildcard src/math/*.c)
 	$(CC) -fPIC -shared -o $@  -c $^ -lc $ $(IDFLAGS)
