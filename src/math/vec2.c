@@ -1,5 +1,5 @@
-#include <math.h>
 #include "math/vec2.h"
+#include <math.h>
 
 IV2 
 CG_IV2_Add(const IV2 a, const IV2 b)
