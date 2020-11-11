@@ -13,7 +13,7 @@ ENTRY = main.c
 all:
 	$(CC) $(ENTRY) src/*/*.c $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
 
-build-static: libCG-Math-Static.a
+build-static: 
 	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS) $(STATIC_LIBS)
 
 libCG-Math-Static.a:
