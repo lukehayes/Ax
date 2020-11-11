@@ -3,8 +3,9 @@ CFLAGS = -Wall
 IDFLAGS = -I include -I deps/GLEW
 SRCDIR = src
 SRCFLAGS = src/math/vec2.c
-LDFLAGS = -L/usr/local/lib/GLFW -L deps/GLEW/lib -L ..
+LDFLAGS = -L/usr/local/lib/GLFW -L deps/GLEW/lib -L .
 LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW
+STATIC_LIBS = -lCG-Math-Static
 TARGET = -o bin/app
 ENTRY = main.c
 
@@ -13,17 +14,11 @@ all:
 	$(CC) $(ENTRY) src/*/*.c $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
 
 build-static: libCG-Math-Static.a
-	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS) -lCG-Math-Static
+	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS) $(STATIC_LIBS)
 
-CG-Math-Static.o:
+libCG-Math-Static.a:
 	$(CC) -c src/math/*.c $(IDFLAGS)
-
-
-libCG-Math.a: *.o
-	ar -rcs $@ $^
-
-libCG-Math.so: $(wildcard src/math/*.c)
-	$(CC) -fPIC -shared -o $@  -c $^ -lc $ $(IDFLAGS)
+	ar -rcs $@ *.o
 
 
 #Debug specific. -g3 flag enables ALL debugging symbols.
