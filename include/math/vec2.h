@@ -3,6 +3,8 @@
 
 #include "common/types.h"
 
+
+/** Generic Functions **/
 #define Add_V2(a,b, Type) \
     CG_Add_##Type( (a),(b) );
 
@@ -38,6 +40,27 @@ CG_IV2_Length(const IV2);
 
 IV2
 CG_IV2_Normalize(const IV2);
+
+FV2 
+CG_Add_FV2(const FV2, const FV2);
+
+FV2 
+CG_FV2_Sub(const FV2, const FV2);
+
+FV2 
+CG_FV2_Mul_Scalar(const FV2, const s32);
+
+FV2 
+CG_FV2_Div(const FV2, const FV2);
+
+s32
+CG_FV2_Length(const FV2);
+
+FV2
+CG_FV2_Normalize(const FV2);
+
+
+
 
 #endif
 
