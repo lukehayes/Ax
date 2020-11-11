@@ -93,18 +93,17 @@ void setup()
 int main(void)
 {
 
-    IV2 a = {2,3};
-    IV2 b = {4,9};
+    FV2 a = {2.0,3.0};
+    FV2 b = {2,3};
+    FV2 c = {4,6};
 
-    fprintf(stderr, "There was an roor");
+    struct FV2 res = Add_V2(b,c, FV2);
+    FV2 res2 = CG_FV2_Normalize(a);
 
-    struct IV2 res = CG_IV2_Add(a,b);
-    s32 res2 = CG_IV2_Length(a);
-
-    printf("Result: %i, %i \n", res.x, res.y);
-
-
-    printf("Result: %i \n", res2);
+    printf("Result: %f, %f \n", res.x, res.y);
+    printf("Norm %f %f", res2.x, res2.y);
+    /*printf("Length: %i \n", CG_IV2_Length(a));*/
+    /*printf("Result: %i, %i \n", res2.x, res2.y);*/
 
 
 
