@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall
-IDFLAGS = -I include -I deps/GLEW
+IDFLAGS = -I include -I deps
 SRCDIR = src
 SRCFLAGS = src/math/vec2.c
 LDFLAGS = -L/usr/local/lib/GLFW -L deps/GLEW/lib -L .
