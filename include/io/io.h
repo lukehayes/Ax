@@ -1,5 +1,5 @@
-#ifndef __CG_IO_H__
-#define __CG_IO_H__
+#ifndef CG_IO_H
+#define CG_IO_H
 
 #include <stdio.h>
 #include "common/types.h"
