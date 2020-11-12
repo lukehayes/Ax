@@ -24,7 +24,7 @@ libCG-Math-Static.a:
 #Debug specific. -g3 flag enables ALL debugging symbols.
 DEBUG_FLAGS = -Wall -ggdb
 debug:
-	$(CC) $(ENTRY) $(TARGET) $(DEBUG_FLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
+	$(CC) $(ENTRY) src/*/*.c $(TARGET) $(DEBUG_FLAGS) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
 
 clean:
 	rm *.o *.so *.a
