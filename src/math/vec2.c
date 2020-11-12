@@ -14,7 +14,7 @@ CG_Add_IV2(const IV2 a, const IV2 b)
 }
 
 IV2 
-CG_IV2_Sub(const IV2 a, const IV2 b) 
+CG_Sub_IV2(const IV2 a, const IV2 b) 
 {
     IV2 result;
     result.x = a.x - b.x;
@@ -23,7 +23,7 @@ CG_IV2_Sub(const IV2 a, const IV2 b)
 }
 
 IV2 
-CG_IV2_Mul_Scalar(const IV2 a, const s32 scalar)
+CG_Mul_Scalar_IV2(const IV2 a, const s32 scalar)
 {
     IV2 result;
     result.x = a.x * scalar;
@@ -32,16 +32,16 @@ CG_IV2_Mul_Scalar(const IV2 a, const s32 scalar)
 }
 
 s32
-CG_IV2_Length(const IV2 a) 
+CG_Length_IV2(const IV2 a) 
 {
     return sqrt( (a.x * a.x) + (a.y * a.y) );
 }
 
 IV2
-CG_IV2_Normalize(const IV2 a)
+CG_Normalize_IV2(const IV2 a)
 {
     IV2 result;
-    s32 length = CG_IV2_Length(a);
+    s32 length = CG_Length_IV2(a);
     result.x = a.x / length;
     result.y = a.y / length;
     return result;
@@ -59,7 +59,7 @@ CG_Add_FV2(const FV2 a, const FV2 b)
 }
 
 FV2 
-CG_FV2_Sub(const FV2 a, const FV2 b) 
+CG_Sub_FV2(const FV2 a, const FV2 b) 
 {
     FV2 result;
     result.x = a.x - b.x;
@@ -68,7 +68,7 @@ CG_FV2_Sub(const FV2 a, const FV2 b)
 }
 
 FV2 
-CG_FV2_Mul_Scalar(const FV2 a, const s32 scalar)
+CG_Mul_Scalar_FV2(const FV2 a, const s32 scalar)
 {
     FV2 result;
     result.x = a.x * scalar;
@@ -77,16 +77,16 @@ CG_FV2_Mul_Scalar(const FV2 a, const s32 scalar)
 }
 
 s32
-CG_FV2_Length(const FV2 a) 
+CG_Length_FV2(const FV2 a) 
 {
     return sqrt( (a.x * a.x) + (a.y * a.y) );
 }
 
 FV2
-CG_FV2_Normalize(const FV2 a)
+CG_Normalize_FV2(const FV2 a)
 {
     FV2 result;
-    s32 length = CG_FV2_Length(a);
+    s32 length = CG_Length_FV2(a);
     result.x = a.x / length;
     result.y = a.y / length;
     return result;

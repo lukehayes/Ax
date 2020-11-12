@@ -27,37 +27,39 @@ IV2
 CG_Add_IV2(const IV2, const IV2);
 
 IV2 
-CG_IV2_Sub(const IV2, const IV2);
+CG_Sub_IV2(const IV2, const IV2);
 
 IV2 
-CG_IV2_Mul_Scalar(const IV2, const s32);
+CG_Mul_IV2_Scalar(const IV2, const s32);
 
 IV2 
-CG_IV2_Div(const IV2, const IV2);
+CG_Div_IV2(const IV2, const IV2);
 
 s32
-CG_IV2_Length(const IV2);
+CG_Length_IV2(const IV2);
 
 IV2
-CG_IV2_Normalize(const IV2);
+CG_Normalize_IV2(const IV2);
+
+/** Float Version **/
 
 FV2 
 CG_Add_FV2(const FV2, const FV2);
 
 FV2 
-CG_FV2_Sub(const FV2, const FV2);
+CG_Sub_FV2(const FV2, const FV2);
 
 FV2 
-CG_FV2_Mul_Scalar(const FV2, const s32);
+CG_Mul_Scalar_FV2(const FV2, const s32);
 
 FV2 
-CG_FV2_Div(const FV2, const FV2);
+CG_Div_FV2(const FV2, const FV2);
 
 s32
-CG_FV2_Length(const FV2);
+CG_Length_FV2(const FV2);
 
 FV2
-CG_FV2_Normalize(const FV2);
+CG_Normalize_FV2(const FV2);
 
 
 
