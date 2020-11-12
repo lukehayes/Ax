@@ -2,12 +2,14 @@
 #define GLEW_STATIC
 #endif
 #include <GLEW/glew.h>
+#include <GLEW/glxew.h>
 #include <GLFW/glfw3.h>
 #include "graphics/buffer.h"
 #include "engine.h"
 #include "linmath.h"
+#include "io/io.h"
+#include <stdlib.h>
 
-#include "math/vec2.h"
 
 
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
@@ -24,7 +26,7 @@ static const struct
     {   0.f,  0.6f, 0.f, 0.f, 1.f }
 };
 
-static const char* vertex_shader_text =
+static const char* vsh_source =
 "#version 330 core\n"
 "uniform mat4 MVP;\n"
 "attribute vec3 vCol;\n"
@@ -60,16 +62,20 @@ void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mod
 void Setup_OpenGL()
 {
 
+
+    /*const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");*/
+    /*printf("%s \n", vsh_source);*/
+    /*GLchar const* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");*/
+
     glGenVertexArrays(1, &vertex_array);
     glBindVertexArray(vertex_array);
-
 
     glGenBuffers(1, &vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
  
     vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex_shader, 1, &vertex_shader_text, NULL);
+    glShaderSource(vertex_shader, 1, &vsh_source, NULL);
     glCompileShader(vertex_shader);
  
     fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -82,7 +88,7 @@ void Setup_OpenGL()
     glLinkProgram(program);
  
     mvp_location = glGetUniformLocation(program, "MVP");
-    vpos_location = glGetAttribLocation(program, "vPos");
+    vpos_location = glGetAttribLocation(program, "vtx_position");
     vcol_location = glGetAttribLocation(program, "vCol");
  
     glEnableVertexAttribArray(vpos_location);
@@ -91,6 +97,9 @@ void Setup_OpenGL()
     glEnableVertexAttribArray(vcol_location);
     glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
                           sizeof(vertices[0]), (void*) (sizeof(float) * 2));
+
+    /*free(vsh_source);*/
+    /*free(fsh_source);*/
 
 }
 
