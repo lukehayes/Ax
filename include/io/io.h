@@ -19,7 +19,7 @@ CG_Get_Filesize(FILE* handle)
  * Read a file into a buffer and return it. 
  * Buffer needs to be freed after use!
  */
-str
+const char*
 CG_Read_File(const char* filename)
 {
     FILE* fh = fopen(filename, "r");
@@ -29,6 +29,10 @@ CG_Read_File(const char* filename)
 
     for(int i = 0; i<= size + 1; i++) {
         buffer[i] = fgetc(fh);
+
+        if(i == size + 1)
+        {
+        }
     }
 
     fclose(fh);
