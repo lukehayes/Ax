@@ -3,6 +3,7 @@ CFLAGS = -Wall
 IDFLAGS = -I include -I deps
 SRCDIR = src
 SRCFLAGS = src/math/vec2.c
+ALLSRC = src/*/*.c
 LDFLAGS = -L/usr/local/lib/GLFW -L deps/GLEW/lib -L .
 LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW
 STATIC_LIBS = -lCG-Math-Static
@@ -11,7 +12,7 @@ ENTRY = main.c
 
 #Bundle all source code into a single binary
 all:
-	$(CC) $(ENTRY) src/*/*.c $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
+	$(CC) $(ENTRY) $(ALLSRC) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
 
 build-static: 
 	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS) $(STATIC_LIBS)
@@ -20,11 +21,10 @@ libCG-Math-Static.a:
 	$(CC) -c src/math/*.c $(IDFLAGS)
 	ar -rcs $@ *.o
 
-
 #Debug specific. -g3 flag enables ALL debugging symbols.
 DEBUG_FLAGS = -Wall -ggdb
 debug:
-	$(CC) $(ENTRY) src/*/*.c $(TARGET) $(DEBUG_FLAGS) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
+	$(CC) $(ENTRY) $(ALLSRC) $(TARGET) $(DEBUG_FLAGS) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
 
 clean:
 	rm *.o *.so *.a
