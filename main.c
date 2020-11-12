@@ -10,7 +10,7 @@
 #include "math/vec2.h"
 
 
-GLuint vertex_buffer, vertex_shader, fragment_shader, program;
+GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 
 static const struct
@@ -25,7 +25,7 @@ static const struct
 };
 
 static const char* vertex_shader_text =
-"#version 110\n"
+"#version 330 core\n"
 "uniform mat4 MVP;\n"
 "attribute vec3 vCol;\n"
 "attribute vec2 vPos;\n"
@@ -37,7 +37,7 @@ static const char* vertex_shader_text =
 "}\n";
  
 static const char* fragment_shader_text =
-"#version 110\n"
+"#version 330 core\n"
 "varying vec3 color;\n"
 "void main()\n"
 "{\n"
@@ -59,6 +59,10 @@ void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void Setup_OpenGL()
 {
+
+    glGenVertexArrays(1, &vertex_array);
+    glBindVertexArray(vertex_array);
+
 
     glGenBuffers(1, &vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
@@ -92,30 +96,18 @@ void Setup_OpenGL()
 
 int main(void)
 {
-
-    FV2 a = {2.0,3.0};
-    FV2 b = {2,3};
-    FV2 c = {4,6};
-
-    struct FV2 res = Add_V2(b,c, FV2);
-    FV2 res2 = Norm_V2(a, FV2);
-
-    printf("Result: %f, %f \n", res.x, res.y);
-    printf("Norm %f %f \n", res2.x, res2.y);
-    /*printf("Length: %i \n", CG_IV2_Length(a));*/
-    /*printf("Result: %i, %i \n", res2.x, res2.y);*/
-
+    /* Initialize the library */
+    if (!glfwInit())
+        return -1;
+    // Initialize GLFW Context etc
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 
     Engine e = CG_CreateEngine();
 
     glfwSetErrorCallback(Error_Callback);
-
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
-
-    // Initialize GLFW Context etc
 
     /* Create a windowed mode window and its OpenGL context */
     e.window = glfwCreateWindow(e.width, e.height, e.title, NULL, NULL);
@@ -124,14 +116,12 @@ int main(void)
         glfwTerminate();
         return -1;
     }
+    /* Make the window's context current */
+    glfwMakeContextCurrent(e.window);
 
     /* Get Key Input*/
     glfwSetKeyCallback(e.window, Key_Callback);
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(e.window);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
     /* Glew MUST be initialized after context creation*/
     GLenum err = glewInit();
