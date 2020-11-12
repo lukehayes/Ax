@@ -8,6 +8,9 @@
 #define Add_V2(a,b, Type) \
     CG_Add_##Type( (a),(b) );
 
+#define Norm_V2(a, Type) \
+    CG_Normalize_##Type( (a) );
+
 /** Structs **/
 typedef struct IV2
 {
