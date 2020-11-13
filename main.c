@@ -90,7 +90,8 @@ void Setup_OpenGL()
         printf("Linking Shader Failed. %s \n", infoLog);
     };
 
-
+    glDeleteShader(vertex_shader);
+    glDeleteShader(fragment_shader);
 
     /*mvp_location = glGetUniformLocation(program, "MVP");*/
     /*vpos_location = glGetAttribLocation(program, "vtx_position");*/
