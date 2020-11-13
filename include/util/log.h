@@ -6,7 +6,6 @@
     Wrapper functions around printf() for logging messages with colors.
 ======================================================================== **/
 
-
 void L(const char* message)
 {
     printf("\e[32mLog:\e[96m%s\e[0m\n", message);
@@ -31,5 +30,6 @@ void LE(const char* message, const char* value)
 {
     printf("\e[31mLog:%s. : \e[33m%s.\e[0m\n", message, value);
 }
+
 
 #endif
