@@ -10,6 +10,7 @@
 #include "io/io.h"
 #include "util/log.h"
 
+
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 
@@ -95,19 +96,8 @@ void Setup_OpenGL()
     glDeleteShader(fragment_shader);
     L("Shaders Loaded. All fine.");
 
-    mvp_location = glGetUniformLocation(program, "MVP");
-    /*vpos_location = glGetAttribLocation(program, "vtx_position");*/
-
-    /*glEnableVertexAttribArray(vpos_location);*/
-    /*glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,*/
-    /*sizeof(verts[0]), (void*) 0);*/
-
-    /*glEnableVertexAttribArray(vcol_location);*/
-    /*glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,*/
-    /*sizeof(verts[0]), (void*) (sizeof(float) * 2));*/
-
-    /*free(vsh_source);*/
-    /*free(fsh_source);*/
+    free((char*)vsh_source);
+    free((char*)fsh_source);
 
 }
 
@@ -149,6 +139,7 @@ int main(void)
     }
 
     Setup_OpenGL();
+
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(e.window))
