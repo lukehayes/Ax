@@ -8,12 +8,12 @@
 #include "engine.h"
 #include "linmath.h"
 #include "io/io.h"
-#include <stdlib.h>
+#include "util/log.h"
 
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 
-float verts[9] = {
+float verts[] = {
     -1.0f, -1.0f, 0.0f,
     1.0f, -1.0f, 0.0f,
     0.0f,  1.0f, 0.0f
@@ -35,6 +35,7 @@ void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mod
 void Setup_OpenGL()
 {
     const int BUFFER_SIZE = sizeof(float) * 9;
+    const int VERTEX_SIZE = sizeof(float) * 3;
     const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
     const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
@@ -47,7 +48,7 @@ void Setup_OpenGL()
     glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, verts, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, BUFFER_SIZE, (void*)0 );
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (void*)0 );
 
     unsigned int vertex_shader, fragment_shader;
     int success;
@@ -62,7 +63,7 @@ void Setup_OpenGL()
     if(!success)
     {
         glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-        printf("Vertex Shader Compilation Failed. %s \n", infoLog);
+        LE("Vertex Shader Compilation Failed", infoLog);
     };
 
     fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -74,7 +75,7 @@ void Setup_OpenGL()
     if(!success)
     {
         glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-        printf("Fragment Shader Compilation Failed. %s \n", infoLog);
+        LE("Fragment Shader Compilation Failed", infoLog);
     };
 
     program = glCreateProgram();
@@ -92,8 +93,9 @@ void Setup_OpenGL()
 
     glDeleteShader(vertex_shader);
     glDeleteShader(fragment_shader);
+    L("Shaders Loaded. All fine.");
 
-    /*mvp_location = glGetUniformLocation(program, "MVP");*/
+    mvp_location = glGetUniformLocation(program, "MVP");
     /*vpos_location = glGetAttribLocation(program, "vtx_position");*/
 
     /*glEnableVertexAttribArray(vpos_location);*/
@@ -167,6 +169,7 @@ int main(void)
         mat4x4_mul(mvp, p, m);
 
         glUseProgram(program);
+        glBindVertexArray(vertex_array);
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*) mvp);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
