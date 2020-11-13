@@ -10,41 +10,14 @@
 #include "io/io.h"
 #include <stdlib.h>
 
-
-
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 
-static const struct
-{
-    float x, y;
-    float r, g, b;
-} vertices[3] =
-{
-    { -0.6f, -0.4f, 1.f, 0.f, 0.f },
-    {  0.6f, -0.4f, 0.f, 1.f, 0.f },
-    {   0.f,  0.6f, 0.f, 0.f, 1.f }
+float verts[9] = {
+    -1.0f, -1.0f, 0.0f,
+    1.0f, -1.0f, 0.0f,
+    0.0f,  1.0f, 0.0f
 };
-
-static const char* vsh_source =
-"#version 330 core\n"
-"uniform mat4 MVP;\n"
-"attribute vec3 vCol;\n"
-"attribute vec2 vPos;\n"
-"varying vec3 color;\n"
-"void main()\n"
-"{\n"
-"    gl_Position = MVP * vec4(vPos, 0.0, 0.4);\n"
-"    color = vCol;\n"
-"}\n";
- 
-static const char* fragment_shader_text =
-"#version 330 core\n"
-"varying vec3 color;\n"
-"void main()\n"
-"{\n"
-"    gl_FragColor = vec4(color, 1.0);\n"
-"}\n";
 
 void Error_Callback(int error, const char* description)
 {
@@ -61,42 +34,74 @@ void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void Setup_OpenGL()
 {
-
-
-    /*const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");*/
-    /*printf("%s \n", vsh_source);*/
-    /*GLchar const* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");*/
+    const int BUFFER_SIZE = sizeof(float) * 9;
+    const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
+    const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
     glGenVertexArrays(1, &vertex_array);
     glBindVertexArray(vertex_array);
 
     glGenBuffers(1, &vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
- 
+
+    glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, verts, GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, BUFFER_SIZE, (void*)0 );
+
+    unsigned int vertex_shader, fragment_shader;
+    int success;
+    char infoLog[512];
+
     vertex_shader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex_shader, 1, &vsh_source, NULL);
     glCompileShader(vertex_shader);
- 
+
+    // print compile errors if any
+    glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
+        printf("Vertex Shader Compilation Failed. %s \n", infoLog);
+    };
+
     fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment_shader, 1, &fragment_shader_text, NULL);
+    glShaderSource(fragment_shader, 1, &fsh_source, NULL);
     glCompileShader(fragment_shader);
- 
+
+    // print compile errors if any
+    glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
+    if(!success)
+    {
+        glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
+        printf("Fragment Shader Compilation Failed. %s \n", infoLog);
+    };
+
     program = glCreateProgram();
+
     glAttachShader(program, vertex_shader);
     glAttachShader(program, fragment_shader);
     glLinkProgram(program);
- 
-    mvp_location = glGetUniformLocation(program, "MVP");
-    vpos_location = glGetAttribLocation(program, "vtx_position");
-    vcol_location = glGetAttribLocation(program, "vCol");
- 
-    glEnableVertexAttribArray(vpos_location);
-    glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,
-                          sizeof(vertices[0]), (void*) 0);
-    glEnableVertexAttribArray(vcol_location);
-    glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
-                          sizeof(vertices[0]), (void*) (sizeof(float) * 2));
+
+    glGetShaderiv(program, GL_LINK_STATUS, &success);
+    if(!success)
+    {
+        glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
+        printf("Linking Shader Failed. %s \n", infoLog);
+    };
+
+
+
+    /*mvp_location = glGetUniformLocation(program, "MVP");*/
+    /*vpos_location = glGetAttribLocation(program, "vtx_position");*/
+
+    /*glEnableVertexAttribArray(vpos_location);*/
+    /*glVertexAttribPointer(vpos_location, 2, GL_FLOAT, GL_FALSE,*/
+    /*sizeof(verts[0]), (void*) 0);*/
+
+    /*glEnableVertexAttribArray(vcol_location);*/
+    /*glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,*/
+    /*sizeof(verts[0]), (void*) (sizeof(float) * 2));*/
 
     /*free(vsh_source);*/
     /*free(fsh_source);*/
@@ -148,18 +153,18 @@ int main(void)
         float ratio;
         int width, height;
         mat4x4 m, p, mvp;
- 
+
         glfwGetFramebufferSize(e.window, &width, &height);
         ratio = width / (float) height;
- 
+
         glViewport(0, 0, width, height);
         glClear(GL_COLOR_BUFFER_BIT);
- 
+
         mat4x4_identity(m);
         mat4x4_rotate_Z(m, m, (float) glfwGetTime());
         mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
         mat4x4_mul(mvp, p, m);
- 
+
         glUseProgram(program);
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*) mvp);
         glDrawArrays(GL_TRIANGLES, 0, 3);
