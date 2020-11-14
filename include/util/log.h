@@ -9,8 +9,18 @@
 #ifndef UTIL_LOG_H
 #define UTIL_LOG_H
 
+
 /* #####   HEADER FILE INCLUDES   ################################################### */
 #include <stdio.h>
+
+/* #####   MACROS  ################################################################# */
+#define NONE "\e[0m"
+#define RED "\e[31m"
+#define GREEN "\e[32m"
+#define YELLOW "\e[33m"
+#define BLUE "\e[94m"
+#define MAGENTA "\e[95m"
+#define LIGHT_GREEN "\e[96m"
 
 
 /* #####   FUNCTION DEFINITIONS  -  LOCAL TO THIS SOURCE FILE   ##################### */
@@ -23,7 +33,7 @@
  */
 void L(const char* message)
 {
-    printf("\e[32mLog:\e[96m%s\e[0m\n", message);
+    printf("%sLog: %s%s%s\n", GREEN, LIGHT_GREEN, message, NONE);
 }
 
 /* 
@@ -34,7 +44,7 @@ void L(const char* message)
  */
 void LI(int value)
 {
-    printf("\e[32mLog:\e[96m%i\e[0m\n", value);
+    printf("%sLog: %s%i%s\n", GREEN, LIGHT_GREEN, value, NONE);
 }
 
 /* 
@@ -45,7 +55,7 @@ void LI(int value)
  */
 void LSI(const char* message, int value)
 {
-    printf("\e[32mLog:\e[96m%s - %i \e[0m\n", message, value);
+    printf("%sLog: %s%s%i%s\n", GREEN, LIGHT_GREEN, message, value, NONE);
 }
 
 /* 
@@ -56,7 +66,7 @@ void LSI(const char* message, int value)
  */
 void LSS(const char* message, const char* value)
 {
-    printf("\e[32mLog:\e[96m%s. - %s. \e[0m\n", message, value);
+    printf("%sLog: %s%s - %s %s\n", GREEN, LIGHT_GREEN, message, value, NONE);
 }
 
 
@@ -68,8 +78,7 @@ void LSS(const char* message, const char* value)
  */
 void LE(const char* message, const char* value)
 {
-    printf("\e[31mLog:%s. : \e[33m%s.\e[0m\n", message, value);
+    printf("%sError: %s%s - %s %s\n", RED, MAGENTA, message, value, NONE);
 }
-
 
 #endif
