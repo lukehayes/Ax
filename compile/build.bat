@@ -10,14 +10,18 @@ REM Compiler Flags
 set compileFlags=/MD /Febin\app.exe
 
 REM Link Libraries
-set includes=-I include -I deps
-set libs=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib glew32s.lib
+
+set LOCAL_LIBS=C:\Dev\Libraries
+set includes=-I include -I %LOCAL_LIBS%\GLFW\include -I %LOCAL_LIBS%\GLEW\Include -I %LOCAL_LIBS%\CGLM\Include\
+set LIBS_DIR= /LIBPATH:%LOCAL_LIBS%\GLFW\Libs /LIBPATH:%LOCAL_LIBS%\GLEW\Libs /LIBPATH:%LOCAL_LIBS%\CGLM\Libs
+set LIBS=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib glew32s.lib
 set math_src=src/math/*.c
+set util_src=src/util/*.c
 
 
-cl main.c %compileFlags% %math_src% %includes% /link %libs% /LIBPATH:libs /LIBPATH:C:\Dev\Libraries\GLEW\Libraries /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
+cl main.c %compileFlags% %math_src% %includes% /link %LIBS% %LIBS_DIR% /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
 
 del *.obj
 
-bin\app.exe
+REM bin\app.exe
 
