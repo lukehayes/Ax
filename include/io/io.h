@@ -27,11 +27,12 @@ CG_Read_File(const char* filename)
 
     char* buffer = malloc(sizeof(char) * size);
 
-    for(int i = 0; i<= size + 1; i++) {
+    for(int i = 0; i<= size; i++) {
         buffer[i] = fgetc(fh);
 
-        if(i == size + 1)
+        if(i == size)
         {
+            buffer[i] = '\0';
         }
     }
 
