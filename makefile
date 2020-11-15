@@ -1,13 +1,13 @@
 CC = gcc
 CFLAGS = -Wall
-IDFLAGS = -I include -I deps
+IDFLAGS = -I include
 SRCDIR = src
 SRCFLAGS = src/math/vec2.c
 ALLSRC = src/*/*.c
-LDFLAGS = -L/usr/local/lib/GLFW -L deps/GLEW/lib -L .
+LDFLAGS =
 LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW
 STATIC_LIBS = -lCG-Math-Static
-TARGET = -o bin/app
+TARGET = -o build/app
 ENTRY = main.c
 
 #Bundle all source code into a single binary
