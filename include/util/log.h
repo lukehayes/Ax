@@ -14,6 +14,7 @@
 #include <stdio.h>
 
 /* #####   MACROS  ################################################################# */
+#if defined(LINUX)
 #define NONE "\e[0m"
 #define RED "\e[31m"
 #define GREEN "\e[32m"
@@ -21,7 +22,17 @@
 #define BLUE "\e[94m"
 #define MAGENTA "\e[95m"
 #define LIGHT_GREEN "\e[96m"
+#endif
 
+#if defined(_WIN32)
+#define NONE ""
+#define RED ""
+#define GREEN ""
+#define YELLOW ""
+#define BLUE ""
+#define MAGENTA ""
+#define LIGHT_GREEN ""
+#endif
 
 /* #####   FUNCTION DEFINITIONS  -  LOCAL TO THIS SOURCE FILE   ##################### */
 
