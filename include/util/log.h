@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 /* #####   MACROS  ################################################################# */
-#if defined(LINUX)
+#if defined(unix) || defined(__unix__) || defined(__unix)
 #define NONE "\e[0m"
 #define RED "\e[31m"
 #define GREEN "\e[32m"
