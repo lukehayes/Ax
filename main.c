@@ -1,11 +1,5 @@
-#ifdef _WIN32
-#define GLEW_STATIC
-#endif
-#include <GLEW/glew.h>
-#include <GLEW/glxew.h>
-#include <GLFW/glfw3.h>
-#include "graphics/buffer.h"
 #include "engine.h"
+#include "graphics/buffer.h"
 #include "linmath.h"
 #include "io/io.h"
 #include "util/log.h"
@@ -103,40 +97,15 @@ void Setup_OpenGL()
 
 int main(void)
 {
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
 
     Engine e = CG_CreateEngine();
-    // Initialize GLFW Context etc
-    e.init();
 
     glfwSetErrorCallback(Error_Callback);
-
-    /* Create a windowed mode window and its OpenGL context */
-    e.window = glfwCreateWindow(e.width, e.height, e.title, NULL, NULL);
-    if (!e.window)
-    {
-        glfwTerminate();
-        return -1;
-    }
-    /* Make the window's context current */
-    glfwMakeContextCurrent(e.window);
 
     /* Get Key Input*/
     glfwSetKeyCallback(e.window, Key_Callback);
 
-
-    /* Glew MUST be initialized after context creation*/
-    GLenum err = glewInit();
-
-    if( GLEW_OK != err )
-    {
-        fprintf(stderr, "Error: %s \n", glewGetErrorString(err));
-    }
-
     Setup_OpenGL();
-
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(e.window))

@@ -1,6 +1,13 @@
 #ifndef _CG_ENGINE_H
 #define _CG_ENGINE_H
 
+#ifdef _WIN32
+#define GLEW_STATIC
+#endif
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include "util/log.h"
+
 typedef struct Engine
 {
     // Properties
@@ -30,8 +37,29 @@ void error_callback(int error, const char* description)
 
 Engine CG_CreateEngine()
 {
-    Engine e = { 800,600, "Game" };
+    int width = 800;
+    int height = 600;
+    char* title = "Game";
+
+    /* Initialize the library */
+    if (!glfwInit()) { LE("GLFW FAILED TO INITIALIZE", NULL); }
+
+    Engine e = { width, height, title };
     e.init = &init;
+    e.init();
+    e.window = glfwCreateWindow(width, height, title, NULL, NULL);
+
+
+    glfwMakeContextCurrent(e.window);
+
+    /* Glew MUST be initialized after context creation*/
+    GLenum err = glewInit();
+
+    if( GLEW_OK != err )
+    {
+        fprintf(stderr, "Error: %s \n", glewGetErrorString(err));
+    }
+
     return e;
 }
 
