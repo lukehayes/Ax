@@ -8,6 +8,7 @@ typedef struct Engine
     int height;
     const char* title;
     GLFWwindow* window;
+    GLFWmonitor* monitor;
 
     // Function Pointers
     void (*init)();
