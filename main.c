@@ -106,13 +106,10 @@ int main(void)
     /* Initialize the library */
     if (!glfwInit())
         return -1;
-    // Initialize GLFW Context etc
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
 
     Engine e = CG_CreateEngine();
+    // Initialize GLFW Context etc
+    e.init();
 
     glfwSetErrorCallback(Error_Callback);
 
