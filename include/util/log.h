@@ -60,6 +60,17 @@ void LI(int value)
 
 /* 
  * ===  FUNCTION  ======================================================================
+ *         Name:  LI - Log Float
+ *  Description:  Log a float(value)to the console.
+ * =====================================================================================
+ */
+void LF(float value)
+{
+    printf("%sLog: %s%f%s\n", GREEN, LIGHT_GREEN, value, NONE);
+}
+
+/* 
+ * ===  FUNCTION  ======================================================================
  *         Name:  LSI - Log String Integer
  *  Description:  Log a string(message) and an integer(value)to the console.
  * =====================================================================================
