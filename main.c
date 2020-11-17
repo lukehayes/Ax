@@ -3,141 +3,194 @@
 #include "linmath.h"
 #include "io/io.h"
 #include "util/log.h"
-
+#include <cglm/mat4.h>
+#include <cglm/vec3.h>
+#include <cglm/cam.h>
+#include <cglm/affine.h>
 
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 
 float verts[] = {
-    -1.0f, -1.0f, 0.0f,
-    1.0f, -1.0f, 0.0f,
-    0.0f,  1.0f, 0.0f
+	-1.0f, -1.0f, 0.0f,
+	1.0f, -1.0f, 0.0f,
+	0.0f,  1.0f, 0.0f
 };
 
 void Error_Callback(int error, const char* description)
 {
-    printf("Error: \n");
-    fprintf(stderr, "Error: %s\n", description);
+	printf("Error: \n");
+	fprintf(stderr, "Error: %s\n", description);
 }
 
 void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GLFW_TRUE);
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
 
 void Setup_OpenGL()
 {
-    const int BUFFER_SIZE = sizeof(float) * 9;
-    const int VERTEX_SIZE = sizeof(float) * 3;
-    const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
-    const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
+	const int BUFFER_SIZE = sizeof(float) * 9;
+	const int VERTEX_SIZE = sizeof(float) * 3;
+	const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
+	const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
-    glGenVertexArrays(1, &vertex_array);
-    glBindVertexArray(vertex_array);
+	glGenVertexArrays(1, &vertex_array);
+	glBindVertexArray(vertex_array);
 
-    glGenBuffers(1, &vertex_buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
+	glGenBuffers(1, &vertex_buffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 
-    glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, verts, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, verts, GL_STATIC_DRAW);
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (void*)0 );
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (void*)0 );
 
-    unsigned int vertex_shader, fragment_shader;
-    int success;
-    char infoLog[512];
+	unsigned int vertex_shader, fragment_shader;
+	int success;
+	char infoLog[512];
 
-    vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex_shader, 1, &vsh_source, NULL);
-    glCompileShader(vertex_shader);
+	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(vertex_shader, 1, &vsh_source, NULL);
+	glCompileShader(vertex_shader);
 
-    // print compile errors if any
-    glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-        LE("Vertex Shader Compilation Failed", infoLog);
-    };
+	// print compile errors if any
+	glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
+	if(!success)
+	{
+		glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
+		LE("Vertex Shader Compilation Failed", infoLog);
+	};
 
-    fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment_shader, 1, &fsh_source, NULL);
-    glCompileShader(fragment_shader);
+	fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(fragment_shader, 1, &fsh_source, NULL);
+	glCompileShader(fragment_shader);
 
-    // print compile errors if any
-    glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
-    if(!success)
-    {
-        glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-        LE("Fragment Shader Compilation Failed", infoLog);
-    };
+	// print compile errors if any
+	glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
+	if(!success)
+	{
+		glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
+		LE("Fragment Shader Compilation Failed", infoLog);
+	};
 
-    program = glCreateProgram();
+	program = glCreateProgram();
 
-    glAttachShader(program, vertex_shader);
-    glAttachShader(program, fragment_shader);
-    glLinkProgram(program);
+	glAttachShader(program, vertex_shader);
+	glAttachShader(program, fragment_shader);
+	glLinkProgram(program);
 
-    glGetShaderiv(program, GL_LINK_STATUS, &success);
-    if(!success)
-    {
-        glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-        printf("Linking Shader Failed. %s \n", infoLog);
-    };
+	glGetShaderiv(program, GL_LINK_STATUS, &success);
+	if(!success)
+	{
+		glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
+		printf("Linking Shader Failed. %s \n", infoLog);
+	};
 
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
-    L("Shaders Loaded. All fine.");
+	glDeleteShader(vertex_shader);
+	glDeleteShader(fragment_shader);
+	L("Shaders Loaded. All fine.");
 
-    free((char*)vsh_source);
-    free((char*)fsh_source);
+	free((char*)vsh_source);
+	free((char*)fsh_source);
 
 }
 
 int main(void)
 {
 
-    Engine e = CG_CreateEngine();
+	Engine e = CG_CreateEngine();
 
-    glfwSetErrorCallback(Error_Callback);
+	glfwSetErrorCallback(Error_Callback);
 
-    /* Get Key Input*/
-    glfwSetKeyCallback(e.window, Key_Callback);
+	/* Get Key Input*/
+	glfwSetKeyCallback(e.window, Key_Callback);
 
-    Setup_OpenGL();
+	Setup_OpenGL();
 
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(e.window))
-    {
-        float ratio;
-        int width, height;
-        mat4x4 m, p, mvp;
+	mat4 projection = GLM_MAT4_IDENTITY_INIT;
+	/*glm_ortho(0,800.0f,600.0f, 0, 0.01f, 1000.0f, projection);*/
+	glm_perspective(glm_rad(45.0f), 800.0f/600.0f, 0.1, 100.0f, projection);
 
-        glfwGetFramebufferSize(e.window, &width, &height);
-        ratio = width / (float) height;
+	mat4 view = GLM_MAT4_IDENTITY_INIT;
+	/*glm_translate_make(view, (float[]){0.0f,0.0f,-10.0f} );*/
+	glm_lookat((float[]){0.0f, 0.0f, -3.0f}, (float[]){0.0f,0.0f,0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
-        glViewport(0, 0, width, height);
-        glClear(GL_COLOR_BUFFER_BIT);
+	mat4 model = GLM_MAT4_IDENTITY_INIT;
+	vec3 position = GLM_VEC3_ONE_INIT;
 
-        mat4x4_identity(m);
-        mat4x4_rotate_Z(m, m, (float) glfwGetTime());
-        mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-        mat4x4_mul(mvp, p, m);
+	position[2] = -30.f;
+	glm_translate_make(model, position);
 
-        glUseProgram(program);
-        glBindVertexArray(vertex_array);
-        glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*) mvp);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+	vec3 positions[] = {
+		{ 0.0f,  0.0f,  0.0f}, 
+		{ 2.0f,  5.0f, -15.0f}, 
+		{-1.5f, -2.2f, -2.5f},  
+		{-3.8f, -2.0f, -12.3f},  
+		{ 2.4f, -0.4f, -3.5f},  
+		{-1.7f,  3.0f, -7.5f},  
+		{ 1.3f, -2.0f, -2.5f},  
+		{ 1.5f,  2.0f, -2.5f}, 
+		{ 1.5f,  0.2f, -1.5f}, 
+		{-1.3f,  1.0f, -1.5f}  
+	};
+
+	static float c = 0.0;
+
+	/* Loop until the user closes the window */
+	while (!glfwWindowShouldClose(e.window))
+	{
+		float ratio;
+		int width, height;
+		mat4x4 m, p, mvp;
+
+		c+= 0.01;
+
+		position[2] = -cos(c) * 10.0f;
+		position[1] = -sin(c) * 10.0f;
+		glm_translate_make(model, position);
+
+		glfwGetFramebufferSize(e.window, &width, &height);
+		ratio = width / (float) height;
+
+		glViewport(0, 0, width, height);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		mat4x4_identity(m);
+		mat4x4_rotate_Z(m, m, (float) glfwGetTime());
+		mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+		mat4x4_mul(mvp, p, m);
+
+		glUseProgram(program);
+		glBindVertexArray(vertex_array);
+
+		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, projection[0]);
+		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, view[0]);
+		glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, model[0]);
+
+		for(int i = 0; i <= 9; i++)
+		{
+			mat4 model = GLM_MAT4_IDENTITY_INIT;
+			glm_translate_make(model, positions[i]);
+			glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, model[0]);
+			glDrawArrays(GL_TRIANGLES, 0, 3);
+		}
 
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(e.window);
 
-        /* Poll for and process events */
-        glfwPollEvents();
-    }
 
-    glfwTerminate();
-    return 0;
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+
+		/* Swap front and back buffers */
+		glfwSwapBuffers(e.window);
+
+		/* Poll for and process events */
+		glfwPollEvents();
+	}
+
+	glfwTerminate();
+	return 0;
 }

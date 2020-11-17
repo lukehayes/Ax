@@ -2,9 +2,11 @@
 
 layout (location = 0) in vec3 vtx_position;
 
-uniform mat4 MVP;
+uniform mat4 projection;
+uniform mat4 view;
+uniform mat4 model;
 
 void main()
 {
-    gl_Position = MVP * vec4(vtx_position, 1.0f);
+    gl_Position = projection * view * model * vec4(vtx_position, 1.0f);
 }
