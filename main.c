@@ -148,6 +148,8 @@ int main(void)
 
 		c+= 0.01;
 
+        glm_lookat((float[]){0.0f, 0.0f, -sin(c) * 50.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
+
 		position[2] = -cos(c) * 10.0f;
 		position[1] = -sin(c) * 10.0f;
 		glm_translate_make(model, position);
