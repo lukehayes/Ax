@@ -12,9 +12,47 @@ GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 
 float verts[] = {
-	-1.0f, -1.0f, 0.0f,
-	1.0f, -1.0f, 0.0f,
-	0.0f,  1.0f, 0.0f
+        -0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+
+        -0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f,
 };
 
 void Error_Callback(int error, const char* description)
@@ -32,7 +70,7 @@ void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void Setup_OpenGL()
 {
-	const int BUFFER_SIZE = sizeof(float) * 9;
+	const int BUFFER_SIZE = sizeof(float) * 18 * 6;
 	const int VERTEX_SIZE = sizeof(float) * 3;
 	const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
 	const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
@@ -177,13 +215,8 @@ int main(void)
 			mat4 model = GLM_MAT4_IDENTITY_INIT;
 			glm_translate_make(model, positions[i]);
 			glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, model[0]);
-			glDrawArrays(GL_TRIANGLES, 0, 3);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
-
-
-
-
-		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 
 		/* Swap front and back buffers */
