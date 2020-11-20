@@ -157,9 +157,13 @@ int main(void)
 	glm_lookat((float[]){0.0f, 0.0f, -3.0f}, (float[]){0.0f,0.0f,0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
 	mat4 model = GLM_MAT4_IDENTITY_INIT;
-	vec3 position = GLM_VEC3_ONE_INIT;
+	vec3 position = GLM_VEC3_ZERO_INIT;
 
-	position[2] = -30.f;
+
+
+	position[0] = 0.0f;
+	position[1] = 0.0f;
+	position[2] = 1.0f;
 	glm_translate_make(model, position);
 
 	vec3 positions[] = {
@@ -184,13 +188,10 @@ int main(void)
 		int width, height;
 		mat4x4 m, p, mvp;
 
-		c+= 0.01;
+		/*c+= 0.01;*/
 
-        glm_lookat((float[]){0.0f, 0.0f, -sin(c) * 50.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
+        glm_lookat((float[]){0.0f, 0.0f, -3.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
-		position[2] = -cos(c) * 10.0f;
-		position[1] = -sin(c) * 10.0f;
-		glm_translate_make(model, position);
 
 		glfwGetFramebufferSize(e.window, &width, &height);
 		ratio = width / (float) height;
@@ -206,18 +207,22 @@ int main(void)
 		glUseProgram(program);
 		glBindVertexArray(vertex_array);
 
+        /*glm_rotate(model, glm_rad(1.f), (float[]) {1,1,1});*/
+
 		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, projection[0]);
 		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, view[0]);
 		glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, model[0]);
 
-		for(int i = 0; i <= 9; i++)
-		{
-			mat4 model = GLM_MAT4_IDENTITY_INIT;
-			glm_translate_make(model, positions[i]);
-			glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, model[0]);
-			glDrawArrays(GL_TRIANGLES, 0, 36);
-		}
+		/*for(int i = 0; i <= 9; i++)*/
+		/*{*/
+			/*mat4 model = GLM_MAT4_IDENTITY_INIT;*/
+			/*glm_translate_make(model, positions[i]);*/
+			/*glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, model[0]);*/
+			/*glDrawArrays(GL_TRIANGLES, 0, 36);*/
+		/*}*/
 
+
+        glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(e.window);
