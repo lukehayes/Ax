@@ -4,7 +4,7 @@
 #ifdef _WIN32
 #define GLEW_STATIC
 #endif
-#include <GL/glew.h>
+#include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
 #include "util/log.h"
 
