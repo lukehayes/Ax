@@ -3,6 +3,7 @@
 #include "linmath.h"
 #include "io/io.h"
 #include "util/log.h"
+#include "model/cube-model.h"
 #include <cglm/mat4.h>
 #include <cglm/vec3.h>
 #include <cglm/cam.h>
@@ -11,49 +12,6 @@
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 
-float verts[] = {
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-};
 
 void Error_Callback(int error, const char* description)
 {
@@ -75,13 +33,17 @@ void Setup_OpenGL()
 	const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
 	const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
+    CubeModel model = CreateModelCube();
+
+
+
 	glGenVertexArrays(1, &vertex_array);
 	glBindVertexArray(vertex_array);
 
 	glGenBuffers(1, &vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 
-	glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, verts, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, model.verticies, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (void*)0 );
