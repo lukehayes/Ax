@@ -1,10 +1,23 @@
 #ifndef CUBE_MODEL_H
 #define CUBE_MODEL_H
 
+/* #####   TYPE DEFINITIONS   ###################################################### */
+
 typedef struct CubeModel 
 {
-    float verticies*;
+    float* verticies;
+
 } CubeModel;
+
+
+/* #####   FUNCTION DEFINITIONS  -   ############################################### */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  CreateModelCube
+ *  Description:  Create an instance of a cube model.
+ * =====================================================================================
+ */
 
 CubeModel CreateModelCube()
 {
@@ -53,9 +66,9 @@ CubeModel CreateModelCube()
     };
 
     CubeModel model;
-    model->verticies = &verts;
+    model.verticies = verts;
 
-    return model
+    return model;
 }
 
 
