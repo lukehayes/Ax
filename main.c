@@ -3,6 +3,7 @@
 #include "linmath.h"
 #include "io/io.h"
 #include "util/log.h"
+#include "model/cube-model.h"
 #include <cglm/mat4.h>
 #include <cglm/vec3.h>
 #include <cglm/cam.h>
@@ -11,49 +12,6 @@
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 
-float verts[] = {
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f,
-
-        -0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-};
 
 void Error_Callback(int error, const char* description)
 {
@@ -75,13 +33,17 @@ void Setup_OpenGL()
 	const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
 	const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
+    CubeModel model = CreateModelCube();
+
+
+
 	glGenVertexArrays(1, &vertex_array);
 	glBindVertexArray(vertex_array);
 
 	glGenBuffers(1, &vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 
-	glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, verts, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, model.verticies, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (void*)0 );
@@ -184,9 +146,7 @@ int main(void)
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(e.window))
 	{
-		float ratio;
 		int width, height;
-		mat4x4 m, p, mvp;
 
 		/*c+= 0.01;*/
 
@@ -194,15 +154,9 @@ int main(void)
 
 
 		glfwGetFramebufferSize(e.window, &width, &height);
-		ratio = width / (float) height;
 
 		glViewport(0, 0, width, height);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		mat4x4_identity(m);
-		mat4x4_rotate_Z(m, m, (float) glfwGetTime());
-		mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-		mat4x4_mul(mvp, p, m);
 
 		glUseProgram(program);
 		glBindVertexArray(vertex_array);

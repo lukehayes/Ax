@@ -60,7 +60,7 @@ void LI(int value)
 
 /* 
  * ===  FUNCTION  ======================================================================
- *         Name:  LI - Log Float
+ *         Name:  LF - Log Float
  *  Description:  Log a float(value)to the console.
  * =====================================================================================
  */
