@@ -146,9 +146,7 @@ int main(void)
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(e.window))
 	{
-		float ratio;
 		int width, height;
-		mat4x4 m, p, mvp;
 
 		/*c+= 0.01;*/
 
@@ -156,15 +154,9 @@ int main(void)
 
 
 		glfwGetFramebufferSize(e.window, &width, &height);
-		ratio = width / (float) height;
 
 		glViewport(0, 0, width, height);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		mat4x4_identity(m);
-		mat4x4_rotate_Z(m, m, (float) glfwGetTime());
-		mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-		mat4x4_mul(mvp, p, m);
 
 		glUseProgram(program);
 		glBindVertexArray(vertex_array);
