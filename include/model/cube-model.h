@@ -63,7 +63,7 @@ f32 cube_verticies[108] = {
  *  Description:  Create an instance of a cube model.
  * =====================================================================================
  */
-void CreateModelCube(struct CubeModel* model)
+void CG_CreateModelCube(struct CubeModel* model)
 {
     int size = sizeof(float) * 108;
     model->verticies = malloc(size);
@@ -76,7 +76,7 @@ void CreateModelCube(struct CubeModel* model)
  *  Description:  Free all memory that the Cube Model struct holds.
  * =====================================================================================
  */
-void DestroyModelCube(CubeModel* model)
+void CG_DestroyModelCube(CubeModel* model)
 {
     free(model->verticies);
 }

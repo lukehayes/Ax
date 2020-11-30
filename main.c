@@ -11,6 +11,7 @@
 
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
+CubeModel model;
 
 
 void Error_Callback(int error, const char* description)
@@ -33,7 +34,7 @@ void Setup_OpenGL()
 	const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
 	const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
-    CubeModel model = CreateModelCube();
+    CG_CreateModelCube(&model);
 
 
 
@@ -148,7 +149,7 @@ int main(void)
 	{
 		int width, height;
 
-		/*c+= 0.01;*/
+        /*c+= 0.01;*/
 
         glm_lookat((float[]){0.0f, 0.0f, -3.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
@@ -161,7 +162,7 @@ int main(void)
 		glUseProgram(program);
 		glBindVertexArray(vertex_array);
 
-        /*glm_rotate(model, glm_rad(1.f), (float[]) {1,1,1});*/
+        glm_rotate(model, glm_rad(0.01f), (float[]) {1,1,1});
 
 		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, projection[0]);
 		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, view[0]);
