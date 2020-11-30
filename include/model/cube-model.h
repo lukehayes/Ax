@@ -1,6 +1,8 @@
 #ifndef CUBE_MODEL_H
 #define CUBE_MODEL_H
 
+#include "common/types.h"
+
 /* #####   TYPE DEFINITIONS   ###################################################### */
 
 typedef struct CubeModel 
@@ -9,19 +11,7 @@ typedef struct CubeModel
 
 } CubeModel;
 
-
-/* #####   FUNCTION DEFINITIONS  -   ############################################### */
-
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  CreateModelCube
- *  Description:  Create an instance of a cube model.
- * =====================================================================================
- */
-
-CubeModel CreateModelCube()
-{
-    float verts[] = {
+f32 cube_verticies[108] = {
             -0.5f, -0.5f, -0.5f,
              0.5f, -0.5f, -0.5f,
              0.5f,  0.5f, -0.5f,
@@ -65,10 +55,30 @@ CubeModel CreateModelCube()
             -0.5f,  0.5f, -0.5f,
     };
 
-    CubeModel model;
-    model.verticies = verts;
+/* #####   FUNCTION DEFINITIONS  -   ############################################### */
 
-    return model;
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  CreateModelCube
+ *  Description:  Create an instance of a cube model.
+ * =====================================================================================
+ */
+void CreateModelCube(struct CubeModel* model)
+{
+    int size = sizeof(float) * 108;
+    model->verticies = malloc(size);
+    memcpy(model->verticies, cube_verticies, size);
+}
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  DestroyCubeModel
+ *  Description:  Free all memory that the Cube Model struct holds.
+ * =====================================================================================
+ */
+void DestroyModelCube(CubeModel* model)
+{
+    free(model->verticies);
 }
 
 
