@@ -9,11 +9,12 @@ MKDIR %outputDir%
 REM Compiler Flags
 set compileFlags=/MD /Febin\app.exe
 
+
 REM Link Libraries
 
-set LOCAL_LIBS=C:\Dev\Libraries
-set includes=-I include -I %LOCAL_LIBS%\GLFW\include -I %LOCAL_LIBS%\GLEW\Include -I %LOCAL_LIBS%\CGLM\Include\
-set LIBS_DIR= /LIBPATH:%LOCAL_LIBS%\GLFW\Libs /LIBPATH:%LOCAL_LIBS%\GLEW\Libs /LIBPATH:%LOCAL_LIBS%\CGLM\Libs
+set LOCAL_LIBS_DIR=C:\Dev\Libraries
+set includes=-I include -I %LOCAL_LIBS_DIR%\GLFW\include -I %LOCAL_LIBS_DIR%\GLEW\Include -I %LOCAL_LIBS_DIR%\CGLM\Include\
+set LIBS_DIR= /LIBPATH:%LOCAL_LIBS_DIR%\GLFW\Libs /LIBPATH:%LOCAL_LIBS_DIR%\GLEW\Libs /LIBPATH:%LOCAL_LIBS_DIR%\CGLM\Libs
 set LIBS=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib glew32s.lib
 set math_src=src/math/*.c
 set util_src=src/util/*.c
