@@ -1,13 +1,9 @@
 #include "engine.h"
 #include "graphics/buffer.h"
-#include "linmath.h"
 #include "io/io.h"
 #include "util/log.h"
 #include "model/cube-model.h"
-#include <cglm/mat4.h>
-#include <cglm/vec3.h>
-#include <cglm/cam.h>
-#include <cglm/affine.h>
+#include "math/cglm-all.h"
 
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
@@ -162,7 +158,7 @@ int main(void)
 		glUseProgram(program);
 		glBindVertexArray(vertex_array);
 
-        glm_rotate(model, glm_rad(0.01f), (float[]) {1,1,1});
+        glm_rotate(model, glm_rad(1.f), (float[]) {1,1,1});
 
 		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, projection[0]);
 		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, view[0]);
