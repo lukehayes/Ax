@@ -9,9 +9,9 @@
 #ifndef UTIL_LOG_H
 #define UTIL_LOG_H
 
-
 /* #####   HEADER FILE INCLUDES   ################################################### */
-#include <stdio.h>
+#include "common/types.h"
+
 
 /* #####   MACROS  ################################################################# */
 #if defined(unix) || defined(__unix__) || defined(__unix)
@@ -34,7 +34,7 @@
 #define LIGHT_GREEN ""
 #endif
 
-/* #####   FUNCTION DEFINITIONS  -  LOCAL TO THIS SOURCE FILE   ##################### */
+/* #####   FUNCTION DEFINITIONS  ##################################################### */
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -42,7 +42,7 @@
  *  Description:  Log a string(message)to the console.
  * =====================================================================================
  */
-void L(const char* message)
+_inline void L(const char* message)
 {
     printf("%sLog: %s%s%s\n", GREEN, LIGHT_GREEN, message, NONE);
 }
@@ -53,7 +53,7 @@ void L(const char* message)
  *  Description:  Log a integer(value)to the console.
  * =====================================================================================
  */
-void LI(int value)
+_inline void LI(int value)
 {
     printf("%sLog: %s%i%s\n", GREEN, LIGHT_GREEN, value, NONE);
 }
@@ -64,7 +64,7 @@ void LI(int value)
  *  Description:  Log a float(value)to the console.
  * =====================================================================================
  */
-void LF(float value)
+_inline void LF(float value)
 {
     printf("%sLog: %s%f%s\n", GREEN, LIGHT_GREEN, value, NONE);
 }
@@ -75,7 +75,7 @@ void LF(float value)
  *  Description:  Log a string(message) and an integer(value)to the console.
  * =====================================================================================
  */
-void LSI(const char* message, int value)
+_inline void LSI(const char* message, int value)
 {
     printf("%sLog: %s%s%i%s\n", GREEN, LIGHT_GREEN, message, value, NONE);
 }
@@ -86,7 +86,7 @@ void LSI(const char* message, int value)
  *  Description:  Log a string(message) and another string(value)to the console.
  * =====================================================================================
  */
-void LSS(const char* message, const char* value)
+_inline void LSS(const char* message, const char* value)
 {
     printf("%sLog: %s%s - %s %s\n", GREEN, LIGHT_GREEN, message, value, NONE);
 }
@@ -98,7 +98,7 @@ void LSS(const char* message, const char* value)
  *  Description:  Log a error string(message) and another string(value)to the console.
  * =====================================================================================
  */
-void LE(const char* message, const char* value)
+_inline void LE(const char* message, const char* value)
 {
     printf("%sError: %s%s - %s %s\n", RED, MAGENTA, message, value, NONE);
 }
