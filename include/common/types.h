@@ -6,7 +6,8 @@ extern "C" {
 #endif
 
 #include <stdlib.h>		// malloc, realloc, free ( for now )
-#include <stdint.h>		// standard types
+#include <stdint.h>		// Standard types
+#include <stdio.h>		// Input and Output
 #include <limits.h>		// INT32_MAX, UINT32_MAX
 #include <string.h> 	// memset
 #include <float.h>		// FLT_MAX
