@@ -1,7 +1,6 @@
 #ifndef __GFX_BUFFER_H__
 #define __GFX_BUFFER_H__
 
-#include <stdio.h>
 #include "common/types.h"
 
 typedef struct Buffer
