@@ -5,6 +5,7 @@
 #include "model/cube-model.h"
 #include "math/cglm-all.h"
 
+
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 CubeModel model;
@@ -160,9 +161,9 @@ int main(void)
 
         glm_rotate(model, glm_rad(1.f), (float[]) {1,1,1});
 
-		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, projection[0]);
-		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, view[0]);
-		glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, model[0]);
+		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, (float*)projection);
+		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, (float*)view);
+		glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, (float*)model);
 
 		/*for(int i = 0; i <= 9; i++)*/
 		/*{*/
