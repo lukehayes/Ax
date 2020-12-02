@@ -5,25 +5,17 @@
 
 typedef struct Buffer
 {
-    f32 x, y;
-    f32 r, g, b;
-    f32 verticies[9];
+    u32 stride;
+    s32 vertexCount;
+    s32 vertexBytes;
+    f32* verticies;
+    u32* indicies;
 } Buffer;
 
-_inline void
-CG_CreateBuffer(Buffer* buffer)
-{
-    float arr[9] = {
-       -1.0f, -1.0f, 0.0f,
-       1.0f, -1.0f, 0.0f,
-       0.0f,  1.0f, 0.0f,
-    };
+void
+CG_CreateBuffer(Buffer* buffer);
 
-    for(int i = 0; i<9; i++)
-    {
-        buffer->verticies[i] = arr[i];
-        printf("%i", i);
-    }
-}
+void
+CG_DestroyBuffer(Buffer* buffer);
 
 #endif
