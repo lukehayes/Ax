@@ -1,5 +1,5 @@
-#ifndef __GFX_BUFFER_H__
-#define __GFX_BUFFER_H__
+#ifndef GFX_BUFFER_H
+#define GFX_BUFFER_H
 
 #include "common/types.h"
 
