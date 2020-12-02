@@ -7,6 +7,9 @@
 
 typedef struct CubeModel 
 {
+    u8 stride;
+    s32 vertexCount;
+    s32 vertexBytes;
     float* verticies;
 
 } CubeModel;
@@ -65,9 +68,10 @@ f32 cube_verticies[108] = {
  */
 void CG_CreateModelCube(struct CubeModel* model)
 {
-    int size = sizeof(float) * 108;
-    model->verticies = malloc(size);
-    memcpy(model->verticies, cube_verticies, size);
+    model->vertexCount = 108;
+    model->vertexBytes = sizeof(float) * model->vertexCount;
+    model->verticies = malloc(model->vertexBytes);
+    memcpy(model->verticies, cube_verticies, model->vertexBytes);
 }
 
 /* 
