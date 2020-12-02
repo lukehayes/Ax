@@ -8,7 +8,8 @@
 
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
-CubeModel model;
+/*CubeModel buffer;*/
+Buffer buffer;
 
 
 void Error_Callback(int error, const char* description)
@@ -27,13 +28,12 @@ void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mod
 void Setup_OpenGL()
 {
 	const int BUFFER_SIZE = sizeof(float) * 18 * 6;
-	const int VERTEX_SIZE = sizeof(float) * 3;
+	const int VERTEX_SIZE = sizeof(float) * 0;
 	const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
 	const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
-    CG_CreateModelCube(&model);
-
-
+    /*CG_CreateModelCube(&buffer);*/
+    CG_CreateBuffer(&buffer);
 
 	glGenVertexArrays(1, &vertex_array);
 	glBindVertexArray(vertex_array);
@@ -41,10 +41,12 @@ void Setup_OpenGL()
 	glGenBuffers(1, &vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 
-	glBufferData(GL_ARRAY_BUFFER, BUFFER_SIZE, model.verticies, GL_STATIC_DRAW);
+    LI(buffer.vertexBytes);
+
+	glBufferData(GL_ARRAY_BUFFER, buffer.vertexBytes, buffer.verticies, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, (void*)0 );
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, buffer.stride, (void*)0 );
 
 	unsigned int vertex_shader, fragment_shader;
 	int success;
@@ -148,7 +150,7 @@ int main(void)
 
         /*c+= 0.01;*/
 
-        glm_lookat((float[]){0.0f, 0.0f, -3.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
+        glm_lookat((float[]){0.0f, 0.0f, -33.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
 
 		glfwGetFramebufferSize(e.window, &width, &height);
@@ -173,16 +175,17 @@ int main(void)
 			/*glDrawArrays(GL_TRIANGLES, 0, 36);*/
 		/*}*/
 
-
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDrawArrays(GL_TRIANGLES, 0, buffer.vertexCount);
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(e.window);
 
 		/* Poll for and process events */
 		glfwPollEvents();
+        /*CG_DestroyModelCube(&cube);*/
 	}
-
+   
+    /*CG_DestroyBuffer(&buffer);*/
 	glfwTerminate();
 	return 0;
 }
