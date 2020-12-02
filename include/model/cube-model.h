@@ -79,6 +79,7 @@ void CG_CreateModelCube(struct CubeModel* model)
 void CG_DestroyModelCube(CubeModel* model)
 {
     free(model->verticies);
+    model->verticies = NULL;
 }
 
 
