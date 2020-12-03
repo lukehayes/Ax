@@ -68,6 +68,7 @@ f32 cube_verticies[108] = {
  */
 void CG_CreateModelCube(struct CubeModel* model)
 {
+    model->stride = 0;
     model->vertexCount = 108;
     model->vertexBytes = sizeof(float) * model->vertexCount;
     model->verticies = malloc(model->vertexBytes);
