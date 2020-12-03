@@ -5,11 +5,10 @@
 #include "model/cube-model.h"
 #include "math/cglm-all.h"
 
-
 GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
-/*CubeModel buffer;*/
-Buffer buffer;
+CubeModel buffer;
+/*Buffer buffer;*/
 
 
 void Error_Callback(int error, const char* description)
@@ -27,13 +26,13 @@ void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void Setup_OpenGL()
 {
-	const int BUFFER_SIZE = sizeof(float) * 18 * 6;
-	const int VERTEX_SIZE = sizeof(float) * 0;
+	/*const int BUFFER_SIZE = sizeof(float) * 18 * 6;*/
+	/*const int VERTEX_SIZE = sizeof(float) * 0;*/
 	const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
 	const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
-    /*CG_CreateModelCube(&buffer);*/
-    CG_CreateBuffer(&buffer);
+    /*CG_CreateModelCube((CubeModel*)&buffer);*/
+    CG_CreateBuffer((Buffer*)&buffer);
 
 	glGenVertexArrays(1, &vertex_array);
 	glBindVertexArray(vertex_array);
@@ -41,9 +40,12 @@ void Setup_OpenGL()
 	glGenBuffers(1, &vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 
-    LI(buffer.vertexBytes);
+    LSI("Sizeof : ", sizeof(buffer.verticies));
+    LSI("Bytes loaded: ", buffer.vertexBytes);
+    LSI("Vertex Count: ", buffer.vertexCount);
+    LSI("Stride: ", buffer.stride);
 
-	glBufferData(GL_ARRAY_BUFFER, buffer.vertexBytes, buffer.verticies, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffer.vertexCount, buffer.verticies, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, buffer.stride, (void*)0 );
@@ -148,7 +150,7 @@ int main(void)
 	{
 		int width, height;
 
-        /*c+= 0.01;*/
+        c+= 0.1;
 
         glm_lookat((float[]){0.0f, 0.0f, -33.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
@@ -161,21 +163,22 @@ int main(void)
 		glUseProgram(program);
 		glBindVertexArray(vertex_array);
 
-        glm_rotate(model, glm_rad(1.f), (float[]) {1,1,1});
+        glm_rotate(view, glm_rad(c), (float[]) {1,1,1});
 
 		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, (float*)projection);
 		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, (float*)view);
 		glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, (float*)model);
 
-		/*for(int i = 0; i <= 9; i++)*/
-		/*{*/
-			/*mat4 model = GLM_MAT4_IDENTITY_INIT;*/
-			/*glm_translate_make(model, positions[i]);*/
-			/*glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, model[0]);*/
-			/*glDrawArrays(GL_TRIANGLES, 0, 36);*/
-		/*}*/
-
         glDrawArrays(GL_TRIANGLES, 0, buffer.vertexCount);
+
+        for(int i = 0; i <= 9; i++)
+        {
+            mat4 model = GLM_MAT4_IDENTITY_INIT;
+            glm_translate_make(model, positions[i]);
+            glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, (float*)model);
+            glDrawArrays(GL_TRIANGLES, 0, buffer.vertexCount);
+        }
+
 
 		/* Swap front and back buffers */
 		glfwSwapBuffers(e.window);
