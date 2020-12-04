@@ -8,7 +8,7 @@ void init()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
 
-void error_callback(int error, const char* description)
+void ErrorCallback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
 }
@@ -36,7 +36,7 @@ Engine CG_CreateEngine()
     e.init();
     e.window = glfwCreateWindow(width, height, title, NULL, NULL);
 
-    e.GetErrors = *glfwSetErrorCallback(error_callback);
+    e.GetErrors = *glfwSetErrorCallback(ErrorCallback);
     e.GetKeyboardInput = *glfwSetKeyCallback(e.window, KeyCallback);
 
 
