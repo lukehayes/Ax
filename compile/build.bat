@@ -7,7 +7,7 @@ set OUTPUT_DIR=bin
 MKDIR %OUTPUT_DIR%
 
 REM Compiler Flags
-set COMPILE_FLAGS=/MD /Febin\app.exe
+set COMPILE_FLAGS=/MD /Febin\app.exe /DMAX_MODELS=100
 
 REM Link Libraries
 
