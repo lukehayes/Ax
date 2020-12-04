@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -DMAX_MODELS="100"
+CFLAGS = -Wall -DMAX_MODELS="10000"
 IDFLAGS = -I include
 SRCDIR = src
 SRCFLAGS = src/math/vec2.c
