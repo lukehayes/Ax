@@ -1,0 +1,18 @@
+#ifndef UTIL_RANDOM
+#define UTIL_RANDOM
+
+#include "common/types.h"
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  CG_RandRange
+ *  Description:  Generate a random number from a given range
+ * =====================================================================================
+ */
+f32 
+CG_RandRange(s16 min, s16 max)
+{
+    return rand() % (min + 1 - max) + min;
+}
+
+#endif

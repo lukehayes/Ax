@@ -2,6 +2,7 @@
 #include "graphics/buffer.h"
 #include "io/io.h"
 #include "util/log.h"
+#include "util/random.h"
 #include "model/cube-model.h"
 #include "math/cglm-all.h"
 
@@ -9,11 +10,6 @@ GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
 GLint mvp_location, vpos_location, vcol_location;
 CubeModel buffer;
 /*Buffer buffer;*/
-
-float randRange(int min, int max)
-{
-    return rand() % (min + 1 - max) + min;
-}
 
 void Error_Callback(int error, const char* description)
 {
@@ -139,9 +135,9 @@ int main(void)
 
     for(int i = 0; i <= MAX_MODELS - 1; i++)
     {
-        float x = randRange(0,range) - (range / 2);
-        float y = randRange(0,range) - (range / 2);
-        float z = randRange(0,range) - (range / 2);
+        float x = CG_RandRange(0,range) - (range / 2);
+        float y = CG_RandRange(0,range) - (range / 2);
+        float z = CG_RandRange(0,range) - (range / 2);
 
         vec3 pos;
         pos[0] = x;
