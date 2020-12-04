@@ -19,7 +19,6 @@ typedef struct Engine
 
     // Function Pointers
     void (*init)();
-    void (*hello)();
 
 
 } Engine;
