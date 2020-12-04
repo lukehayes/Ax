@@ -10,6 +10,10 @@ GLint mvp_location, vpos_location, vcol_location;
 CubeModel buffer;
 /*Buffer buffer;*/
 
+float randRange(int min, int max)
+{
+    return rand() % (min + 1 - max) + min;
+}
 
 void Error_Callback(int error, const char* description)
 {
@@ -31,8 +35,8 @@ void Setup_OpenGL()
 	const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
 	const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
-    /*CG_CreateModelCube((CubeModel*)&buffer);*/
-    CG_CreateBuffer((Buffer*)&buffer);
+    CG_CreateModelCube((CubeModel*)&buffer);
+    /*CG_CreateBuffer((Buffer*)&buffer);*/
 
 	glGenVertexArrays(1, &vertex_array);
 	glBindVertexArray(vertex_array);
@@ -130,18 +134,34 @@ int main(void)
 	position[2] = 1.0f;
 	glm_translate_make(model, position);
 
-	vec3 positions[] = {
-		{ 0.0f,  0.0f,  0.0f}, 
-		{ 2.0f,  5.0f, -15.0f}, 
-		{-1.5f, -2.2f, -2.5f},  
-		{-3.8f, -2.0f, -12.3f},  
-		{ 2.4f, -0.4f, -3.5f},  
-		{-1.7f,  3.0f, -7.5f},  
-		{ 1.3f, -2.0f, -2.5f},  
-		{ 1.5f,  2.0f, -2.5f}, 
-		{ 1.5f,  0.2f, -1.5f}, 
-		{-1.3f,  1.0f, -1.5f}  
-	};
+    int range = 10;
+    vec3 positions[MAX_MODELS];
+
+    for(int i = 0; i <= MAX_MODELS - 1; i++)
+    {
+        float x = randRange(0,range) - (range / 2);
+        float y = randRange(0,range) - (range / 2);
+        float z = randRange(0,range) - (range / 2);
+
+        vec3 pos;
+        pos[0] = x;
+        pos[1] = y;
+        pos[2] = z;
+        memcpy(positions[i], pos, sizeof(float) * 3);
+    }
+
+	/*vec3 positions[] = {*/
+		/*{ 0.0f,  0.0f,  0.0f}, */
+		/*{ 2.0f,  5.0f, -15.0f}, */
+		/*{-1.5f, -2.2f, -2.5f},  */
+		/*{-3.8f, -2.0f, -12.3f},  */
+		/*{ 2.4f, -0.4f, -3.5f},  */
+		/*{-1.7f,  3.0f, -7.5f},  */
+		/*{ 1.3f, -2.0f, -2.5f},  */
+		/*{ 1.5f,  2.0f, -2.5f}, */
+		/*{ 1.5f,  0.2f, -1.5f}, */
+		/*{-1.3f,  1.0f, -1.5f}  */
+	/*};*/
 
 	static float c = 0.0;
 
@@ -171,12 +191,12 @@ int main(void)
 
         glDrawArrays(GL_TRIANGLES, 0, buffer.vertexCount);
 
-        for(int i = 0; i <= 9; i++)
+        for(int i = 0; i <= MAX_MODELS - 1; i++)
         {
             mat4 model = GLM_MAT4_IDENTITY_INIT;
             glm_translate_make(model, positions[i]);
             glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, (float*)model);
-            glDrawArrays(GL_TRIANGLES, 0, buffer.vertexCount);
+            glDrawArrays(GL_LINES, 0, buffer.vertexCount);
         }
 
 
