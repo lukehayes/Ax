@@ -10,21 +10,18 @@
 typedef struct Engine
 {
     // Properties
-    int width;
-    int height;
-    const char* title;
+    s32 width;
+    s32 height;
+    const_str title;
     GLFWwindow* window;
     GLFWmonitor* monitor;
 
     // Function Pointers
     void (*init)();
+    void (*hello)();
 
 
 } Engine;
-
-void init();
-
-void error_callback(int error, const char* description);
 
 Engine CG_CreateEngine();
 

@@ -2,7 +2,6 @@
 #include "common/types.h"
 #include "util/log.h"
 
-
 void init()
 {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
