@@ -9,7 +9,7 @@
  *  Description:  Generate a random number from a given range
  * =====================================================================================
  */
-f32 
+s16 
 CG_RandRange(s16 min, s16 max)
 {
     return rand() % (min + 1 - max) + min;
