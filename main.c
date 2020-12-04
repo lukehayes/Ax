@@ -111,7 +111,7 @@ int main(void)
 	position[2] = 1.0f;
 	glm_translate_make(model, position);
 
-    int range = 10;
+    int range = 1000;
     vec3 positions[MAX_MODELS];
 
     for(int i = 0; i <= MAX_MODELS - 1; i++)
