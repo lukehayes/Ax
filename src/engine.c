@@ -13,6 +13,15 @@ void error_callback(int error, const char* description)
     fprintf(stderr, "Error: %s\n", description);
 }
 
+void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GLFW_TRUE);
+
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+        L("Pressed");
+}
+
 Engine CG_CreateEngine()
 {
     int width = 800;
@@ -26,6 +35,9 @@ Engine CG_CreateEngine()
     e.init = &init;
     e.init();
     e.window = glfwCreateWindow(width, height, title, NULL, NULL);
+
+    e.GetErrors = *glfwSetErrorCallback(error_callback);
+    e.GetKeyboardInput = *glfwSetKeyCallback(e.window, KeyCallback);
 
 
     glfwMakeContextCurrent(e.window);

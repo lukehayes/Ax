@@ -19,6 +19,8 @@ typedef struct Engine
 
     // Function Pointers
     void (*init)();
+    void (*GetErrors)();
+    void (*GetKeyboardInput)();
 
 
 } Engine;

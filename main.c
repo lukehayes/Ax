@@ -11,19 +11,6 @@ GLint mvp_location, vpos_location, vcol_location;
 CubeModel buffer;
 /*Buffer buffer;*/
 
-void Error_Callback(int error, const char* description)
-{
-	printf("Error: \n");
-	fprintf(stderr, "Error: %s\n", description);
-}
-
-void Key_Callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GLFW_TRUE);
-}
-
-
 void Setup_OpenGL()
 {
 	/*const int BUFFER_SIZE = sizeof(float) * 18 * 6;*/
@@ -102,15 +89,9 @@ void Setup_OpenGL()
 
 int main(void)
 {
-
 	Engine e = CG_CreateEngine();
 
-	glfwSetErrorCallback(Error_Callback);
-
-	/* Get Key Input*/
-	glfwSetKeyCallback(e.window, Key_Callback);
-
-	Setup_OpenGL();
+    Setup_OpenGL();
 
 	mat4 projection = GLM_MAT4_IDENTITY_INIT;
 	/*glm_ortho(0,800.0f,600.0f, 0, 0.01f, 1000.0f, projection);*/
