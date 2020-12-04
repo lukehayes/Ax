@@ -23,9 +23,9 @@ set GFX_SRC=src/graphics/*.c
 set ALL_DRC=%SRC_ROOT% %MATH_SRC% %GFX_SRC%
 
 
-cl main.c %COMPILE_FLAGS% %ALL_SRC% %INCLUDES% /link %LIBS% %LIBS_DIR% /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
+cl main.c %SRC_ROOT% %COMPILE_FLAGS% %INCLUDES% /link %LIBS% %LIBS_DIR% /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
 
 del *.obj
 
-bin\app.exe
+REM bin\app.exe
 
