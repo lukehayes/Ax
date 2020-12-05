@@ -111,14 +111,14 @@ int main(void)
 	position[2] = 1.0f;
 	glm_translate_make(model, position);
 
-    int range = 1000;
+    int range = 10;
     vec3 positions[MAX_MODELS];
 
     for(int i = 0; i <= MAX_MODELS - 1; i++)
     {
-        float x = CG_RandRange(0,range) - (range / 2);
-        float y = CG_RandRange(0,range) - (range / 2);
-        float z = CG_RandRange(0,range) - (range / 2);
+        f32 x = (f32)CG_RandRange(0,range) - (range / 2);
+        f32 y = (f32)CG_RandRange(0,range) - (range / 2);
+        f32 z = (f32)CG_RandRange(0,range) - (range / 2);
 
         vec3 pos;
         pos[0] = x;
