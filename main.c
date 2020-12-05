@@ -127,19 +127,6 @@ int main(void)
         memcpy(positions[i], pos, sizeof(float) * 3);
     }
 
-	/*vec3 positions[] = {*/
-		/*{ 0.0f,  0.0f,  0.0f}, */
-		/*{ 2.0f,  5.0f, -15.0f}, */
-		/*{-1.5f, -2.2f, -2.5f},  */
-		/*{-3.8f, -2.0f, -12.3f},  */
-		/*{ 2.4f, -0.4f, -3.5f},  */
-		/*{-1.7f,  3.0f, -7.5f},  */
-		/*{ 1.3f, -2.0f, -2.5f},  */
-		/*{ 1.5f,  2.0f, -2.5f}, */
-		/*{ 1.5f,  0.2f, -1.5f}, */
-		/*{-1.3f,  1.0f, -1.5f}  */
-	/*};*/
-
 	static float c = 0.0;
 
 	/* Loop until the user closes the window */
