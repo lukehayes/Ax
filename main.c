@@ -1,14 +1,16 @@
 #include "engine.h"
 #include "graphics/buffer.h"
+#include "graphics/shader.h"
 #include "io/io.h"
 #include "util/log.h"
 #include "util/random.h"
 #include "model/cube-model.h"
 #include "math/cglm-all.h"
 
-GLuint vertex_array, vertex_buffer, vertex_shader, fragment_shader, program;
+GLuint vertex_array, vertex_buffer;
 GLint mvp_location, vpos_location, vcol_location;
 CubeModel buffer;
+Shader shader;
 /*Buffer buffer;*/
 
 void Setup_OpenGL()
@@ -37,53 +39,16 @@ void Setup_OpenGL()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, buffer.stride, (void*)0 );
 
-	unsigned int vertex_shader, fragment_shader;
-	int success;
-	char infoLog[512];
+    CG_CreateShader(&shader, vsh_source, fsh_source);
 
-	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertex_shader, 1, &vsh_source, NULL);
-	glCompileShader(vertex_shader);
+    L("VSH Source", vsh_source);
+    L("FSH Source", fsh_source);
 
-	// print compile errors if any
-	glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &success);
-	if(!success)
-	{
-		glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-		LE("Vertex Shader Compilation Failed", infoLog);
-	};
-
-	fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragment_shader, 1, &fsh_source, NULL);
-	glCompileShader(fragment_shader);
-
-	// print compile errors if any
-	glGetShaderiv(fragment_shader, GL_COMPILE_STATUS, &success);
-	if(!success)
-	{
-		glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-		LE("Fragment Shader Compilation Failed", infoLog);
-	};
-
-	program = glCreateProgram();
-
-	glAttachShader(program, vertex_shader);
-	glAttachShader(program, fragment_shader);
-	glLinkProgram(program);
-
-	glGetShaderiv(program, GL_LINK_STATUS, &success);
-	if(!success)
-	{
-		glGetShaderInfoLog(vertex_shader, 512, NULL, infoLog);
-		printf("Linking Shader Failed. %s \n", infoLog);
-	};
-
-	glDeleteShader(vertex_shader);
-	glDeleteShader(fragment_shader);
-	L("Shaders Loaded. All fine.");
 
 	free((char*)vsh_source);
 	free((char*)fsh_source);
+
+
 
 }
 
@@ -134,9 +99,9 @@ int main(void)
 	{
 		int width, height;
 
-        c+= 0.01;
+        c+= 0.001;
 
-        glm_lookat((float[]){0.0f, 0.0f, -33.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
+        glm_lookat((float[]){cos(c) / 10.0, cos(c) * 10.0, sin(c) / 10.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
 
 		glfwGetFramebufferSize(e.window, &width, &height);
@@ -144,22 +109,26 @@ int main(void)
 		glViewport(0, 0, width, height);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glUseProgram(program);
+		glUseProgram(shader.program);
 		glBindVertexArray(vertex_array);
 
         glm_rotate(view, glm_rad(c), (float[]) {1,1,1});
 
-		glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, (float*)projection);
-		glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_FALSE, (float*)view);
-		glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, (float*)model);
+		glUniformMatrix4fv(glGetUniformLocation(shader.program, "projection"), 1, GL_FALSE, (float*)projection);
+		glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)view);
+		glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model);
 
+
+    glUniform1f(glGetUniformLocation(shader.program, "c"), c);
+
+        
         glDrawArrays(GL_TRIANGLES, 0, buffer.vertexCount);
 
         for(int i = 0; i <= MAX_MODELS - 1; i++)
         {
             mat4 model = GLM_MAT4_IDENTITY_INIT;
             glm_translate_make(model, positions[i]);
-            glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, (float*)model);
+            glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model);
             glDrawArrays(GL_LINES, 0, buffer.vertexCount);
         }
 
