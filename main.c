@@ -134,7 +134,7 @@ int main(void)
 	{
 		int width, height;
 
-        c+= 0.1;
+        c+= 0.01;
 
         glm_lookat((float[]){0.0f, 0.0f, -33.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
