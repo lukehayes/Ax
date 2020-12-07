@@ -11,6 +11,7 @@
 
 /* #####   HEADER FILE INCLUDES   ################################################### */
 #include "common/types.h"
+#include "graphics/buffer.h"
 
 
 /* #####   MACROS  ################################################################# */
@@ -35,6 +36,7 @@
 #endif
 
 /* #####   FUNCTION DEFINITIONS  ##################################################### */
+
 
 /* 
  * ===  FUNCTION  ======================================================================
@@ -101,6 +103,21 @@ _inline void LSS(const char* message, const char* value)
 _inline void LE(const char* message, const char* value)
 {
     printf("%sError: %s%s - %s %s\n", RED, MAGENTA, message, value, NONE);
+}
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  LB - Log Buffer
+ *  Description:  Log the currently bound buffer to the screen
+ * =====================================================================================
+ */
+_inline void LB(Buffer* buffer)
+{
+    LSI("Buffer ID: ", buffer->id);
+    LSI("Sizeof: ", sizeof(buffer->verticies));
+    LSI("Bytes loaded: ", buffer->vertexBytes);
+    LSI("Vertex Count: ", buffer->vertexCount);
+    LSI("Stride: ", buffer->stride);
 }
 
 #endif
