@@ -5,6 +5,7 @@
 
 typedef struct Buffer
 {
+    u8 id;
     u32 stride;
     s32 vertexCount;
     s32 vertexBytes;
