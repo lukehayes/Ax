@@ -27,10 +27,6 @@ void CG_CreateShader(Shader* shader, const_str vsh_source, const_str fsh_source)
     shader->vsh_path = vsh_source;
     shader->fsh_path = fsh_source;
 
-    L("Source");
-    L(vsh_source);
-    L(fsh_source);
-
     // Vertex Shader Compilation
 	vertex_shader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertex_shader, 1, &shader->vsh_path, NULL);
@@ -72,6 +68,10 @@ void CG_CreateShader(Shader* shader, const_str vsh_source, const_str fsh_source)
 	glDeleteShader(vertex_shader);
 	glDeleteShader(fragment_shader);
 	L("Shaders Loaded. All fine.");
+
+    // TODO Need to write a better solution for this
+	free((char*)vsh_source);
+	free((char*)fsh_source);
 }
 
 
