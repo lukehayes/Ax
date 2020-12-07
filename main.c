@@ -15,39 +15,14 @@ Shader shader;
 
 void Setup_OpenGL()
 {
-	/*const int BUFFER_SIZE = sizeof(float) * 18 * 6;*/
-	/*const int VERTEX_SIZE = sizeof(float) * 0;*/
-	const char* vsh_source = CG_Read_File("assets/shaders/VSH-Default.glsl");
-	const char* fsh_source = CG_Read_File("assets/shaders/FSH-Default.glsl");
 
-    CG_CreateModelCube((CubeModel*)&buffer);
+    CG_CreateModelCube(&buffer);
     /*CG_CreateBuffer((Buffer*)&buffer);*/
 
-	glGenVertexArrays(1, &vertex_array);
-	glBindVertexArray(vertex_array);
-
-	glGenBuffers(1, &vertex_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
-
-    LSI("Sizeof : ", sizeof(buffer.verticies));
-    LSI("Bytes loaded: ", buffer.vertexBytes);
-    LSI("Vertex Count: ", buffer.vertexCount);
-    LSI("Stride: ", buffer.stride);
-
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * buffer.vertexCount, buffer.verticies, GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, buffer.stride, (void*)0 );
-
-    CG_CreateShader(&shader, vsh_source, fsh_source);
-
-    L("VSH Source", vsh_source);
-    L("FSH Source", fsh_source);
+    LB((Buffer*)&buffer);
 
 
-	free((char*)vsh_source);
-	free((char*)fsh_source);
-
+    CG_CreateShader(&shader, CG_Read_File("assets/shaders/VSH-Default.glsl"), CG_Read_File("assets/shaders/FSH-Default.glsl"));
 
 
 }
