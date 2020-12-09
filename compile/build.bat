@@ -1,13 +1,13 @@
 @echo off
 REM cl main.c glfw4.lib -I C:\Dev\Libraries\GLFW3.3\include\ /link /LIBPATH:C:\Dev\Libraries\GLFW3.3\libs /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
 
-del bin/app.exe
+del "bin/app.exe"
 
 set OUTPUT_DIR=bin
 MKDIR %OUTPUT_DIR%
 
 REM Compiler Flags
-set COMPILE_FLAGS=/MD /Febin\app.exe /DMAX_MODELS=100
+set COMPILE_FLAGS=/MD /Febin\app.exe /DMAX_MODELS=1000
 
 REM Link Libraries
 
