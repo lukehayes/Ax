@@ -14,6 +14,7 @@ typedef struct CubeModel
 {
     s8 id;
     s8 stride;
+    s8 count;
     s32 vertexCount;
     s32 vertexBytes;
     float verticies[108];
@@ -85,6 +86,7 @@ void CG_CreateModelCube(CubeModel* model)
     id++;
 
     model->stride = 0;
+    model->count = 36;
     model->vertexCount = 108;
     model->vertexBytes = sizeof(f32) * model->vertexCount;
     memcpy(model->verticies, cube_verticies, sizeof(f32) * 108);
