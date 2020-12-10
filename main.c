@@ -7,8 +7,6 @@
 #include "model/cube-model.h"
 #include "math/cglm-all.h"
 
-GLuint vertex_array, vertex_buffer;
-GLint mvp_location, vpos_location, vcol_location;
 CubeModel buffer;
 Shader shader;
 /*Buffer buffer;*/
@@ -19,8 +17,7 @@ void Setup_OpenGL()
     CG_CreateModelCube(&buffer);
     /*CG_CreateBuffer((Buffer*)&buffer);*/
 
-    LB((Buffer*)&buffer);
-
+    /*LB((Buffer*)&buffer);*/
 
     CG_CreateShader(&shader, CG_Read_File("assets/shaders/VSH-Default.glsl"), CG_Read_File("assets/shaders/FSH-Default.glsl"));
 
@@ -74,7 +71,7 @@ int main(void)
 	{
 		int width, height;
 
-        c+= 0.001;
+        c+= 0.0001;
 
         glm_lookat((float[]){cos(c) / 10.0, cos(c) * 10.0, sin(c) / 10.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
@@ -85,7 +82,7 @@ int main(void)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glUseProgram(shader.program);
-		glBindVertexArray(vertex_array);
+        glBindVertexArray(buffer.VAO_ID);
 
         glm_rotate(view, glm_rad(c), (float[]) {1,1,1});
 
@@ -93,18 +90,15 @@ int main(void)
 		glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)view);
 		glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model);
 
-
-    glUniform1f(glGetUniformLocation(shader.program, "c"), c);
-
         
-        glDrawArrays(GL_TRIANGLES, 0, buffer.vertexCount);
+        glDrawArrays(GL_TRIANGLES, 0, 36 );
 
         for(int i = 0; i <= MAX_MODELS - 1; i++)
         {
             mat4 model = GLM_MAT4_IDENTITY_INIT;
             glm_translate_make(model, positions[i]);
             glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model);
-            glDrawArrays(GL_LINES, 0, buffer.vertexCount);
+            glDrawArrays(GL_LINE_LOOP, 0, 108);
         }
 
 
