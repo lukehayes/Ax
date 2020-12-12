@@ -20,7 +20,7 @@ void Setup_OpenGL()
     /*LB((Buffer*)&buffer);*/
 
     CG_CreateShader(&shader, CG_Read_File("assets/shaders/VSH-Default.glsl"), CG_Read_File("assets/shaders/FSH-Default.glsl"));
-
+    
 
 }
 
@@ -29,6 +29,8 @@ int main(void)
 	Engine e = CG_CreateEngine();
 
     Setup_OpenGL();
+
+
 
 	mat4 projection = GLM_MAT4_IDENTITY_INIT;
 	/*glm_ortho(0,800.0f,600.0f, 0, 0.01f, 1000.0f, projection);*/
@@ -48,7 +50,7 @@ int main(void)
 	position[2] = 1.0f;
 	glm_translate_make(model, position);
 
-    int range = 20;
+    int range = 10;
     vec3 positions[MAX_MODELS];
 
     for(int i = 0; i <= MAX_MODELS - 1; i++)
@@ -73,7 +75,7 @@ int main(void)
 
         c+= 0.0001;
 
-        glm_lookat((float[]){cos(c) / 10.0, cos(c) * 10.0, sin(c) / 10.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
+        glm_lookat((float[]){cos(c) / 10.0, tan(c) * 10.0, sin(c) / 1.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
 
 		glfwGetFramebufferSize(e.window, &width, &height);
