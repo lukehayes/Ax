@@ -6,8 +6,6 @@
 
 /* #####   TYPE DEFINITIONS   ###################################################### */
 
-#define BUFFER_SIZE 108
-
 static f32 cube_verticies[] = {
             -0.5f, -0.5f, -0.5f,
              0.5f, -0.5f, -0.5f,
