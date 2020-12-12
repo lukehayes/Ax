@@ -25,6 +25,14 @@ typedef struct CubeModel
 } CubeModel;
 
 
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  CG_Generate_Buffers
+ *  Description:  Generate the VAO and VBO for this model
+ * =====================================================================================
+ */
+void CG_Generate_Buffers(CubeModel* model);
+
 /* #####   FUNCTION DEFINITIONS  -   ############################################### */
 
 /* 
@@ -34,14 +42,6 @@ typedef struct CubeModel
  * =====================================================================================
  */
 void CG_CreateModelCube(CubeModel* model);
-
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  CG_Generate_Buffers
- *  Description:  Generate the VAO and VBO for this model
- * =====================================================================================
- */
-void CG_Generate_Buffers(CubeModel* model);
 
 /* 
  * ===  FUNCTION  ======================================================================
