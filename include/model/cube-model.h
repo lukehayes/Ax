@@ -26,18 +26,7 @@ typedef struct CubeModel
     
 } CubeModel;
 
-
-/* #####   FUNCTION DEFINITIONS  -   ############################################### */
-
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  CreateModelCube
- *  Description:  Create an instance of a cube model.
- * =====================================================================================
- */
-void CG_CreateModelCube(CubeModel* model)
-{
-    f32 cube_verticies[] = {
+static f32 cube_verticies[] = {
             -0.5f, -0.5f, -0.5f,
              0.5f, -0.5f, -0.5f,
              0.5f,  0.5f, -0.5f,
@@ -81,6 +70,19 @@ void CG_CreateModelCube(CubeModel* model)
             -0.5f,  0.5f, -0.5f,
     };
 
+void CG_Generate_Buffers(CubeModel* model);
+
+/* #####   FUNCTION DEFINITIONS  -   ############################################### */
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  CreateModelCube
+ *  Description:  Create an instance of a cube model.
+ * =====================================================================================
+ */
+void CG_CreateModelCube(CubeModel* model)
+{
+
     static u8 id = 1;
     model->id = id;
     id++;
@@ -91,6 +93,12 @@ void CG_CreateModelCube(CubeModel* model)
     model->vertexBytes = sizeof(f32) * model->vertexCount;
     memcpy(model->verticies, cube_verticies, sizeof(f32) * 108);
 
+    CG_Generate_Buffers(model);
+}
+
+
+void CG_Generate_Buffers(CubeModel* model)
+{
     // TODO Abstract this out later
 	glGenVertexArrays(1, &model->VAO_ID);
 	glBindVertexArray(model->VAO_ID);
