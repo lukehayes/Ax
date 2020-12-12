@@ -7,7 +7,7 @@ set OUTPUT_DIR=bin
 MKDIR %OUTPUT_DIR%
 
 REM Compiler Flags
-set COMPILE_FLAGS=/MD /Febin\app.exe /DMAX_MODELS=1000
+set COMPILE_FLAGS=/MD /Febin\app.exe /DMAX_MODELS=100
 
 REM Link Libraries
 
@@ -20,10 +20,11 @@ REM Project Sources
 set SRC_ROOT=src/*.c
 set MATH_SRC=src/math/*.c
 set GFX_SRC=src/graphics/*.c
-set ALL_DRC=%SRC_ROOT% %MATH_SRC% %GFX_SRC%
+set MODEL_SRC=src/model/*.c
+set ALL_SRC=%SRC_ROOT% %MATH_SRC% %GFX_SRC% %MODEL_SRC%
 
 
-cl main.c %SRC_ROOT% %COMPILE_FLAGS% %INCLUDES% /link %LIBS% %LIBS_DIR% /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
+cl main.c %SRC_ROOT% %ALL_SRC% %COMPILE_FLAGS% %INCLUDES% /link %LIBS% %LIBS_DIR% /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
 
 del *.obj
 
