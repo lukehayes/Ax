@@ -1,7 +1,11 @@
 #include "model/cube-model.h"
-#include "engine.h"
 #include "util/log.h"
-#include "math/cglm-all.h"
+
+void CG_CreateCubeModel(CubeModel* self)
+{
+	self->matrix = GLM_MAT4_IDENTITY_INIT;
+	self->position = GLM_VEC3_ZERO_INIT;
+}
 
 
 
