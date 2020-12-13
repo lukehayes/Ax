@@ -5,9 +5,13 @@
 #include "util/log.h"
 #include "util/random.h"
 #include "mesh/cube-mesh.h"
+#include "model/cube-model.h"
 #include "math/cglm-all.h"
 
+#define CGGLM_ALL_UNALIGNED
+
 CubeMesh mesh;
+CubeModel model;
 Shader shader;
 /*Buffer buffer;*/
 
@@ -40,15 +44,16 @@ int main(void)
 	/*glm_translate_make(view, (float[]){0.0f,0.0f,-10.0f} );*/
 	glm_lookat((float[]){0.0f, 0.0f, -3.0f}, (float[]){0.0f,0.0f,0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
-	mat4 model = GLM_MAT4_IDENTITY_INIT;
-	vec3 position = GLM_VEC3_ZERO_INIT;
+	/*mat4 model = GLM_MAT4_IDENTITY_INIT;*/
+	/*vec3 position = GLM_VEC3_ZERO_INIT;*/
+
+    CG_CreateCubeModel(&model);
 
 
-
-	position[0] = 0.0f;
-	position[1] = 0.0f;
-	position[2] = 1.0f;
-	glm_translate_make(model, position);
+	model.position[0] = 0.0f;
+	model.position[1] = 0.0f;
+	model.position[2] = 1.0f;
+	glm_translate_make(model.matrix, model.position);
 
     int range = 20;
     vec3 positions[MAX_MODELS];
@@ -90,7 +95,7 @@ int main(void)
 
 		glUniformMatrix4fv(glGetUniformLocation(shader.program, "projection"), 1, GL_FALSE, (float*)projection);
 		glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)view);
-		glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model);
+		glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, model.matrix);
 
         
         glDrawArrays(GL_TRIANGLES, 0, mesh.count );
@@ -99,7 +104,7 @@ int main(void)
         {
             mat4 model = GLM_MAT4_IDENTITY_INIT;
             glm_translate_make(model, positions[i]);
-            glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model);
+            /*glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, *model->matrix);*/
             glDrawArrays(GL_TRIANGLES, 0, mesh.count);
         }
 
