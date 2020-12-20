@@ -9,6 +9,8 @@ typedef struct CubeModel
 {
     mat4 matrix;
     vec3 position;
+    vec3 rotation;
+    vec3 scale;
     
 } CubeModel;
 
