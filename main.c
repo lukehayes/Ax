@@ -86,7 +86,7 @@ int main(int argc, const char *argv[])
 	{
 		int width, height;
 
-        c+= 0.01;
+        c+= 0.001;
 
         glm_lookat((float[]){cos(c) / 10.0, -43.0f}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
@@ -99,21 +99,22 @@ int main(int argc, const char *argv[])
 		glUseProgram(shader.program);
         glBindVertexArray(mesh.VAO_ID);
 
-        glm_rotate(view, glm_rad(c), (float[]) {1,1,1});
+        glm_rotate(view, glm_rad(c) * 10.0, (float[]) {1,1,1});
 
 		glUniformMatrix4fv(glGetUniformLocation(shader.program, "projection"), 1, GL_FALSE, (float*)projection);
 		glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)view);
         glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model.matrix);
         
-        glDrawArrays(GL_TRIANGLES, 0, mesh.count );
 
         for(int i = 0; i <= MAX_MODELS - 1; i++)
         {
             CubeModel model = models[i];
             glm_translate_make(model.matrix, model.position);
-            glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, model.matrix);
+            glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model.matrix);
             glDrawArrays(GL_LINE_LOOP, 0, mesh.count);
         }
+
+        glDrawArrays(GL_TRIANGLES, 0, mesh.count );
 
 
 		/* Swap front and back buffers */
