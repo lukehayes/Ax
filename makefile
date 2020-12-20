@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -DMAX_MODELS="10000"
+CFLAGS = -DMAX_MODELS="100"
 IDFLAGS = -I include
 SRCDIR = src
 SRCFLAGS = src/math/vec2.c
@@ -7,7 +7,7 @@ ALLSRC = $(wildcard src/*.c) $(wildcard src/*/*.c)
 LDFLAGS =
 LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW
 STATIC_LIBS = -lCG-Math-Static
-TARGET = -o build/app
+TARGET = -o bin/app
 ENTRY = main.c
 
 #Bundle all source code into a single binary
