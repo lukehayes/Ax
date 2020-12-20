@@ -27,8 +27,7 @@ void Setup_OpenGL()
     
 
 }
-
-int main(void)
+int main(int argc, const char *argv[])
 {
 	Engine e = CG_CreateEngine();
 
@@ -57,6 +56,7 @@ int main(void)
 
     int range = 20;
     vec3 positions[MAX_MODELS];
+    CubeModel models[MAX_MODELS];
 
     for(int i = 0; i <= MAX_MODELS - 1; i++)
     {
@@ -64,23 +64,31 @@ int main(void)
         f32 y = (f32)CG_RandRange(0,range) - (range / 2);
         f32 z = (f32)CG_RandRange(0,range) - (range / 2);
 
+        CubeModel model;
+        CG_CreateCubeModel(&model);
+
         vec3 pos;
         pos[0] = x;
         pos[1] = y;
         pos[2] = z;
-        memcpy(positions[i], pos, sizeof(float) * 3);
+        memcpy(model.position, pos, sizeof(float) * 3);
+        models[i] = model;
     }
 
 	static float c = 0.0;
+
+    vec3 scale = GLM_VEC3_ZERO_INIT;
+    scale[1] = 1.0f;
+
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(e.window))
 	{
 		int width, height;
 
-        c+= 0.001;
+        c+= 0.01;
 
-        glm_lookat((float[]){cos(c) / 10.0, tan(c) * 10.0, sin(c) / 1.0}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
+        glm_lookat((float[]){cos(c) / 10.0, -43.0f}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
 
 
 		glfwGetFramebufferSize(e.window, &width, &height);
@@ -95,17 +103,16 @@ int main(void)
 
 		glUniformMatrix4fv(glGetUniformLocation(shader.program, "projection"), 1, GL_FALSE, (float*)projection);
 		glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)view);
-		glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, model.matrix);
-
+        glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model.matrix);
         
         glDrawArrays(GL_TRIANGLES, 0, mesh.count );
 
         for(int i = 0; i <= MAX_MODELS - 1; i++)
         {
-            mat4 model = GLM_MAT4_IDENTITY_INIT;
-            glm_translate_make(model, positions[i]);
-            /*glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, *model->matrix);*/
-            glDrawArrays(GL_TRIANGLES, 0, mesh.count);
+            CubeModel model = models[i];
+            glm_translate_make(model.matrix, model.position);
+            glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, model.matrix);
+            glDrawArrays(GL_LINE_LOOP, 0, mesh.count);
         }
 
 
