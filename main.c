@@ -1,6 +1,7 @@
 #include "engine.h"
 #include "graphics/buffer.h"
 #include "graphics/shader.h"
+#include "graphics/camera.h"
 #include "io/io.h"
 #include "util/log.h"
 #include "util/random.h"
@@ -13,7 +14,7 @@
 CubeMesh mesh;
 CubeModel model;
 Shader shader;
-/*Buffer buffer;*/
+Camera camera;
 
 void Setup_OpenGL()
 {
@@ -33,26 +34,8 @@ int main(int argc, const char *argv[])
 
     Setup_OpenGL();
 
-
-
-	mat4 projection = GLM_MAT4_IDENTITY_INIT;
-	/*glm_ortho(0,800.0f,600.0f, 0, 0.01f, 1000.0f, projection);*/
-	glm_perspective(glm_rad(45.0f), 800.0f/600.0f, 0.1, 100.0f, projection);
-
-	mat4 view = GLM_MAT4_IDENTITY_INIT;
-	/*glm_translate_make(view, (float[]){0.0f,0.0f,-10.0f} );*/
-	glm_lookat((float[]){0.0f, 0.0f, -3.0f}, (float[]){0.0f,0.0f,0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
-
-	/*mat4 model = GLM_MAT4_IDENTITY_INIT;*/
-	/*vec3 position = GLM_VEC3_ZERO_INIT;*/
-
+    CG_CreateCamera3D(&camera);
     CG_CreateCubeModel(&model);
-
-
-	model.transform.position[0] = 0.0f;
-	model.transform.position[1] = 0.0f;
-	model.transform.position[2] = 1.0f;
-	glm_translate_make(model.matrix, model.transform.position);
 
     int range = 20;
     vec3 positions[MAX_MODELS];
@@ -88,7 +71,7 @@ int main(int argc, const char *argv[])
 
         c+= 0.001;
 
-        glm_lookat((float[]){cos(c) / 10.0, -43.0f}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, view );
+        glm_lookat((float[]){cos(c) / 10.0, -43.0f}, (float[]){0.0f,0.0f, 0.0f}, (float[]){0.0f,1.0f,0.0f}, camera.view );
 
 
 		glfwGetFramebufferSize(e.window, &width, &height);
@@ -99,11 +82,10 @@ int main(int argc, const char *argv[])
 		glUseProgram(shader.program);
         glBindVertexArray(mesh.VAO_ID);
 
-        glm_rotate(view, glm_rad(c) * 10.0, (float[]) {1,1,1});
+        glm_rotate(camera.view, glm_rad(c) * 100.0, (float[]) {1,1,1});
 
-		glUniformMatrix4fv(glGetUniformLocation(shader.program, "projection"), 1, GL_FALSE, (float*)projection);
-		glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)view);
-        glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model.matrix);
+		glUniformMatrix4fv(glGetUniformLocation(shader.program, "projection"), 1, GL_FALSE, (float*)camera.projection);
+		glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)camera.view); glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model.matrix);
         
 
         for(int i = 0; i <= MAX_MODELS - 1; i++)
