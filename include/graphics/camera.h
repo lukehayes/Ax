@@ -12,7 +12,7 @@ typedef struct Camera
     Transform transform;
 
     // Function Pointers
-    void (*update)(float dt);
+    void (*update)(struct Camera* camera, f64 dt);
 
 } Camera;
 
