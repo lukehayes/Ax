@@ -8,7 +8,7 @@ void CG_CreateCubeModel(CubeModel* self)
     memcpy(self->matrix, &mat, sizeof(float) * 16);
 
     vec3 pos = GLM_VEC3_ZERO_INIT;
-    memcpy(self->position, &pos, sizeof(float) * 3);
+    memcpy(self->transform.position, &pos, sizeof(float) * 3);
 }
 
 

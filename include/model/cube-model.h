@@ -2,15 +2,14 @@
 #define CUBE_MODEL_H
 
 #include "math/cglm-all.h"
+#include "core/transform.h"
 
 /* #####   TYPE DEFINITIONS   ###################################################### */
 
 typedef struct CubeModel 
 {
     mat4 matrix;
-    vec3 position;
-    vec3 rotation;
-    vec3 scale;
+    Transform transform;
     
 } CubeModel;
 

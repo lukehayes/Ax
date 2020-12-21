@@ -11,7 +11,7 @@ typedef struct Transform
     vec3 scale;
 } Transform;
 
-void
+inline void
 CG_CreateTransform(Transform* self)
 {
     vec3 position = GLM_VEC3_ZERO_INIT;

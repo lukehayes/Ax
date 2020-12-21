@@ -49,10 +49,10 @@ int main(int argc, const char *argv[])
     CG_CreateCubeModel(&model);
 
 
-	model.position[0] = 0.0f;
-	model.position[1] = 0.0f;
-	model.position[2] = 1.0f;
-	glm_translate_make(model.matrix, model.position);
+	model.transform.position[0] = 0.0f;
+	model.transform.position[1] = 0.0f;
+	model.transform.position[2] = 1.0f;
+	glm_translate_make(model.matrix, model.transform.position);
 
     int range = 20;
     vec3 positions[MAX_MODELS];
@@ -71,7 +71,7 @@ int main(int argc, const char *argv[])
         pos[0] = x;
         pos[1] = y;
         pos[2] = z;
-        memcpy(model.position, pos, sizeof(float) * 3);
+        memcpy(model.transform.position, pos, sizeof(float) * 3);
         models[i] = model;
     }
 
@@ -109,7 +109,7 @@ int main(int argc, const char *argv[])
         for(int i = 0; i <= MAX_MODELS - 1; i++)
         {
             CubeModel model = models[i];
-            glm_translate_make(model.matrix, model.position);
+            glm_translate_make(model.matrix, model.transform.position);
             glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model.matrix);
             glDrawArrays(GL_LINE_LOOP, 0, mesh.count);
         }
