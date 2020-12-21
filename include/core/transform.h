@@ -1,5 +1,5 @@
-#ifndef COMMON_TRANSFORM_H
-#define COMMON_TRANSFORM_H
+#ifndef CORE_TRANSFORM_H
+#define CORE_TRANSFORM_H
 
 #include "common/types.h"
 #include "math/cglm-all.h"
