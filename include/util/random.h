@@ -3,6 +3,7 @@
 
 #include "common/types.h"
 
+
 /* 
  * ===  FUNCTION  ======================================================================
  *         Name:  CG_RandRange
@@ -12,8 +13,23 @@
 s16 
 CG_RandRange(s16 min, s16 max)
 {
-    srand(time(NULL));
     return rand() % (min + 1 - max) + min;
 }
+
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  CG_RandRangeF
+ *  Description:  Generate a random float from a given range
+ * =====================================================================================
+ */
+f32 
+CG_RandRangeF(f32 min, f32 max)
+{
+    f32 r = ((f32)rand()) / (f32)RAND_MAX;
+    f32 diff = max - min;
+    f32 rn = r * diff;
+    return rn;
+}
+
 
 #endif
