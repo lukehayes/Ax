@@ -31,5 +31,16 @@ CG_RandRangeF(f32 min, f32 max)
     return rn;
 }
 
+/* 
+ * ===  FUNCTION  ======================================================================
+ *         Name:  CG_RandF
+ *  Description:  Generate a random float between 0.0 and 1.0
+ * =====================================================================================
+ */
+f32 
+CG_RandF()
+{
+    return ((f32)rand()) / (f32)RAND_MAX;
+}
 
 #endif
