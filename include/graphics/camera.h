@@ -19,5 +19,7 @@ typedef struct Camera
 void
 CG_CreateCamera3D(Camera* camera);
 
+void
+CG_CreateCamera2D(Camera* camera);
 
 #endif
