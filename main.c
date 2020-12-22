@@ -31,17 +31,22 @@ int main(int argc, const char *argv[])
     CG_CreateCubeModel(&model);
 
 	static float c = 0.0;
-
+    model.transform.position[2] = cos(c) * -10.0f;
+    glm_translate(model.matrix, model.transform.position);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(e.window))
 	{
 		int width, height;
 
-        c+= 0.001;
+        c+= 0.01;
 
-        camera.transform.position[2] = cos(c) * 10.0;
-        camera.update(&camera, 3.4);
+        /*model.transform.position[0] = sin(c) * 2.0f;*/
+        /*model.transform.position[1] = cos(c) * 2.0f;*/
+        /*model.transform.position[2] = cos(c) * 10.0f;*/
+        /*glm_translate(model.matrix, model.transform.position);*/
+
+        /*camera.update(&camera, 3.4);*/
 
 		glfwGetFramebufferSize(e.window, &width, &height);
 
@@ -52,8 +57,9 @@ int main(int argc, const char *argv[])
 		glUseProgram(shader.program);
         glBindVertexArray(mesh.VAO_ID);
 
-		glUniformMatrix4fv(glGetUniformLocation(shader.program, "projection"), 1, GL_FALSE, (float*)camera.projection);
-		glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)camera.view); glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model.matrix);
+        glUniformMatrix4fv(glGetUniformLocation(shader.program, "projection"), 1, GL_FALSE, (float*)camera.projection);
+		glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)camera.view);
+        glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model.matrix);
         
         glDrawArrays(GL_TRIANGLES, 0, mesh.count );
 
