@@ -7,6 +7,7 @@
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
 #include "common/types.h"
+#include "window.h"
 
 namespace CG {
 
@@ -15,18 +16,18 @@ namespace CG {
         public:
             Engine();
             ~Engine();
-            void Init();
-            void Create();
-            void GetErrors();
-            void GetKeyboardInput();
-            GLFWwindow* GetWindow() const;
 
-        //private:
-            s32 width = 800;
-            s32 height = 600;
-            const_str title = "Game Title";
-            GLFWwindow* window;
-            GLFWmonitor* monitor;
+            void Init();
+
+            void Create();
+
+            void GetErrors();
+
+            void GetKeyboardInput();
+
+            CG::Window GetWindow() const;
+
+            CG::Window window;
     };
     
 } /* namespace CG */
