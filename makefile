@@ -2,13 +2,12 @@ CC = gcc
 CFLAGS = -DMAX_MODELS="100"
 IDFLAGS = -I include
 SRCDIR = src
-SRCFLAGS = src/math/vec2.c
-ALLSRC = $(wildcard src/*.c) $(wildcard src/*/*.c)
+ALLSRC = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
 LDFLAGS =
-LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW
+LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW -lstdc++
 STATIC_LIBS = -lCG-Math-Static
 TARGET = -o bin/app
-ENTRY = main.c
+ENTRY = main.cpp
 
 #Bundle all source code into a single binary
 all:
