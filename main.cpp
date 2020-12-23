@@ -6,12 +6,10 @@ int main(int argc, const char *argv[])
     CG::Engine engine;
     engine.Create();
 
-
-
 	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(engine.window))
+	while (!glfwWindowShouldClose(engine.GetWindow().window ))
 	{
-		glfwGetFramebufferSize(engine.window, &engine.width, &engine.height);
+		//glfwGetFramebufferSize(engine.GetWindow().window, engine.GetWindow().width, &engine.GetWindow().height);
 
 		//glViewport(0, 0, width, height);
         //glClearColor(0.0,0.3f,1.0f,1.0f);
@@ -27,7 +25,7 @@ int main(int argc, const char *argv[])
         //glDrawArrays(GL_TRIANGLES, 0, mesh.count );
 
 		/* Swap front and back buffers */
-		glfwSwapBuffers(engine.window);
+		glfwSwapBuffers(engine.GetWindow().window);
 
 		/* Poll for and process events */
 		glfwPollEvents();
