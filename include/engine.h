@@ -8,25 +8,28 @@
 #include <GLFW/glfw3.h>
 #include "common/types.h"
 
-typedef struct Engine
-{
-    // Properties
-    s32 width;
-    s32 height;
-    const_str title;
-    GLFWwindow* window;
-    GLFWmonitor* monitor;
+namespace CG {
 
-    // Function Pointers
-    void (*init)();
-    void (*GetErrors)();
-    void (*GetKeyboardInput)();
+    class Engine
+    {
+        public:
+            Engine();
+            ~Engine();
+            void Init();
+            void Create();
+            void GetErrors();
+            void GetKeyboardInput();
+            GLFWwindow* GetWindow() const;
 
-
-} Engine;
-
-Engine CG_CreateEngine();
-
+        //private:
+            s32 width = 800;
+            s32 height = 600;
+            const_str title = "Game Title";
+            GLFWwindow* window;
+            GLFWmonitor* monitor;
+    };
+    
+} /* namespace CG */
 
 
 #endif
