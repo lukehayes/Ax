@@ -1,12 +1,14 @@
-#ifndef _CG_ENGINE_H
-#define _CG_ENGINE_H
+#ifndef CG_ENGINE_H
+#define CG_ENGINE_H
 
 #ifdef _WIN32
 #define GLEW_STATIC
 #endif
+
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
 #include "common/types.h"
+
 #include "window.h"
 
 namespace CG {

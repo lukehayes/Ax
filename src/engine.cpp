@@ -20,8 +20,7 @@ namespace CG {
     void 
     Engine::GetKeyboardInput() {}
 
-    void
-    Engine::Create() {}
+    void Engine::Create() {}
 
     CG::Window
     Engine::GetWindow() const { return this->window; }
