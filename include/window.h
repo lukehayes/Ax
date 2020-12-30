@@ -4,6 +4,7 @@
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
 #include "common/types.h"
+
 namespace CG 
 {
     class Window

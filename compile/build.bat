@@ -17,15 +17,11 @@ set LIBS_DIR= /LIBPATH:%LOCAL_LIBS_DIR%\GLFW\Libs /LIBPATH:%LOCAL_LIBS_DIR%\GLEW
 set LIBS=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib glew32s.lib
 
 REM Project Sources
-set SRC_ROOT=src/*.c
-set MATH_SRC=src/math/*.c
-set GFX_SRC=src/graphics/*.c
-set MODEL_SRC=src/model/*.c
-set MESH_SRC=src/mesh/*.c
-set ALL_SRC=%SRC_ROOT% %MATH_SRC% %GFX_SRC% %MODEL_SRC% %MESH_SRC%
+set SRC_ROOT=src/*.cpp
+set ALL_SRC=%SRC_ROOT% 
 
 
-cl main.c %SRC_ROOT% %ALL_SRC% %COMPILE_FLAGS% %INCLUDES% /link %LIBS% %LIBS_DIR% /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
+cl main.cpp %ALL_SRC% %COMPILE_FLAGS% %INCLUDES% /link %LIBS% %LIBS_DIR% /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
 
 del *.obj
 
