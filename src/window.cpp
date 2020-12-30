@@ -3,7 +3,9 @@
 namespace CG
 {
 
-    Window::Window() {}
+    Window::Window() {
+        this->Create();
+    }
     Window::~Window() {}
 
     void
@@ -12,6 +14,8 @@ namespace CG
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+        glfwInit();
 
         this->window = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
 
