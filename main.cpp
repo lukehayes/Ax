@@ -33,5 +33,7 @@ int main(int argc, const char *argv[])
         /*CG_DestroyModelCube(&cube);*/
 	}
 
+    Engine.Shutdown();
+
 	return 0;
 }
