@@ -4,19 +4,18 @@ namespace CG {
 
     Engine::Engine() {}
     Engine::~Engine() {
-        glfwTerminate();
     }
 
     void
     Engine::Start()
     {
-        // TODO
+        glfwInit();
     }
 
     void
     Engine::Shutdown()
     {
-        // TODO
+        glfwTerminate();
     }
 
     void 
