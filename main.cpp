@@ -3,13 +3,14 @@
 int main(int argc, const char *argv[])
 {
     
-    CG::Engine engine;
-    engine.Create();
+   CG::Engine Engine;
+    Engine.Start();
+
 
 	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(engine.GetWindow().window ))
+	while (!glfwWindowShouldClose(Engine.GetWindow().window ))
 	{
-		//glfwGetFramebufferSize(engine.GetWindow().window, engine.GetWindow().width, &engine.GetWindow().height);
+		//glfwGetFramebufferSize(Engine.GetWindow().window, Engine.GetWindow().width, &Engine.GetWindow().height);
 
 		//glViewport(0, 0, width, height);
         //glClearColor(0.0,0.3f,1.0f,1.0f);
@@ -25,7 +26,7 @@ int main(int argc, const char *argv[])
         //glDrawArrays(GL_TRIANGLES, 0, mesh.count );
 
 		/* Swap front and back buffers */
-		glfwSwapBuffers(engine.GetWindow().window);
+		glfwSwapBuffers(Engine.GetWindow().window);
 
 		/* Poll for and process events */
 		glfwPollEvents();
