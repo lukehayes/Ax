@@ -21,7 +21,9 @@ namespace CG {
 
             void Init();
 
-            void Create();
+            void Start();
+
+            void Shutdown();
 
             void GetErrors();
 
