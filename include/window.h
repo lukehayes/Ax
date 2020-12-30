@@ -1,6 +1,10 @@
 #ifndef CG_WINDOW_H
 #define CG_WINDOW_H
 
+#ifdef _WIN32
+#define GLEW_STATIC
+#endif
+
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
 #include "common/types.h"
