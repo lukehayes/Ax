@@ -29,7 +29,4 @@ namespace CG
             fprintf(stderr, "Error: %s \n", glewGetErrorString(err));
         }
     }
-
-    GLFWwindow* 
-    Window::GetWindow() { return this->window; }
 }

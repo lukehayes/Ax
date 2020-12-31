@@ -19,8 +19,16 @@ namespace CG
 
             void Create();
 
-            GLFWwindow* GetWindow();
+            inline GLFWwindow* 
+            GetWindow() { return this->window; }
 
+            inline s32 
+            GetHeight() { return this->height; }
+
+            inline s32 
+            GetWidth() { return this->width; }
+
+        private:
             s32 width = 800;
             s32 height = 600;
             const_str title = "Game Title";
