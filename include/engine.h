@@ -11,14 +11,12 @@ namespace CG {
             Engine();
             ~Engine();
 
-            void init();
+            void       init();
+            void       start();
+            void       shutdown();
 
-            void start();
-            void shutdown();
-
-            void getErrors();
-            void getKeyboardInput();
-
+            void       getErrors();
+            void       getKeyboardInput();
             CG::Window getWindow() const;
 
             CG::Window window;
