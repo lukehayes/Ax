@@ -9,24 +9,19 @@
 #include <GLFW/glfw3.h>
 #include "common/types.h"
 
-namespace CG 
-{
+namespace CG {
+
     class Window
     {
         public:
             Window();
             ~Window();
 
-            void create();
+            void         create();
 
-            inline GLFWwindow* 
-            getWindow() { return this->window; }
-
-            inline s32 
-            getHeight() { return this->height; }
-
-            inline s32 
-            GetWidth() { return this->width; }
+            GLFWwindow*  getWindow();
+            s32          getHeight();
+            s32          getWidth();
 
         private:
             s32          width = 800;
@@ -37,5 +32,13 @@ namespace CG
     };
 }
 
+inline GLFWwindow* 
+CG::Window::getWindow() { return this->window; }
+
+inline s32 
+CG::Window::getHeight() { return this->height; }
+
+inline s32 
+CG::Window::getWidth() { return this->width; }
 
 #endif
