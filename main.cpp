@@ -8,9 +8,9 @@ int main(int argc, const char *argv[])
 
 
 	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(Engine.GetWindow().GetWindow() ))
+	while (!glfwWindowShouldClose(Engine.getWindow().getWindow() ))
 	{
-		//glfwGetFramebufferSize(Engine.GetWindow().window, Engine.GetWindow().width, &Engine.GetWindow().height);
+		//glfwGetFramebufferSize(Engine.getWindow().window, Engine.getWindow().width, &Engine.getWindow().height);
 
 		//glViewport(0, 0, width, height);
         //glClearColor(0.0,0.3f,1.0f,1.0f);
@@ -26,7 +26,7 @@ int main(int argc, const char *argv[])
         //glDrawArrays(GL_TRIANGLES, 0, mesh.count );
 
 		/* Swap front and back buffers */
-		glfwSwapBuffers(Engine.GetWindow().GetWindow());
+		glfwSwapBuffers(Engine.getWindow().getWindow());
 
 		/* Poll for and process events */
 		glfwPollEvents();
