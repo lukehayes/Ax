@@ -17,22 +17,22 @@ namespace CG
             Window();
             ~Window();
 
-            void Create();
+            void create();
 
             inline GLFWwindow* 
-            GetWindow() { return this->window; }
+            getWindow() { return this->window; }
 
             inline s32 
-            GetHeight() { return this->height; }
+            getHeight() { return this->height; }
 
             inline s32 
             GetWidth() { return this->width; }
 
         private:
-            s32 width = 800;
-            s32 height = 600;
-            const_str title = "Game Title";
-            GLFWwindow* window;
+            s32          width = 800;
+            s32          height = 600;
+            const_str    title = "Game Title";
+            GLFWwindow*  window;
             GLFWmonitor* monitor;
     };
 }

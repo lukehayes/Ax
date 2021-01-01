@@ -4,7 +4,7 @@ int main(int argc, const char *argv[])
 {
     
     CG::Engine Engine;
-    Engine.Start();
+    Engine.start();
 
 
 	/* Loop until the user closes the window */
@@ -33,7 +33,7 @@ int main(int argc, const char *argv[])
         /*CG_DestroyModelCube(&cube);*/
 	}
 
-    Engine.Shutdown();
+    Engine.shutdown();
 
 	return 0;
 }

@@ -4,12 +4,12 @@ namespace CG
 {
 
     Window::Window() {
-        this->Create();
+        this->create();
     }
     Window::~Window() {}
 
     void
-    Window::Create()
+    Window::create()
     {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

@@ -7,25 +7,25 @@ namespace CG {
     }
 
     void
-    Engine::Start()
+    Engine::start()
     {
         glfwInit();
     }
 
     void
-    Engine::Shutdown()
+    Engine::shutdown()
     {
         glfwTerminate();
     }
 
     void 
-    Engine::GetErrors() {}
+    Engine::getErrors() {}
 
     void 
-    Engine::GetKeyboardInput() {}
+    Engine::getKeyboardInput() {}
 
     CG::Window
-    Engine::GetWindow() const { return this->window; }
+    Engine::getWindow() const { return this->window; }
 
 } /* namespace CG */
 
