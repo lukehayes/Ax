@@ -10,11 +10,11 @@ MKDIR %OUTPUT_DIR%
 REM --- Compiler Flags
 set COMPILE_FLAGS=/MD /Febin\app.exe /DMAX_MODELS=100
 
-REM --- Includes Directories
-set INCLUDES=-I include -I %LOCAL_LIBS_DIR%\GLFW\include -I %LOCAL_LIBS_DIR%\GLEW\Include -I %LOCAL_LIBS_DIR%\CGLM\Include\
-
 REM --- Link Libraries Directory
 set LOCAL_LIBS_DIR=C:\Dev\Libraries
+
+REM --- Includes Directories
+set INCLUDES=-I include -I %LOCAL_LIBS_DIR%\GLFW\include -I %LOCAL_LIBS_DIR%\GLEW\Include -I %LOCAL_LIBS_DIR%\CGLM\Include\
 
 REM --- Library Directories
 set LIBS_DIR= /LIBPATH:%LOCAL_LIBS_DIR%\GLFW\Libs /LIBPATH:%LOCAL_LIBS_DIR%\GLEW\Libs /LIBPATH:%LOCAL_LIBS_DIR%\CGLM\Libs
