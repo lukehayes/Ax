@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -DMAX_MODELS="100"
-IDFLAGS = -I include
+INCDIR = -I include
 SRCDIR = src
 ALLSRC = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
 LDFLAGS =
@@ -11,19 +11,19 @@ ENTRY = main.cpp
 
 #Bundle all source code into a single binary
 all:
-	$(CC) $(ENTRY) $(ALLSRC) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
+	$(CC) $(ENTRY) $(ALLSRC) $(TARGET) $(CFLAGS) $(INCDIR) $(LDFLAGS) $(LIBS)
 
 build-static: 
-	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS) $(STATIC_LIBS)
+	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(INCDIR) $(LDFLAGS) $(LIBS) $(STATIC_LIBS)
 
 libCG-Math-Static.a:
-	$(CC) -c src/math/*.c $(IDFLAGS)
+	$(CC) -c src/math/*.c $(INCDIR)
 	ar -rcs $@ *.o
 
 #Debug specific. -g3 flag enables ALL debugging symbols.
 DEBUG_FLAGS = -Wall -ggdb
 debug:
-	$(CC) $(ENTRY) $(ALLSRC) $(TARGET) $(DEBUG_FLAGS) $(CFLAGS) $(IDFLAGS) $(LDFLAGS) $(LIBS)
+	$(CC) $(ENTRY) $(ALLSRC) $(TARGET) $(DEBUG_FLAGS) $(CFLAGS) $(INCDIR) $(LDFLAGS) $(LIBS)
 
 clean:
 	rm *.o *.so *.a
