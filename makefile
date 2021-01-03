@@ -1,30 +1,28 @@
 CC = gcc
 CFLAGS = -DMAX_MODELS="100"
-INCDIR = -I include
-SRCDIR = src
-ALLSRC = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
-LDFLAGS =
+INC_DIR = -I include
+SRC_DIR = src
+ALL_SRC = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
+LD_FLAGS = -L.
 LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW -lstdc++
-STATIC_LIBS = -lCG-Math-Static
+STATIC_LIBS = -lCG
 TARGET = -o bin/app
 ENTRY = main.cpp
 
-#Bundle all source code into a single binary
-all:
-	$(CC) $(ENTRY) $(ALLSRC) $(TARGET) $(CFLAGS) $(INCDIR) $(LDFLAGS) $(LIBS)
+app-debug:
+	$(CC) main.cpp $(ALL_SRC) $(TARGET) $(INC_DIR) $(LIBS)
 
-build-static: 
-	$(CC) $(ENTRY) $(TARGET) $(CFLAGS) $(INCDIR) $(LDFLAGS) $(LIBS) $(STATIC_LIBS)
+%.o: %src/*.cpp
+	$(CC) -I include -c $^
 
-libCG-Math-Static.a:
-	$(CC) -c src/math/*.c $(INCDIR)
-	ar -rcs $@ *.o
+libCG.a: *.o
+	ar -rcs $@ $^
 
-#Debug specific. -g3 flag enables ALL debugging symbols.
-DEBUG_FLAGS = -Wall -ggdb
-debug:
-	$(CC) $(ENTRY) $(ALLSRC) $(TARGET) $(DEBUG_FLAGS) $(CFLAGS) $(INCDIR) $(LDFLAGS) $(LIBS)
+app-lib:
+	$(CC) main.cpp $(TARGET) $(INC_DIR) $(LD_FLAGS) $(LIBS) -lCG
+
+.PHONY:clean
 
 clean:
-	rm *.o *.so *.a
-	rm -r bin
+	rm -rf bin/
+	rm *.o *.a
