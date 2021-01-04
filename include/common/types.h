@@ -1,6 +1,8 @@
 #ifndef __TYPES_H__
 #define __TYPES_H__
 
+#include <array>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -13,7 +15,6 @@ extern "C" {
 #include <float.h>		// FLT_MAX
 #include <time.h>
 #include <ctype.h>
-#include <array>
 
 #define _inline 			static inline
 #define _local_persist 		static
