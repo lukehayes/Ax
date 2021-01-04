@@ -68,6 +68,7 @@ typedef const char* 	const_str;
 // Template Typedefs
 ============================================================*/
 using Array3f = std::array<float,3>;
+using Array4f = std::array<float,4>;
 
 #ifdef __cplusplus
 }
