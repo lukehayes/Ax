@@ -18,7 +18,8 @@ namespace Ax {
             void       getErrors();
             void       getKeyboardInput();
             Ax::Window getWindow() const;
-            
+
+        private: 
             Ax::Window window;
     };
     
