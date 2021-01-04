@@ -63,6 +63,11 @@ typedef const char* 	const_str;
 #define f32_max 		FLT_MAX
 #define f32_min 		FLT_MIN
 
+/*============================================================
+// Template Typedefs
+============================================================*/
+using Array3f = std::array<float,3>;
+
 #ifdef __cplusplus
 }
 #endif 	// c++
