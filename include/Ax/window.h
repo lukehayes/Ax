@@ -14,8 +14,8 @@ namespace Ax {
     class Window
     {
         public:
-            Window();
-            ~Window();
+                         Window();
+                        ~Window();
 
             void         create();
 

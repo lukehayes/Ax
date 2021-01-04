@@ -8,8 +8,8 @@ namespace Ax {
     class Engine
     {
         public:
-            Engine();
-            ~Engine();
+                       Engine();
+                      ~Engine();
 
             void       init();
             void       start();
@@ -18,7 +18,7 @@ namespace Ax {
             void       getErrors();
             void       getKeyboardInput();
             Ax::Window getWindow() const;
-
+            
             Ax::Window window;
     };
     
