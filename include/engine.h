@@ -1,9 +1,9 @@
-#ifndef AX_ENGINE_H
-#define AX_ENGINE_H
+#ifndef Ax_ENGINE_H
+#define Ax_ENGINE_H
 
 #include "window.h"
 
-namespace AX {
+namespace Ax {
 
     class Engine
     {
@@ -17,12 +17,12 @@ namespace AX {
 
             void       getErrors();
             void       getKeyboardInput();
-            AX::Window getWindow() const;
+            Ax::Window getWindow() const;
 
-            AX::Window window;
+            Ax::Window window;
     };
     
-} /* namespace AX */
+} /* namespace Ax */
 
 
 #endif

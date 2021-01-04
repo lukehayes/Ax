@@ -1,6 +1,6 @@
 #include "window.h"
 
-namespace AX
+namespace Ax
 {
 
     Window::Window() {

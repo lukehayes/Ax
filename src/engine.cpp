@@ -1,6 +1,6 @@
 #include "engine.h"
 
-namespace AX {
+namespace Ax {
 
     Engine::Engine() {}
     Engine::~Engine() {
@@ -24,9 +24,9 @@ namespace AX {
     void 
     Engine::getKeyboardInput() {}
 
-    AX::Window
+    Ax::Window
     Engine::getWindow() const { return this->window; }
 
-} /* namespace AX */
+} /* namespace Ax */
 
 
