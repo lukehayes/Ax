@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -DMAX_MODELS="100"
 INC_DIR = -I include
 SRC_DIR = src
-ALL_SRC = $(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
+ALL_SRC = $(wildcard src/Ax/*.cpp) $(wildcard src/Ax/*/*.cpp)
 LD_FLAGS = -L.
 LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW -lstdc++
 STATIC_LIBS = -lCG
