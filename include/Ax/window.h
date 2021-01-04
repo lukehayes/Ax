@@ -7,7 +7,7 @@
 
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
-#include "common/types.h"
+#include "Ax/common/types.h"
 
 namespace Ax {
 
