@@ -7,7 +7,7 @@
 #include <iostream>
 #include "Ax/common/glm.h"
 
-namespace AX::GL {
+namespace Ax::GL {
     
     class Shader
     {
