@@ -1,6 +1,6 @@
 #include "window.h"
 
-namespace CG
+namespace AX
 {
 
     Window::Window() {

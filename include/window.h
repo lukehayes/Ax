@@ -1,5 +1,5 @@
-#ifndef CG_WINDOW_H
- #define CG_WINDOW_H
+#ifndef AX_WINDOW_H
+#define AX_WINDOW_H
 
 #ifdef _WIN32
  #define GLEW_STATIC
@@ -9,7 +9,7 @@
 #include <GLFW/glfw3.h>
 #include "common/types.h"
 
-namespace CG {
+namespace AX {
 
     class Window
     {
@@ -32,8 +32,8 @@ namespace CG {
     };
 }
 
-inline GLFWwindow* CG::Window::getWindow() { return this->window; }
-inline s32         CG::Window::getHeight() { return this->height; }
-inline s32         CG::Window::getWidth() { return this->width; }
+inline GLFWwindow* AX::Window::getWindow() { return this->window; }
+inline s32         AX::Window::getHeight() { return this->height; }
+inline s32         AX::Window::getWidth() { return this->width; }
 
 #endif

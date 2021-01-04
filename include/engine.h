@@ -1,9 +1,9 @@
-#ifndef CG_ENGINE_H
-#define CG_ENGINE_H
+#ifndef AX_ENGINE_H
+#define AX_ENGINE_H
 
 #include "window.h"
 
-namespace CG {
+namespace AX {
 
     class Engine
     {
@@ -17,12 +17,12 @@ namespace CG {
 
             void       getErrors();
             void       getKeyboardInput();
-            CG::Window getWindow() const;
+            AX::Window getWindow() const;
 
-            CG::Window window;
+            AX::Window window;
     };
     
-} /* namespace CG */
+} /* namespace AX */
 
 
 #endif
