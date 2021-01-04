@@ -1,10 +1,22 @@
 #include "Ax/engine.h"
+#include "Ax/gl/vertex-array.h"
+#include "Ax/gl/buffer-target.h"
+#include "Ax/gl/shader.h"
 
 int main(int argc, const char *argv[])
 {
-    
+
     Ax::Engine Engine;
     Engine.start();
+
+    Ax::GL::VertexArray vao;
+
+    Ax::GL::Shader shader(
+            "assets/shaders/VSH-Default.glsl",
+            "assets/shaders/FSH-Default.glsl"
+            );
+
+    vao.addData({0.3f, -1.0f, 0.9f}, Ax::GL::BufferTarget::ARRAY_BUFFER);
 
 
 	/* Loop until the user closes the window */
@@ -18,6 +30,9 @@ int main(int argc, const char *argv[])
 
 		//glUseProgram(shader.program);
         //glBindVertexArray(mesh.VAO_ID);
+    
+        shader.use();
+        vao.bind();
 
         //glUniformMatrix4fv(glGetUniformLocation(shader.program, "projection"), 1, GL_FALSE, (float*)camera.projection);
 		//glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)camera.view);
