@@ -2,7 +2,6 @@
 #define GFX_VERTEX_H
 
 #include "common/types.h"
-#include <array>
 
 namespace Graphics {
 

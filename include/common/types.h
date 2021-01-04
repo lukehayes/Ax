@@ -13,6 +13,7 @@ extern "C" {
 #include <float.h>		// FLT_MAX
 #include <time.h>
 #include <ctype.h>
+#include <array>
 
 #define _inline 			static inline
 #define _local_persist 		static
