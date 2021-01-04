@@ -1,4 +1,4 @@
-# AX
+# Ax
 
 Ax is a small rendering 'Engine' written with C++ to aid in abstracting some of the lower level OpenGL boilerplate necessary with creating 2D/3D visualizations.
 
