@@ -1,9 +1,9 @@
-#ifndef GFX_VERTEX_H
-#define GFX_VERTEX_H
+#ifndef GL_VERTEX_H
+#define GL_VERTEX_H
 
 #include "common/types.h"
 
-namespace Graphics {
+namespace GL {
 
     class Vertex
     {
@@ -29,7 +29,7 @@ namespace Graphics {
     };
 }
 
-inline Array3f  Graphics::Vertex::getPosition() const { return this->position; }
-inline Array3f  Graphics::Vertex::getColor() const { return this->color; }
+inline Array3f  GL::Vertex::getPosition() const { return this->position; }
+inline Array3f  GL::Vertex::getColor() const { return this->color; }
 
 #endif
