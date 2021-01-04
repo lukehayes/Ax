@@ -36,6 +36,8 @@ namespace Ax::GL
         }
         const char* vShaderCode = vertexCode.c_str();
         const char * fShaderCode = fragmentCode.c_str();
+
+        std::cout << vShaderCode << std::endl;
         // 2. compile shaders
         unsigned int vertex, fragment;
         // vertex shader
@@ -62,7 +64,7 @@ namespace Ax::GL
     void 
     Shader::use() const
     { 
-        glUseProgram(ID); 
+        glUseProgram(this->ID); 
     }
 
     void 
