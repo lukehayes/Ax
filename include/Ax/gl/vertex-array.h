@@ -10,32 +10,18 @@ namespace Ax::GL {
     {
         public:
 
-            VertexArray();
-            ~VertexArray();
+                   VertexArray();
+                  ~VertexArray();
 
-            void bind();
-            void unbind();
+            void   bind();
+            void   unbind();
 
-            void addData(std::array<float, 9>verticies, const BufferConfig& config)
-            {
-                glGenBuffers(1, &this->bufferID);
-                glBindBuffer(config.target, this->bufferID);
-                glBufferData(config.target, sizeof(float) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
-
-                glVertexAttribPointer(
-                        config.attributePosition,
-                        config.vertexSize,
-                        GL_FLOAT, 
-                        false, 
-                        config.vertexStride,
-                        0);
-
-                glEnableVertexAttribArray(config.attributePosition);
-            }
+            void   setAttribPointers(const BufferConfig& config);
+            void   setBufferData(std::array<f32, 8>verticies, const BufferConfig& config);
 
         private:
-            GLuint id;
-            GLuint bufferID;
+            GLuint m_id;
+            GLuint m_bufferID;
 
 
     };
