@@ -1,7 +1,7 @@
 #ifndef GL_VTX_ARRAY_H
 #define GL_VTX_ARRAY_H
 
-#include "buffer-target.h"
+#include "Ax/gl/buffer-config.h"
 #include "Ax/common/types.h"
 
 namespace Ax::GL {
@@ -16,15 +16,21 @@ namespace Ax::GL {
             void bind();
             void unbind();
 
-            void addData(Array3f verticies, BufferTarget target)
+            void addData(std::array<float, 9>verticies, const BufferConfig& config)
             {
                 glGenBuffers(1, &this->bufferID);
-                glBindBuffer(target, this->bufferID);
+                glBindBuffer(config.target, this->bufferID);
+                glBufferData(config.target, sizeof(float) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
 
-                glBufferData(target, sizeof(float) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
+                glVertexAttribPointer(
+                        config.attributePosition,
+                        config.vertexSize,
+                        GL_FLOAT, 
+                        false, 
+                        config.vertexStride,
+                        0);
 
-
-
+                glEnableVertexAttribArray(config.attributePosition);
             }
 
         private:
