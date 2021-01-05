@@ -12,15 +12,20 @@ int main(int argc, const char *argv[])
     Ax::GL::VertexArray vao;
 
     Ax::GL::Shader shader(
-            "assets/shaders/VSH-Default.glsl",
-            "assets/shaders/FSH-Default.glsl"
-            );
+        "assets/shaders/VSH-Default.glsl",
+        "assets/shaders/FSH-Default.glsl"
+    );
 
-    vao.addData({0.3f, -1.0f, 0.9f}, Ax::GL::BufferTarget::ARRAY_BUFFER);
+    vao.addData({
+            0.0f, 1.0f, 0.9f,
+            -1.0f, -1.0f, 0.9f,
+            1.0f, -1.0f, -0.5f,
+            }, Ax::GL::BufferTarget::ARRAY_BUFFER);
 
+    std::cout << Engine.window().width() << std::endl;
 
 	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(Engine.getWindow().getWindow() ))
+	while (!glfwWindowShouldClose(Engine.window().window() ))
 	{
 		//glfwGetFramebufferSize(Engine.getWindow().window, Engine.getWindow().width, &Engine.getWindow().height);
 
@@ -38,10 +43,10 @@ int main(int argc, const char *argv[])
 		//glUniformMatrix4fv(glGetUniformLocation(shader.program, "view"), 1, GL_FALSE, (float*)camera.view);
         //glUniformMatrix4fv(glGetUniformLocation(shader.program, "model"), 1, GL_FALSE, (float*)model.matrix);
         
-        //glDrawArrays(GL_TRIANGLES, 0, mesh.count );
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		/* Swap front and back buffers */
-		glfwSwapBuffers(Engine.getWindow().getWindow());
+		glfwSwapBuffers(Engine.window().window());
 
 		/* Poll for and process events */
 		glfwPollEvents();

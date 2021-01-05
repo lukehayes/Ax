@@ -19,13 +19,13 @@ namespace Ax {
     }
 
     void 
-    Engine::getErrors() {}
+    Engine::errors() {}
 
     void 
-    Engine::getKeyboardInput() {}
+    Engine::keyboardInput() {}
 
     Ax::Window
-    Engine::getWindow() const { return this->window; }
+    Engine::window() const { return m_window; }
 
 } /* namespace Ax */
 

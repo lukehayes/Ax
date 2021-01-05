@@ -15,12 +15,12 @@ namespace Ax {
             void       start();
             void       shutdown();
 
-            void       getErrors();
-            void       getKeyboardInput();
-            Ax::Window getWindow() const;
+            void       errors();
+            void       keyboardInput();
+            Ax::Window window() const;
 
         private: 
-            Ax::Window window;
+            Ax::Window m_window;
     };
     
 } /* namespace Ax */

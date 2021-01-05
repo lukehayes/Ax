@@ -19,16 +19,16 @@ namespace Ax {
 
             void         create();
 
-            GLFWwindow*  getWindow();
-            s32          getHeight();
-            s32          getWidth();
+            GLFWwindow*  window();
+            s32          height();
+            s32          width();
 
         private:
-            s32          width = 800;
-            s32          height = 600;
-            const_str    title = "Game Title";
-            GLFWwindow*  window;
-            GLFWmonitor* monitor;
+            s32          m_width = 800;
+            s32          m_height = 600;
+            const_str    m_title = "Game Title";
+            GLFWwindow*  m_window;
+            GLFWmonitor* m_monitor;
     };
 }
 

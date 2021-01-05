@@ -11,15 +11,16 @@ namespace Ax
     void
     Window::create()
     {
+        glfwInit();
+
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-        glfwInit();
 
-        this->window = glfwCreateWindow(this->width, this->height, this->title, NULL, NULL);
+        m_window = glfwCreateWindow(m_width, m_height, m_title, NULL, NULL);
 
-        glfwMakeContextCurrent(this->window);
+        glfwMakeContextCurrent(m_window);
 
         /* Glew MUST be initialized after context creation*/
         GLenum err = glewInit();
