@@ -5,6 +5,7 @@ namespace Ax::GL {
     VertexArray::VertexArray() 
     {
         glGenVertexArrays(1, &this->id);
+        glBindVertexArray(this->id);
     }
 
     VertexArray::~VertexArray() {}
