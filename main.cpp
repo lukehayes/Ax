@@ -1,8 +1,8 @@
-#include "Ax/system/engine.h"
-#include "Ax/system/gl/vertex-array.h"
-#include "Ax/system/gl/buffer-target.h"
-#include "Ax/system/gl/buffer-config.h"
-#include "Ax/system/gl/shader.h"
+#include "Ax/System/Engine.h"
+#include "Ax/System/GL/VertexArray.h"
+#include "Ax/System/GL/BufferTarget.h"
+#include "Ax/System/GL/BufferConfig.h"
+#include "Ax/System/GL/Shader.h"
 
 int main(int argc, const char *argv[])
 {

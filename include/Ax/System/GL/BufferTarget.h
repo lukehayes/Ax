@@ -1,5 +1,5 @@
-#ifndef BUFFER_TARGET_H
-#define BUFFER_TARGET_H
+#ifndef AX_SYS_GL_BUFFER_TARGET_H
+#define AX_SYS_GL_BUFFER_TARGET_H
 
 #include <GLEW/glew.h>
 

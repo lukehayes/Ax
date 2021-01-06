@@ -1,8 +1,8 @@
 #ifndef GL_VTX_ARRAY_H
 #define GL_VTX_ARRAY_H
 
-#include "Ax/system/gl/buffer-config.h"
-#include "Ax/system/common/types.h"
+#include "Ax/System/GL/BufferConfig.h"
+#include "Ax/System/Common/Types.h"
 
 namespace Ax::System::GL {
 

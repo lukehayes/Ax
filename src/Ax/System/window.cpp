@@ -1,4 +1,4 @@
-#include "Ax/system/window.h"
+#include "Ax/System/Window.h"
 
 namespace Ax::System
 {

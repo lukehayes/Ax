@@ -1,4 +1,4 @@
-#include "Ax/system/gl/shader.h"
+#include "Ax/System/GL/Shader.h"
 #include <GLEW/glew.h>
 
 namespace Ax::System::GL

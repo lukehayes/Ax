@@ -1,4 +1,4 @@
-#include "Ax/system/gl/vertex-array.h"
+#include "Ax/System/GL/VertexArray.h"
 
 namespace Ax::System::GL {
 

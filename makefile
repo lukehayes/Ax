@@ -2,7 +2,8 @@ CC = gcc
 CFLAGS = -DMAX_MODELS="100"
 INC_DIR = -I include
 SRC_DIR = src
-ALL_SRC = $(wildcard src/Ax/system/*.cpp) $(wildcard src/Ax/system/*/*.cpp)
+SYSTEM_NAMESPACE = src/Ax/System/
+ALL_SRC = $(wildcard $(SYSTEM_NAMESPACE)*.cpp) $(wildcard $(SYSTEM_NAMESPACE)*/*.cpp)
 LD_FLAGS = -L.
 LIBS = -lglfw3 -lGLU -lGL -lX11 -lpthread -lm -ldl -lGLEW -lstdc++
 STATIC_LIBS = -lCG

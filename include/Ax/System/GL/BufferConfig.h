@@ -1,8 +1,8 @@
-#ifndef GL_BUFCONFIG_H
-#define GL_BUFCONFIG_H
+#ifndef AX_SYS_GL_BUFCONFIG_H
+#define AX_SYS_GL_BUFCONFIG_H
 
-#include "Ax/system/gl/buffer-target.h"
-#include "Ax/system/common/types.h"
+#include "Ax/System/GL/BufferTarget.h"
+#include "Ax/System/Common/Types.h"
 
 namespace Ax::System::GL {
 

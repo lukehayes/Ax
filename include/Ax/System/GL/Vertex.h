@@ -1,7 +1,7 @@
-#ifndef GL_VERTEX_H
-#define GL_VERTEX_H
+#ifndef AX_SYS_GL_GL_VERTEX_H
+#define AX_SYS_GL_GL_VERTEX_H
 
-#include "Ax/system/common/types.h"
+#include "Ax/System/Common/Types.h"
 
 namespace GL {
 

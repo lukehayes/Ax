@@ -7,7 +7,7 @@
 
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
-#include "Ax/system/common/types.h"
+#include "Ax/System/Common/Types.h"
 
 namespace Ax::System{
 
@@ -32,6 +32,6 @@ namespace Ax::System{
     };
 }
 
-#include "Ax/system/window-inl.h"
+#include "Ax/System/Window-inl.h"
 
 #endif
