@@ -3,11 +3,15 @@
 #include "Ax/System/GL/BufferTarget.h"
 #include "Ax/System/GL/BufferConfig.h"
 #include "Ax/System/GL/Shader.h"
+#include "Ax/System/GL/Primitive.h"
 
 int main(int argc, const char *argv[])
 {
 
-    Ax::System::Engine Engine;
+    using namespace Ax::System;
+    using namespace Ax::System::GL;
+
+    Engine Engine;
     Engine.start();
 
     Ax::System::GL::VertexArray vao;
@@ -78,7 +82,7 @@ int main(int argc, const char *argv[])
         vao.bind();
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model,  glm::vec3(std::cos(c), std::sin(c), 11.0f));
-        model = glm::rotate(model, glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        model = glm::rotate(model, glm::radians(c * -100.0f), glm::vec3(1.0f, 1.0f, 1.0f));
         shader.setMat4("model", model);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
 
@@ -86,7 +90,13 @@ int main(int argc, const char *argv[])
         model = glm::translate(model,  glm::vec3(-2.0f, 0.0f, 30.0f + std::sin(c) * 11.0f));
         model = glm::rotate(model, glm::radians(c * 100), glm::vec3(1.0f, 1.0f, 1.0f));
         shader.setMat4("model", model);
-        glDrawArrays(GL_LINE_STRIP, 0, 8);
+        glDrawArrays(Primitive::LINES, 0, 8);
+
+        model = glm::mat4(1.0f);
+        model = glm::translate(model,  glm::vec3(5.0f, 4.0f, 30.0f + std::sin(c) * 11.0f));
+        model = glm::rotate(model, glm::radians(c * 100), glm::vec3(1.0f, 1.0f, 1.0f));
+        shader.setMat4("model", model);
+        glDrawArrays(Primitive::POINTS, 0, 8);
 
 
 
