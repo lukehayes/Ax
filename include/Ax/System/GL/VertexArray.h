@@ -1,5 +1,5 @@
-#ifndef GL_VTX_ARRAY_H
-#define GL_VTX_ARRAY_H
+#ifndef AX_SYS_GL_VTXARRAY_H
+#define AX_SYS_GL_VTXARRAY_H
 
 #include "Ax/System/GL/BufferConfig.h"
 #include "Ax/System/Common/Types.h"
@@ -22,8 +22,6 @@ namespace Ax::System::GL {
         private:
             GLuint m_id;
             GLuint m_bufferID;
-
-
     };
 }
 

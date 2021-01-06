@@ -1,5 +1,5 @@
-#ifndef COMMON_TYPES_H
-#define COMMON_TYPES_H
+#ifndef AX_SYS_COMMON_TYPES_H
+#define AX_SYS_COMMON_TYPES_H
 
 #include <array>
 
@@ -26,4 +26,4 @@ using const_str =       const char*;
 using Array3f = std::array<float,3>;
 using Array4f = std::array<float,4>;
 
-#endif // __TYPES_H__
+#endif // AX_SYS_COMMON_TYPES_H
