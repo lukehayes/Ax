@@ -14,7 +14,7 @@ REM --- Link Libraries Directory
 set LOCAL_LIBS_DIR=C:\Dev\Libraries
 
 REM --- Includes Directories
-set INCLUDES=-I include -I %LOCAL_LIBS_DIR%\GLFW\include -I %LOCAL_LIBS_DIR%\GLEW\Include -I %LOCAL_LIBS_DIR%\CGLM\Include\
+set INCLUDES=-I include -I %LOCAL_LIBS_DIR%\GLFW\include -I %LOCAL_LIBS_DIR%\GLEW\Include -I %LOCAL_LIBS_DIR%
 
 REM --- Library Directories
 set LIBS_DIR= /LIBPATH:%LOCAL_LIBS_DIR%\GLFW\Libs /LIBPATH:%LOCAL_LIBS_DIR%\GLEW\Libs /LIBPATH:%LOCAL_LIBS_DIR%\CGLM\Libs
@@ -23,7 +23,7 @@ REM --- Libraries
 set LIBS=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib glew32s.lib
 
 REM --- Project Sources
-set SRC_ROOT=src/*.cpp
+set SRC_ROOT=../src/Ax/*.cpp ../src/Ax/*/*.cpp
 set ALL_SRC=%SRC_ROOT% 
 
 REM --- Run Compiler
