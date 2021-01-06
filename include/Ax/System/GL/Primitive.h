@@ -15,7 +15,7 @@ namespace Ax::System::GL
         LINES          = GL_LINES,
         LINE_STRIP     = GL_LINE_STRIP,
         LINE_LOOP      = GL_LINE_LOOP,
-        TRIANGLE_FAN   = GL_TRIANGLE_FAN
+        TRIANGLE_FAN   = GL_TRIANGLE_FAN,
         TRIANGLE_STRIP = GL_TRIANGLE_STRIP
     };
 }
