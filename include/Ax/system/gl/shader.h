@@ -5,9 +5,9 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "Ax/common/glm.h"
+#include "Ax/system/common/glm.h"
 
-namespace Ax::GL {
+namespace Ax::System::GL {
     
     class Shader
     {

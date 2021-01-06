@@ -1,6 +1,6 @@
-#include "Ax/engine.h"
+#include "Ax/system/engine.h"
 
-namespace Ax {
+namespace Ax::System{
 
     Engine::Engine() {}
     Engine::~Engine() {
@@ -24,9 +24,9 @@ namespace Ax {
     void 
     Engine::keyboardInput() {}
 
-    Ax::Window
+    Ax::System::Window
     Engine::window() const { return m_window; }
 
-} /* namespace Ax */
+} /* namespace Ax::System*/
 
 

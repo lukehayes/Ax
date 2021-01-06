@@ -1,5 +1,5 @@
-#ifndef Ax_WINDOW_H
-#define Ax_WINDOW_H
+#ifndef AX_SYS_WINDOW_H
+#define AX_SYS_WINDOW_H
 
 #ifdef _WIN32
  #define GLEW_STATIC
@@ -7,9 +7,9 @@
 
 #include <GLEW/glew.h>
 #include <GLFW/glfw3.h>
-#include "Ax/common/types.h"
+#include "Ax/system/common/types.h"
 
-namespace Ax {
+namespace Ax::System{
 
     class Window
     {
@@ -32,6 +32,6 @@ namespace Ax {
     };
 }
 
-#include "Ax/window-inl.h"
+#include "Ax/system/window-inl.h"
 
 #endif

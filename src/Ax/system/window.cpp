@@ -1,6 +1,6 @@
-#include "Ax/window.h"
+#include "Ax/system/window.h"
 
-namespace Ax
+namespace Ax::System
 {
 
     Window::Window() {

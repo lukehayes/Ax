@@ -1,23 +1,23 @@
-#include "Ax/engine.h"
-#include "Ax/gl/vertex-array.h"
-#include "Ax/gl/buffer-target.h"
-#include "Ax/gl/buffer-config.h"
-#include "Ax/gl/shader.h"
+#include "Ax/system/engine.h"
+#include "Ax/system/gl/vertex-array.h"
+#include "Ax/system/gl/buffer-target.h"
+#include "Ax/system/gl/buffer-config.h"
+#include "Ax/system/gl/shader.h"
 
 int main(int argc, const char *argv[])
 {
 
-    Ax::Engine Engine;
+    Ax::System::Engine Engine;
     Engine.start();
 
-    Ax::GL::VertexArray vao;
+    Ax::System::GL::VertexArray vao;
 
-    Ax::GL::Shader shader(
+    Ax::System::GL::Shader shader(
         "assets/shaders/VSH-Default.glsl",
         "assets/shaders/FSH-Default.glsl"
     );
 
-    Ax::GL::BufferConfig config{0,2,0, Ax::GL::ARRAY_BUFFER};
+    Ax::System::GL::BufferConfig config{0,2,0, Ax::System::GL::ARRAY_BUFFER};
 
     vao.setBufferData({
            -1.0,   1.0,
@@ -27,7 +27,7 @@ int main(int argc, const char *argv[])
             }, config);
     vao.setAttribPointers(config);
 
-    Ax::GL::VertexArray vao2;
+    Ax::System::GL::VertexArray vao2;
     vao2.setBufferData({
            -1.0,   1.0,
            -1.0,  -1.0,

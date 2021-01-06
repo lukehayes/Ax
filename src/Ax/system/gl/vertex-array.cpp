@@ -1,6 +1,6 @@
-#include "Ax/gl/vertex-array.h"
+#include "Ax/system/gl/vertex-array.h"
 
-namespace Ax::GL {
+namespace Ax::System::GL {
 
     VertexArray::VertexArray() 
     {

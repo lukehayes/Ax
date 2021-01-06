@@ -3,7 +3,7 @@
 
 #include <GLEW/glew.h>
 
-namespace Ax::GL
+namespace Ax::System::GL
 {
     enum BufferTarget
     {

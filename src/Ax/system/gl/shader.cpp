@@ -1,7 +1,7 @@
-#include "Ax/gl/shader.h"
+#include "Ax/system/gl/shader.h"
 #include <GLEW/glew.h>
 
-namespace Ax::GL
+namespace Ax::System::GL
 {
     Shader::Shader(){}
     Shader::Shader(const char* vertexPath, const char* fragmentPath)

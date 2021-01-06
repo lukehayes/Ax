@@ -1,10 +1,10 @@
 #ifndef GL_BUFCONFIG_H
 #define GL_BUFCONFIG_H
 
-#include "Ax/gl/buffer-target.h"
-#include "Ax/common/types.h"
+#include "Ax/system/gl/buffer-target.h"
+#include "Ax/system/common/types.h"
 
-namespace Ax::GL {
+namespace Ax::System::GL {
 
     struct BufferConfig
     {

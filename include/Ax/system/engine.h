@@ -1,9 +1,9 @@
-#ifndef Ax_ENGINE_H
-#define Ax_ENGINE_H
+#ifndef AX_SYS_ENGINE_H
+#define AX_SYS_ENGINE_H
 
-#include "Ax/window.h"
+#include "Ax/system/window.h"
 
-namespace Ax {
+namespace Ax::System {
 
     class Engine
     {
@@ -17,13 +17,13 @@ namespace Ax {
 
             void       errors();
             void       keyboardInput();
-            Ax::Window window() const;
+            Ax::System::Window window() const;
 
         private: 
-            Ax::Window m_window;
+            Ax::System::Window m_window;
     };
     
-} /* namespace Ax */
+} /* namespace Ax::System*/
 
 
 #endif
