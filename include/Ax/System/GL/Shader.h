@@ -30,7 +30,7 @@ namespace Ax::System::GL {
     private:
 
         void      _createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName);
-        void      checkCompileErrors(unsigned int shader, std::string type);
+        void      _checkCompileErrors(unsigned int shader, std::string type);
 
         s16       ID;
         s16       m_vertID;

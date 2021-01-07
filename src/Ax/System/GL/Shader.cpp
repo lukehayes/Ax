@@ -51,7 +51,7 @@ namespace Ax::System::GL
         glAttachShader(ID, m_vertID);
         glAttachShader(ID, m_fragID);
         glLinkProgram(ID);
-        checkCompileErrors(ID, "PROGRAM");
+        _checkCompileErrors(ID, "PROGRAM");
 
         // delete the shaders as they're linked into our program now and no longer necessary
         glDeleteShader(vertex);
@@ -63,7 +63,7 @@ namespace Ax::System::GL
         id = glCreateShader(shaderType);
         glShaderSource(id, 1, &code, NULL);
         glCompileShader(id);
-        checkCompileErrors(id, shaderName);
+        _checkCompileErrors(id, shaderName);
     }
 
     void 
@@ -103,7 +103,7 @@ namespace Ax::System::GL
     }
 
     void 
-    Shader::checkCompileErrors(unsigned int shader, std::string type)
+    Shader::_checkCompileErrors(unsigned int shader, std::string type)
     {
         int success;
         char infoLog[1024];
