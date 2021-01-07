@@ -1,5 +1,4 @@
 #include "Ax/System/GL/Shader.h"
-#include <GLEW/glew.h>
 
 namespace Ax::System::GL
 {
@@ -34,30 +33,37 @@ namespace Ax::System::GL
         {
             std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
         }
-        const char* vShaderCode = vertexCode.c_str();
-        const char * fShaderCode = fragmentCode.c_str();
+
+        m_vertCode = vertexCode.c_str();
+        m_fragCode = fragmentCode.c_str();
 
         // 2. compile shaders
         unsigned int vertex, fragment;
+
         // vertex shader
-        vertex = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vertex, 1, &vShaderCode, NULL);
-        glCompileShader(vertex);
-        checkCompileErrors(vertex, "VERTEX");
+        _createShader(this->m_vertID, this->m_vertCode, GL_VERTEX_SHADER, "VERTEX");
+
         // fragment Shader
-        fragment = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fragment, 1, &fShaderCode, NULL);
-        glCompileShader(fragment);
-        checkCompileErrors(fragment, "FRAGMENT");
+        _createShader(this->m_fragID, this->m_fragCode, GL_FRAGMENT_SHADER, "FRAGMENT");
+
         // shader Program
         ID = glCreateProgram();
-        glAttachShader(ID, vertex);
-        glAttachShader(ID, fragment);
+        glAttachShader(ID, m_vertID);
+        glAttachShader(ID, m_fragID);
         glLinkProgram(ID);
         checkCompileErrors(ID, "PROGRAM");
+
         // delete the shaders as they're linked into our program now and no longer necessary
         glDeleteShader(vertex);
         glDeleteShader(fragment);
+    }
+
+    void Shader::_createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName)
+    {
+        id = glCreateShader(shaderType);
+        glShaderSource(id, 1, &code, NULL);
+        glCompileShader(id);
+        checkCompileErrors(id, shaderName);
     }
 
     void 
@@ -90,7 +96,7 @@ namespace Ax::System::GL
         glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
     }
 
-    unsigned int 
+    s16
     Shader::getID() const 
     {
         return this->ID;

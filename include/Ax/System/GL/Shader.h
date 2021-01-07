@@ -1,32 +1,42 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include <GLEW/glew.h>
+#include "Ax/System/Common/glm.h"
+#include "Ax/System/Common/Types.h"
+
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "Ax/System/Common/glm.h"
 
 namespace Ax::System::GL {
     
     class Shader
     {
     public:
-                     Shader();
-                     Shader(const char* vertexPath, const char* fragmentPath);
+                  Shader();
+                  Shader(const char* vertexPath, const char* fragmentPath);
 
-        void         use() const;
+        void      use() const;
 
-        void         setBool(const std::string &name, bool value) const;
-        void         setInt(const std::string &name, int value) const;
-        void         setFloat(const std::string &name, float value) const;
-        void         setMat4(const std::string& name, const glm::mat4& mat) const;
+        void      setBool(const std::string &name, bool value) const;
+        void      setInt(const std::string &name, int value) const;
+        void      setFloat(const std::string &name, float value) const;
+        void      setMat4(const std::string& name, const glm::mat4& mat) const;
 
-        unsigned int getID() const;
+        s16       getID() const;
 
     private:
-        void         checkCompileErrors(unsigned int shader, std::string type);
-        unsigned int ID;
+
+        void      _createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName);
+        void      checkCompileErrors(unsigned int shader, std::string type);
+
+        s16       ID;
+        s16       m_vertID;
+        s16       m_fragID;
+        const_str m_vertCode;
+        const_str m_fragCode;
     };
 
 }
