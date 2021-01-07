@@ -1,5 +1,5 @@
-CC = gcc
-CFLAGS = -DMAX_MODELS="100"
+CXX = gcc
+CXXFLAGS = -DMAX_MODELS="100"
 
 INC_DIR = -I include
 SRC_DIR = src
@@ -13,19 +13,25 @@ ENTRY = main.cpp
 SYSTEM_NAMESPACE = src/Ax/System/
 SYSTEM_SRC = $(wildcard $(SYSTEM_NAMESPACE)*.cpp) $(wildcard $(SYSTEM_NAMESPACE)*/*.cpp)
 
-app-debug:
-	$(CC) main.cpp $(SYSTEM_SRC) $(TARGET) $(INC_DIR) $(LIBS)
+# Development
+%.o: %$(SYSTEM_NAMESPACE)*.cpp %$(SYSTEM_NAMESPACE)*/*.cpp
+	$(CXX) -I include -c $^
 
-%.o: $(SYSTEM_SRC)
-	$(CC) -I include -c $^
+app-debug: *.o
+	$(CXX) main.cpp $^ $(TARGET) $(INC_DIR) $(LIBS)
 
+run: app-debug
+	$(shell "./bin/app")
+
+# Library Creation
 libAxSystem.a: *.o
 	ar -rcs $@ $^
-	rm *.o
+	rm *.
 
 app-lib: libAxSystem.a
-	$(CC) $(ENTRY) $(TARGET) $(INC_DIR) $(LINK_DIR) $(LIBS) -lAxSystem -lGLEW
+	$(CXX) $(ENTRY) $(TARGET) $(INC_DIR) $(LINK_DIR) $(LIBS) -lAxSystem -lGLEW
 
+# Cleanup
 .PHONY:clean
 clean:
 	rm -rf bin/
