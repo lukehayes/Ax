@@ -24,12 +24,12 @@ run: app-debug
 	$(shell "./bin/app")
 
 # Library Creation
-libAxSystem.a: *.o
-	ar -rcs $@ $^
-	rm *.
+#libAxSystem.a: *.o
+	#ar -rcs $@ $^
+	#rm *.
 
-app-lib: libAxSystem.a
-	$(CXX) $(ENTRY) $(TARGET) $(INC_DIR) $(LINK_DIR) $(LIBS) -lAxSystem -lGLEW
+#app-lib: libAxSystem.a
+	#$(CXX) $(ENTRY) $(TARGET) $(INC_DIR) $(LINK_DIR) $(LIBS) -lAxSystem -lGLEW
 
 # Cleanup
 .PHONY:clean
