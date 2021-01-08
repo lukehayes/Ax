@@ -1,16 +1,15 @@
-#ifndef AX_SYS_CORE_TRANSFORM_H
-#define AX_SYS_CORE_TRANSFORM_H
+#ifndef AX_COMPONENT_TRANSFORM_H
+#define AX_COMPONENT_TRANSFORM_H
 
 #include "Ax/System/Common/Types.h"
 
-namespace Core
-{
+namespace Ax::System::Component {
 
     class Transform
     {
         public:
-            Transform(){}
-            ~Transform(){}
+               Transform(){}
+               ~Transform(){}
 
         private:
             V3 m_position;
