@@ -4,6 +4,9 @@
 #include "Ax/System/GL/BufferConfig.h"
 #include "Ax/System/GL/Shader.h"
 #include "Ax/System/GL/Primitive.h"
+#include "Ax/System/Math/Random.h"
+
+#include <vector>
 
 int main(int argc, const char *argv[])
 {
@@ -40,15 +43,24 @@ int main(int argc, const char *argv[])
             }, config);
     vao2.setAttribPointers(config);
 
-    glm::mat4 projection = glm::perspective(
-            glm::radians(45.0f),
-            4.0f/ 3.0f,
+    //glm::mat4 projection = glm::perspective(
+            //glm::radians(45.0f),
+            //4.0f/ 3.0f,
+            //0.1f,
+            //100.0f
+    //);
+
+    glm::mat4 projection = glm::ortho(
+            0.0f,
+            800.0f,
+            600.0f,
+            0.0f,
             0.1f,
             100.0f
     );
 
     glm::mat4 view = glm::lookAt(
-            glm::vec3(0.0f, 0.0f, -3.0f),
+            glm::vec3(0.0f, 0.0f, 1.0f),
             glm::vec3(0.0f, 0.0f,0.0f),
             glm::vec3(0.0f, 1.0f,0.0f)
     );
@@ -56,15 +68,27 @@ int main(int argc, const char *argv[])
     glm::mat4 model = glm::mat4(1.0f);
 
     //glm::translate(model, glm::vec3(0.0f, 0.0f, -40.0f));
+    //model = glm::translate(model,  glm::vec3(0.0f, 0.0f, 0.0f));
 
     float c = 0.0;
+
+
+    std::vector<glm::vec3> cubePositions(MAX, {0.0f,0.0f,0.0f});
+
+    using namespace Ax::System::Math;
+
+    for(auto &p : cubePositions)
+    {
+        p.x = Random::randDouble(1.0f, 800.0f);
+        p.y = Random::randDouble(1.0f, 600.0f);
+    }
 
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(Engine.window().window() ))
 	{
 
-        c += 0.1;
+        c += 0.01;
 
 		/* Poll for and process events */
 		glfwPollEvents();
@@ -72,32 +96,45 @@ int main(int argc, const char *argv[])
 		//glfwGetFramebufferSize(Engine.window().window, Engine.window().width, &Engine.window().height);
 
 		//glViewport(0, 0, width, height);
-        glClearColor(0.0,0.0f,0.0f,1.0f);
+        glClearColor(0.0f,0.0f,0.0f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    view = glm::lookAt(
+            glm::vec3(0.0f, 0.0f, 1.0f),
+            glm::vec3(0.0f, 0.0f,0.0f),
+            glm::vec3(0.0f, 1.0f,0.0f)
+    );
     
         shader.use();
         shader.setMat4("projection", projection);
         shader.setMat4("view", view);
 
         vao.bind();
+
+        for(auto &pos : cubePositions)
+        {
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, pos);
+            model = glm::scale(model,  glm::vec3(std::sin(c) * 10.0f));
+            shader.setMat4("model", model);
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
+        }
+
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model,  glm::vec3(std::cos(c), std::sin(c), 11.0f));
-        model = glm::rotate(model, glm::radians(c * -100.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+
+        //---------------------------------------------------------------------
+        // Transformation Order - Translate, Rotate, Scale.
+        //---------------------------------------------------------------------
+        // model = glm::translate(model, glm::vec3(100.0f, 100.0f, 0.0f));
+        // model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+        // model = glm::scale(model,  glm::vec3(10.0f));
+        //---------------------------------------------------------------------
+
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        //model = glm::scale(model,  10.0f * glm::vec3(std::cos(c), 10.0f * std::sin(c), 0.0f));
+        
         shader.setMat4("model", model);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
-
-        model = glm::mat4(1.0f);
-        model = glm::translate(model,  glm::vec3(-2.0f, 0.0f, 30.0f + std::sin(c) * 11.0f));
-        model = glm::rotate(model, glm::radians(c * 100), glm::vec3(1.0f, 1.0f, 1.0f));
-        shader.setMat4("model", model);
-        glDrawArrays(Primitive::LINES, 0, 8);
-
-        model = glm::mat4(1.0f);
-        model = glm::translate(model,  glm::vec3(5.0f, 4.0f, 30.0f + std::sin(c) * 11.0f));
-        model = glm::rotate(model, glm::radians(c * 100), glm::vec3(1.0f, 1.0f, 1.0f));
-        shader.setMat4("model", model);
-        glDrawArrays(Primitive::POINTS, 0, 8);
-
 
 
 		/* Swap front and back buffers */
