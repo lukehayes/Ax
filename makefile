@@ -1,5 +1,5 @@
 CXX = gcc
-CXXFLAGS = -DMAX_MODELS="100"
+CXX_FLAGS = -DMAX="3"
 
 INC_DIR = -I include
 SRC_DIR = src
@@ -18,7 +18,7 @@ SYSTEM_SRC = $(wildcard $(SYSTEM_NAMESPACE)*.cpp) $(wildcard $(SYSTEM_NAMESPACE)
 	$(CXX) -I include -c $^
 
 app-debug: *.o
-	$(CXX) main.cpp $^ $(TARGET) $(INC_DIR) $(LIBS)
+	$(CXX) main.cpp $^ $(CXX_FLAGS) $(TARGET) $(INC_DIR) $(LIBS)
 
 run: app-debug
 	$(shell "./bin/app")
