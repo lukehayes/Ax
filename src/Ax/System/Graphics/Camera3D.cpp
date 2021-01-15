@@ -1,8 +1,6 @@
 #include "Ax/System/Graphics/Camera3D.h"
 #include "Ax/System/Common/glm.h"
 
-#include <iostream>
-
 namespace Ax::System::Graphics {
 
     Camera3D::Camera3D()
@@ -25,6 +23,15 @@ namespace Ax::System::Graphics {
     void   
     Camera3D::update(double dt) 
     {
+        float x = this->transform.position().x;
+        float y = this->transform.position().y;
+        float z = this->transform.position().z;
+
+        this->view = glm::lookAt(
+            glm::vec3(x,y,z),
+            glm::vec3(0.0f, 0.0f, -1.0f),
+            glm::vec3(0.0f, 1.0f,0.0f)
+        );
     }
 
 } /* namespace Ax::System::Graphics */
