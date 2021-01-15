@@ -73,8 +73,6 @@ int main(int argc, const char *argv[])
         p.x = Random::randDouble(-10.0f, 100.0f);
         p.y = Random::randDouble(-10.0f, 100.0f);
         p.z = Random::randDouble(-10.0f, 100.0f);
-
-        std::cout << p.z << std::endl;
     }
 
 
