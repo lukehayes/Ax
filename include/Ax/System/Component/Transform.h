@@ -16,9 +16,9 @@ namespace Ax::System::Component {
 
                ~Transform(){}
 
-            V3 position();
-            V3 rotation() ;
-            V3 scale();
+            V3& position();
+            V3& rotation() ;
+            V3& scale();
 
         private:
             V3 m_position;
@@ -27,13 +27,13 @@ namespace Ax::System::Component {
     };
 }
 
-inline V3
+inline V3&
 Ax::System::Component::Transform::position() { return this->m_position; }
 
-inline V3
+inline V3&
 Ax::System::Component::Transform::rotation() { return this->m_rotation; }
 
-inline V3
+inline V3&
 Ax::System::Component::Transform::scale() { return this->m_scale; }
 
 #endif
