@@ -5,6 +5,7 @@
 #include "Ax/System/GL/Shader.h"
 #include "Ax/System/GL/Primitive.h"
 #include "Ax/System/Graphics/Camera2D.h"
+#include "Ax/System/Graphics/Camera3D.h"
 #include "Ax/System/Math/Random.h"
 
 #include <vector>
@@ -53,6 +54,7 @@ int main(int argc, const char *argv[])
     //);
 
     Camera2D camera;
+    Camera3D camera3D;
 
     glm::mat4 model = glm::mat4(1.0f);
 
@@ -68,8 +70,11 @@ int main(int argc, const char *argv[])
 
     for(auto &p : cubePositions)
     {
-        p.x = Random::randDouble(1.0f, 800.0f);
-        p.y = Random::randDouble(1.0f, 600.0f);
+        p.x = Random::randDouble(-10.0f, 100.0f);
+        p.y = Random::randDouble(-10.0f, 100.0f);
+        p.z = Random::randDouble(-10.0f, 100.0f);
+
+        std::cout << p.z << std::endl;
     }
 
 
@@ -94,10 +99,10 @@ int main(int argc, const char *argv[])
             //glm::vec3(0.0f, 1.0f,0.0f)
     //);
     
-        camera.update(2.0);
+        camera3D.update(2.0);
         shader.use();
-        shader.setMat4("projection", camera.projection);
-        shader.setMat4("view", camera.view);
+        shader.setMat4("projection", camera3D.projection);
+        shader.setMat4("view", camera3D.view);
 
         vao.bind();
 
@@ -105,7 +110,9 @@ int main(int argc, const char *argv[])
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, pos);
-            model = glm::scale(model,  glm::vec3(std::sin(c) * 10.0f));
+            //model = glm::translate(model,  glm::vec3(std::sin(c) * 10.0f));
+            //model = glm::scale(model,  glm::vec3(std::sin(c) * 10.0f));
+            model = glm::rotate(model, glm::radians(std::sin(c) * 10.0f), glm::vec3(1.0f, 1.0f, 1.0f));
             shader.setMat4("model", model);
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
         }
@@ -124,7 +131,7 @@ int main(int argc, const char *argv[])
         //model = glm::scale(model,  10.0f * glm::vec3(std::cos(c), 10.0f * std::sin(c), 0.0f));
         
         shader.setMat4("model", model);
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
+        //glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
 
 
 		/* Swap front and back buffers */
