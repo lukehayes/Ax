@@ -1,5 +1,5 @@
 CXX = gcc
-CXX_FLAGS = -DMAX="3"
+CXX_FLAGS = -DMAX=100
 
 INC_DIR = -I include
 SRC_DIR = src
