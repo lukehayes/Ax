@@ -4,6 +4,7 @@
 #include "Ax/System/GL/BufferConfig.h"
 #include "Ax/System/GL/Shader.h"
 #include "Ax/System/GL/Primitive.h"
+#include "Ax/System/Graphics/Camera2D.h"
 #include "Ax/System/Math/Random.h"
 
 #include <vector>
@@ -13,6 +14,7 @@ int main(int argc, const char *argv[])
 
     using namespace Ax::System;
     using namespace Ax::System::GL;
+    using namespace Ax::System::Graphics;
 
     Engine Engine;
     Engine.start();
@@ -50,20 +52,7 @@ int main(int argc, const char *argv[])
             //100.0f
     //);
 
-    glm::mat4 projection = glm::ortho(
-            0.0f,
-            800.0f,
-            600.0f,
-            0.0f,
-            0.1f,
-            100.0f
-    );
-
-    glm::mat4 view = glm::lookAt(
-            glm::vec3(0.0f, 0.0f, 1.0f),
-            glm::vec3(0.0f, 0.0f,0.0f),
-            glm::vec3(0.0f, 1.0f,0.0f)
-    );
+    Camera2D camera;
 
     glm::mat4 model = glm::mat4(1.0f);
 
@@ -99,15 +88,16 @@ int main(int argc, const char *argv[])
         glClearColor(0.0f,0.0f,0.0f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    view = glm::lookAt(
-            glm::vec3(0.0f, 0.0f, 1.0f),
-            glm::vec3(0.0f, 0.0f,0.0f),
-            glm::vec3(0.0f, 1.0f,0.0f)
-    );
+    //view = glm::lookAt(
+            //glm::vec3(0.0f, 0.0f, 1.0f),
+            //glm::vec3(0.0f, 0.0f,0.0f),
+            //glm::vec3(0.0f, 1.0f,0.0f)
+    //);
     
+        camera.update(2.0);
         shader.use();
-        shader.setMat4("projection", projection);
-        shader.setMat4("view", view);
+        shader.setMat4("projection", camera.projection);
+        shader.setMat4("view", camera.view);
 
         vao.bind();
 

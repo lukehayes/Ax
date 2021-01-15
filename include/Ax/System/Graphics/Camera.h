@@ -6,20 +6,20 @@
 
 namespace Ax::System::Graphics {
 
-    using namespace Ax::System::Compontent;
+    using namespace Ax::System::Component;
 
     class Camera
     {
         public:
-                   Camera();
-                  ~Camera();
-        
-        Transform transform;
+                        Camera();
+                        ~Camera();
+
+            virtual void update(double dt) = 0;
 
         private: 
     };
-    
-} /* namespace Ax::System*/
+
+} /* namespace Ax::System::Graphics */
 
 
 #endif
