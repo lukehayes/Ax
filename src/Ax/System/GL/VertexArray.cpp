@@ -10,7 +10,7 @@ namespace Ax::System::GL {
 
     VertexArray::~VertexArray() 
     {
-        glDeleteBuffer(1, &,m_bufferID);
+        glDeleteBuffer(1, &,m_ArrayBufferID);
         glDeleteVertexArrays(1, &,m_id);
     }
 
@@ -43,8 +43,8 @@ namespace Ax::System::GL {
     void
     VertexArray::setBufferData(std::array<f32, 8>verticies, const BufferConfig& config)
     {
-        glGenBuffers(1, &m_bufferID);
-        glBindBuffer(config.target, m_bufferID);
+        glGenBuffers(1, &m_ArrayBufferID);
+        glBindBuffer(config.target, m_ArrayBufferID);
         glBufferData(config.target, sizeof(f32) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
     }
 }

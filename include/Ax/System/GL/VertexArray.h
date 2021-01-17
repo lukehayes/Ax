@@ -21,7 +21,7 @@ namespace Ax::System::GL {
 
         private:
             GLuint m_id;
-            GLuint m_bufferID;
+            GLuint m_ArrayBufferID;
     };
 }
 
