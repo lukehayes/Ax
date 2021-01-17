@@ -8,7 +8,11 @@ namespace Ax::System::GL {
         glBindVertexArray(m_id);
     }
 
-    VertexArray::~VertexArray() {}
+    VertexArray::~VertexArray() 
+    {
+        glDeleteBuffer(1, &,m_bufferID);
+        glDeleteVertexArrays(1, &,m_id);
+    }
 
     void 
     VertexArray::bind() 
