@@ -20,7 +20,7 @@ REM --- Library Directories
 set LIBS_DIR= /LIBPATH:%LOCAL_LIBS_DIR%\GLFW\Libs /LIBPATH:%LOCAL_LIBS_DIR%\GLEW\Libs /LIBPATH:%LOCAL_LIBS_DIR%\CGLM\Libs
 
 REM --- Libraries
-set LIBS=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib glew32s.lib
+set LIBS=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib glew32.lib
 
 REM --- Project Sources
 set AX_SYSTEM_SRC=src/Ax/System/*.cpp src/Ax/System/GL/*.cpp
