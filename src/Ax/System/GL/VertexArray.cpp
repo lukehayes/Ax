@@ -10,8 +10,8 @@ namespace Ax::System::GL {
 
     VertexArray::~VertexArray() 
     {
-        glDeleteBuffer(1, &,m_ArrayBufferID);
-        glDeleteVertexArrays(1, &,m_id);
+        glDeleteBuffers(1, &m_ArrayBufferID);
+        glDeleteVertexArrays(1, &m_id);
     }
 
     void 
