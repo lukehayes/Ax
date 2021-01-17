@@ -23,8 +23,10 @@ REM --- Libraries
 set LIBS=glfw3.lib gdi32.lib user32.lib opengl32.lib kernel32.lib ucrt.lib shell32.lib msvcrt.lib glew32.lib
 
 REM --- Project Sources
-set AX_SYSTEM_SRC=src/Ax/System/*.cpp src/Ax/System/GL/*.cpp
-set ALL_SRC=%AX_SYSTEM_SRC% 
+set AX_SYSTEM_SRC=src/Ax/System/*.cpp
+set AX_GL_SRC=src/Ax/System/GL/*.cpp
+set AX_GRAPHICS_SRC=src/Ax/System/Graphics/*.cpp
+set ALL_SRC=%AX_SYSTEM_SRC% %AX_GL_SRC% %AX_GRAPHICS_SRC%
 
 REM --- Run Compiler
 cl main.cpp %ALL_SRC% %COMPILE_FLAGS% %INCLUDES% /link %LIBS% %LIBS_DIR% /SUBSYSTEM:CONSOLE /NODEFAULTLIB:msvcrt.lib
