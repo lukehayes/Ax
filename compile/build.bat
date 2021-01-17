@@ -8,7 +8,7 @@ set OUTPUT_DIR=bin
 MKDIR %OUTPUT_DIR%
 
 REM --- Compiler Flags
-set COMPILE_FLAGS=/MD /Febin\app.exe /std:c++17 /DMAX=100
+set COMPILE_FLAGS=/MD /EHsc /Febin\app.exe /std:c++17 /DMAX=100
 
 REM --- Link Libraries Directory
 set LOCAL_LIBS_DIR=C:\Dev\Libraries
