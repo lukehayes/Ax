@@ -8,7 +8,7 @@ namespace Ax::System::Graphics {
             glm::radians(45.0f),
             800.0f / 600.0f,
             0.1f,
-            100.0f
+            1000.0f
                 )),
 
           view( glm::lookAt(
