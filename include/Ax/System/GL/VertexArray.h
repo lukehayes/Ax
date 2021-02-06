@@ -22,6 +22,7 @@ namespace Ax::System::GL {
         private:
             GLuint m_id;
             GLuint m_ArrayBufferID;
+            Array8f m_buffer;
     };
 }
 
