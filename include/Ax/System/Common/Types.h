@@ -25,8 +25,8 @@ using const_str =       const char*;
 /*============================================================
 // Template Typedefs
 ============================================================*/
-using Array3f   =      std::array<float,3>;
-using Array4f   =      std::array<float,4>;
+using Array3f   =      std::array<f32,3>;
+using Array4f   =      std::array<f32,4>;
 
 /*============================================================
 // GLM Specific
