@@ -41,7 +41,7 @@ namespace Ax::System::GL {
     }
 
     void
-    VertexArray::setBufferData(std::array<f32, 8>verticies, const BufferConfig& config)
+    VertexArray::setBufferData(std::vector<f32> verticies, const BufferConfig& config)
     {
         glGenBuffers(1, &m_ArrayBufferID);
         glBindBuffer(config.target, m_ArrayBufferID);

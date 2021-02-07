@@ -17,7 +17,7 @@ namespace Ax::System::GL {
             void   unbind();
 
             void   setAttribPointers(const BufferConfig& config);
-            void   setBufferData(std::array<f32, 8>verticies, const BufferConfig& config);
+            void   setBufferData(std::vector<f32> verticies, const BufferConfig& config);
 
         private:
             GLuint m_id;
