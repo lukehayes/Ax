@@ -2,6 +2,7 @@
 #define AX_SYS_COMMON_TYPES_H
 
 #include <array>
+#include <vector>
 #include <string>
 #include "Ax/System/Common/glm.h"
 
