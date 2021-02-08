@@ -20,7 +20,6 @@ int main(int argc, const char *argv[])
     Engine Engine;
     Engine.start();
 
-    Ax::System::GL::VertexArray vao;
 
     Ax::System::GL::Shader shader(
         "assets/shaders/VSH-Default.glsl",
@@ -29,22 +28,30 @@ int main(int argc, const char *argv[])
 
     Ax::System::GL::BufferConfig config{0,2,0, Ax::System::GL::ARRAY_BUFFER};
 
-    vao.setBufferData({
-           -1.0,   1.0,
-           -1.0,  -1.0,
-            1.0,   1.0,
-            1.0,  -1.0,
-            }, config);
-    vao.setAttribPointers(config);
+    //Ax::System::GL::VertexArray vao;
+    Ax::System::GL::VertexArray vao({
+       -1.0,   1.0,
+       -1.0,  -1.0,
+        1.0,   1.0,
+        1.0,  -1.0
+    }, config);
 
-    Ax::System::GL::VertexArray vao2;
-    vao2.setBufferData({
-           -1.0,   1.0,
-           -1.0,  -1.0,
-            1.0,   1.0,
-            1.0,  -1.0,
-            }, config);
-    vao2.setAttribPointers(config);
+    //vao.setBufferData({
+           //-0.0,   1.0,
+           //-1.0,  -1.0,
+            //1.0,   1.0,
+            //1.0,  -1.0,
+            //}, config);
+    //vao.setAttribPointers(config);
+
+    //Ax::System::GL::VertexArray vao2;
+    //vao2.setBufferData({
+           //-1.0,   1.0,
+           //-1.0,  -1.0,
+            //1.0,   1.0,
+            //1.0,  -1.0,
+            //}, config);
+    //vao2.setAttribPointers(config);
 
     //glm::mat4 projection = glm::perspective(
             //glm::radians(45.0f),
@@ -55,6 +62,7 @@ int main(int argc, const char *argv[])
 
     Camera2D camera;
     Camera3D camera3D;
+    camera3D.transform.position().z = -30.0f;
 
     glm::mat4 model = glm::mat4(1.0f);
 
@@ -104,17 +112,18 @@ int main(int argc, const char *argv[])
 
         vao.bind();
 
-        for(auto &pos : cubePositions)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, pos);
-            //model = glm::translate(model,  glm::vec3(std::sin(c) * 10.0f));
-            //model = glm::scale(model,  glm::vec3(std::sin(c) * 10.0f));
-            model = glm::rotate(model, glm::radians(std::sin(c) * 10.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-            shader.setMat4("model", model);
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
-        }
+        //for(auto &pos : cubePositions)
+        //{
+            //glm::mat4 model = glm::mat4(1.0f);
+            //model = glm::translate(model, pos);
+            ////model = glm::translate(model,  glm::vec3(std::sin(c) * 10.0f));
+            ////model = glm::scale(model,  glm::vec3(std::sin(c) * 10.0f));
+            //model = glm::rotate(model, glm::radians(std::sin(c) * 10.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+            //shader.setMat4("model", model);
+            //glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
+        //}
 
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
         glm::mat4 model = glm::mat4(1.0f);
 
         //---------------------------------------------------------------------
