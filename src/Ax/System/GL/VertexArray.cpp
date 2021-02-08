@@ -8,6 +8,17 @@ namespace Ax::System::GL {
         glBindVertexArray(m_id);
     }
 
+    VertexArray::VertexArray(std::vector<f32> verticies, const BufferConfig& config)
+    {
+        glGenVertexArrays(1, &m_id);
+        glBindVertexArray(m_id);
+
+
+        this->m_buffer = verticies;
+        this->setAttribPointers(config);
+        this->setBufferData(verticies, config);
+    }
+
     VertexArray::~VertexArray() 
     {
         glDeleteBuffers(1, &m_ArrayBufferID);

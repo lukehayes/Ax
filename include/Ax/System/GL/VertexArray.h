@@ -11,6 +11,7 @@ namespace Ax::System::GL {
         public:
 
                    VertexArray();
+                   VertexArray(std::vector<f32> verticies, const BufferConfig& config);
                   ~VertexArray();
 
             void   bind();
