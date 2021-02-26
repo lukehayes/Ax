@@ -11,7 +11,7 @@ TARGET = -o bin/app
 ENTRY = main.cpp
 
 SYSTEM_NAMESPACE = src/Ax/System/
-SYSTEM_SRC = $(wildcard $(SYSTEM_NAMESPACE)*.cpp) $(wildcard $(SYSTEM_NAMESPACE)*/*.cpp)
+SYSTEM_SRC = $(wildcard $(SYSTEM_NAMESPACE)**/*.cpp)
 
 # Development
 %.o: %$(SYSTEM_NAMESPACE)*.cpp %$(SYSTEM_NAMESPACE)*/*.cpp
