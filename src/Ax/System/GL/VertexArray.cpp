@@ -1,4 +1,5 @@
 #include "Ax/System/GL/VertexArray.h"
+#include <iostream>
 
 namespace Ax::System::GL {
 
@@ -8,21 +9,31 @@ namespace Ax::System::GL {
         glBindVertexArray(m_id);
     }
 
-    VertexArray::VertexArray(std::vector<f32> verticies, const BufferConfig& config)
+    VertexArray::VertexArray(const std::vector<f32>& verticies, const BufferConfig& config)
+        : m_buffer(verticies),
+          m_config(config)
     {
-        glGenVertexArrays(1, &m_id);
-        glBindVertexArray(m_id);
 
-
-        this->m_buffer = verticies;
-        this->setAttribPointers(config);
-        this->setBufferData(verticies, config);
+        this->generate();
+        this->setAttribPointers(m_config);
+        this->setBufferData(m_buffer, m_config);
+        std::cout << 1 << std::endl;
     }
 
     VertexArray::~VertexArray() 
     {
         glDeleteBuffers(1, &m_ArrayBufferID);
         glDeleteVertexArrays(1, &m_id);
+    }
+
+    void 
+    VertexArray::generate() 
+    {
+        glGenVertexArrays(1, &m_id);
+        glBindVertexArray(m_id);
+
+        glGenBuffers(1, &m_ArrayBufferID);
+        glBindBuffer(m_config.target, m_ArrayBufferID);
     }
 
     void 
