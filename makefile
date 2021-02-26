@@ -1,11 +1,11 @@
-CXX = gcc
+CXX = g++
 CXX_FLAGS = -DMAX=100
 
 INC_DIR = -I include
 SRC_DIR = src
 
 LINK_DIR = -L.
-LIBS = -lglfw3 -lGLEW -lGLU -lGL -lX11 -lpthread -lm -ldl -lstdc++
+LIBS = -lglfw3 -lGLEW -lGLU -lGL -lX11 -lpthread -lm -ldl
 
 TARGET = -o bin/app
 ENTRY = main.cpp
