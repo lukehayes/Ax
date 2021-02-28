@@ -1,7 +1,7 @@
 #ifndef AX_SYS_GL_PRIMITIVE_H
 #define AX_SYS_GL_PRIMITIVE_H
 
-#include <GLEW/glew.h>
+#include <glad/glad.h>
 
 namespace Ax::System::GL
 {

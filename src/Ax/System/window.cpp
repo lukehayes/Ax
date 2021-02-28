@@ -22,12 +22,14 @@ namespace Ax::System
 
         glfwMakeContextCurrent(m_window);
 
-        /* Glew MUST be initialized after context creation*/
-        GLenum err = glewInit();
+        gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
-        if( GLEW_OK != err )
-        {
-            fprintf(stderr, "Error: %s \n", glewGetErrorString(err));
-        }
+        /* Glew MUST be initialized after context creation*/
+        //GLenum err = glewInit();
+
+        //if( GLEW_OK != err )
+        //{
+            //fprintf(stderr, "Error: %s \n", glewGetErrorString(err));
+        //}
     }
 }

@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include <GLEW/glew.h>
+#include <glad/glad.h>
 #include "Ax/System/Common/glm.h"
 #include "Ax/System/Common/Types.h"
 

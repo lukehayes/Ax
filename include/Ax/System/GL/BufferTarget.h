@@ -1,7 +1,7 @@
 #ifndef AX_SYS_GL_BUFFER_TARGET_H
 #define AX_SYS_GL_BUFFER_TARGET_H
 
-#include <GLEW/glew.h>
+#include <glad/glad.h>
 
 namespace Ax::System::GL
 {
