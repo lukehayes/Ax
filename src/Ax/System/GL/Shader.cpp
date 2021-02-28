@@ -38,7 +38,7 @@ namespace Ax::System::GL
         m_fragCode = fragmentCode.c_str();
 
         // 2. compile shaders
-        unsigned int vertex, fragment;
+        //unsigned int vertex, fragment;
 
         // vertex shader
         _createShader(this->m_vertID, this->m_vertCode, GL_VERTEX_SHADER, "VERTEX");
@@ -54,8 +54,8 @@ namespace Ax::System::GL
         _checkCompileErrors(ID, "PROGRAM");
 
         // delete the shaders as they're linked into our program now and no longer necessary
-        glDeleteShader(vertex);
-        glDeleteShader(fragment);
+        glDeleteShader(this->m_vertID);
+        glDeleteShader(this->m_fragID);
     }
 
     void Shader::_createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName)
