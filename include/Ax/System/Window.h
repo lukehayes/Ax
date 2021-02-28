@@ -1,11 +1,7 @@
 #ifndef AX_SYS_WINDOW_H
 #define AX_SYS_WINDOW_H
 
-#ifdef _WIN32
- #define GLEW_STATIC
-#endif
-
-#include <GLEW/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Ax/System/Common/Types.h"
 
