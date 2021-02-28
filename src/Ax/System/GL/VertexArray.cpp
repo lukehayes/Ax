@@ -15,8 +15,8 @@ namespace Ax::System::GL {
     {
 
         this->generate();
-        this->setAttribPointers(m_config);
         this->setBufferData(m_buffer, m_config);
+        this->setAttribPointers(m_config);
         std::cout << 1 << std::endl;
     }
 
@@ -29,11 +29,13 @@ namespace Ax::System::GL {
     void 
     VertexArray::generate() 
     {
+        std::cout << "Generating" << std::endl;
         glGenVertexArrays(1, &m_id);
         glBindVertexArray(m_id);
 
         glGenBuffers(1, &m_ArrayBufferID);
         glBindBuffer(m_config.target, m_ArrayBufferID);
+        std::cout << "Done Generating" << std::endl;
     }
 
     void 
