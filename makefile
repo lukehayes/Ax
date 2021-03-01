@@ -15,6 +15,9 @@ all: binary
 binary: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(ENTRY) $(GLAD_SRC) *.o $(OUTPUT) $(LDFLAGS)
 
+debug: $(OBJS)
+	$(CXX) $(CXXFLAGS) -ggdb $(ENTRY) $(GLAD_SRC) *.o $(OUTPUT) $(LDFLAGS)
+
 Engine.o: $(SYSTEM_NAMESPACE)/Engine.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 	
@@ -35,8 +38,6 @@ Camera2D.o: $(SYSTEM_NAMESPACE)/Graphics/Camera2D.cpp
 
 Camera3D.o: $(SYSTEM_NAMESPACE)/Graphics/Camera3D.cpp
 	$(CXX) $(CXXFLAGS) -c $<
-
-
 
 
 # Cleanup
