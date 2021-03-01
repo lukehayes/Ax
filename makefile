@@ -5,20 +5,21 @@ INC_DIR = -I include
 SRC_DIR = src
 
 LINK_DIR = -L.
-LIBS = -lglfw3 -lGLEW -lGLU -lGL -lX11 -lpthread -lm -ldl
+LIBS = -lglfw3 -lGL -lX11 -lpthread -lm -ldl
 
 TARGET = -o bin/app
 ENTRY = main.cpp
+GLAD_SRC = src/glad.c
 
 SYSTEM_NAMESPACE = src/Ax/System/
 SYSTEM_SRC = $(wildcard $(SYSTEM_NAMESPACE)**/*.cpp)
 
 # Development
-%.o: %$(SYSTEM_NAMESPACE)*.cpp %$(SYSTEM_NAMESPACE)*/*.cpp
-	$(CXX) -I include -c $^
+%.o: %$(system_namespace)*.cpp %$(system_namespace)*/*.cpp
+	$(CXX) -c $^
 
 app-debug: *.o
-	$(CXX) main.cpp $^ $(CXX_FLAGS) $(TARGET) $(INC_DIR) $(LIBS)
+	$(CXX) main.cpp $(GLAD_SRC) $^ $(CXX_FLAGS) $(TARGET) $(INC_DIR) $(LIBS)
 
 run: app-debug
 	$(shell "./bin/app")
