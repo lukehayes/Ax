@@ -17,6 +17,7 @@ namespace Ax::System {
 
             void       errors();
             void       keyboardInput();
+
             Ax::System::Window window() const;
 
         private: 
