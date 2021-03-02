@@ -1,6 +1,7 @@
 #ifndef AX_SYS_COMMON_TYPES_H
 #define AX_SYS_COMMON_TYPES_H
 
+#include <iostream>
 #include <array>
 #include <vector>
 #include <string>
