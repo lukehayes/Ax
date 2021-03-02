@@ -45,7 +45,6 @@ int main(int argc, const char *argv[])
     //---------------------------------------------------------------------
     Camera2D camera;
     Camera3D camera3D;
-    camera3D.transform.position().z = -30.0f;
 
     glm::mat4 model = glm::mat4(1.0f);
 
