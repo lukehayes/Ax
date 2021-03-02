@@ -14,6 +14,12 @@ namespace Ax::System::Component {
                    m_scale(10.0f, 10.0f, 10.0f)
                {}
 
+               Transform(const V3& position):
+                   m_position(position),
+                   m_rotation(0.0f, 0.0f, 0.0f),
+                   m_scale(10.0f, 10.0f, 10.0f)
+               {}
+
                ~Transform(){}
 
             V3& position();
