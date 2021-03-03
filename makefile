@@ -1,6 +1,5 @@
 CXX = g++
-CXXFLAGS = -I./include -DMAX=10
-INC_DIR = -I include
+CXXFLAGS = -I./include -DMAX=10 -DDEBUG=1
 SRC_DIR = src
 LDFLAGS = -L. -lglfw3 -lGL -lX11 -lpthread -lm -ldl
 OUTPUT = -o bin/app
