@@ -1,47 +1,43 @@
 #include "Ax/System/GL/VertexArray.h"
-#include <iostream>
 
 namespace Ax::System::GL {
 
     VertexArray::VertexArray() 
     {
-        glGenVertexArrays(1, &m_id);
-        glBindVertexArray(m_id);
+        glGenVertexArrays(1, &this->id);
+        glBindVertexArray(this->id);
     }
 
     VertexArray::VertexArray(const std::vector<f32>& verticies, const BufferConfig& config)
-        : m_buffer(verticies),
-          m_config(config)
+        : buffer(verticies),
+          config(config)
     {
 
         this->generate();
-        this->setBufferData(m_buffer, m_config);
-        this->setAttribPointers(m_config);
-        std::cout << 1 << std::endl;
+        this->setBufferData(this->buffer, this->config);
+        this->setAttribPointers(this->config);
     }
 
     VertexArray::~VertexArray() 
     {
-        glDeleteBuffers(1, &m_ArrayBufferID);
-        glDeleteVertexArrays(1, &m_id);
+        glDeleteBuffers(1, &this->arrayBufferID);
+        glDeleteVertexArrays(1, &this->id);
     }
 
     void 
     VertexArray::generate() 
     {
-        std::cout << "Generating" << std::endl;
-        glGenVertexArrays(1, &m_id);
-        glBindVertexArray(m_id);
+        glGenVertexArrays(1, &this->id);
+        glBindVertexArray(this->id);
 
-        glGenBuffers(1, &m_ArrayBufferID);
-        glBindBuffer(m_config.target, m_ArrayBufferID);
-        std::cout << "Done Generating" << std::endl;
+        glGenBuffers(1, &this->arrayBufferID);
+        glBindBuffer(this->config.target, this->arrayBufferID);
     }
 
     void 
     VertexArray::bind() 
     {
-        glBindVertexArray(m_id);
+        glBindVertexArray(this->id);
     }
 
     void 
@@ -67,8 +63,8 @@ namespace Ax::System::GL {
     void
     VertexArray::setBufferData(std::vector<f32> verticies, const BufferConfig& config)
     {
-        glGenBuffers(1, &m_ArrayBufferID);
-        glBindBuffer(config.target, m_ArrayBufferID);
+        glGenBuffers(1, &this->arrayBufferID);
+        glBindBuffer(config.target, this->arrayBufferID);
         glBufferData(config.target, sizeof(f32) * verticies.size(), verticies.data(), GL_STATIC_DRAW );
     }
 }

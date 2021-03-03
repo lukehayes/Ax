@@ -22,10 +22,10 @@ namespace Ax::System::GL {
             void   setBufferData(std::vector<f32> verticies, const BufferConfig& config);
 
         private:
-            std::vector<f32> m_buffer;
-            BufferConfig m_config;
-            GLuint m_id;
-            GLuint m_ArrayBufferID;
+            std::vector<f32> buffer;
+            BufferConfig config;
+            GLuint id;
+            GLuint arrayBufferID;
     };
 }
 
