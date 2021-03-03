@@ -11,21 +11,14 @@ namespace Ax::System::GL {
         public:
 
                    VertexArray();
-                   VertexArray(const std::vector<f32>& verticies, const BufferConfig& config);
                   ~VertexArray();
 
             void   generate();
             void   bind();
             void   unbind();
 
-            void   setAttribPointers(const BufferConfig& config);
-            void   setBufferData(std::vector<f32> verticies, const BufferConfig& config);
-
         private:
-            std::vector<f32> buffer;
-            BufferConfig config;
-            GLuint id;
-            GLuint arrayBufferID;
+            GLUI   id;
     };
 }
 
