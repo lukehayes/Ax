@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -I./include -DMAX=100
+CXXFLAGS = -I./include -DMAX=10
 INC_DIR = -I include
 SRC_DIR = src
 LDFLAGS = -L. -lglfw3 -lGL -lX11 -lpthread -lm -ldl
