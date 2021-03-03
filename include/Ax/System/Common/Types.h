@@ -6,6 +6,7 @@
 #include <string>
 #include "Ax/System/Common/glm.h"
 #include "Ax/System/Common/Log.h"
+#include <glad/glad.h>
 
 /*============================================================
 // Primitives
@@ -37,5 +38,11 @@ using Array8f   =      std::array<f32,8>;
 ============================================================*/
 using V3        =      glm::vec3;
 using M4        =      glm::mat4;
+
+/*============================================================
+// OpenGL Specific
+============================================================*/
+using GLUI      =      GLuint;
+using GLI       =      GLint;
 
 #endif // AX_SYS_COMMON_TYPES_H
