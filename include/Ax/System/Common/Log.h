@@ -24,4 +24,13 @@ void LOG(const A& a, const B& b)
     }
 }
 
+template<typename A, typename B, typename C>
+void LOG(const A& a, const B& b, const C& c)
+{
+    if(DEBUG)
+    {
+        std::cout << "LOG: " << a << " " << b << " " << c << std::endl;
+    }
+}
+
 #endif  //AX_SYS_COMMON_LOG
