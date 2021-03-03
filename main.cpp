@@ -1,5 +1,7 @@
 #include "Ax/System/Engine.h"
+#include "Ax/System/Common/Log.h"
 #include "Ax/System/GL/VertexArray.h"
+#include "Ax/System/GL/BufferObject.h"
 #include "Ax/System/GL/BufferTarget.h"
 #include "Ax/System/GL/BufferConfig.h"
 #include "Ax/System/GL/Shader.h"
@@ -33,11 +35,12 @@ int main(int argc, const char *argv[])
     
     Ax::System::GL::BufferConfig config{0,2,0, Ax::System::GL::ARRAY_BUFFER};
 
-    Ax::System::GL::VertexArray vao({
-       -1.0,   1.0,
-       -1.0,  -1.0,
-        1.0,   1.0,
-        1.0,  -1.0
+    Ax::System::GL::VertexArray vao;
+    Ax::System::GL::BufferObject buffer({
+        -1.0, 1.0,
+        -1.0, -1.0,
+        1.0, 1.0,
+        1.0, -1.0
     }, config);
 
     //---------------------------------------------------------------------
@@ -49,6 +52,7 @@ int main(int argc, const char *argv[])
     glm::mat4 model = glm::mat4(1.0f);
 
     float c = 0.0;
+
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(Engine.window().window() ))
@@ -68,9 +72,12 @@ int main(int argc, const char *argv[])
         shader.use();
         shader.setMat4("projection", camera3D.projection);
         shader.setMat4("view", camera3D.view);
+        shader.setVec3("color", glm::vec3(0,1,0));
+
+        //model = glm::rotate(model, glm::radians(c/100.0f), glm::vec3(1.0f, 1.0f, 1.0f));
         shader.setMat4("model", model);
 
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
         //---------------------------------------------------------------------
         // Transformation Order - Translate, Rotate, Scale.
