@@ -1,11 +1,11 @@
 #ifndef AX_SYS_COMMON_TYPES_H
 #define AX_SYS_COMMON_TYPES_H
 
-#include <iostream>
 #include <array>
 #include <vector>
 #include <string>
 #include "Ax/System/Common/glm.h"
+#include "Ax/System/Common/Log.h"
 
 /*============================================================
 // Primitives
