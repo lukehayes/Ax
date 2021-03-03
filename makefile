@@ -7,7 +7,7 @@ ENTRY = main.cpp
 GLAD_SRC = $(SRC_DIR)/glad.c
 SYSTEM_NAMESPACE = $(SRC_DIR)/Ax/System
 SYSTEM_SRC := $(wildcard $(SYSTEM_NAMESPACE)/*.cpp)
-OBJS := Engine.o Window.o Shader.o VertexArray.o Camera.o Camera2D.o Camera3D.o
+OBJS := Engine.o Window.o Shader.o VertexArray.o BufferObject.o Camera.o Camera2D.o Camera3D.o
 
 all: binary
 
@@ -27,6 +27,9 @@ Shader.o: $(SYSTEM_NAMESPACE)/GL/Shader.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 
 VertexArray.o: $(SYSTEM_NAMESPACE)/GL/VertexArray.cpp
+	$(CXX) $(CXXFLAGS) -c $<
+
+BufferObject.o: $(SYSTEM_NAMESPACE)/GL/BufferObject.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 
 Camera.o: $(SYSTEM_NAMESPACE)/Graphics/Camera.cpp
