@@ -1,5 +1,5 @@
 /**
- * Base Renderer that Ax Renderers should inherit from.
+ * Base Renderer that Ax Renderers should inherit from for polymorphism benefits.
  */
 #ifndef AX_SYS_BSREND_H
 #define AX_SYS_BSREND_H
@@ -13,9 +13,6 @@ namespace Ax::System::Graphics {
         public:
                         BaseRenderer();
                         ~BaseRenderer();
-
-            virtual void update(double dt) = 0;
-
         private: 
     };
 
