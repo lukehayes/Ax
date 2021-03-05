@@ -28,16 +28,17 @@ namespace Ax::System::GL {
 
         s16       getID() const;
 
+        str       vertexSource;
+        str       fragmentSource;
+
     private:
 
         void      _createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName);
         void      _checkCompileErrors(unsigned int shader, std::string type);
 
         s16       ID;
-        s16       m_vertID;
+        s16       _vertID;
         s16       m_fragID;
-        const_str m_vertCode;
-        const_str m_fragCode;
     };
 
 }

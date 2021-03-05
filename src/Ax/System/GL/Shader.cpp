@@ -6,8 +6,6 @@ namespace Ax::System::GL
     Shader::Shader(const char* vertexPath, const char* fragmentPath)
     {
         // 1. retrieve the vertex/fragment source code from filePath
-        std::string vertexCode;
-        std::string fragmentCode;
         std::ifstream vShaderFile;
         std::ifstream fShaderFile;
         // ensure ifstream objects can throw exceptions:
@@ -26,25 +24,22 @@ namespace Ax::System::GL
             vShaderFile.close();
             fShaderFile.close();
             // convert stream into string
-            vertexCode   = vShaderStream.str();
-            fragmentCode = fShaderStream.str();
+            this->vertexSource   = vShaderStream.str();
+            this->fragmentSource = fShaderStream.str();
         }
         catch (std::ifstream::failure& e)
         {
             std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
         }
 
-        m_vertCode = vertexCode.c_str();
-        m_fragCode = fragmentCode.c_str();
-
         // 2. compile shaders
         //unsigned int vertex, fragment;
 
         // vertex shader
-        _createShader(this->m_vertID, this->m_vertCode, GL_VERTEX_SHADER, "VERTEX");
+        _createShader(this->m_vertID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
 
         // fragment Shader
-        _createShader(this->m_fragID, this->m_fragCode, GL_FRAGMENT_SHADER, "FRAGMENT");
+        _createShader(this->m_fragID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
 
         // shader Program
         ID = glCreateProgram();
