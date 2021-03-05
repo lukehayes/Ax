@@ -37,8 +37,8 @@ namespace Ax::System::GL {
         void      _checkCompileErrors(unsigned int shader, std::string type);
 
         s16       ID;
-        s16       _vertID;
-        s16       m_fragID;
+        s16       vertexID;
+        s16       fragmentID;
     };
 
 }

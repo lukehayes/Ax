@@ -36,21 +36,21 @@ namespace Ax::System::GL
         //unsigned int vertex, fragment;
 
         // vertex shader
-        _createShader(this->m_vertID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
+        _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
 
         // fragment Shader
-        _createShader(this->m_fragID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
+        _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
 
         // shader Program
         ID = glCreateProgram();
-        glAttachShader(ID, m_vertID);
-        glAttachShader(ID, m_fragID);
+        glAttachShader(ID, vertexID);
+        glAttachShader(ID, fragmentID);
         glLinkProgram(ID);
         _checkCompileErrors(ID, "PROGRAM");
 
         // delete the shaders as they're linked into our program now and no longer necessary
-        glDeleteShader(this->m_vertID);
-        glDeleteShader(this->m_fragID);
+        glDeleteShader(this->vertexID);
+        glDeleteShader(this->fragmentID);
     }
 
     void Shader::_createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName)
