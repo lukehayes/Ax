@@ -8,15 +8,15 @@ namespace Ax::System::Graphics {
         //---------------------------------------------------------------------
         // Shader, VertexArray/Buffer Setup.
         //---------------------------------------------------------------------
-        this->shader = GL::Shader(
+        this->Shader = GL::Shader(
                 "assets/shaders/VSH-Default.glsl",
                 "assets/shaders/FSH-Default.glsl"
                 );
 
         GL::BufferConfig config{0,2,0, Ax::System::GL::ARRAY_BUFFER};
 
-        this->vertexArray.bind();
-        this->bufferObject = GL::BufferObject({
+        this->VertexArray.bind();
+        this->BufferObject = GL::BufferObject({
                 -1.0, 1.0,
                 -1.0, -1.0,
                 1.0, 1.0,
@@ -24,23 +24,29 @@ namespace Ax::System::Graphics {
                 }, config);
     }
 
-    MeshRenderer::~MeshRenderer() {}
+    MeshRenderer::~MeshRenderer() {
+        LOG("Renderer Destoryed!", "Buffer ID:", this->BufferObject.id);
+    }
 
     void MeshRenderer::draw(int x, int y)
     {
         M4 model = M4(1.0f);
         static float c = 0.0f;
         c += 0.1;
-        this->shader.use();
-        this->vertexArray.bind();
-        this->shader.setMat4("projection", this->camera.projection);
-        this->shader.setMat4("view", this->camera.view);
-        this->shader.setVec3("color", glm::vec3(1,1,1));
+        this->VertexArray.bind();
+        this->Shader.use();
+
+        this->Camera.transform.position().z = std::sin(c) * 100.0f;
+        
+        this->Shader.setMat4("projection", this->Camera.projection);
+        this->Shader.setMat4("view", this->Camera.view);
+        this->Shader.setVec3("color", glm::vec3(1,1,1));
+
         model = glm::rotate(model, glm::radians(c/10.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
-        this->shader.setMat4("model", model);
+        this->Shader.setMat4("model", model);
 
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
     }
 
 }

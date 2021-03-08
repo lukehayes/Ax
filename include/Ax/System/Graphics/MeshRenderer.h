@@ -40,11 +40,11 @@ namespace Ax::System::Graphics {
              */
             void draw(int x, int y);
 
-            GL::VertexArray vertexArray;
-            GL::BufferObject bufferObject;
-            GL::BufferConfig bufferConfig;
-            GL::Shader shader;
-            Graphics::Camera3D camera;
+            GL::VertexArray VertexArray;
+            GL::BufferObject BufferObject;
+            GL::BufferConfig BufferConfig;
+            GL::Shader Shader;
+            Graphics::Camera3D Camera;
     };
 
 } /* namespace Ax::System::Graphics */
