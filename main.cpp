@@ -26,12 +26,8 @@ int main(int argc, const char *argv[])
     Engine Engine;
     Engine.start();
 
-    Shader shader(
-        "assets/shaders/VSH-Default.glsl",
-        "assets/shaders/FSH-Default.glsl"
-    );
+    MeshRenderer Renderer;
 
-    MeshRenderer renderer;
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(Engine.window().window() ))
@@ -43,7 +39,10 @@ int main(int argc, const char *argv[])
         glClearColor(0.0f,0.0f,0.0f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        renderer.draw(10,10);
+        Renderer.draw(1,1, 10,10);
+        Renderer.draw(11,11);
+        Renderer.draw(100,100);
+        Renderer.draw(200,200);
 
         //---------------------------------------------------------------------
         // Transformation Order - Translate, Rotate, Scale.
