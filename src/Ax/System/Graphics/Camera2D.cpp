@@ -25,7 +25,7 @@ namespace Ax::System::Graphics {
     Camera2D::~Camera2D(){}
 
     void   
-    Camera2D::update(double dt) 
+    Camera2D::update() 
     {
     }
 

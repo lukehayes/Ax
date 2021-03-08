@@ -11,7 +11,7 @@ namespace Ax::System::Graphics {
                    Camera2D();
                   ~Camera2D();
 
-            void   update(double dt);
+            void   update();
 
         Transform  transform;
         glm::mat4  projection;

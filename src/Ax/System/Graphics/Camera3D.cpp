@@ -23,7 +23,7 @@ namespace Ax::System::Graphics {
     Camera3D::~Camera3D(){}
 
     void   
-    Camera3D::update(double dt) 
+    Camera3D::update() 
     {
         this->view = glm::lookAt(
                 this->transform.position(),

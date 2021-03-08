@@ -14,7 +14,7 @@ namespace Ax::System::Graphics {
                         Camera();
                         ~Camera();
 
-            virtual void update(double dt) = 0;
+            virtual void update() = 0;
 
         private: 
     };
