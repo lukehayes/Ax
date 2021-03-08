@@ -17,8 +17,8 @@ namespace Ax::System::GL {
 
     BufferObject::~BufferObject() 
     {
-        glDeleteBuffers(1, &this->id);
-        LOG("Buffer Object ID:", this->id, " Destroyed");
+        //glDeleteBuffers(1, &this->id);
+        //LOG("Buffer Object ID:", this->id, " Destroyed");
     }
 
     void 
