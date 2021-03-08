@@ -42,11 +42,11 @@ namespace Ax::System::Graphics {
         this->Shader.setMat4("view", this->Camera.view);
         this->Shader.setVec3("color", glm::vec3(1,1,1));
 
-        model = glm::rotate(model, glm::radians(c/10.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        model = glm::rotate(model, glm::radians(c*10.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
         this->Shader.setMat4("model", model);
 
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
 
 }
