@@ -22,7 +22,6 @@ namespace Ax::System::GL {
             void   setBufferData(std::vector<f32> verticies);
 
             std::vector<f32> data;
-        private:
             BufferConfig config;
             GLuint id;
     };
