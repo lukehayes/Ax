@@ -16,7 +16,12 @@ namespace Ax::System::Graphics {
 
             virtual void update() = 0;
 
+            M4 combined() { return this->view * this->projection; }
+
         private: 
+            M4  projection;
+            M4  view;
+            Transform  transform;
     };
 
 } /* namespace Ax::System::Graphics */
