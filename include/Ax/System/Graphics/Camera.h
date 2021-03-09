@@ -11,14 +11,22 @@ namespace Ax::System::Graphics {
     class Camera
     {
         public:
-                        Camera();
-                        ~Camera();
+            Camera();
+            Camera(const M4& projection, const M4& view);
+            Camera(const M4& projection, const M4& view, const V3& position);
+            ~Camera();
 
             virtual void update() = 0;
 
-            M4 combined() { return this->view * this->projection; }
+            /**
+             * Get the combined projection and view matricies
+             * that have been multiplied together.
+             *
+             * @return glm::mat4
+             */
+            M4 combined();
 
-        private: 
+            //Properties
             M4  projection;
             M4  view;
             Transform  transform;

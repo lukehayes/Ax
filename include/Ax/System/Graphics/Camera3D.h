@@ -13,12 +13,6 @@ namespace Ax::System::Graphics {
 
             void   update();
 
-        Transform  transform;
-        M4         projection;
-        M4         view;
-
-        private: 
-
     };
     
 } /* namespace Ax::System::Graphics */

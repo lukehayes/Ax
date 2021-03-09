@@ -7,21 +7,22 @@ namespace Ax::System::Graphics {
 
     class Camera2D : public Camera
     {
-        public:
-                   Camera2D();
-                  ~Camera2D();
+    public:
 
-            void   update();
+        /**
+         * Default Constructor
+         */
+        Camera2D();
 
+        /**
+         * Destructor
+         */
+        ~Camera2D();
 
-        Transform  transform;
-        M4  projection;
-        M4  view;
-
-        private: 
+        void update();
 
     };
-    
+
 } /* namespace Ax::System::Graphics */
 
 

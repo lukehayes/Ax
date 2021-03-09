@@ -6,6 +6,19 @@
 namespace Ax::System::Graphics {
 
     Camera::Camera() { std::cout << "Camera Base Class" << std::endl; }
+
+    Camera::Camera(const M4& projection, const M4& view)
+        : projection(projection),
+          view(view),
+          transform()
+    {}
+
+    Camera::Camera(const M4& projection, const M4& view, const V3& position)
+        : projection(projection),
+          view(view),
+          transform(transform)
+    {}
+
     Camera::~Camera(){}
 
     M4 Camera::combined() { return this->projection * this->view; }
