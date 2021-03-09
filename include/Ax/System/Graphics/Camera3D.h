@@ -14,8 +14,8 @@ namespace Ax::System::Graphics {
             void   update();
 
         Transform  transform;
-        glm::mat4  projection;
-        glm::mat4  view;
+        M4         projection;
+        M4         view;
 
         private: 
 
