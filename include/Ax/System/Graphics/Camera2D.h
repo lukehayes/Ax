@@ -19,6 +19,11 @@ namespace Ax::System::Graphics {
          */
         ~Camera2D();
 
+        /**
+         * Update the objects view matrix.
+         *
+         * @return void
+         */
         void update();
 
     };
