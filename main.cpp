@@ -4,6 +4,7 @@
 #include "Ax/System/GL/BufferObject.h"
 #include "Ax/System/GL/BufferTarget.h"
 #include "Ax/System/GL/BufferConfig.h"
+#include "Ax/System/GL/RectangleMesh.h"
 #include "Ax/System/GL/Shader.h"
 #include "Ax/System/GL/Primitive.h"
 #include "Ax/System/Graphics/Camera2D.h"
