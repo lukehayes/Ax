@@ -12,27 +12,19 @@ namespace Ax::System::Graphics {
                 "assets/shaders/FSH-Default.glsl"
                 );
 
-        GL::BufferConfig config{0,2,0, Ax::System::GL::ARRAY_BUFFER};
-
-        this->VertexArray.bind();
-        this->BufferObject = GL::BufferObject({
-                -1.0, 1.0,
-                -1.0, -1.0,
-                1.0, 1.0,
-                1.0, -1.0
-                }, config);
     }
 
     MeshRenderer::~MeshRenderer() {
-        LOG("Renderer Destoryed!", "Buffer ID:", this->BufferObject.id);
+        LOG("Renderer Destoryed!", "Buffer ID:", this->Mesh.BufferObject.id);
     }
 
     void MeshRenderer::draw(f32 x, f32 y, f32 w = 1, f32 h = 1)
     {
+        LOG("Vertex Count", this->Mesh.vertexCount);
         M4 model = M4(1.0f);
         static float c = 0.0f;
         c += 0.1;
-        this->VertexArray.bind();
+        this->Mesh.VertexArray.bind();
         this->Shader.use();
 
         this->Camera.transform.position().z = std::sin(c) * 100.0f;
@@ -54,7 +46,7 @@ namespace Ax::System::Graphics {
         M4 model = M4(1.0f);
         static float c = 0.0f;
         c += 0.01;
-        this->VertexArray.bind();
+        this->Mesh.VertexArray.bind();
         this->Shader.use();
 
         this->Camera.transform.position().x = 100.0f + std::cos(c) * 100.0f;
