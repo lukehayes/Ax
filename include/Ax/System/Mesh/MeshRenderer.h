@@ -10,9 +10,10 @@
 #include "Ax/System/Graphics/Camera2D.h"
 #include "Ax/System/Graphics/Camera3D.h"
 
-namespace Ax::System::Graphics {
+namespace Ax::System::Mesh {
 
-    using Ax::System::GL::RectangleMesh;
+    using Ax::System::Mesh::RectangleMesh;
+    using Ax::System::Graphics::BaseRenderer;
 
     class MeshRenderer : public BaseRenderer
     {

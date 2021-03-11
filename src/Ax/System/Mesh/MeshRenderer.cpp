@@ -1,6 +1,6 @@
 #include "Ax/System/Mesh/MeshRenderer.h"
 
-namespace Ax::System::Graphics {
+namespace Ax::System::Mesh {
 
     MeshRenderer::MeshRenderer() 
     {

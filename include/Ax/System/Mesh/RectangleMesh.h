@@ -13,7 +13,7 @@
 #include "Ax/System/GL/BufferTarget.h"
 #include "Ax/System/GL/BufferConfig.h"
 
-namespace Ax::System::GL {
+namespace Ax::System::Mesh {
 
     class RectangleMesh : public IMesh
     {

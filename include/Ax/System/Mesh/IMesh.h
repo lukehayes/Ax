@@ -6,7 +6,7 @@
 #include <glad/glad.h>
 #include "Ax/System/Common/Types.h"
 
-namespace Ax::System::GL {
+namespace Ax::System::Mesh {
 
     class IMesh
     {
