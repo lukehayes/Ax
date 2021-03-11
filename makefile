@@ -41,7 +41,7 @@ Camera2D.o: $(SYSTEM_NAMESPACE)/Graphics/Camera2D.cpp
 Camera3D.o: $(SYSTEM_NAMESPACE)/Graphics/Camera3D.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 
-MeshRenderer.o: $(SYSTEM_NAMESPACE)/Graphics/MeshRenderer.cpp
+MeshRenderer.o: $(SYSTEM_NAMESPACE)/Mesh/MeshRenderer.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 
 

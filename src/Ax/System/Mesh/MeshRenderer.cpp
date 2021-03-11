@@ -1,4 +1,4 @@
-#include "Ax/System/Graphics/MeshRenderer.h"
+#include "Ax/System/Mesh/MeshRenderer.h"
 
 namespace Ax::System::Graphics {
 

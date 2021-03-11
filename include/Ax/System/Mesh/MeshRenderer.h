@@ -1,12 +1,12 @@
 /**
- * Mesh Renderer
+ * Mesh Renderer for drawing basic Meshes.
  */
 #ifndef AX_SYS_MESHREND_H
 #define AX_SYS_MESHREND_H
 
 #include "Ax/System/Graphics/BaseRenderer.h"
 #include "Ax/System/GL/Shader.h"
-#include "Ax/System/GL/RectangleMesh.h"
+#include "Ax/System/Mesh/RectangleMesh.h"
 #include "Ax/System/Graphics/Camera2D.h"
 #include "Ax/System/Graphics/Camera3D.h"
 

@@ -5,7 +5,7 @@
 #ifndef AX_SYS_RECTMESH_H
 #define AX_SYS_RECTMESH_H
 
-#include "Ax/System/GL/IMesh.h"
+#include "Ax/System/Mesh/IMesh.h"
 #include <glad/glad.h>
 #include "Ax/System/Common/Types.h"
 #include "Ax/System/GL/VertexArray.h"
