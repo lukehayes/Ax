@@ -9,6 +9,7 @@
 #include "Ax/System/Graphics/Camera2D.h"
 #include "Ax/System/Graphics/Camera3D.h"
 #include "Ax/System/Mesh/MeshRenderer.h"
+#include "Ax/System/Mesh/MeshBuilder.h"
 #include "Ax/System/Mesh/RectangleMesh.h"
 #include "Ax/System/Math/Random.h"
 
@@ -29,6 +30,12 @@ int main(int argc, const char *argv[])
     Engine.start();
 
     MeshRenderer Renderer;
+
+    MeshBuilder b;
+
+
+    RectangleMesh mesh;
+
 
 
 	/* Loop until the user closes the window */
