@@ -7,7 +7,7 @@
  *    
  * =====================================================================================
  */
-#ifdef  AX_SYS_BLDR_H
+#ifndef  AX_SYS_BLDR_H
 #define AX_SYS_BLDR_H
 
 namespace Ax::System::Builder
@@ -24,15 +24,7 @@ namespace Ax::System::Builder
          * on the derived class.
          */
         virtual void build() = 0;
-    }
+    };
 }
 
 #endif
-
-
-
-
-
-
-
-

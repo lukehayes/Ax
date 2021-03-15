@@ -8,22 +8,24 @@
  *    
  * =====================================================================================
  */
-#ifdef  AX_SYS_MESHBLDR_H
-#define AX_SYS_MESHBLDR_H
+#ifndef  AX_SYS_MESHBLDR_H
+#define  AX_SYS_MESHBLDR_H
 
 #include "Ax/System/Builder/Builder.h"
-#include <memory.h>
+#include <memory>
 
 namespace Ax::System::Mesh
 {
-    using Ax::System::Builder;
 
-    class MeshBuilder : public Builder
+    class MeshBuilder : public Builder::Builder
     {
     public:
 
         MeshBuilder() {}
-        MeshBuilder(const IMesh* mesh) : meshObject(std::make_shared<IMesh>(mesh)) {}
+        MeshBuilder(const IMesh& mesh) 
+        {
+            //this->meshObject = std::make_shared<IMesh>();
+        }
 
         /**
          * Load all of the mesh data onto the GPU.
@@ -34,7 +36,7 @@ namespace Ax::System::Mesh
         }
 
         std::shared_ptr<IMesh> meshObject;
-    }
+    };
 }
 
 #endif
