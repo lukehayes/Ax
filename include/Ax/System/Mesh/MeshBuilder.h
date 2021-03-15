@@ -12,6 +12,7 @@
 #define AX_SYS_MESHBLDR_H
 
 #include "Ax/System/Builder/Builder.h"
+#include <memory.h>
 
 namespace Ax::System::Mesh
 {
@@ -22,7 +23,7 @@ namespace Ax::System::Mesh
     public:
 
         MeshBuilder() {}
-        MeshBuilder(const IMesh* mesh) : meshObject(mesh) {}
+        MeshBuilder(const IMesh* mesh) : meshObject(std::make_shared<IMesh>(mesh)) {}
 
         /**
          * Load all of the mesh data onto the GPU.
@@ -32,8 +33,7 @@ namespace Ax::System::Mesh
 
         }
 
-        IMesh* meshObject = nullptr;
-
+        std::shared_ptr<IMesh> meshObject;
     }
 }
 
