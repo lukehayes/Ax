@@ -8,10 +8,6 @@
 #include "Ax/System/Mesh/IMesh.h"
 #include <glad/glad.h>
 #include "Ax/System/Common/Types.h"
-#include "Ax/System/GL/VertexArray.h"
-#include "Ax/System/GL/BufferObject.h"
-#include "Ax/System/GL/BufferTarget.h"
-#include "Ax/System/GL/BufferConfig.h"
 
 namespace Ax::System::Mesh {
 
@@ -20,24 +16,21 @@ namespace Ax::System::Mesh {
     public:
         RectangleMesh(){
 
-            GL::BufferConfig config{0,2,0, Ax::System::GL::ARRAY_BUFFER};
+            //GL::BufferConfig config{0,2,0, Ax::System::GL::ARRAY_BUFFER};
 
-            this->VertexArray.bind();
-            this->BufferObject = GL::BufferObject({
+            this->verticies = {
                     -1.0, 1.0,
                     -1.0, -1.0,
                     1.0, 1.0,
                     1.0, -1.0
-                    }, config);
+            };
 
-            this->vertexCount = this->BufferObject.data.size();
+            this->vertexCount = this->verticies.size();
         }
         ~RectangleMesh(){}
 
 
-        GL::VertexArray VertexArray;
-        GL::BufferObject BufferObject;
-        GL::BufferConfig BufferConfig;
+        std::vector<f32> verticies;
         s32 vertexCount;
     };
 }

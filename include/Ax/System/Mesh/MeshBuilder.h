@@ -12,6 +12,10 @@
 #define  AX_SYS_MESHBLDR_H
 
 #include "Ax/System/Builder/Builder.h"
+#include "Ax/System/GL/VertexArray.h"
+#include "Ax/System/GL/BufferObject.h"
+#include "Ax/System/GL/BufferTarget.h"
+#include "Ax/System/GL/BufferConfig.h"
 #include <memory>
 
 namespace Ax::System::Mesh
@@ -22,20 +26,30 @@ namespace Ax::System::Mesh
     public:
 
         MeshBuilder() {}
-        MeshBuilder(const IMesh& mesh) 
+        MeshBuilder(const std::shared_ptr<IMesh>& mesh) 
+            : meshObject(mesh)
         {
-            //this->meshObject = std::make_shared<IMesh>();
         }
 
         /**
          * Load all of the mesh data onto the GPU.
          */
-        virtual void build()
+        void build() const override
         {
+            RectangleMesh* mesh = dynamic_cast<RectangleMesh*>(this->meshObject.get());
+
+            this->BufferObject.generate();
+            this->BufferObject.bind();
+            this->setBufferData(mesh->verticies);
+            this->setAttribPointers();
+
 
         }
 
-        std::shared_ptr<IMesh> meshObject;
+        const std::shared_ptr<IMesh> meshObject;
+        GL::VertexArray VertexArray;
+        GL::BufferObject BufferObject;
+        GL::BufferConfig BufferConfig;
     };
 }
 
