@@ -23,7 +23,7 @@ namespace Ax::System::Builder
          * Start the build/setup everything that is necessary
          * on the derived class.
          */
-        virtual void build() = 0;
+        virtual void build() const = 0;
     };
 }
 
