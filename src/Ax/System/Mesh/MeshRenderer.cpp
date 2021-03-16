@@ -14,9 +14,7 @@ namespace Ax::System::Mesh {
 
     }
 
-    MeshRenderer::~MeshRenderer() {
-        LOG("Renderer Destoryed!", "Buffer ID:", this->Mesh.BufferObject.id);
-    }
+    MeshRenderer::~MeshRenderer() {}
 
     void MeshRenderer::draw(f32 x, f32 y, f32 w = 1, f32 h = 1)
     {
@@ -24,7 +22,8 @@ namespace Ax::System::Mesh {
         M4 model = M4(1.0f);
         static float c = 0.0f;
         c += 0.1;
-        this->Mesh.VertexArray.bind();
+
+
         this->Shader.use();
 
         this->Camera.transform.position().z = std::sin(c) * 100.0f;
@@ -46,7 +45,8 @@ namespace Ax::System::Mesh {
         M4 model = M4(1.0f);
         static float c = 0.0f;
         c += 0.01;
-        this->Mesh.VertexArray.bind();
+
+
         this->Shader.use();
 
         this->Camera.transform.position().x = 100.0f + std::cos(c) * 100.0f;
