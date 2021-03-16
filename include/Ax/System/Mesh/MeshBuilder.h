@@ -31,6 +31,12 @@ namespace Ax::System::Mesh
         {
         }
 
+
+        void setMesh(const std::shared_ptr<IMesh>& mesh)
+        {
+            this->meshObject = mesh;
+        }
+
         /**
          * Load all of the mesh data onto the GPU.
          */
