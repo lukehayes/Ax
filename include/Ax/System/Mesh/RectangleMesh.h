@@ -21,8 +21,8 @@ namespace Ax::System::Mesh {
                 1.0, 1.0,
                 1.0, -1.0
             },
-            config({0,2,0, Ax::System::GL::ARRAY_BUFFER})
-            vertexCount(verticies.size()),
+            config({0,2,0, Ax::System::GL::ARRAY_BUFFER}),
+            vertexCount(verticies.size())
         {}
 
         ~RectangleMesh(){}
