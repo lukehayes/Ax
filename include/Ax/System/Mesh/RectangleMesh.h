@@ -1,7 +1,14 @@
-/**
- * A simple instance of a rectangle, using
- * GL_TRIANGLE_FAN.
+/*
+ * =====================================================================================
+ *
+ *        Class:  RectangleMesh
+ *
+ *  Description:  A Rectangle Mesh defines how the mesh is describes so that the
+ *                GPU can interpret it correctly.
+ *
+ * =====================================================================================
  */
+
 #ifndef AX_SYS_RECTMESH_H
 #define AX_SYS_RECTMESH_H
 
