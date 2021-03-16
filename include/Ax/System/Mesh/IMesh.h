@@ -1,8 +1,16 @@
-/**
- * Parent class of all mesh instances inside AX.
+/*
+ * =====================================================================================
+ *
+ *        Class:  IMesh
+ *
+ *  Description:  Parent class for all meshes inside Ax.
+ *
+ * =====================================================================================
  */
+
 #ifndef AX_SYS_IMESH_H
 #define AX_SYS_IMESH_H
+
 #include <glad/glad.h>
 #include "Ax/System/Common/Types.h"
 
