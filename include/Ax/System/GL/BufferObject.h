@@ -21,6 +21,11 @@ namespace Ax::System::GL {
             void   setAttribPointers();
             void   setBufferData(std::vector<f32> verticies);
 
+            inline void setConfig(const BufferConfig& config)
+            {
+                this->config = config;
+            }
+
             std::vector<f32> data;
             BufferConfig config;
             GLuint id;
