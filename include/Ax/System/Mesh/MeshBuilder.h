@@ -50,12 +50,13 @@ namespace Ax::System::Mesh
 
             this->BufferObject.setConfig(mesh->config);
 
-
             // Buffer Initializaltion
             this->BufferObject.generate();
             this->BufferObject.bind();
             this->BufferObject.setBufferData(mesh->verticies);
             this->BufferObject.setAttribPointers();
+
+            LOG("Rectangle Mesh Data Loaded Into GPU.");
         }
 
         std::shared_ptr<IMesh> meshObject;
