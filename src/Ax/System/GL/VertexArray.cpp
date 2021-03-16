@@ -4,8 +4,8 @@ namespace Ax::System::GL {
 
     VertexArray::VertexArray() 
     {
-        this->generate();
-        this->bind();
+        //this->generate();
+        //this->bind();
     }
 
     VertexArray::~VertexArray() 
