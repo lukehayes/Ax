@@ -34,19 +34,17 @@ namespace Ax::System::Mesh
         /**
          * Load all of the mesh data onto the GPU.
          */
-        void build() const override
+        void build() override
         {
             RectangleMesh* mesh = dynamic_cast<RectangleMesh*>(this->meshObject.get());
 
             this->BufferObject.generate();
             this->BufferObject.bind();
-            this->setBufferData(mesh->verticies);
-            this->setAttribPointers();
-
-
+            this->BufferObject.setBufferData(mesh->verticies);
+            this->BufferObject.setAttribPointers();
         }
 
-        const std::shared_ptr<IMesh> meshObject;
+        std::shared_ptr<IMesh> meshObject;
         GL::VertexArray VertexArray;
         GL::BufferObject BufferObject;
         GL::BufferConfig BufferConfig;
