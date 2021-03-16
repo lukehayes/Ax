@@ -33,9 +33,7 @@ int main(int argc, const char *argv[])
 
     const std::shared_ptr<RectangleMesh> mesh = std::make_shared<RectangleMesh>();
     MeshBuilder b(mesh);
-
     b.build();
-    
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(Engine.window().window() ))

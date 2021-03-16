@@ -1,4 +1,5 @@
 #include "Ax/System/Mesh/MeshRenderer.h"
+#include "Ax/System/Mesh/MeshBuilder.h"
 
 namespace Ax::System::Mesh {
 
@@ -45,6 +46,10 @@ namespace Ax::System::Mesh {
         M4 model = M4(1.0f);
         static float c = 0.0f;
         c += 0.01;
+
+        //Ax::System::Mesh::RectangleMesh mesh;
+        //Ax::System::Mesh::MeshBuilder builder(std::make_shared<IMesh>(mesh));
+        //builder.build();
 
 
         this->Shader.use();

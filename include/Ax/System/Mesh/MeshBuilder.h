@@ -44,6 +44,14 @@ namespace Ax::System::Mesh
         {
             RectangleMesh* mesh = dynamic_cast<RectangleMesh*>(this->meshObject.get());
 
+            // VAO Initializaltion
+            this->VertexArray.generate();
+            this->VertexArray.bind();
+
+            this->BufferObject.setConfig(mesh->config);
+
+
+            // Buffer Initializaltion
             this->BufferObject.generate();
             this->BufferObject.bind();
             this->BufferObject.setBufferData(mesh->verticies);
@@ -53,7 +61,6 @@ namespace Ax::System::Mesh
         std::shared_ptr<IMesh> meshObject;
         GL::VertexArray VertexArray;
         GL::BufferObject BufferObject;
-        GL::BufferConfig BufferConfig;
     };
 }
 
