@@ -14,19 +14,17 @@ namespace Ax::System::Mesh {
     class RectangleMesh : public IMesh
     {
     public:
-        RectangleMesh(){
+        RectangleMesh()
+            : verticies{
+                -1.0, 1.0,
+                -1.0, -1.0,
+                1.0, 1.0,
+                1.0, -1.0
+            },
+            config({0,2,0, Ax::System::GL::ARRAY_BUFFER})
+            vertexCount(verticies.size()),
+        {}
 
-            this->config = {0,2,0, Ax::System::GL::ARRAY_BUFFER};
-
-            this->verticies = {
-                    -1.0, 1.0,
-                    -1.0, -1.0,
-                    1.0, 1.0,
-                    1.0, -1.0
-            };
-
-            this->vertexCount = this->verticies.size();
-        }
         ~RectangleMesh(){}
 
 
