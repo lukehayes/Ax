@@ -16,7 +16,7 @@ namespace Ax::System::Mesh {
     public:
         RectangleMesh(){
 
-            //GL::BufferConfig config{0,2,0, Ax::System::GL::ARRAY_BUFFER};
+            this->config = {0,2,0, Ax::System::GL::ARRAY_BUFFER};
 
             this->verticies = {
                     -1.0, 1.0,
@@ -31,6 +31,7 @@ namespace Ax::System::Mesh {
 
 
         std::vector<f32> verticies;
+        GL::BufferConfig config;
         s32 vertexCount;
     };
 }
