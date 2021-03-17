@@ -15,6 +15,7 @@
 #include "Ax/System/Mesh/IMesh.h"
 #include <glad/glad.h>
 #include "Ax/System/Common/Types.h"
+#include "Ax/System/GL/BufferConfig.h"
 
 namespace Ax::System::Mesh {
 
