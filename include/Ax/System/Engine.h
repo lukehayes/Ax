@@ -20,11 +20,19 @@ namespace Ax::System {
             Engine();
             ~Engine();
 
+            /**
+             * Initalize all of the systems that Ax needs in place to
+             * be able to run. Example - Loading all of the data
+             * into the GPU. Needs to be refactored.
+             */
             void initSystems();
+
             void start();
+
             void shutdown();
 
             void errors();
+
             void keyboardInput();
 
             Ax::System::Window window() const;

@@ -16,6 +16,8 @@
 #include "Ax/System/GL/BufferObject.h"
 #include "Ax/System/GL/BufferTarget.h"
 #include "Ax/System/GL/BufferConfig.h"
+#include "Ax/System/Mesh/RectangleMesh.h"
+
 #include <memory>
 
 namespace Ax::System::Mesh

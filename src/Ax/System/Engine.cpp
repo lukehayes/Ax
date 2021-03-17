@@ -1,28 +1,39 @@
 #include "Ax/System/Engine.h"
+#include "Ax/System/Mesh/MeshBuilder.h"
+#include "Ax/System/Mesh/RectangleMesh.h"
+#include <memory>
 
-namespace Ax::System{
+namespace Ax::System {
 
     Engine::Engine() {}
-    Engine::~Engine() {
-    }
+    Engine::~Engine() {}
 
-    void
-    Engine::start()
+    void Engine::start()
     {
         glfwInit();
     }
 
-    void
-    Engine::shutdown()
+    void Engine::shutdown()
     {
         glfwTerminate();
     }
 
-    void 
-    Engine::errors() {}
+    void Engine::initSystems()
+    {
+        // Initalize all of the systems that
+        // Ax needs - MeshBuilders etc.
 
-    void 
-    Engine::keyboardInput() {}
+        using namespace Ax::System::Mesh;
+
+        // Load data onto the GPU
+        const std::shared_ptr<RectangleMesh> mesh = std::make_shared<RectangleMesh>();
+        Mesh::MeshBuilder b(mesh);
+        b.build();
+    }
+
+    void Engine::errors() {}
+
+    void Engine::keyboardInput() {}
 
     Ax::System::Window
     Engine::window() const { return m_window; }

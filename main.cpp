@@ -9,11 +9,12 @@
 #include "Ax/System/Graphics/Camera2D.h"
 #include "Ax/System/Graphics/Camera3D.h"
 #include "Ax/System/Mesh/MeshRenderer.h"
-#include "Ax/System/Mesh/MeshBuilder.h"
 #include "Ax/System/Mesh/RectangleMesh.h"
 #include "Ax/System/Math/Random.h"
+#include "Ax/System/Mesh/MeshBuilder.h"
 
 #include <vector>
+#include <memory>
 
 int main(int argc, const char *argv[])
 {
@@ -31,9 +32,7 @@ int main(int argc, const char *argv[])
 
     MeshRenderer Renderer;
 
-    const std::shared_ptr<RectangleMesh> mesh = std::make_shared<RectangleMesh>();
-    MeshBuilder b(mesh);
-    b.build();
+    Engine.initSystems();
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(Engine.window().window() ))
@@ -44,6 +43,11 @@ int main(int argc, const char *argv[])
 		//glViewport(0, 0, width, height);
         glClearColor(0.0f,0.0f,0.0f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        for(int i = 0; i <= 10; i++)
+        {
+            Renderer.draw(200 + std::sin(i) * 10,  200 + i * 10, 10,10);
+        }
 
         Renderer.draw(1,1, 10.0f, 10.0f);
         Renderer.draw(11,11);
