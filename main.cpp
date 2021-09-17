@@ -16,6 +16,12 @@
 #include <vector>
 #include <memory>
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){    
+   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS){
+       glfwSetWindowShouldClose(window, GL_TRUE); 
+   }
+}
+
 int main(int argc, const char *argv[])
 {
     using namespace Ax::System;
@@ -33,14 +39,16 @@ int main(int argc, const char *argv[])
     MeshRenderer Renderer;
 
     Engine.initSystems();
+   
+    glfwSetKeyCallback(Engine.window().window(), key_callback);
 
-	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(Engine.window().window() ))
-	{
-		/* Poll for and process events */
-		glfwPollEvents();
+    /* Loop until the user closes the window */
+    while (!glfwWindowShouldClose(Engine.window().window() ))
+    {
+        /* Poll for and process events */
+        glfwPollEvents();
 
-		//glViewport(0, 0, width, height);
+        //glViewport(0, 0, width, height);
         glClearColor(0.0f,0.0f,0.0f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -61,12 +69,12 @@ int main(int argc, const char *argv[])
         // model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         // model = glm::scale(model,  glm::vec3(10.0f));
         //---------------------------------------------------------------------
-        
-		/* Swap front and back buffers */
-		glfwSwapBuffers(Engine.window().window());
-	}
+
+        /* Swap front and back buffers */
+        glfwSwapBuffers(Engine.window().window());
+    }
 
     Engine.shutdown();
 
-	return 0;
+    return 0;
 }
