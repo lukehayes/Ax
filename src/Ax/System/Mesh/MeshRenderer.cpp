@@ -27,7 +27,7 @@ namespace Ax::System::Mesh {
 
         this->Shader.use();
 
-        this->Camera.transform.position().z = std::sin(c) * 100.0f;
+        this->Camera.transform.position.z = std::sin(c) * 100.0f;
         
         //this->Shader.setMat4("view", this->Camera.view);
         this->Shader.setVec3("color", glm::vec3(1,1,1));
@@ -54,9 +54,9 @@ namespace Ax::System::Mesh {
 
         this->Shader.use();
 
-        this->Camera.transform.position().x = 100.0f + std::cos(c) * 100.0f;
-        this->Camera.transform.position().y = 100.0f + std::sin(c) * 100.0f;
-        this->Camera.transform.position().z = -100.0f + std::sin(c) * 100.0f;
+        this->Camera.transform.position.x = 100.0f + std::cos(c) * 100.0f;
+        this->Camera.transform.position.y = 100.0f + std::sin(c) * 100.0f;
+        this->Camera.transform.position.z = -100.0f + std::sin(c) * 100.0f;
         this->Camera.update();
         
         this->Shader.setMat4("projection", this->Camera.projection);

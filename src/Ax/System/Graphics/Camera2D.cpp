@@ -27,6 +27,7 @@ namespace Ax::System::Graphics {
     void   
     Camera2D::update() 
     {
+        std::cout << "2D Camera Update Nothing" << std::endl;
     }
 
 } /* namespace Ax::System::Graphics */

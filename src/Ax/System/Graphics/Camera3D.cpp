@@ -14,7 +14,7 @@ namespace Ax::System::Graphics {
                         ),
 
                     glm::lookAt(
-                        this->transform.position(),
+                        this->transform.position,
                         glm::vec3(0.0f, 0.0f, -1.0f),
                         glm::vec3(0.0f, 1.0f,0.0f)
                         ),
@@ -32,7 +32,7 @@ namespace Ax::System::Graphics {
     void Camera3D::update() 
     {
         this->view = glm::lookAt(
-                this->transform.position(),
+                this->transform.position,
                 glm::vec3(0.0f, 0.0f, -1.0f),
                 glm::vec3(0.0f, 1.0f,0.0f)
             );
