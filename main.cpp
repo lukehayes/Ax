@@ -16,6 +16,12 @@
 #include <vector>
 #include <memory>
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){    
+   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS){
+       glfwSetWindowShouldClose(window, GL_TRUE); 
+   }
+}
+
 int main(int argc, const char *argv[])
 {
     using namespace Ax::System;
@@ -33,26 +39,42 @@ int main(int argc, const char *argv[])
     MeshRenderer Renderer;
 
     Engine.initSystems();
+   
+    glfwSetKeyCallback(Engine.window().window(), key_callback);
 
-	/* Loop until the user closes the window */
-	while (!glfwWindowShouldClose(Engine.window().window() ))
-	{
-		/* Poll for and process events */
-		glfwPollEvents();
+    double now = 0.0;
+    double lastFrame = 0.0;
+    double delta = 0.0;
 
-		//glViewport(0, 0, width, height);
-        glClearColor(0.0f,0.0f,0.0f,1.0f);
+    /* Loop until the user closes the window */
+    while (!glfwWindowShouldClose(Engine.window().window() ))
+    {
+        /* Poll for and process events */
+        glfwPollEvents();
+
+        glfwSetTime(glfwGetTime());
+        now = glfwGetTime();
+
+        //glViewport(0, 0, width, height);
+        glClearColor(0.8f,0.8f,0.8f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // Renders on 2D Camera
         for(int i = 0; i <= 10; i++)
         {
             Renderer.draw(200 + std::sin(i) * 10,  200 + i * 10, 10,10);
         }
 
-        Renderer.draw(1,1, 10.0f, 10.0f);
-        Renderer.draw(11,11);
-        Renderer.draw(100,100);
-        Renderer.draw(200,200);
+        // Renders on 3D Camera
+        for(int i = 0; i <= 50; i++)
+        {
+            Renderer.draw(std::cos(i) * 100, std::sin(i) * 100);
+
+            Renderer.draw(
+                    Ax::System::Math::Random::randDouble(0.0, 200.0),
+                    Ax::System::Math::Random::randDouble(0.0, 200.0)
+            );
+        }
 
         //---------------------------------------------------------------------
         // Transformation Order - Translate, Rotate, Scale.
@@ -61,12 +83,18 @@ int main(int argc, const char *argv[])
         // model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         // model = glm::scale(model,  glm::vec3(10.0f));
         //---------------------------------------------------------------------
-        
-		/* Swap front and back buffers */
-		glfwSwapBuffers(Engine.window().window());
-	}
+
+        lastFrame = glfwGetTime();
+
+        delta = lastFrame - now;
+
+        std::cout << delta << std::endl;
+
+        /* Swap front and back buffers */
+        glfwSwapBuffers(Engine.window().window());
+    }
 
     Engine.shutdown();
 
-	return 0;
+    return 0;
 }
