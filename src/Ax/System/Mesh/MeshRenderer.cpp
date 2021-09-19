@@ -43,9 +43,14 @@ namespace Ax::System::Mesh {
     }
     void MeshRenderer::draw(int x, int y)
     {
+        // This method should only be concerned with rendering
+        // All shader, camera and unrelated code should be
+        // abstracted out into respected classes.
+
+
         M4 model = M4(1.0f);
         static float c = 0.0f;
-        c += 0.01;
+        c += 0.00001;
 
         //Ax::System::Mesh::RectangleMesh mesh;
         //Ax::System::Mesh::MeshBuilder builder(std::make_shared<IMesh>(mesh));
@@ -53,15 +58,12 @@ namespace Ax::System::Mesh {
 
 
         this->Shader.use();
-
-        this->Camera.transform.position.x = 100.0f + std::cos(c) * 100.0f;
-        this->Camera.transform.position.y = 100.0f + std::sin(c) * 100.0f;
-        this->Camera.transform.position.z = -100.0f + std::sin(c) * 100.0f;
         this->Camera.update();
         
+        // All of this should be moved to Camera class.
         this->Shader.setMat4("projection", this->Camera.projection);
         this->Shader.setMat4("view", this->Camera.view);
-        this->Shader.setVec3("color", glm::vec3(1,1,1));
+        this->Shader.setVec3("color", glm::vec3(0.3));
 
         model = glm::translate(model, glm::vec3(x,y, 0.0f));
         //model = glm::rotate(model, glm::radians(c*5.0f), glm::vec3(1.0f, 1.0f, 1.0f));
