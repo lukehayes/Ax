@@ -39,15 +39,11 @@ int main(int argc, const char *argv[])
     MeshRenderer Renderer;
 
     Engine.initSystems();
-   
     glfwSetKeyCallback(Engine.window().window(), key_callback);
-<<<<<<< HEAD
 
     double now = 0.0;
     double lastFrame = 0.0;
     double delta = 0.0;
-=======
->>>>>>> 8d094cb2fe50504e242f48a29beb1e0057f7867e
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(Engine.window().window() ))
@@ -55,16 +51,11 @@ int main(int argc, const char *argv[])
         /* Poll for and process events */
         glfwPollEvents();
 
-<<<<<<< HEAD
         glfwSetTime(glfwGetTime());
         now = glfwGetTime();
 
         //glViewport(0, 0, width, height);
         glClearColor(0.8f,0.8f,0.8f,1.0f);
-=======
-        //glViewport(0, 0, width, height);
-        glClearColor(0.0f,0.0f,0.0f,1.0f);
->>>>>>> 8d094cb2fe50504e242f48a29beb1e0057f7867e
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Renders on 2D Camera
@@ -92,15 +83,9 @@ int main(int argc, const char *argv[])
         // model = glm::scale(model,  glm::vec3(10.0f));
         //---------------------------------------------------------------------
 
-<<<<<<< HEAD
         lastFrame = glfwGetTime();
-
         delta = lastFrame - now;
 
-        std::cout << delta << std::endl;
-
-=======
->>>>>>> 8d094cb2fe50504e242f48a29beb1e0057f7867e
         /* Swap front and back buffers */
         glfwSwapBuffers(Engine.window().window());
     }
