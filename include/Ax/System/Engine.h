@@ -35,7 +35,7 @@ namespace Ax::System {
 
             void keyboardInput();
 
-            Ax::System::Window window() const;
+            Ax::System::Window getWindow() const;
 
         private: 
             Ax::System::Window m_window;

@@ -5,7 +5,7 @@
 
 namespace Ax::System {
 
-    Engine::Engine() {}
+    Engine::Engine() : m_window(800,900) {}
     Engine::~Engine() {}
 
     void Engine::start()
@@ -36,7 +36,7 @@ namespace Ax::System {
     void Engine::keyboardInput() {}
 
     Ax::System::Window
-    Engine::window() const { return m_window; }
+    Engine::getWindow() const { return m_window; }
 
 } /* namespace Ax::System*/
 
