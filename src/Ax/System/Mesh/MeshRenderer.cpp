@@ -19,7 +19,7 @@ namespace Ax::System::Mesh {
 
     void MeshRenderer::draw(f32 x, f32 y, f32 w = 1, f32 h = 1)
     {
-        LOG("Vertex Count", this->Mesh.vertexCount);
+        //LOG("Vertex Count", this->Mesh.vertexCount);
         M4 model = M4(1.0f);
         static float c = 0.0f;
         c += 0.1;
@@ -50,7 +50,7 @@ namespace Ax::System::Mesh {
 
         M4 model = M4(1.0f);
         static float c = 0.0f;
-        c += 0.00001;
+        c += 0.001;
 
         //Ax::System::Mesh::RectangleMesh mesh;
         //Ax::System::Mesh::MeshBuilder builder(std::make_shared<IMesh>(mesh));
@@ -66,12 +66,25 @@ namespace Ax::System::Mesh {
         this->Shader.setVec3("color", glm::vec3(0.3));
 
         model = glm::translate(model, glm::vec3(x,y, 0.0f));
-        //model = glm::rotate(model, glm::radians(c*5.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        //model = glm::scale(model,  glm::vec3(10.0f));
+        model = glm::rotate(model, glm::radians(c*5.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        model = glm::scale(model,  glm::vec3(10.0f));
 
         this->Shader.setMat4("model", model);
 
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
 
+    void MeshRenderer::draw(int x, int y, const Ax::System::GL::Shader& shader )
+    {
+        shader.use();
+        this->Camera.update();
+
+        std::cout << shader.vertexSource << std::endl;
+
+        // All of this should be moved to Camera class.
+        shader.setMat4("projection", this->Camera.projection);
+        shader.setMat4("view", this->Camera.view);
+
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    }
 }

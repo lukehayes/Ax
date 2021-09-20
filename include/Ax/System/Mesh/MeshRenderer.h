@@ -9,11 +9,13 @@
 #include "Ax/System/Mesh/RectangleMesh.h"
 #include "Ax/System/Graphics/Camera2D.h"
 #include "Ax/System/Graphics/Camera3D.h"
+#include "Ax/System/GL/Shader.h"
 
 namespace Ax::System::Mesh {
 
     using Ax::System::Mesh::RectangleMesh;
     using Ax::System::Graphics::BaseRenderer;
+    using namespace Ax::System::GL;
 
     class MeshRenderer : public BaseRenderer
     {
@@ -46,11 +48,13 @@ namespace Ax::System::Mesh {
              */
             void draw(int x, int y);
 
+            void draw(int x, int y, const Ax::System::GL::Shader& shader );
+
             void draw(f32 x, f32 y, f32 w, f32 h);
 
             RectangleMesh Mesh;
             GL::Shader Shader;
-            Graphics::Camera2D Camera;
+            Graphics::Camera3D Camera;
     };
 
 } /* namespace Ax::System::Graphics */
