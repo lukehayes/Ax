@@ -11,6 +11,7 @@ namespace Ax::System{
     {
         public:
                          Window();
+                         Window(s32 width, s32 height);
                         ~Window();
 
             void         create();

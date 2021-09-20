@@ -6,20 +6,26 @@ namespace Ax::System
     Window::Window() {
         this->create();
     }
+
+    Window::Window(s32 width, s32 height) : m_width(width), m_height(height) 
+    {
+        this->create();
+    }
+
     Window::~Window() {}
 
     void
-    Window::create()
-    {
-        glfwInit();
+        Window::create()
+        {
+            glfwInit();
 
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        
-        m_window = glfwCreateWindow(m_width, m_height, m_title, NULL, NULL);
-        glfwMakeContextCurrent(m_window);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-        gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-    }
+            m_window = glfwCreateWindow(m_width, m_height, m_title, NULL, NULL);
+            glfwMakeContextCurrent(m_window);
+
+            gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+        }
 }
