@@ -7,6 +7,7 @@
 #include "Ax/System/Common/glm.h"
 #include "Ax/System/Common/Log.h"
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 /*============================================================
 // Primitives
