@@ -1,4 +1,5 @@
 #include "Ax/System/Engine.h"
+#include "Ax/System/Game.h"
 #include "Ax/System/Common/Log.h"
 #include "Ax/System/GL/VertexArray.h"
 #include "Ax/System/GL/BufferObject.h"
@@ -30,50 +31,15 @@ int main(int argc, const char *argv[])
     using namespace Ax::System::Mesh;
     using namespace Ax::System::Math;
 
+    Game game;
+
+    glfwSetKeyCallback(game.engine.getWindow().window(), key_callback);
+
+    game.update();
+
     //---------------------------------------------------------------------
     // Engine Initialization.
     //---------------------------------------------------------------------
-    Engine Engine;
-    Engine.start();
-
-    MeshRenderer Renderer;
-
-    Engine.initSystems();
-    glfwSetKeyCallback(Engine.window().window(), key_callback);
-
-    double now = 0.0;
-    double lastFrame = 0.0;
-    double delta = 0.0;
-
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(Engine.window().window() ))
-    {
-        /* Poll for and process events */
-        glfwPollEvents();
-
-        glfwSetTime(glfwGetTime());
-        now = glfwGetTime();
-
-        //glViewport(0, 0, width, height);
-        glClearColor(0.8f,0.8f,0.8f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // Renders on 2D Camera
-        for(int i = 0; i <= 10; i++)
-        {
-            Renderer.draw(200 + std::sin(i) * 10,  200 + i * 10, 10,10);
-        }
-
-        // Renders on 3D Camera
-        for(int i = 0; i <= 50; i++)
-        {
-            Renderer.draw(std::cos(i) * 100, std::sin(i) * 100);
-
-            Renderer.draw(
-                    Ax::System::Math::Random::randDouble(0.0, 200.0),
-                    Ax::System::Math::Random::randDouble(0.0, 200.0)
-            );
-        }
 
         //---------------------------------------------------------------------
         // Transformation Order - Translate, Rotate, Scale.
@@ -82,15 +48,7 @@ int main(int argc, const char *argv[])
         // model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
         // model = glm::scale(model,  glm::vec3(10.0f));
         //---------------------------------------------------------------------
-
-        lastFrame = glfwGetTime();
-        delta = lastFrame - now;
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(Engine.window().window());
-    }
-
-    Engine.shutdown();
+        //
 
     return 0;
 }
