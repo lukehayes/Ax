@@ -16,7 +16,7 @@ namespace Ax::System::Mesh {
 
     using Ax::System::Mesh::RectangleMesh;
     using Ax::System::Graphics::BaseRenderer;
-    using Ax::System::Graphics::Camera;
+    //using Ax::System::Graphics::Camera;
     using namespace Ax::System::GL;
 
     class MeshRenderer : public BaseRenderer
@@ -48,15 +48,17 @@ namespace Ax::System::Mesh {
              *
              * @return void.
              */
-            void draw(int x, int y, const Camera& camera);
+            void draw(int x, int y);
 
             void draw(int x, int y, const Ax::System::GL::Shader& shader );
 
             void draw(f32 x, f32 y, f32 w, f32 h);
 
+            void setCamera(Graphics::Camera* camera);
+
             RectangleMesh Mesh;
             GL::Shader Shader;
-            Graphics::Camera3D Camera;
+            Graphics::Camera* camera;
     };
 
 } /* namespace Ax::System::Graphics */
