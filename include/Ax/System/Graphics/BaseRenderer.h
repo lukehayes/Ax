@@ -23,7 +23,7 @@ namespace Ax::System::Graphics {
              *
              * @return void.
              */
-            virtual void draw(int x, int y, const Camera* camera ) = 0;
+            virtual void draw(int x, int y, const Camera& camera ) = 0;
 
         private: 
     };
