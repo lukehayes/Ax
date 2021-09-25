@@ -32,7 +32,7 @@ namespace Ax::System::Graphics {
     void Camera3D::update() 
     {
         static float c = 0.0f;
-        c += 0.00001;
+        c += 0.00000001;
 
         this->view = glm::lookAt(
                 this->transform.position,
@@ -41,8 +41,8 @@ namespace Ax::System::Graphics {
             );
 
         this->transform.position.x = 100.0f + std::cos(c) * 100.0f;
-        //this->Camera.transform.position.y = 100.0f + std::sin(c) * 100.0f;
-        this->transform.position.z = -200 + -100.0f + std::sin(c) * 100.0f;
+        this->transform.position.y = 100.0f + std::sin(c) * 100.0f;
+        this->transform.position.z = -400 + -100.0f + std::sin(c) * 100.0f;
     }
 
 } /* namespace Ax::System::Graphics */

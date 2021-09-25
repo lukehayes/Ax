@@ -5,8 +5,11 @@
 #define AX_SYS_BSREND_H
 
 #include "Ax/System/Common/Types.h"
+#include "Ax/System/Graphics/Camera.h"
 
 namespace Ax::System::Graphics {
+
+    using Ax::System::Graphics::Camera;
 
     class BaseRenderer
     {
@@ -20,7 +23,7 @@ namespace Ax::System::Graphics {
              *
              * @return void.
              */
-            virtual void draw(int x, int y) = 0;
+            virtual void draw(int x, int y, const Camera* camera ) = 0;
 
         private: 
     };

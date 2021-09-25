@@ -2,6 +2,8 @@
 #include "Ax/System/Mesh/MeshBuilder.h"
 
 namespace Ax::System::Mesh {
+     
+    using Ax::System::Graphics::Camera;
 
     MeshRenderer::MeshRenderer() 
     {
@@ -41,7 +43,8 @@ namespace Ax::System::Mesh {
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     }
-    void MeshRenderer::draw(int x, int y)
+
+    void MeshRenderer::draw(int x, int y, const Ax::System::Graphics::Camera& camera )
     {
         // This method should only be concerned with rendering
         // All shader, camera and unrelated code should be
@@ -63,11 +66,11 @@ namespace Ax::System::Mesh {
         // All of this should be moved to Camera class.
         this->Shader.setMat4("projection", this->Camera.projection);
         this->Shader.setMat4("view", this->Camera.view);
-        this->Shader.setVec3("color", glm::vec3(0.3));
+        this->Shader.setVec3("color", glm::vec3(0.6,0.0,.9));
 
         model = glm::translate(model, glm::vec3(x,y, 0.0f));
-        model = glm::rotate(model, glm::radians(c*5.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        model = glm::scale(model,  glm::vec3(10.0f));
+        //model = glm::rotate(model, glm::radians(c*5.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+        model = glm::scale(model,  glm::vec3(1.0f));
 
         this->Shader.setMat4("model", model);
 

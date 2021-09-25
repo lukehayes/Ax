@@ -3,6 +3,7 @@
 
 #include "Ax/System/Common/Types.h"
 #include "Ax/System/Engine.h"
+#include "Ax/System/Mesh/MeshRenderer.h"
 
 class Game
 {
@@ -44,6 +45,14 @@ class Game
                 // model = glm::scale(model,  glm::vec3(10.0f));
                 //---------------------------------------------------------------------
 
+                Ax::System::Graphics::Camera3D camera;
+
+                for (int i = 0; i < 100; i++) {
+                    for (int j = 0; j < 100; j++) {
+                        this->renderer.draw(i * 20, j * 20, camera);
+                    }
+                }
+
                 this->lastFrame = glfwGetTime();
                 this->delta = lastFrame - now;
 
@@ -59,9 +68,7 @@ class Game
         double now = 0.0;
         double lastFrame = 0.0;
         double delta = 0.0;
-
-
-
+        Ax::System::Mesh::MeshRenderer renderer;
 };
 
 #endif
