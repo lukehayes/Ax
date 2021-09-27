@@ -20,7 +20,7 @@ namespace Ax::System::Graphics {
              *
              * @return void.
              */
-            virtual void draw(int x, int y) = 0;
+            virtual void draw(int x, int y, glm::vec3 color) = 0;
 
         private: 
     };

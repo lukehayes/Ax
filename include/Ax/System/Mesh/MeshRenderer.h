@@ -48,7 +48,7 @@ namespace Ax::System::Mesh {
              *
              * @return void.
              */
-            void draw(int x, int y);
+            void draw(int x, int y, glm::vec3 color);
 
             void draw(int x, int y, const Ax::System::GL::Shader& shader );
 
