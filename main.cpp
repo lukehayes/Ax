@@ -23,8 +23,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
    }
 }
 
-void window_callback(GLFWwindow* window, int width, int height){    
-    std::cout << "Window " << std::endl;
+void framebuffer_callback(GLFWwindow* window, int width, int height){    
+    glViewport(0,0, width, height);
 }
 
 int main(int argc, const char *argv[])
@@ -38,7 +38,7 @@ int main(int argc, const char *argv[])
     Game game;
 
     glfwSetKeyCallback(game.engine.getWindow().window(), key_callback);
-    glfwSetWindowSizeCallback(game.engine.getWindow().window(), window_callback);
+    glfwSetFramebufferSizeCallback(game.engine.getWindow().window(), framebuffer_callback);
 
     game.update();
 
