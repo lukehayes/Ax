@@ -31,8 +31,9 @@ namespace Ax::System::Graphics {
      */
     void Camera3D::update() 
     {
+        std::cout << "3D" << std::endl;
         static float c = 0.0f;
-        c += 0.00000001;
+        c += 0.01;
 
         this->view = glm::lookAt(
                 this->transform.position,

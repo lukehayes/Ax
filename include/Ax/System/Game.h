@@ -45,19 +45,30 @@ class Game
                 // model = glm::scale(model,  glm::vec3(10.0f));
                 //---------------------------------------------------------------------
 
-                Ax::System::Graphics::Camera2D camera;
-                //Ax::System::Graphics::Camera3D camera;
+                Ax::System::Graphics::Camera2D camera2d;
 
-                camera.update();
+                this->renderer.setCamera(&camera2d);
 
-                this->renderer.setCamera(&camera);
+                camera2d.update();
 
 
                 for (int i = 0; i < 10; i++) {
                     for (int j = 0; j < 10; j++) {
-                        this->renderer.draw(i * 20, j * 20);
+                        this->renderer.draw(i * 10, j * 10);
                     }
                 }
+
+                //Ax::System::Graphics::Camera3D camera;
+                //camera.update();
+
+                //this->renderer.setCamera(&camera);
+
+
+                //for (int i = 0; i < 10; i++) {
+                    //for (int j = 0; j < 10; j++) {
+                        //this->renderer.draw(i * 20, j * 20);
+                    //}
+                //}
 
                 this->lastFrame = glfwGetTime();
                 this->delta = lastFrame - now;

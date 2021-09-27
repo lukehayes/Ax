@@ -12,14 +12,16 @@ namespace Ax::System::Graphics {
                 600.0f,
                 0.0f,
                 0.1f,
-                100.0f
+                1000.0f
                 ),
 
-          glm::lookAt(
-                glm::vec3(0.0f, 0.0f, 1.0f),
-                glm::vec3(0.0f, 0.0f,0.0f),
-                glm::vec3(0.0f, 1.0f,0.0f)
-                ))
+                glm::lookAt(
+                    glm::vec3(0.0, 0.0, 0.0), // Position
+                    glm::vec3(0, 0, 0), // Look at direction
+                    glm::vec3(0, 1, 0) // Y is UP
+                )
+
+                )
     {}
 
     Camera2D::~Camera2D(){}
@@ -27,7 +29,19 @@ namespace Ax::System::Graphics {
     void   
     Camera2D::update() 
     {
-        std::cout << "2D Camera Update Nothing" << std::endl;
+        std::cout << "2D" << std::endl;
+        static float c = 0.0f;
+        c += 0.01;
+
+        this->transform.position.x = -50;
+        this->transform.position.y = 0;
+        this->transform.position.z = 0;
+
+        this->view = glm::lookAt(
+                this->transform.position,
+                glm::vec3(0.0f, 0.0f, -10.0f),
+                glm::vec3(0.0f, 1.0f,0.0f)
+            );
     }
 
 } /* namespace Ax::System::Graphics */

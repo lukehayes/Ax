@@ -60,18 +60,16 @@ namespace Ax::System::Mesh {
         //Ax::System::Mesh::MeshBuilder builder(std::make_shared<IMesh>(mesh));
         //builder.build();
 
-
         this->Shader.use();
-        this->camera->update();
         
         // All of this should be moved to Camera class.
         this->Shader.setMat4("projection", this->camera->projection);
         this->Shader.setMat4("view", this->camera->view);
-        this->Shader.setVec3("color", glm::vec3(0.6,0.0,.9));
+        this->Shader.setVec3("color", glm::vec3(0.0,0.0,.9));
 
-        model = glm::translate(model, glm::vec3(x,y, 0.0f));
+        model = glm::translate(model, glm::vec3(0.0,0.0, 10.0f));
         //model = glm::rotate(model, glm::radians(c*5.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        model = glm::scale(model,  glm::vec3(1.0f));
+        model = glm::scale(model,  glm::vec3(100.0f));
 
         this->Shader.setMat4("model", model);
 
