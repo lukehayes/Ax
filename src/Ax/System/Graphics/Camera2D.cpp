@@ -9,20 +9,25 @@ namespace Ax::System::Graphics {
         : Camera(glm::ortho(
                 0.0f,
                 800.0f,
-                600.0f,
                 0.0f,
+                600.0f,
                 0.1f,
-                1000.0f
+                100.0f
                 ),
 
                 glm::lookAt(
-                    glm::vec3(0.0, 0.0, 0.0), // Position
+                    glm::vec3(0.0, 0.0, -3.0), // Position
                     glm::vec3(0, 0, 0), // Look at direction
                     glm::vec3(0, 1, 0) // Y is UP
                 )
 
                 )
     {}
+
+    void Camera2D::setView(float width, float height) 
+    {
+        this->projection = glm::ortho(0.0f, width, 0.0f, height, 0.1f, 1000.0f);
+    }
 
     Camera2D::~Camera2D(){}
 
@@ -33,15 +38,11 @@ namespace Ax::System::Graphics {
         static float c = 0.0f;
         c += 0.01;
 
-        this->transform.position.x = -50;
+        this->transform.position.x = -100;
         this->transform.position.y = 0;
         this->transform.position.z = 0;
 
-        this->view = glm::lookAt(
-                this->transform.position,
-                glm::vec3(0.0f, 0.0f, -10.0f),
-                glm::vec3(0.0f, 1.0f,0.0f)
-            );
+        this->view = glm::translate(this->view, this->transform.position);
     }
 
 } /* namespace Ax::System::Graphics */
