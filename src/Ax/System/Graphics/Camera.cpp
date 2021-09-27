@@ -5,7 +5,10 @@
 
 namespace Ax::System::Graphics {
 
-    Camera::Camera() { std::cout << "Camera Base Class" << std::endl; }
+    Camera::Camera() : 
+        projection(1.0f),
+        view(1.0f)
+    { std::cout << "Camera Base Class" << std::endl; }
 
     Camera::Camera(const M4& projection, const M4& view)
         : projection(projection),
