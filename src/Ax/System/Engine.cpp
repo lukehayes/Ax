@@ -5,7 +5,7 @@
 
 namespace Ax::System {
 
-    Engine::Engine() : m_window(800,900) {}
+    Engine::Engine() : m_window(800,600) {}
     Engine::~Engine() {}
 
     void Engine::start()
