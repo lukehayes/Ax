@@ -26,6 +26,17 @@ namespace Ax::System::Graphics {
          */
         void update();
 
+        /**
+         * Set the projection matrix for the camera.
+         *
+         * @param float width
+         *
+         * @param float height
+         *
+         * @return void
+         */
+        void setView(float width, float height);
+
     };
 
 } /* namespace Ax::System::Graphics */
