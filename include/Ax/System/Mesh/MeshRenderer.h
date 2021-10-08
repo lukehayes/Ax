@@ -56,6 +56,11 @@ namespace Ax::System::Mesh {
 
             void setCamera(Graphics::Camera* camera);
 
+            inline GL::Shader getShader() 
+            {
+                return this->Shader;
+            }
+
             RectangleMesh Mesh;
             GL::Shader Shader;
             Graphics::Camera* camera;
