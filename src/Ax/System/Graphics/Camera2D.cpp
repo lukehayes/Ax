@@ -16,7 +16,7 @@ namespace Ax::System::Graphics {
                 ),
 
                 glm::lookAt(
-                    glm::vec3(0.0, 0.0, -3.0), // Position
+                    glm::vec3(0.0, 0.0, 3.0), // Position
                     glm::vec3(0, 0, 0), // Look at direction
                     glm::vec3(0, 1, 0) // Y is UP
                 )
@@ -34,11 +34,11 @@ namespace Ax::System::Graphics {
     void   
     Camera2D::update() 
     {
-        std::cout << "2D" << std::endl;
+        //std::cout << "2D" << std::endl;
         static float c = 0.0f;
-        c += 0.01;
+        c += 0.001;
 
-        this->transform.position.x = -100;
+        this->transform.position.x = 0;
         this->transform.position.y = 0;
         this->transform.position.z = 0;
 
