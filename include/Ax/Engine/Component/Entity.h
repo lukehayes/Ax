@@ -3,7 +3,7 @@
 
 #include "Ax/System/Component/Transform.h"
 
-namespace Ax::System::Entity {
+namespace Ax::Engine::Component {
 
     /**
      * The base component class for all to be Entities.

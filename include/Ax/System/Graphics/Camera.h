@@ -2,11 +2,11 @@
 #define AX_SYS_CAM_H
 
 #include "Ax/System/Common/glm.h"
-#include "Ax/System/Component/Transform.h"
+#include "Ax/Engine/Component/Transform.h"
 
 namespace Ax::System::Graphics {
 
-    using namespace Ax::System::Component;
+    using namespace Ax::Engine::Component;
 
     class Camera
     {

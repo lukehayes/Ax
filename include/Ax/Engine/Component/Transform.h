@@ -3,7 +3,7 @@
 
 #include "Ax/System/Common/Types.h"
 
-namespace Ax::System::Component {
+namespace Ax::Engine::Component {
 
     class Transform
     {
