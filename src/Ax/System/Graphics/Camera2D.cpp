@@ -34,14 +34,6 @@ namespace Ax::System::Graphics {
     void   
     Camera2D::update() 
     {
-        //std::cout << "2D" << std::endl;
-        static float c = 0.0f;
-        c += 0.001;
-
-        this->transform.position.x = 0;
-        this->transform.position.y = 0;
-        this->transform.position.z = 0;
-
         this->view = glm::translate(this->view, this->transform.position);
     }
 
