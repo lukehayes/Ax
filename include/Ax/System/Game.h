@@ -30,6 +30,9 @@ class Game
                 "assets/shaders/FSH-Default.glsl"
                 );
 
+            float r = Ax::System::Math::Random::randDouble(0,1);
+            float g = Ax::System::Math::Random::randDouble(0,1);
+            float b = Ax::System::Math::Random::randDouble(0,1);
 
             /* Loop until the user closes the window */
             while (!glfwWindowShouldClose(engine.getWindow().window() ))
@@ -69,24 +72,22 @@ class Game
                 for (int i = 0; i < 10; i++) {
                     for (int j = 0; j < 10; j++) {
                         M4 model = glm::scale(model,  glm::vec3(10.0f));
-                        //this->renderer.getShader().setMat4("model", model);
-                        //this->renderer.draw(i * 100.0, j * 100.0,{1,0.1,1});
+                        shader.setVec3("color", {1,0,1});
                         this->renderer.draw(i * 100.0, j * 100.0, shader);
                     }
                 }
 
-                //Ax::System::Graphics::Camera3D camera3d;
-                //this->renderer.setCamera(&camera3d);
-                //camera3d.update();
+                Ax::System::Graphics::Camera3D camera3d;
+                this->renderer.setCamera(&camera3d);
+                camera3d.update();
 
-                //for (int i = 0; i < 10; i++) {
-                    //for (int j = 0; j < 10; j++) {
-                        //float r = Ax::System::Math::Random::randDouble(0,1);
-                        //float g = Ax::System::Math::Random::randDouble(0,1);
-                        //float b = Ax::System::Math::Random::randDouble(0,1);
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 10; j++) {
                         //this->renderer.draw(i * 10,j * 10,{r,g,b});
-                    //}
-                //}
+                        shader.setVec3("color", {r,b,g});
+                        this->renderer.draw(i * 100.0, j * 100.0, shader);
+                    }
+                }
 
 
                 //Ax::System::Graphics::Camera3D camera;

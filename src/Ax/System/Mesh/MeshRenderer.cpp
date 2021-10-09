@@ -95,7 +95,7 @@ namespace Ax::System::Mesh {
         // All of this should be moved to Camera class.
         shader.setMat4("projection", this->camera->projection);
         shader.setMat4("view", this->camera->view);
-        shader.setVec3("color", {1,0,1});
+        //shader.setVec3("color", {1,0,1});
 
         model = glm::translate(model, glm::vec3(x,y, 0.0f));
         //model = glm::rotate(model, glm::radians(c*5.0f), glm::vec3(1.0f, 1.0f, 1.0f));
