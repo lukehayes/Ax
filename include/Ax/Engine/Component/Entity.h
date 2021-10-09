@@ -1,7 +1,7 @@
 #ifndef AX_ENTITY_H
 #define AX_ENTITY_H
 
-#include "Ax/System/Component/Transform.h"
+#include "Ax/Engine/Component/Transform.h"
 
 namespace Ax::Engine::Component {
 
@@ -14,7 +14,7 @@ namespace Ax::Engine::Component {
                     Entity() {}
                     ~Entity() {}
 
-        virtual void update() = 0;
+        virtual void update(double dt) = 0;
 
         Transform    transform;
     };
