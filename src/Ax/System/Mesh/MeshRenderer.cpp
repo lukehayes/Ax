@@ -97,11 +97,11 @@ namespace Ax::System::Mesh {
         shader.setMat4("view", this->camera->view);
         //shader.setVec3("color", {1,0,1});
 
-        model = glm::translate(model, glm::vec3(x,y, 0.0f));
+        //model = glm::translate(model, glm::vec3(x,y, 0.0f));
         //model = glm::rotate(model, glm::radians(c*5.0f), glm::vec3(1.0f, 1.0f, 1.0f));
         //model = glm::scale(model,  glm::vec3(10.0f));
 
-        shader.setMat4("model", model);
+        //shader.setMat4("model", model);
 
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }

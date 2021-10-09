@@ -41,9 +41,9 @@ namespace Ax::System::Graphics {
                 glm::vec3(0.0f, 1.0f,0.0f)
             );
 
-        this->transform.position.x = 100.0f + std::cos(c) * 100.0f;
-        this->transform.position.y = 100.0f + std::sin(c) * 100.0f;
-        this->transform.position.z = -400 + -100.0f + std::sin(c) * 100.0f;
+        //this->transform.position.x = 100.0f + std::cos(c) * 100.0f;
+        //this->transform.position.y = 100.0f + std::sin(c) * 100.0f;
+        //this->transform.position.z = -400 + -100.0f + std::sin(c) * 100.0f;
     }
 
 } /* namespace Ax::System::Graphics */

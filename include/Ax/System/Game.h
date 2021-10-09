@@ -56,34 +56,39 @@ class Game
                 // model = glm::scale(model,  glm::vec3(10.0f));
                 //---------------------------------------------------------------------
 
+                static float c = 0.0f;
+                c += 0.001;
+
                 Ax::System::Graphics::Camera2D camera2d;
                 this->renderer.setCamera(&camera2d);
-
-
                 camera2d.update();
-                static float c = 0.0f;
-                c += 0.0001;
-
-                //this->renderer.draw(0,1, {0,1,1});
-                //this->renderer.draw(-200,200, {1,0,0 });
-                //this->renderer.draw(-300,200, {1,0,0});
-                //this->renderer.draw(-400,200 + (std::sin(c) * 100), {1,1,0});
 
                 for (int i = 0; i < 10; i++) {
                     for (int j = 0; j < 10; j++) {
-                        M4 model = glm::scale(model,  glm::vec3(10.0f));
-                        shader.setVec3("color", {1,0,1});
+                        M4 model = M4(1.0f);
+                        model = glm::translate(model, glm::vec3(i * 100.0, j * 100.0, 0.0f));
+                        model = glm::scale(model,  glm::vec3(10.0f));
+                        shader.setVec3("color", {0.4,0,1});
+                        shader.setMat4("model", model);
                         this->renderer.draw(i * 100.0, j * 100.0, shader);
                     }
                 }
 
                 Ax::System::Graphics::Camera3D camera3d;
                 this->renderer.setCamera(&camera3d);
+
+                camera3d.transform.position.x = 100.0f + std::cos(c) * 100.0f;
+                camera3d.transform.position.y = 100.0f + std::sin(c) * 100.0f;
+                camera3d.transform.position.z = -400 + -100.0f + std::sin(c) * 100.0f;
+
                 camera3d.update();
 
                 for (int i = 0; i < 10; i++) {
                     for (int j = 0; j < 10; j++) {
-                        //this->renderer.draw(i * 10,j * 10,{r,g,b});
+                        M4 model = M4(1.0f);
+                        model = glm::translate(model, glm::vec3(i * 100.0, j * 100.0, 0.0f));
+                        model = glm::scale(model,  glm::vec3(10.0f));
+                        shader.setMat4("model", model);
                         shader.setVec3("color", {r,b,g});
                         this->renderer.draw(i * 100.0, j * 100.0, shader);
                     }
