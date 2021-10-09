@@ -19,7 +19,7 @@ namespace Ax::System::Mesh {
     //using Ax::System::Graphics::Camera;
     using namespace Ax::System::GL;
 
-    class MeshRenderer : public BaseRenderer
+    class MeshRenderer 
     {
         public:
             /**

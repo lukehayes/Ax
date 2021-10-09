@@ -25,6 +25,12 @@ class Game
             glfwSetTime(glfwGetTime());
             now = glfwGetTime();
 
+            Ax::System::GL::Shader shader(
+                "assets/shaders/VSH-Default.glsl",
+                "assets/shaders/FSH-Default.glsl"
+                );
+
+
             /* Loop until the user closes the window */
             while (!glfwWindowShouldClose(engine.getWindow().window() ))
             {
@@ -37,6 +43,7 @@ class Game
                 //glViewport(0, 0, width, height);
                 glClearColor(0.8f,0.8f,0.8f,1.0f);
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
                 //---------------------------------------------------------------------
                 // Transformation Order - Translate, Rotate, Scale.
@@ -62,23 +69,24 @@ class Game
                 for (int i = 0; i < 10; i++) {
                     for (int j = 0; j < 10; j++) {
                         M4 model = glm::scale(model,  glm::vec3(10.0f));
-                        this->renderer.getShader().setMat4("model", model);
-                        this->renderer.draw(i * 100.0, j * 100.0,{1,0.1,1});
+                        //this->renderer.getShader().setMat4("model", model);
+                        //this->renderer.draw(i * 100.0, j * 100.0,{1,0.1,1});
+                        this->renderer.draw(i * 100.0, j * 100.0, shader);
                     }
                 }
 
-                Ax::System::Graphics::Camera3D camera3d;
-                this->renderer.setCamera(&camera3d);
-                camera3d.update();
+                //Ax::System::Graphics::Camera3D camera3d;
+                //this->renderer.setCamera(&camera3d);
+                //camera3d.update();
 
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 10; j++) {
-                        float r = Ax::System::Math::Random::randDouble(0,1);
-                        float g = Ax::System::Math::Random::randDouble(0,1);
-                        float b = Ax::System::Math::Random::randDouble(0,1);
-                        this->renderer.draw(i * 10,j * 10,{r,g,b});
-                    }
-                }
+                //for (int i = 0; i < 10; i++) {
+                    //for (int j = 0; j < 10; j++) {
+                        //float r = Ax::System::Math::Random::randDouble(0,1);
+                        //float g = Ax::System::Math::Random::randDouble(0,1);
+                        //float b = Ax::System::Math::Random::randDouble(0,1);
+                        //this->renderer.draw(i * 10,j * 10,{r,g,b});
+                    //}
+                //}
 
 
                 //Ax::System::Graphics::Camera3D camera;
