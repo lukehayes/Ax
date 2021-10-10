@@ -6,6 +6,7 @@ OUTPUT = -o bin/app
 ENTRY = main.cpp
 GLAD_SRC = $(SRC_DIR)/glad.c
 SYSTEM_NAMESPACE = $(SRC_DIR)/Ax/System
+ENGINE_NAMESPACE = $(SRC_DIR)/Ax/Engine
 SYSTEM_SRC := $(wildcard $(SYSTEM_NAMESPACE)/*.cpp)
 OBJS := Engine.o Window.o Shader.o VertexArray.o BufferObject.o Camera.o Camera2D.o Camera3D.o MeshRenderer.o
 
