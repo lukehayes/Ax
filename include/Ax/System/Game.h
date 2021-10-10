@@ -66,20 +66,20 @@ namespace Ax::System
                     //---------------------------------------------------------------------
 
                     static float c = 0.0f;
-                    c += 0.01;
-                    float speed = 100;
+                    c += 0.001;
+                    float speed = 100000;
 
-                    Ax::System::Graphics::Camera3D camera2d;
+                    Ax::System::Graphics::Camera2D camera2d;
                     this->renderer.setCamera(&camera2d);
                     camera2d.update();
 
                     te.update(delta);
-                    te.transform.position.x = std::cos(c) * speed * delta;
-                    te.transform.position.y = std::sin(c) * speed * delta;
-                    te.transform.position.z = std::sin(c) * speed * delta;
+                    te.transform.position.x = 100;
+                    te.transform.position.y = 100;
+                    te.transform.position.z = -5.0;
                     M4 model = M4(1.0f);
                     model = glm::translate(model, te.transform.position);
-                    model = glm::scale(model,  glm::vec3(100.0f));
+                    model = glm::scale(model,  glm::vec3(1.0f));
                     shader.setVec3("color", te.color);
                     shader.setMat4("model", model);
                     this->renderer.draw(
