@@ -13,11 +13,13 @@ namespace Ax::Engine::Component {
 
         void update(double dt)
         {
-            std::cout << "Delta " << dt << std::endl;
+            transform.position.x = 790;
+            transform.position.y = 590;
+            transform.position.z = -5.0;
         }
 
         Transform    transform;
-        V3           color = {1,0,0};
+        V3           color = {0,0,0};
     };
 }
 
