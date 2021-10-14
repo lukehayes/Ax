@@ -78,31 +78,32 @@ namespace Ax::System::Mesh {
 
     void MeshRenderer::draw(int x, int y, const Ax::System::GL::Shader& shader )
     {
-        // This method should only be concerned with rendering
-        // All shader, camera and unrelated code should be
-        // abstracted out into respected classes.
-
-        M4 model = M4(1.0f);
-        static float c = 0.0f;
-        c += 0.001;
-
-        //Ax::System::Mesh::RectangleMesh mesh;
-        //Ax::System::Mesh::MeshBuilder builder(std::make_shared<IMesh>(mesh));
-        //builder.build();
-
         shader.use();
         
         // All of this should be moved to Camera class.
         shader.setMat4("projection", this->camera->projection);
         shader.setMat4("view", this->camera->view);
-        //shader.setVec3("color", {1,0,1});
 
-        //model = glm::translate(model, glm::vec3(x,y, 0.0f));
-        //model = glm::rotate(model, glm::radians(c*5.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-        //model = glm::scale(model,  glm::vec3(10.0f));
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    }
 
-        //shader.setMat4("model", model);
+    void MeshRenderer::draw(
+            const Ax::Engine::Component::TestEntity& entity,
+            const Ax::System::GL::Shader& shader )
+    {
+        shader.use();
 
+        // Setup Model
+        M4 model = M4(1.0f);
+        model = glm::translate(model, entity.transform.position);
+        model = glm::scale(model,  glm::vec3(entity.transform.allAxisScale));
+
+        // Send data to shader
+        shader.setMat4("projection", this->camera->projection);
+        shader.setMat4("view", this->camera->view);
+        shader.setMat4("model", model);
+
+        // Draw The Model
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
 

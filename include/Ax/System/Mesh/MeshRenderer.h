@@ -11,6 +11,7 @@
 #include "Ax/System/Graphics/Camera2D.h"
 #include "Ax/System/Graphics/Camera3D.h"
 #include "Ax/System/GL/Shader.h"
+#include "Ax/Engine/Component/TestEntity.h"
 
 namespace Ax::System::Mesh {
 
@@ -53,6 +54,10 @@ namespace Ax::System::Mesh {
             void draw(int x, int y, const Ax::System::GL::Shader& shader );
 
             void draw(f32 x, f32 y, f32 w, f32 h);
+
+            void draw(
+                    const Ax::Engine::Component::TestEntity& entity,
+                    const Ax::System::GL::Shader& shader );
 
             void setCamera(Graphics::Camera* camera);
 
