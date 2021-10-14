@@ -79,7 +79,7 @@ namespace Ax::System
                     te.transform.position.z = -5.0;
                     M4 model = M4(1.0f);
                     model = glm::translate(model, te.transform.position);
-                    model = glm::scale(model,  glm::vec3(1.0f));
+                    model = glm::scale(model,  glm::vec3(te.transform.allAxisScale));
                     shader.setVec3("color", te.color);
                     shader.setMat4("model", model);
                     this->renderer.draw(
