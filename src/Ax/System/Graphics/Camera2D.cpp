@@ -26,6 +26,7 @@ namespace Ax::System::Graphics {
 
     void Camera2D::setView(float width, float height) 
     {
+        std::cout << "Set View Called." << std::endl;
         this->projection = glm::ortho(0.0f, width, 0.0f, height, 0.1f, 1000.0f);
     }
 

@@ -13,9 +13,9 @@ namespace Ax::Engine::Component {
 
         void update(double dt)
         {
-            transform.position.x = 790;
-            transform.position.y = 590;
-            transform.position.z = -5.0;
+            //transform.position.x = 790;
+            //transform.position.y = 590;
+            //transform.position.z = -5.0;
         }
 
         Transform    transform;
