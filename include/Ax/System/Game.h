@@ -43,19 +43,18 @@ namespace Ax::System
                 float g = Ax::System::Math::Random::randDouble(0,1);
                 float b = Ax::System::Math::Random::randDouble(0,1);
 
-                /* Loop until the user closes the window */
+
+                static double limitFPS = 1.0 / 60.0;
+
+                double lastTime = glfwGetTime(), timer = lastTime;
+                double deltaTime = 0, nowTime = 0;
+                int frames = 0 , updates = 0;
+
+                // - While window is alive
                 while (!glfwWindowShouldClose(engine.getWindow().window() ))
                 {
                     /* Poll for and process events */
                     glfwPollEvents();
-
-                    glfwSetTime(glfwGetTime());
-                    this->now = glfwGetTime();
-
-                    //glViewport(0, 0, width, height);
-                    glClearColor(0.8f,0.8f,0.8f,1.0f);
-                    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
                     //---------------------------------------------------------------------
                     // Transformation Order - Translate, Rotate, Scale.
@@ -65,28 +64,43 @@ namespace Ax::System
                     // model = glm::scale(model,  glm::vec3(10.0f));
                     //---------------------------------------------------------------------
 
-                    static float c = 0.0f;
-                    c += 0.0001;
-                    float speed = 100000;
+                    // - Measure time
+                    nowTime = glfwGetTime();
+                    deltaTime += (nowTime - lastTime) / limitFPS;
+                    lastTime = nowTime;
+
+                    // - Only update at 60 frames / s
+                    while (deltaTime >= 1.0){
+                        //update();   // - Update function
+                        updates++;
+                        deltaTime--;
+                    }
+
+                    // - Render at maximum possible frames
+                    
+                    glClearColor(0.8f,0.8f,0.8f,1.0f);
+                    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                     Ax::System::Graphics::Camera3D camera2d;
                     camera2d.transform.position = glm::vec3(0.0f, 0.0f, -10.0f);
                     this->renderer.setCamera(&camera2d);
 
-
-                    //te.update(delta);
-                    te.transform.position.x = 0.0f;
-                    te.transform.position.y = 0.0f;
-                    te.transform.position.z = 100.0f;
+                    te.update(delta);
 
                     shader.setVec3("color", te.color);
                     camera2d.update();
                     this->renderer.draw(te,shader);
 
-                    this->lastFrame = glfwGetTime();
-                    this->delta = lastFrame - now;
+                    //render(); // - Render function
+                    frames++;
 
-                    /* Swap front and back buffers */
+                    // - Reset after one second
+                    if (glfwGetTime() - timer > 1.0) {
+                        timer ++;
+                        std::cout << "FPS: " << frames << " Updates:" << updates << std::endl;
+                        updates = 0, frames = 0;
+                    }
+
                     glfwSwapBuffers(engine.getWindow().window());
                 }
             }
