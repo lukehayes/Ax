@@ -66,21 +66,21 @@ namespace Ax::System
                     //---------------------------------------------------------------------
 
                     static float c = 0.0f;
-                    c += 0.00001;
+                    c += 0.0001;
                     float speed = 100000;
 
                     Ax::System::Graphics::Camera3D camera2d;
                     camera2d.transform.position = glm::vec3(0.0f, 0.0f, -10.0f);
                     this->renderer.setCamera(&camera2d);
 
-                    camera2d.update();
 
                     //te.update(delta);
-                    te.transform.position.x = 1.0f;
+                    te.transform.position.x = 0.0f;
                     te.transform.position.y = 0.0f;
                     te.transform.position.z = 100.0f;
 
                     shader.setVec3("color", te.color);
+                    camera2d.update();
                     this->renderer.draw(te,shader);
 
                     this->lastFrame = glfwGetTime();

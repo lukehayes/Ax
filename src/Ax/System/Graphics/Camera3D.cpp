@@ -32,15 +32,18 @@ namespace Ax::System::Graphics {
      */
     void Camera3D::update() 
     {
-        //this->view = glm::lookAt(
-                //this->transform.position,
-                //glm::vec3(0.0f, 0.0f, -3.0f),
-                //glm::vec3(0.0f, 1.0f,0.0f)
-            //);
+        static float c = 0.0f;
+        c += 0.0001;
 
-        //this->transform.position.x = 100.0f + std::cos(c) * 100.0f;
-        //this->transform.position.y = 100.0f + std::sin(c) * 100.0f;
-        //this->transform.position.z = 100.0f + std::sin(c) * 100.0f;
+        this->transform.position.x = 100.0f + std::cos(c) * 100.0f;
+        this->transform.position.y = 100.0f + std::sin(c) * 100.0f;
+        this->transform.position.z = -100.0f + std::sin(c) * 100.0f;
+
+        this->view = glm::lookAt(
+                this->transform.position,
+                glm::vec3(0.0f, 0.0f, 0.0f),
+                glm::vec3(0.0f, 1.0f,0.0f)
+            );
     }
 
 } /* namespace Ax::System::Graphics */
