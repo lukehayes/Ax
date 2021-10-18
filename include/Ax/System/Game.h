@@ -39,13 +39,8 @@ namespace Ax::System
                         "assets/shaders/FSH-Default.glsl"
                         );
 
-                float r = Ax::System::Math::Random::randDouble(0,1);
-                float g = Ax::System::Math::Random::randDouble(0,1);
-                float b = Ax::System::Math::Random::randDouble(0,1);
-
-
+                // Loop Timing Variables
                 static double limitFPS = 1.0 / 60.0;
-
                 double lastTime = glfwGetTime(), timer = lastTime;
                 double deltaTime = 0, nowTime = 0;
                 int frames = 0 , updates = 0;
@@ -68,6 +63,8 @@ namespace Ax::System
                     nowTime = glfwGetTime();
                     deltaTime += (nowTime - lastTime) / limitFPS;
                     lastTime = nowTime;
+                    Ax::System::Graphics::Camera3D camera2d;
+                    this->renderer.setCamera(&camera2d);
 
                     // - Only update at 60 frames / s
                     while (deltaTime >= 1.0){
@@ -81,14 +78,12 @@ namespace Ax::System
                     glClearColor(0.8f,0.8f,0.8f,1.0f);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                    Ax::System::Graphics::Camera3D camera2d;
-                    camera2d.transform.position = glm::vec3(0.0f, 0.0f, -10.0f);
-                    this->renderer.setCamera(&camera2d);
 
-                    te.update(delta);
 
-                    shader.setVec3("color", te.color);
                     camera2d.update();
+                    te.update(deltaTime);
+                    shader.setVec3("color", te.color);
+
                     this->renderer.draw(te,shader);
 
                     //render(); // - Render function
