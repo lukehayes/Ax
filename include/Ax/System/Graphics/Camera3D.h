@@ -11,7 +11,7 @@ namespace Ax::System::Graphics {
                    Camera3D();
                   ~Camera3D();
 
-            void   update();
+            void   update(double delta);
 
     };
     

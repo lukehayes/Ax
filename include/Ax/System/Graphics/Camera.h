@@ -16,7 +16,7 @@ namespace Ax::System::Graphics {
             Camera(const M4& projection, const M4& view, const V3& position);
             ~Camera();
 
-            virtual void update() = 0;
+            virtual void update(double delta) = 0;
 
             /**
              * Get the combined projection and view matricies

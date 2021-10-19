@@ -24,7 +24,7 @@ namespace Ax::System::Graphics {
          *
          * @return void
          */
-        void update();
+        void update(double delta);
 
         /**
          * Set the projection matrix for the camera.

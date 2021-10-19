@@ -69,6 +69,10 @@ namespace Ax::System
                     // - Only update at 60 frames / s
                     while (deltaTime >= 1.0){
                         //update();   // - Update function
+
+                        camera2d.update(deltaTime);
+                        te.update(deltaTime);
+
                         updates++;
                         deltaTime--;
                     }
@@ -78,10 +82,6 @@ namespace Ax::System
                     glClearColor(0.8f,0.8f,0.8f,1.0f);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-
-                    camera2d.update();
-                    te.update(deltaTime);
                     shader.setVec3("color", te.color);
 
                     this->renderer.draw(te,shader);
