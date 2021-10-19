@@ -21,7 +21,7 @@ namespace Ax::System::Graphics {
     Camera::Camera(const M4& projection, const M4& view, const V3& position)
         : projection(projection),
           view(view),
-          transform(transform)
+          transform(position)
     {}
 
     Camera::~Camera(){}

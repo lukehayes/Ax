@@ -19,12 +19,10 @@ namespace Ax::System::Graphics {
                         glm::vec3(0.0f, 1.0f,0.0f)
                         ),
 
-                    {0.0f, 0.0f, -10.0f}
+                    // Explicitly set cameras transform.position
+                    {0.0f, 0.0f, 10.0f}
                   ){
 
-                this->transform.position.x = 0.0f;
-                this->transform.position.y = 0.0f;
-                this->transform.position.z = 3.0f;
             }
 
     Camera3D::~Camera3D(){}
