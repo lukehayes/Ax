@@ -32,7 +32,8 @@ namespace Ax::System
                 glfwSetTime(glfwGetTime());
                 now = glfwGetTime();
 
-                TestEntity te;
+                TestEntity te({0,0,0});
+                TestEntity te2({1,-1,0});
 
                 Ax::System::GL::Shader shader(
                         "assets/shaders/VSH-Default.glsl",
@@ -72,6 +73,7 @@ namespace Ax::System
 
                         camera2d.update(deltaTime);
                         te.update(deltaTime);
+                        te2.update(deltaTime);
 
                         updates++;
                         deltaTime--;
@@ -84,6 +86,7 @@ namespace Ax::System
 
                     shader.setVec3("color", te.color);
 
+                    this->renderer.draw(te2,shader);
                     this->renderer.draw(te,shader);
 
                     //render(); // - Render function

@@ -8,12 +8,9 @@ namespace Ax::Engine::Component {
     class TestEntity
     {
         public:
-            TestEntity() 
+            TestEntity(const V3& position) 
             {
-
-                transform.position.x = 0.0f;
-                transform.position.y = 0.0f;
-                transform.position.z = -10.0f;
+                this->transform.position = position;
             }
 
             ~TestEntity() {}
@@ -21,10 +18,7 @@ namespace Ax::Engine::Component {
             void update(double dt)
             {
                 static float c = 0.0;
-                c += 0.0001;
-                transform.position.x = std::cos(c) * 10.0f;
-                transform.position.y = -std::tan(c) * 10.0f;
-                transform.position.z = -10.0f;
+                c += 0.001;
             }
 
             Transform    transform;
