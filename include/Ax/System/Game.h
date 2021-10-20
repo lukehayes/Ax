@@ -11,6 +11,7 @@
 namespace Ax::System
 {
     using Ax::Engine::Component::TestEntity;
+    using Ax::System::Math::Random;
 
     class Game
     {
@@ -35,6 +36,23 @@ namespace Ax::System
                 TestEntity te({0,0,0});
                 TestEntity te2({1,-1,0});
 
+                std::vector<TestEntity> entities;
+                int MAX_ENTITIES = 100;
+
+                for (int i = 0; i <= MAX_ENTITIES; i++) 
+                {
+                    double r = Random::randDouble(0,1);
+                    double g = Random::randDouble(0,1);
+                    double b = Random::randDouble(0,1);
+                    double x = Random::randDouble(-10.0, 10.0);
+                    double y = Random::randDouble(-10.0, 10.0);
+                    double z = Random::randDouble(-10.0, 10.0);
+
+                    TestEntity e({x,y,z});
+                    e.color = {r,g,b};
+                    entities.push_back(e);
+                }
+
                 Ax::System::GL::Shader shader(
                         "assets/shaders/VSH-Default.glsl",
                         "assets/shaders/FSH-Default.glsl"
@@ -45,6 +63,9 @@ namespace Ax::System
                 double lastTime = glfwGetTime(), timer = lastTime;
                 double deltaTime = 0, nowTime = 0;
                 int frames = 0 , updates = 0;
+
+                Ax::System::Graphics::Camera3D camera2d;
+                this->renderer.setCamera(&camera2d);
 
                 // - While window is alive
                 while (!glfwWindowShouldClose(engine.getWindow().window() ))
@@ -64,8 +85,6 @@ namespace Ax::System
                     nowTime = glfwGetTime();
                     deltaTime += (nowTime - lastTime) / limitFPS;
                     lastTime = nowTime;
-                    Ax::System::Graphics::Camera3D camera2d;
-                    this->renderer.setCamera(&camera2d);
 
                     // - Only update at 60 frames / s
                     while (deltaTime >= 1.0){
@@ -74,6 +93,11 @@ namespace Ax::System
                         camera2d.update(deltaTime);
                         te.update(deltaTime);
                         te2.update(deltaTime);
+
+                    //for(auto e : entities)
+                    //{
+                        //e.update(deltaTime);
+                    //}
 
                         updates++;
                         deltaTime--;
@@ -88,6 +112,12 @@ namespace Ax::System
 
                     this->renderer.draw(te2,shader);
                     this->renderer.draw(te,shader);
+
+                    for(auto e : entities)
+                    {
+                        shader.setVec3("color", e.color);
+                        this->renderer.draw(e,shader);
+                    }
 
                     //render(); // - Render function
                     frames++;
