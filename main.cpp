@@ -1,21 +1,5 @@
 #include "Ax/System/Engine.h"
 #include "Ax/System/Game.h"
-#include "Ax/System/Common/Log.h"
-#include "Ax/System/GL/VertexArray.h"
-#include "Ax/System/GL/BufferObject.h"
-#include "Ax/System/GL/BufferTarget.h"
-#include "Ax/System/GL/BufferConfig.h"
-#include "Ax/System/GL/Shader.h"
-#include "Ax/System/GL/Primitive.h"
-#include "Ax/System/Graphics/Camera2D.h"
-#include "Ax/System/Graphics/Camera3D.h"
-#include "Ax/System/Mesh/MeshRenderer.h"
-#include "Ax/System/Mesh/RectangleMesh.h"
-#include "Ax/System/Math/Random.h"
-#include "Ax/System/Mesh/MeshBuilder.h"
-
-#include <vector>
-#include <memory>
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){    
    if ((key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) && action == GLFW_PRESS){
@@ -30,10 +14,6 @@ void framebuffer_callback(GLFWwindow* window, int width, int height){
 int main(int argc, const char *argv[])
 {
     using namespace Ax::System;
-    using namespace Ax::System::GL;
-    using namespace Ax::System::Graphics;
-    using namespace Ax::System::Mesh;
-    using namespace Ax::System::Math;
 
     Game game;
 
