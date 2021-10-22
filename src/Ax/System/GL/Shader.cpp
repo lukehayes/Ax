@@ -2,22 +2,6 @@
 
 namespace Ax::System::GL
 {
-    Shader::Shader(){
-        std::string vertexSource   = "assets/shaders/VSH-Default.glsl";
-        std::string fragmentSource = "assets/shaders/FSH-Default.glsl";
-
-        this->vertexSource   = this->_readShaderFile(vertexSource.c_str());
-        this->fragmentSource = this->_readShaderFile(fragmentSource.c_str());
-
-        _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
-        _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
-
-        this->compile();
-
-        glDeleteShader(this->vertexID);
-        glDeleteShader(this->fragmentID);
-    }
-
     Shader::~Shader()
     {
         // delete the shaders as they're linked into our program now and no longer necessary
