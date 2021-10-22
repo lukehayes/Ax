@@ -13,6 +13,9 @@ namespace Ax::System::GL
         _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
 
         this->compile();
+
+        glDeleteShader(this->vertexID);
+        glDeleteShader(this->fragmentID);
     }
 
     Shader::~Shader()
