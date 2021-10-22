@@ -52,43 +52,14 @@ namespace Ax::System::GL
 
     Shader::Shader(const char* vertexPath, const char* fragmentPath)
     {
-        // 1. retrieve the vertex/fragment source code from filePath
-        std::ifstream vShaderFile;
-        std::ifstream fShaderFile;
-        // ensure ifstream objects can throw exceptions:
-        vShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
-        fShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
-        try 
-        {
-            // open files
-            vShaderFile.open(vertexPath);
-            fShaderFile.open(fragmentPath);
-            std::stringstream vShaderStream, fShaderStream;
-            // read file's buffer contents into streams
-            vShaderStream << vShaderFile.rdbuf();
-            fShaderStream << fShaderFile.rdbuf();
-            // close file handlers
-            vShaderFile.close();
-            fShaderFile.close();
-            // convert stream into string
-            this->vertexSource   = vShaderStream.str();
-            this->fragmentSource = fShaderStream.str();
-        }
-        catch (std::ifstream::failure& e)
-        {
-            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
-        }
+        this->vertexSource   = this->readShaderFile(vertexPath);
+        this->fragmentSource = this->readShaderFile(fragmentPath);
 
-        // 2. compile shaders
-        //unsigned int vertex, fragment;
-
-        // vertex shader
         _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
-
-        // fragment Shader
         _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
 
-        // delete the shaders as they're linked into our program now and no longer necessary
+        this->compile();
+
         glDeleteShader(this->vertexID);
         glDeleteShader(this->fragmentID);
     }
