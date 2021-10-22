@@ -25,10 +25,10 @@ namespace Ax::System::GL
         //glDeleteShader(this->fragmentID);
     }
 
-    Shader::Shader(const char* vertexPath, const char* fragmentPath)
+    Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath)
     {
-        this->vertexSource   = this->_readShaderFile(vertexPath);
-        this->fragmentSource = this->_readShaderFile(fragmentPath);
+        this->vertexSource   = this->_readShaderFile(vertexPath.c_str());
+        this->fragmentSource = this->_readShaderFile(fragmentPath.c_str());
 
         _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
         _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
