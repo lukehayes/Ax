@@ -2,7 +2,42 @@
 
 namespace Ax::System::GL
 {
-    Shader::Shader(){}
+    Shader::Shader(){
+        std::string vertexSource   = "assets/shaders/VSH-Default.glsl";
+        std::string fragmentSource = "assets/shaders/FSH-Default.glsl";
+
+        this->vertexSource   = this->readShaderFile(vertexSource.c_str());
+        this->fragmentSource = this->readShaderFile(fragmentSource.c_str());
+
+        _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
+        _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
+    }
+
+    str Shader::readShaderFile(const char* filePath)
+    {
+        // 1. retrieve the vertex/fragment source code from filePath
+        std::ifstream file;
+        // ensure ifstream objects can throw exceptions:
+        file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+
+        try 
+        {
+            // open files
+            file.open(filePath);
+            std::stringstream fileStream;
+            // read file's buffer contents into streams
+            fileStream << file.rdbuf();
+            // close file handlers
+            file.close();
+            // convert stream into string
+            return fileStream.str();
+        }
+        catch (std::ifstream::failure& e)
+        {
+            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+        }
+    }
+
     Shader::Shader(const char* vertexPath, const char* fragmentPath)
     {
         // 1. retrieve the vertex/fragment source code from filePath

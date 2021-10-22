@@ -18,6 +18,8 @@ namespace Ax::System::GL {
                   Shader();
                   Shader(const char* vertexPath, const char* fragmentPath);
 
+        str  readShaderFile(const char* filePath);
+
         void      use() const;
 
         void      setBool(const std::string &name, bool value) const;
