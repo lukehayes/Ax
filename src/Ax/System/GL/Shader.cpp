@@ -13,6 +13,13 @@ namespace Ax::System::GL
         _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
     }
 
+    Shader::~Shader()
+    {
+        // delete the shaders as they're linked into our program now and no longer necessary
+        glDeleteShader(this->vertexID);
+        glDeleteShader(this->fragmentID);
+    }
+
     str Shader::readShaderFile(const char* filePath)
     {
         // 1. retrieve the vertex/fragment source code from filePath

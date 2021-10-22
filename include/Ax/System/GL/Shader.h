@@ -17,6 +17,7 @@ namespace Ax::System::GL {
     public:
                   Shader();
                   Shader(const char* vertexPath, const char* fragmentPath);
+                  ~Shader();
 
         str  readShaderFile(const char* filePath);
 
