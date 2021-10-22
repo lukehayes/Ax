@@ -21,6 +21,8 @@ namespace Ax::System::GL {
 
         str  readShaderFile(const char* filePath);
 
+        void      compile();
+
         void      use() const;
 
         void      setBool(const std::string &name, bool value) const;

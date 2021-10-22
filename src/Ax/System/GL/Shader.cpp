@@ -11,13 +11,15 @@ namespace Ax::System::GL
 
         _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
         _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
+
+        this->compile();
     }
 
     Shader::~Shader()
     {
         // delete the shaders as they're linked into our program now and no longer necessary
-        glDeleteShader(this->vertexID);
-        glDeleteShader(this->fragmentID);
+        //glDeleteShader(this->vertexID);
+        //glDeleteShader(this->fragmentID);
     }
 
     str Shader::readShaderFile(const char* filePath)
@@ -83,16 +85,19 @@ namespace Ax::System::GL
         // fragment Shader
         _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
 
+        // delete the shaders as they're linked into our program now and no longer necessary
+        glDeleteShader(this->vertexID);
+        glDeleteShader(this->fragmentID);
+    }
+
+    void Shader::compile()
+    {
         // shader Program
         ID = glCreateProgram();
         glAttachShader(ID, vertexID);
         glAttachShader(ID, fragmentID);
         glLinkProgram(ID);
         _checkCompileErrors(ID, "PROGRAM");
-
-        // delete the shaders as they're linked into our program now and no longer necessary
-        glDeleteShader(this->vertexID);
-        glDeleteShader(this->fragmentID);
     }
 
     void Shader::_createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName)
