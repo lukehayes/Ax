@@ -7,17 +7,7 @@ namespace Ax::System::Mesh {
     using Ax::System::Graphics::Camera;
     using Ax::System::Graphics::Camera2D;
 
-    MeshRenderer::MeshRenderer() 
-    {
-        //---------------------------------------------------------------------
-        // Shader, VertexArray/Buffer Setup.
-        //---------------------------------------------------------------------
-        this->Shader = GL::Shader(
-                "assets/shaders/VSH-Default.glsl",
-                "assets/shaders/FSH-Default.glsl"
-                );
-
-    }
+    MeshRenderer::MeshRenderer() {}
 
     MeshRenderer::~MeshRenderer() {}
 
