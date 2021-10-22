@@ -6,8 +6,8 @@ namespace Ax::System::GL
         std::string vertexSource   = "assets/shaders/VSH-Default.glsl";
         std::string fragmentSource = "assets/shaders/FSH-Default.glsl";
 
-        this->vertexSource   = this->readShaderFile(vertexSource.c_str());
-        this->fragmentSource = this->readShaderFile(fragmentSource.c_str());
+        this->vertexSource   = this->_readShaderFile(vertexSource.c_str());
+        this->fragmentSource = this->_readShaderFile(fragmentSource.c_str());
 
         _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
         _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
@@ -25,7 +25,31 @@ namespace Ax::System::GL
         //glDeleteShader(this->fragmentID);
     }
 
-    str Shader::readShaderFile(const char* filePath)
+    Shader::Shader(const char* vertexPath, const char* fragmentPath)
+    {
+        this->vertexSource   = this->_readShaderFile(vertexPath);
+        this->fragmentSource = this->_readShaderFile(fragmentPath);
+
+        _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
+        _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
+
+        this->compile();
+
+        glDeleteShader(this->vertexID);
+        glDeleteShader(this->fragmentID);
+    }
+
+    void Shader::compile()
+    {
+        // shader Program
+        ID = glCreateProgram();
+        glAttachShader(ID, vertexID);
+        glAttachShader(ID, fragmentID);
+        glLinkProgram(ID);
+        _checkCompileErrors(ID, "PROGRAM");
+    }
+
+    str Shader::_readShaderFile(const char* filePath)
     {
         // 1. retrieve the vertex/fragment source code from filePath
         std::ifstream file;
@@ -48,30 +72,6 @@ namespace Ax::System::GL
         {
             std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
         }
-    }
-
-    Shader::Shader(const char* vertexPath, const char* fragmentPath)
-    {
-        this->vertexSource   = this->readShaderFile(vertexPath);
-        this->fragmentSource = this->readShaderFile(fragmentPath);
-
-        _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
-        _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
-
-        this->compile();
-
-        glDeleteShader(this->vertexID);
-        glDeleteShader(this->fragmentID);
-    }
-
-    void Shader::compile()
-    {
-        // shader Program
-        ID = glCreateProgram();
-        glAttachShader(ID, vertexID);
-        glAttachShader(ID, fragmentID);
-        glLinkProgram(ID);
-        _checkCompileErrors(ID, "PROGRAM");
     }
 
     void Shader::_createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName)

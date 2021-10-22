@@ -19,7 +19,6 @@ namespace Ax::System::GL {
                   Shader(const char* vertexPath, const char* fragmentPath);
                   ~Shader();
 
-        str  readShaderFile(const char* filePath);
 
         void      compile();
 
@@ -38,6 +37,7 @@ namespace Ax::System::GL {
 
     private:
 
+        str       _readShaderFile(const char* filePath);
         void      _createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName);
         void      _checkCompileErrors(unsigned int shader, std::string type);
 
