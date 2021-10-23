@@ -35,6 +35,11 @@ namespace Ax::System::Mesh {
 
         ~RectangleMesh(){}
 
+        friend std::ostream& operator<<(std::ostream& stream, RectangleMesh const& mesh)
+        {
+            stream << "Rectangle Mesh ";
+            return stream;
+        }
 
         std::vector<f32> verticies;
         GL::BufferConfig config;

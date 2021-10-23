@@ -9,8 +9,8 @@
  * =====================================================================================
  */
 
-#ifndef AX_SYS_RECTMESH_H
-#define AX_SYS_RECTMESH_H
+#ifndef AX_SYS_LINEMESH_H
+#define AX_SYS_LINEMESH_H
 
 #include "Ax/System/Mesh/IMesh.h"
 #include <glad/glad.h>
@@ -24,11 +24,17 @@ namespace Ax::System::Mesh {
     public:
         LineMesh()
             : verticies{
-                -1.0, 1.0
+                -1.0, 1.0,
             },
             config({0,2,0, Ax::System::GL::ARRAY_BUFFER}),
             vertexCount(verticies.size())
         {}
+
+        friend std::ostream& operator<<(std::ostream& stream, LineMesh const& mesh)
+        {
+            stream << "Line Mesh ";
+            return stream;
+        }
 
         ~LineMesh(){}
 
