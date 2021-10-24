@@ -4,16 +4,10 @@
 
 namespace Ax::System::Builder
 {
-
-    using Ax::System::Mesh::IMesh;
-    using Ax::System::Mesh::RectangleMesh;
-    using Ax::System::Mesh::LineMesh;
-
     MeshBuilder::MeshBuilder() {}
 
     MeshBuilder::MeshBuilder(const std::shared_ptr<IMesh>& mesh) 
         : meshObject(mesh){}
-
 
     void MeshBuilder::setMesh(const std::shared_ptr<IMesh>& mesh)
     {
@@ -32,13 +26,14 @@ namespace Ax::System::Builder
         this->VertexArray.generate();
         this->VertexArray.bind();
 
-        this->BufferObject.setConfig(mesh->config);
+        this->BufferObject.config = mesh->config;
+        //this->BufferObject.setConfig(mesh->config);
 
         // Buffer Initializaltion
-        this->BufferObject.generate();
-        this->BufferObject.bind();
-        this->BufferObject.setBufferData(mesh->verticies);
-        this->BufferObject.setAttribPointers();
+        //this->BufferObject.generate();
+        //this->BufferObject.bind();
+        //this->BufferObject.setBufferData(mesh->verticies);
+        //this->BufferObject.setAttribPointers();
 
         std::cout << mesh << " Data Loaded Into GPU."<< std::endl;
     }
