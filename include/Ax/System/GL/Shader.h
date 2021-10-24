@@ -15,7 +15,7 @@ namespace Ax::System::GL {
     class Shader
     {
     public:
-                  Shader() = delete;
+                  Shader();
 
                   Shader(const std::string& vertexPath, const std::string& fragmentPath);
                   ~Shader();
