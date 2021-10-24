@@ -8,7 +8,7 @@ GLAD_SRC = $(SRC_DIR)/glad.c
 SYSTEM_NAMESPACE = $(SRC_DIR)/Ax/System
 ENGINE_NAMESPACE = $(SRC_DIR)/Ax/Engine
 SYSTEM_SRC := $(wildcard $(SYSTEM_NAMESPACE)/*.cpp)
-OBJS := Engine.o Window.o Shader.o VertexArray.o BufferObject.o Camera.o Camera2D.o Camera3D.o MeshRenderer.o
+OBJS := Engine.o Window.o Shader.o VertexArray.o BufferObject.o Camera.o Camera2D.o Camera3D.o MeshRenderer.o MeshBuilder.o
 
 all: binary
 
@@ -43,6 +43,9 @@ Camera3D.o: $(SYSTEM_NAMESPACE)/Graphics/Camera3D.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 
 MeshRenderer.o: $(SYSTEM_NAMESPACE)/Mesh/MeshRenderer.cpp
+	$(CXX) $(CXXFLAGS) -c $<
+
+MeshBuilder.o: $(SYSTEM_NAMESPACE)/Builder/MeshBuilder.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 
 

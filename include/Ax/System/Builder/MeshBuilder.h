@@ -17,49 +17,31 @@
 #include "Ax/System/GL/BufferTarget.h"
 #include "Ax/System/GL/BufferConfig.h"
 #include "Ax/System/Mesh/RectangleMesh.h"
+#include "Ax/System/Mesh/LineMesh.h"
+#include "Ax/System/Mesh/IMesh.h"
 
 #include <memory>
 
-namespace Ax::System::Mesh
+namespace Ax::System::Builder
 {
+
+    using Ax::System::Mesh::IMesh;
+    using Ax::System::Mesh::RectangleMesh;
+    using Ax::System::Mesh::LineMesh;
 
     class MeshBuilder : public Builder::Builder
     {
     public:
 
-        MeshBuilder() {}
-        MeshBuilder(const std::shared_ptr<IMesh>& mesh) 
-            : meshObject(mesh)
-        {
-        }
+        MeshBuilder();
+        MeshBuilder(const std::shared_ptr<IMesh>& mesh);
 
-
-        void setMesh(const std::shared_ptr<IMesh>& mesh)
-        {
-            this->meshObject = mesh;
-        }
+        void setMesh(const std::shared_ptr<IMesh>& mesh);
 
         /**
          * Load all of the mesh data onto the GPU.
          */
-        void build() override
-        {
-            RectangleMesh* mesh = dynamic_cast<RectangleMesh*>(this->meshObject.get());
-
-            // VAO Initializaltion
-            this->VertexArray.generate();
-            this->VertexArray.bind();
-
-            this->BufferObject.setConfig(mesh->config);
-
-            // Buffer Initializaltion
-            this->BufferObject.generate();
-            this->BufferObject.bind();
-            this->BufferObject.setBufferData(mesh->verticies);
-            this->BufferObject.setAttribPointers();
-
-            LOG("Rectangle Mesh Data Loaded Into GPU.");
-        }
+        void build() override;
 
         std::shared_ptr<IMesh> meshObject;
         GL::VertexArray VertexArray;

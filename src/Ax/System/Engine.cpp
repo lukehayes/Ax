@@ -1,5 +1,5 @@
 #include "Ax/System/Engine.h"
-#include "Ax/System/Mesh/MeshBuilder.h"
+#include "Ax/System/Builder/MeshBuilder.h"
 #include "Ax/System/Mesh/RectangleMesh.h"
 #include <memory>
 
@@ -23,11 +23,11 @@ namespace Ax::System {
         // Initalize all of the systems that
         // Ax needs - MeshBuilders etc.
 
-        using namespace Ax::System::Mesh;
+        using namespace Ax::System::Builder;
 
         // Load data onto the GPU
         const std::shared_ptr<RectangleMesh> mesh = std::make_shared<RectangleMesh>();
-        Mesh::MeshBuilder b(mesh);
+        Builder::MeshBuilder b(mesh);
         b.build();
     }
 

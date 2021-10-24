@@ -1,5 +1,5 @@
 #include "Ax/System/Mesh/MeshRenderer.h"
-#include "Ax/System/Mesh/MeshBuilder.h"
+#include "Ax/System/Builder/MeshBuilder.h"
 #include "Ax/System/Graphics/Camera2D.h"
 
 namespace Ax::System::Mesh {
