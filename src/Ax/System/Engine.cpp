@@ -1,6 +1,7 @@
 #include "Ax/System/Engine.h"
 #include "Ax/System/Builder/MeshBuilder.h"
 #include "Ax/System/Mesh/RectangleMesh.h"
+#include "Ax/System/Mesh/LineMesh.h"
 #include <memory>
 
 namespace Ax::System {
@@ -26,7 +27,8 @@ namespace Ax::System {
         using namespace Ax::System::Builder;
 
         // Load data onto the GPU
-        const std::shared_ptr<RectangleMesh> mesh = std::make_shared<RectangleMesh>();
+        //const std::shared_ptr<RectangleMesh> mesh = std::make_shared<RectangleMesh>();
+        const std::shared_ptr<LineMesh> mesh = std::make_shared<LineMesh>();
         Builder::MeshBuilder b(mesh);
         b.build();
     }
