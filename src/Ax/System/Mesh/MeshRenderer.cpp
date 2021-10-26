@@ -31,6 +31,7 @@ namespace Ax::System::Mesh {
         // Setup Model
         M4 model = M4(1.0f);
         model = glm::translate(model, entity.transform.position);
+        model = glm::rotate(model, glm::radians(90.0f), entity.transform.position);
         model = glm::scale(model,  glm::vec3(entity.transform.allAxisScale));
 
         // Send data to shader
@@ -39,7 +40,8 @@ namespace Ax::System::Mesh {
         shader.setMat4("model", model);
 
         // Draw The Model
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glDrawArrays(GL_LINES, 0, 2);
     }
 
 
