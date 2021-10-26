@@ -43,7 +43,7 @@ namespace Ax::System::Builder
          */
         void build() override;
 
-        std::shared_ptr<IMesh> meshObject;
+        std::shared_ptr<IMesh> meshObject = nullptr;
         GL::VertexArray VertexArray;
         GL::BufferObject BufferObject;
     };
