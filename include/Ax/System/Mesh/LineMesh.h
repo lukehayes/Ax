@@ -24,7 +24,8 @@ namespace Ax::System::Mesh {
     public:
         LineMesh()
             : verticies{
-                -1.0, 1.0,
+                 0.5, 0.0,
+                -0.5, 0.0
             },
             config({0,2,0, Ax::System::GL::ARRAY_BUFFER}),
             vertexCount(verticies.size())
