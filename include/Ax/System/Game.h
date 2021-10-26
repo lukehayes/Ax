@@ -37,16 +37,16 @@ namespace Ax::System
                 TestEntity te2({1,-1,0});
 
                 std::vector<TestEntity> entities;
-                int MAX_ENTITIES = 100;
+                int MAX_ENTITIES = 1000;
 
                 for (int i = 0; i <= MAX_ENTITIES; i++) 
                 {
                     double r = Random::randDouble(0,1);
                     double g = Random::randDouble(0,1);
                     double b = Random::randDouble(0,1);
-                    double x = Random::randDouble(-10.0, 10.0);
-                    double y = Random::randDouble(-10.0, 10.0);
-                    double z = Random::randDouble(-10.0, 10.0);
+                    double x = Random::randDouble(-1.0, 1.0);
+                    double y = Random::randDouble(-1.0, 1.0);
+                    double z = Random::randDouble(-1.0, 1.0);
 
                     TestEntity e({x,y,z});
                     e.color = {r,g,b};
@@ -96,7 +96,7 @@ namespace Ax::System
 
                     //for(auto e : entities)
                     //{
-                        //e.update(deltaTime);
+                        //e.update(deltatime);
                     //}
 
                         updates++;
@@ -105,10 +105,10 @@ namespace Ax::System
 
                     // - Render at maximum possible frames
                     
-                    glClearColor(0.8f,0.8f,0.8f,1.0f);
+                    glClearColor(0.1f,0.1f,0.1f,1.0f);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                    shader.setVec3("color", te.color);
+                    shader.setVec3("color", {0.3,0.1,0.8});
 
                     this->renderer.draw(te2,shader);
                     this->renderer.draw(te,shader);
@@ -116,7 +116,7 @@ namespace Ax::System
                     for(auto e : entities)
                     {
                         shader.setVec3("color", e.color);
-                        this->renderer.draw(e,shader);
+                        this->renderer.draw(e,shader, GL::POINTS);
                     }
 
                     //render(); // - Render function

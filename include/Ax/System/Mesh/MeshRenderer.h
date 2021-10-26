@@ -11,13 +11,14 @@
 #include "Ax/System/Graphics/Camera2D.h"
 #include "Ax/System/Graphics/Camera3D.h"
 #include "Ax/System/GL/Shader.h"
+#include "Ax/System/GL/Primitive.h"
 #include "Ax/Engine/Component/TestEntity.h"
 
 namespace Ax::System::Mesh {
 
     using Ax::System::Mesh::RectangleMesh;
     using Ax::System::Graphics::BaseRenderer;
-    //using Ax::System::Graphics::Camera;
+    //using Ax::System::Graphics::CameraL;
     using namespace Ax::System::GL;
 
     class MeshRenderer 
@@ -57,7 +58,9 @@ namespace Ax::System::Mesh {
 
             void draw(
                     const Ax::Engine::Component::TestEntity& entity,
-                    const Ax::System::GL::Shader& shader );
+                    const Ax::System::GL::Shader& shader,
+                    GL::Primitive primitive = GL::TRIANGLES
+                    );
 
             void setCamera(Graphics::Camera* camera);
 

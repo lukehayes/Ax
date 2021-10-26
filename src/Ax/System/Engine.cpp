@@ -28,8 +28,8 @@ namespace Ax::System {
 
         // Load data onto the GPU
         //const std::shared_ptr<RectangleMesh> mesh = std::make_shared<RectangleMesh>();
-        const std::shared_ptr<LineMesh> mesh = std::make_shared<LineMesh>();
-        Builder::MeshBuilder b(mesh);
+        //const std::shared_ptr<LineMesh> mesh = std::make_shared<LineMesh>();
+        Builder::MeshBuilder b;
         b.build();
     }
 
