@@ -35,7 +35,7 @@ namespace Ax::System::Builder
         //this->BufferObject.setBufferData(mesh->verticies);
         //this->BufferObject.setAttribPointers();
 
-        std::cout << mesh << " Data Loaded Into GPU."<< std::endl;
+        std::cout << *mesh << " Data Loaded Into GPU."<< std::endl;
     }
 }
 
