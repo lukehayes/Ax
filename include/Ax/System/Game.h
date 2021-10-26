@@ -6,6 +6,9 @@
 #include "Ax/System/Mesh/MeshRenderer.h"
 #include "Ax/System/Math/Random.h"
 #include "Ax/Engine/Component/TestEntity.h"
+#include "Ax/System/Graphics/Camera.h"
+#include "Ax/System/Graphics/Camera2D.h"
+#include "Ax/System/Graphics/Camera3D.h"
 
 
 namespace Ax::System
@@ -110,7 +113,6 @@ namespace Ax::System
 
                     shader.setVec3("color", {0.3,0.1,0.8});
 
-                    this->renderer.draw(te2,shader);
                     this->renderer.draw(te,shader);
 
                     for(auto e : entities)
