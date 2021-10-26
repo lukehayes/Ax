@@ -1,11 +1,7 @@
 #include "Ax/System/Mesh/MeshRenderer.h"
 #include "Ax/System/Builder/MeshBuilder.h"
-#include "Ax/System/Graphics/Camera2D.h"
 
 namespace Ax::System::Mesh {
-     
-    using Ax::System::Graphics::Camera;
-    using Ax::System::Graphics::Camera2D;
 
     MeshRenderer::MeshRenderer() {}
 
@@ -36,7 +32,7 @@ namespace Ax::System::Mesh {
         // Setup Model
         M4 model = M4(1.0f);
         model = glm::translate(model, entity.transform.position);
-        model = glm::rotate(model, glm::radians(c), entity.transform.position);
+        //model = glm::rotate(model, glm::radians(c), entity.transform.position);
         model = glm::scale(model,  glm::vec3(entity.transform.allAxisScale));
 
         // Send data to shader

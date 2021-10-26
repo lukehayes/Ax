@@ -6,19 +6,14 @@
 
 #include "Ax/System/Graphics/BaseRenderer.h"
 #include "Ax/System/GL/Shader.h"
-#include "Ax/System/Mesh/RectangleMesh.h"
 #include "Ax/System/Graphics/Camera.h"
-#include "Ax/System/Graphics/Camera2D.h"
-#include "Ax/System/Graphics/Camera3D.h"
-#include "Ax/System/GL/Shader.h"
 #include "Ax/System/GL/Primitive.h"
 #include "Ax/Engine/Component/TestEntity.h"
+#include "Ax/System/Common/Types.h"
 
 namespace Ax::System::Mesh {
 
-    using Ax::System::Mesh::RectangleMesh;
     using Ax::System::Graphics::BaseRenderer;
-    //using Ax::System::Graphics::CameraL;
     using namespace Ax::System::GL;
 
     class MeshRenderer 
@@ -28,13 +23,6 @@ namespace Ax::System::Mesh {
              * Default Constructor.
              */
             MeshRenderer();
-
-            
-            MeshRenderer(const RectangleMesh& mesh)
-            {
-                this->Mesh = mesh;
-            }
-
 
             /**
              * Destructor.
@@ -64,7 +52,7 @@ namespace Ax::System::Mesh {
 
             void setCamera(Graphics::Camera* camera);
 
-            RectangleMesh Mesh;
+            /** Data Members **/
             Graphics::Camera* camera;
     };
 
