@@ -19,21 +19,26 @@ namespace Ax::System::Builder
      */
     void MeshBuilder::build()
     {
-        //RectangleMesh* mesh = dynamic_cast<RectangleMesh*>(this->meshObject.get());
-        Ax::System::Mesh::LineMesh* mesh = dynamic_cast<Ax::System::Mesh::LineMesh*>(this->meshObject.get());
+        const std::shared_ptr<RectangleMesh> meshObject = std::make_shared<RectangleMesh>();
+        RectangleMesh* mesh = dynamic_cast<RectangleMesh*>(this->meshObject.get());
+
+        //const std::shared_ptr<LineMesh> meshObject = std::make_shared<LineMesh>();
+        //Ax::System::Mesh::LineMesh* mesh = dynamic_cast<Ax::System::Mesh::LineMesh*>(this->meshObject.get());
 
         // VAO Initializaltion
         this->VertexArray.generate();
         this->VertexArray.bind();
 
-        this->BufferObject.config = mesh->config;
-        //this->BufferObject.setConfig(mesh->config);
+        Ax::System::GL::BufferConfig config = {0,2,0, Ax::System::GL::ARRAY_BUFFER};
 
+        this->BufferObject.config = config;
+        //this->BufferObject.setConfig(mesh->config);
+        
         // Buffer Initializaltion
-        //this->BufferObject.generate();
-        //this->BufferObject.bind();
-        //this->BufferObject.setBufferData(mesh->verticies);
-        //this->BufferObject.setAttribPointers();
+        this->BufferObject.generate();
+        this->BufferObject.bind();
+        this->BufferObject.setBufferData(meshObject->verticies);
+        this->BufferObject.setAttribPointers();
 
         std::cout << *mesh << " Data Loaded Into GPU."<< std::endl;
     }
