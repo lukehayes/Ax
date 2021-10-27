@@ -32,7 +32,7 @@ namespace Ax::System::Mesh {
         // Setup Model
         M4 model = M4(1.0f);
         model = glm::translate(model, entity.transform.position);
-        //model = glm::rotate(model, glm::radians(c), entity.transform.position);
+        model = glm::rotate(model, glm::radians(c), entity.transform.position);
         model = glm::scale(model,  glm::vec3(entity.transform.allAxisScale));
 
         // Send data to shader
