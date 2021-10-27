@@ -4,7 +4,7 @@ namespace Ax::System::GL {
 
     VertexArray::VertexArray() 
     {
-        //this->generate();
+        this->generate();
         //this->bind();
     }
 
@@ -32,5 +32,6 @@ namespace Ax::System::GL {
     VertexArray::unbind() 
     {
         glBindVertexArray(0);
+        LOG("Vertex Array ID:", this->id, "UnBound.");
     }
 }
