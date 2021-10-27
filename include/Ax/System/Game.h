@@ -40,7 +40,7 @@ namespace Ax::System
                 TestEntity te2({1,-1,0});
 
                 std::vector<TestEntity> entities;
-                int MAX_ENTITIES = 1000;
+                int MAX_ENTITIES = 10000;
 
                 for (int i = 0; i <= MAX_ENTITIES; i++) 
                 {
