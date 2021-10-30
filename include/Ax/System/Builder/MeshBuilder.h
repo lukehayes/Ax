@@ -12,8 +12,6 @@
 #define  AX_SYS_MESHBLDR_H
 
 #include "Ax/System/Builder/Builder.h"
-#include "Ax/System/GL/VertexArray.h"
-#include "Ax/System/GL/BufferObject.h"
 #include "Ax/System/GL/BufferConfig.h"
 #include "Ax/System/Mesh/RectangleMesh.h"
 #include "Ax/System/Mesh/LineMesh.h"
@@ -22,8 +20,6 @@
 
 namespace Ax::System::Builder
 {
-    using Ax::System::Mesh::RectangleMesh;
-    using Ax::System::Mesh::LineMesh;
 
     class MeshBuilder : public Builder::Builder
     {
@@ -35,9 +31,6 @@ namespace Ax::System::Builder
          * Load all of the mesh data onto the GPU.
          */
         void build() override;
-
-        GL::VertexArray VertexArray;
-        GL::BufferObject BufferObject;
     };
 }
 

@@ -1,9 +1,11 @@
 #include "Ax/System/Builder/MeshBuilder.h"
-
 #include <memory>
 
 namespace Ax::System::Builder
 {
+    using Ax::System::Mesh::RectangleMesh;
+    using Ax::System::Mesh::LineMesh;
+
     MeshBuilder::MeshBuilder() {}
 
     /**
@@ -11,22 +13,25 @@ namespace Ax::System::Builder
      */
     void MeshBuilder::build()
     {
-        const std::shared_ptr<RectangleMesh> meshObject = std::make_shared<RectangleMesh>();
+        //const std::shared_ptr<RectangleMesh> meshObject = std::make_shared<RectangleMesh>();
         //const std::shared_ptr<LineMesh> meshObject = std::make_shared<LineMesh>();
        
-        // VAO Initializaltion
-        this->VertexArray.generate();
-        this->VertexArray.bind();
+        RectangleMesh meshObject;
 
-        this->BufferObject.config = meshObject->config;
+
+        // VAO Initializaltion
+        meshObject.vertexArray.generate();
+        meshObject.vertexArray.bind();
+
+        meshObject.config = meshObject.config;
         
         // Buffer Initializaltion
-        this->BufferObject.generate();
-        this->BufferObject.bind();
-        this->BufferObject.setBufferData(meshObject->verticies);
-        this->BufferObject.setAttribPointers();
+        meshObject.bufferObject.generate();
+        meshObject.bufferObject.bind();
+        meshObject.bufferObject.setBufferData(meshObject.verticies);
+        meshObject.bufferObject.setAttribPointers();
 
-        std::cout << *meshObject.get() << " Data Loaded Into GPU."<< std::endl;
+        //std::cout << *meshObject.get() << " Data Loaded Into GPU."<< std::endl;
     }
 }
 

@@ -8,7 +8,6 @@
  *
  * =====================================================================================
  */
-
 #ifndef AX_SYS_RECTMESH_H
 #define AX_SYS_RECTMESH_H
 
@@ -16,8 +15,13 @@
 #include <glad/glad.h>
 #include "Ax/System/Common/Types.h"
 #include "Ax/System/GL/BufferConfig.h"
+#include "Ax/System/GL/VertexArray.h"
+#include "Ax/System/GL/BufferObject.h"
 
 namespace Ax::System::Mesh {
+
+    using Ax::System::GL::VertexArray;
+    using Ax::System::GL::BufferObject;
 
     class RectangleMesh : public IMesh
     {
@@ -26,6 +30,7 @@ namespace Ax::System::Mesh {
             : verticies{
                 -1.0, 1.0,
                 -1.0, -1.0,
+
                 1.0, 1.0,
                 1.0, -1.0
             },
@@ -44,6 +49,8 @@ namespace Ax::System::Mesh {
         std::vector<f32> verticies;
         GL::BufferConfig config;
         s32 vertexCount;
+        GL::VertexArray vertexArray;
+        GL::BufferObject bufferObject;
     };
 }
 
