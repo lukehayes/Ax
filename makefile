@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -I./include -DMAX=10 -DDEBUG=1
 SRC_DIR = src
-LDFLAGS = -L. -lglfw3 -lGL -lX11 -lpthread -lm -ldl
+LDFLAGS = -L. -lglfw -lGL -lX11 -lpthread -lm -ldl
 OUTPUT = -o bin/app
 ENTRY = main.cpp
 GLAD_SRC = $(SRC_DIR)/glad.c
