@@ -52,5 +52,5 @@ MeshBuilder.o: $(SYSTEM_NAMESPACE)/Builder/MeshBuilder.cpp
 # Cleanup
 .PHONY:clean
 clean:
-	rm -rf bin/
+	rm -rf bin/*
 	rm *.o *.a
