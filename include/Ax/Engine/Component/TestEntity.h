@@ -27,7 +27,7 @@ namespace Ax::Engine::Component {
             }
 
             Transform    transform;
-            V3           color = {0,0,0};
+            V3           color = {1,0,1};
     };
 }
 
