@@ -36,26 +36,6 @@ namespace Ax::System
                 glfwSetTime(glfwGetTime());
                 now = glfwGetTime();
 
-                TestEntity te({0,0,0});
-                TestEntity te2({1,-1,0});
-
-                std::vector<TestEntity> entities;
-                int MAX_ENTITIES = 10000;
-
-                for (int i = 0; i <= MAX_ENTITIES; i++) 
-                {
-                    double r = Random::randDouble(0,1);
-                    double g = Random::randDouble(0,1);
-                    double b = Random::randDouble(0,1);
-                    double x = Random::randDouble(-1.0, 1.0);
-                    double y = Random::randDouble(-1.0, 1.0);
-                    double z = Random::randDouble(-1.0, 1.0);
-
-                    TestEntity e({x,y,z});
-                    e.color = {r,g,b};
-                    entities.push_back(e);
-                }
-
                 Ax::System::GL::Shader shader(
                         "assets/shaders/VSH-Default.glsl",
                         "assets/shaders/FSH-Default.glsl"
@@ -94,13 +74,6 @@ namespace Ax::System
                         //update();   // - Update function
 
                         camera2d.update(deltaTime);
-                        te.update(deltaTime);
-                        te2.update(deltaTime);
-
-                    //for(auto e : entities)
-                    //{
-                        //e.update(deltatime);
-                    //}
 
                         updates++;
                         deltaTime--;
@@ -113,13 +86,7 @@ namespace Ax::System
 
                     shader.setVec3("color", {0.3,0.1,0.8});
 
-                    this->renderer.draw(te,shader);
 
-                    for(auto e : entities)
-                    {
-                        shader.setVec3("color", e.color);
-                        this->renderer.draw(e,shader, GL::POINTS);
-                    }
 
                     //render(); // - Render function
                     frames++;
