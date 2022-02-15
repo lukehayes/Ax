@@ -8,6 +8,11 @@ namespace Ax::Engine::Component {
     class TestEntity
     {
         public:
+            TestEntity() 
+            {
+                this->transform.position = {0,0,0};
+            }
+
             TestEntity(const V3& position) 
             {
                 this->transform.position = position;
