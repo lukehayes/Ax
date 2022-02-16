@@ -84,8 +84,6 @@ namespace Ax::System
                     glClearColor(0.1f,0.1f,0.1f,1.0f);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                    shader.setVec3("color", {0.3,0.1,0.8});
-
 
 
                     //render(); // - Render function

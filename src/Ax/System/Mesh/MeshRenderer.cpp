@@ -39,6 +39,7 @@ namespace Ax::System::Mesh {
         shader.setMat4("projection", this->camera->projection);
         shader.setMat4("view", this->camera->view);
         shader.setMat4("model", model);
+        shader.setVec3("color", entity.color);
 
         // Draw The Model
         //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
