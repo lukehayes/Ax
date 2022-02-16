@@ -10,7 +10,7 @@ namespace Ax::Engine::Component {
         public:
             TestEntity() 
             {
-                this->transform.position = {0,0,0};
+                this->transform.position = {0,0,-10.0};
             }
 
             TestEntity(const V3& position) 
