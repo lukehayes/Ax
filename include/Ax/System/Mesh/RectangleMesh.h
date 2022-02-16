@@ -17,11 +17,13 @@
 #include "Ax/System/GL/BufferConfig.h"
 #include "Ax/System/GL/VertexArray.h"
 #include "Ax/System/GL/BufferObject.h"
+#include "Ax/System/GL/Primitive.h"
 
 namespace Ax::System::Mesh {
 
     using Ax::System::GL::VertexArray;
     using Ax::System::GL::BufferObject;
+    using Ax::System::GL::Primitive;
 
     class RectangleMesh : public IMesh
     {
@@ -34,7 +36,7 @@ namespace Ax::System::Mesh {
                 1.0, 1.0,
                 1.0, -1.0
             },
-            config({0,2,0, Ax::System::GL::ARRAY_BUFFER}),
+            config({0,2,0, Ax::System::GL::ARRAY_BUFFER, Primitive::TRIANGLE_STRIP }),
             vertexCount(verticies.size())
         {}
 

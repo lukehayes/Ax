@@ -16,8 +16,11 @@
 #include <glad/glad.h>
 #include "Ax/System/Common/Types.h"
 #include "Ax/System/GL/BufferConfig.h"
+#include "Ax/System/GL/Primitive.h"
 
 namespace Ax::System::Mesh {
+
+    using Ax::System::GL::Primitive;
 
     class LineMesh : public IMesh
     {
@@ -27,7 +30,7 @@ namespace Ax::System::Mesh {
                  0.5, 0.0,
                 -0.5, 0.0
             },
-            config({0,2,0, Ax::System::GL::ARRAY_BUFFER}),
+            config({0,2,0, Ax::System::GL::ARRAY_BUFFER, Primitive::LINES}),
             vertexCount(verticies.size())
         {}
 
