@@ -9,10 +9,10 @@ namespace Ax::System::GL {
           config(config)
     {
 
-        //this->generate();
-        //this->bind();
-        //this->setBufferData(this->data);
-        //this->setAttribPointers();
+        this->generate();
+        this->bind();
+        this->setBufferData(this->data);
+        this->setAttribPointers();
     }
 
     BufferObject::~BufferObject() 
