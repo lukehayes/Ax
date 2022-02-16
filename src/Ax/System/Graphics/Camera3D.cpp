@@ -35,12 +35,11 @@ namespace Ax::System::Graphics {
     void 
     Camera3D::update(double delta) 
     {
-        static double c = 0.0;
-        c += 0.01;
-
-        this->transform.position.x = 100 + std::cos(c) * 100.0f;
-        this->transform.position.y = 100 + std::sin(c) * 100.0f;
-        this->transform.position.z = 100 + std::cos(c) * 100.0f;
+        //static double c = 0.0;
+        //c += 0.001;
+        //this->transform.position.x = 100 + std::cos(c) * 100.0f;
+        //this->transform.position.y = 100 + std::sin(c) * 100.0f;
+        //this->transform.position.z = 100 + std::cos(c) * 100.0f;
 
         this->view = glm::lookAt(
                 this->transform.position,
