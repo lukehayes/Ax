@@ -50,6 +50,14 @@ namespace Ax::System
                 Ax::System::Graphics::Camera3D camera2d;
                 this->renderer.setCamera(&camera2d);
 
+                TestEntity te;
+                TestEntity te2({10,-10,-5});
+                te2.color = {0,1,1};
+
+                TestEntity te3({-10,-10,-8});
+                te3.color = {0.5,0,0.8};
+
+
                 // - While window is alive
                 while (!glfwWindowShouldClose(engine.getWindow().window() ))
                 {
@@ -83,6 +91,10 @@ namespace Ax::System
                     
                     glClearColor(0.1f,0.1f,0.1f,1.0f);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+                    this->renderer.draw(te, shader);
+                    this->renderer.draw(te2, shader);
+                    this->renderer.draw(te3, shader);
 
 
 
