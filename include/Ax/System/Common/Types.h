@@ -8,7 +8,7 @@
 #include "Ax/System/Common/Log.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
+#include "Ax/System/Math/Random.h"
 /*============================================================
 // Primitives
 ============================================================*/
