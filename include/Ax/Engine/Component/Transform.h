@@ -26,6 +26,8 @@ namespace Ax::Engine::Component {
             V3 rotation;
             V3 scale;
             f32 allAxisScale = 10.0f;
+            f32 angle = 0.0;
+            f32 single_scale = 1.0f;
     };
 }
 

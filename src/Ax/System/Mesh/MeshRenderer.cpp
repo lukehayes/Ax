@@ -27,13 +27,13 @@ namespace Ax::System::Mesh {
         shader.use();
 
         static float c = 0.0;
-        c += 0.0001;
+        c += 0.0000001;
 
         // Setup Model
         M4 model = M4(1.0f);
         model = glm::translate(model, entity.transform.position);
-        model = glm::rotate(model, glm::radians(c), entity.transform.position);
-        model = glm::scale(model,  glm::vec3(entity.transform.allAxisScale));
+        model = glm::rotate(model, entity.transform.angle + glm::radians(std::sin(c)) * 1000, {1,1,1});
+        model = glm::scale(model,  glm::vec3(entity.transform.single_scale));
 
         // Send data to shader
         shader.setMat4("projection", this->camera->projection);

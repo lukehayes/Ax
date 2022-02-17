@@ -53,18 +53,23 @@ namespace Ax::System
                 std::vector<TestEntity> entities;
                 int space = 100;
 
-                for(int i = 0; i <= 100; i++)
+                for(int i = 0; i <= 1000; i++)
                 {
                     int x = Ax::System::Math::Random::randInt(-space, space);
                     int y = Ax::System::Math::Random::randInt(-space, space);
                     int z = Ax::System::Math::Random::randInt(-space, -100 + space);
 
-                    double r = Ax::System::Math::Random::randDouble(0.5,1);
-                    double g = Ax::System::Math::Random::randDouble(0.5,1);
-                    double b = Ax::System::Math::Random::randDouble(0.5,1);
+                    double r = Ax::System::Math::Random::randDouble(0.1,0.4);
+                    double g = Ax::System::Math::Random::randDouble(0.6,0.9);
+                    double b = Ax::System::Math::Random::randDouble(0.8,1);
+
+                    double angle = Ax::System::Math::Random::randDouble(0.0,1.0);
+                    double scale = Ax::System::Math::Random::randDouble(1.0, 10.0f);
 
                     TestEntity te({x,y,z});
                     te.color = {r,g,b};
+                    te.transform.angle = angle;
+                    te.transform.single_scale = scale;
 
                     entities.push_back(te);
                 }
