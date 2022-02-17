@@ -20,18 +20,18 @@ namespace Ax::System
     {
 
         public:
-            Game() 
+            Game()
             {
                 engine.start();
                 engine.initSystems();
             }
 
-            ~Game() 
+            ~Game()
             {
                 engine.shutdown();
             }
 
-            void update() 
+            void update()
             {
                 glfwSetTime(glfwGetTime());
                 now = glfwGetTime();
@@ -50,12 +50,32 @@ namespace Ax::System
                 Ax::System::Graphics::Camera3D camera2d;
                 this->renderer.setCamera(&camera2d);
 
-                TestEntity te;
-                TestEntity te2({10,-10,-5});
-                te2.color = {0,1,1};
+                std::vector<TestEntity> entities;
+                int space = 100;
 
-                TestEntity te3({-10,-10,-8});
-                te3.color = {0.5,0,0.8};
+                for(int i = 0; i <= 100; i++)
+                {
+                    int x = Ax::System::Math::Random::randInt(-space, space);
+                    int y = Ax::System::Math::Random::randInt(-space, space);
+                    int z = Ax::System::Math::Random::randInt(-space, -100 + space);
+
+                    double r = Ax::System::Math::Random::randDouble(0.5,1);
+                    double g = Ax::System::Math::Random::randDouble(0.5,1);
+                    double b = Ax::System::Math::Random::randDouble(0.5,1);
+
+                    TestEntity te({x,y,z});
+                    te.color = {r,g,b};
+
+                    entities.push_back(te);
+                }
+
+
+                //TestEntity te;
+                //TestEntity te2({10,-10,-5});
+                //te2.color = {0,1,1};
+
+                //TestEntity te3({-10,-10,-8});
+                //te3.color = {0.5,0,0.8};
 
 
                 // - While window is alive
@@ -92,9 +112,15 @@ namespace Ax::System
                     glClearColor(0.1f,0.1f,0.1f,1.0f);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-                    this->renderer.draw(te, shader);
-                    this->renderer.draw(te2, shader);
-                    this->renderer.draw(te3, shader);
+
+                    for(auto e : entities)
+                    {
+                        this->renderer.draw(e, shader);
+                    }
+
+                    //this->renderer.draw(te, shader);
+                    //this->renderer.draw(te2, shader);
+                    //this->renderer.draw(te3, shader);
 
 
 
