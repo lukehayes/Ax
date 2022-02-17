@@ -20,15 +20,15 @@ int main(int argc, const char *argv[])
 
     Game game;
 
-    RectangleMesh rect;
-    Ax::System::Builder::MeshInitializer miRect;
-    miRect.init(&rect);
-    miRect.vertexArray.bind();
+    RectangleMesh mesh;
+    GL::VertexArray vao;
+    vao.generate();
+    vao.bind();
 
-    LineMesh line;
-    Ax::System::Builder::MeshInitializer miLine;
-    miLine.init(&line);
-    miLine.vertexArray.bind();
+    GL::BufferObject vbo(mesh.verticies, mesh.config);
+    vbo.generate();
+    vbo.bind();
+
 
     glfwSetKeyCallback(game.engine.getWindow().window(), key_callback);
     glfwSetFramebufferSizeCallback(game.engine.getWindow().window(), framebuffer_callback);
