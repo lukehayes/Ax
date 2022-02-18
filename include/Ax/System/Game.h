@@ -24,6 +24,31 @@ namespace Ax::System
             {
                 engine.start();
                 engine.initSystems();
+
+                int space = 1000;
+
+                // TODO Abtract this out from the update loop and
+                // into some kind of initializer!
+                for(int i = 0; i <= 10000; i++)
+                {
+                    int x = Ax::System::Math::Random::randInt(-space, space);
+                    int y = Ax::System::Math::Random::randInt(-space, space);
+                    int z = Ax::System::Math::Random::randInt(-space, -100 + space);
+
+                    double r = Ax::System::Math::Random::randDouble(0.1,0.4);
+                    double g = Ax::System::Math::Random::randDouble(0.6,0.9);
+                    double b = Ax::System::Math::Random::randDouble(0.8,1);
+
+                    double angle = Ax::System::Math::Random::randDouble(0.0,1.0);
+                    double scale = Ax::System::Math::Random::randDouble(1.0, 10.0f);
+
+                    TestEntity te({x,y,z});
+                    te.color = {r,g,b};
+                    te.transform.angle = angle;
+                    te.transform.single_scale = scale;
+
+                    this->entities.push_back(te);
+                }
             }
 
             ~Game()
@@ -49,38 +74,6 @@ namespace Ax::System
 
                 Ax::System::Graphics::Camera3D camera2d;
                 this->renderer.setCamera(&camera2d);
-
-                std::vector<TestEntity> entities;
-                int space = 100;
-
-                for(int i = 0; i <= 1000; i++)
-                {
-                    int x = Ax::System::Math::Random::randInt(-space, space);
-                    int y = Ax::System::Math::Random::randInt(-space, space);
-                    int z = Ax::System::Math::Random::randInt(-space, -100 + space);
-
-                    double r = Ax::System::Math::Random::randDouble(0.1,0.4);
-                    double g = Ax::System::Math::Random::randDouble(0.6,0.9);
-                    double b = Ax::System::Math::Random::randDouble(0.8,1);
-
-                    double angle = Ax::System::Math::Random::randDouble(0.0,1.0);
-                    double scale = Ax::System::Math::Random::randDouble(1.0, 10.0f);
-
-                    TestEntity te({x,y,z});
-                    te.color = {r,g,b};
-                    te.transform.angle = angle;
-                    te.transform.single_scale = scale;
-
-                    entities.push_back(te);
-                }
-
-
-                //TestEntity te;
-                //TestEntity te2({10,-10,-5});
-                //te2.color = {0,1,1};
-
-                //TestEntity te3({-10,-10,-8});
-                //te3.color = {0.5,0,0.8};
 
 
                 // - While window is alive
@@ -114,20 +107,13 @@ namespace Ax::System
 
                     // - Render at maximum possible frames
                     
-                    glClearColor(0.1f,0.1f,0.1f,1.0f);
+                    glClearColor(1.0f,1.0f,1.0f,1.0f);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
                     for(auto e : entities)
                     {
                         this->renderer.draw(e, shader);
                     }
-
-                    //this->renderer.draw(te, shader);
-                    //this->renderer.draw(te2, shader);
-                    //this->renderer.draw(te3, shader);
-
-
 
                     //render(); // - Render function
                     frames++;
@@ -151,6 +137,7 @@ namespace Ax::System
             double lastFrame = 0.0;
             double delta = 0.0;
             Ax::System::Mesh::MeshRenderer renderer;
+            std::vector<TestEntity> entities;
     };
 
 }
