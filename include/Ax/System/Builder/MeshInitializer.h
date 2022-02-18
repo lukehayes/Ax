@@ -34,12 +34,8 @@ namespace Ax::System::Builder
                 this->BufferObject.setAttribPointers();
 
                 std::cout << *meshObject << " Loaded onto GPU" << std::endl;
-
                 //this->vertexArray.unbind();
-
             }
-
-
 
             ~MeshInitializer()
             {

@@ -20,15 +20,20 @@ int main(int argc, const char *argv[])
 
     Game game;
 
+    // ------------------------------------------------------
+    // 3 lines of code...
     RectangleMesh mesh;
-    GL::VertexArray vao;
-    vao.generate();
-    vao.bind();
-
-    GL::BufferObject vbo(mesh.verticies, mesh.config);
-    vbo.generate();
-    vbo.bind();
-
+    Builder::MeshInitializer initializer;
+    initializer.init(&mesh);
+    // Run  all of this comment below
+    //RectangleMesh mesh;
+    //GL::VertexArray vao;
+    //vao.generate();
+    //vao.bind();
+    //GL::BufferObject vbo(mesh.verticies, mesh.config);
+    //vbo.generate();
+    //vbo.bind();
+    // ------------------------------------------------------
 
     glfwSetKeyCallback(game.engine.getWindow().window(), key_callback);
     glfwSetFramebufferSizeCallback(game.engine.getWindow().window(), framebuffer_callback);
