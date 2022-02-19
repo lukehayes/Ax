@@ -19,19 +19,20 @@ namespace Ax::System::Builder
             MeshInitializer() {}
 
             template<class T>
-            void init(const T* meshObject)
+            void init(T* meshObject)
             {
-                this->vertexArray.bind();
+                meshObject->vertexArray.bind();
+                //this->vertexArray.bind();
 
-                //const std::shared_ptr<IMesh> meshObject = std::make_shared<IMesh>();
+                ////const std::shared_ptr<IMesh> meshObject = std::make_shared<IMesh>();
 
-                this->BufferObject.config = meshObject->config;
+                meshObject->bufferObject.config = meshObject->config;
 
-                //// Buffer Initializaltion
-                this->BufferObject.generate();
-                this->BufferObject.bind();
-                this->BufferObject.setBufferData(meshObject->verticies);
-                this->BufferObject.setAttribPointers();
+                ////// Buffer Initializaltion
+                meshObject->bufferObject.generate();
+                meshObject->bufferObject.bind();
+                meshObject->bufferObject.setBufferData(meshObject->verticies);
+                meshObject->bufferObject.setAttribPointers();
 
                 std::cout << *meshObject << " Loaded onto GPU" << std::endl;
                 //this->vertexArray.unbind();
