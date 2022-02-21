@@ -5,6 +5,7 @@
 #include "Ax/System/GL/BufferObject.h"
 #include "Ax/System/Mesh/RectangleMesh.h"
 #include "Ax/System/Mesh/LineMesh.h"
+#include "Ax/System/Mesh/CubeMesh.h"
 #include <memory>
 
 namespace Ax::System::Builder

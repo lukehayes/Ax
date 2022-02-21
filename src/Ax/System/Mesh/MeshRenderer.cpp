@@ -42,7 +42,7 @@ namespace Ax::System::Mesh {
         shader.setVec3("color", entity.color);
 
         // Draw The Model
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glDrawArrays(entity.primitive, 0, entity.verticies);
         //glDrawArrays(primitive, 0, 3);
     }
 

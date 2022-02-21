@@ -28,6 +28,9 @@ namespace Ax::Engine::Component {
 
             Transform    transform;
             V3           color = {1,0,1};
+            int verticies = 36;
+            GLenum primitive = GL_TRIANGLES;
+
     };
 }
 
