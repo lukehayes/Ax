@@ -19,7 +19,7 @@ namespace Ax::System::Mesh {
     }
 
     void MeshRenderer::draw(
-            const Ax::Engine::Component::TestEntity& entity,
+            Ax::Engine::Component::Entity* entity,
             const Ax::System::GL::Shader& shader,
             GL::Primitive primitive
             )
@@ -31,18 +31,18 @@ namespace Ax::System::Mesh {
 
         // Setup Model
         M4 model = M4(1.0f);
-        model = glm::translate(model, entity.transform.position);
-        model = glm::rotate(model, entity.transform.angle + glm::radians(std::sin(c)) * 1000, {1,1,1});
-        model = glm::scale(model,  glm::vec3(entity.transform.single_scale));
+        model = glm::translate(model, entity->getTransform().position);
+        //model = glm::rotate(model, entity.transform.angle + glm::radians(std::sin(c)) * 1000, {1,1,1});
+        model = glm::scale(model,  glm::vec3(entity->transform.single_scale));
 
         // Send data to shader
         shader.setMat4("projection", this->camera->projection);
         shader.setMat4("view", this->camera->view);
         shader.setMat4("model", model);
-        shader.setVec3("color", entity.color);
+        shader.setVec3("color", entity->getColor());
 
         // Draw The Model
-        glDrawArrays(entity.primitive, 0, entity.verticies);
+        glDrawArrays(entity->getPrimitive(), 0, entity->getVerticies());
         //glDrawArrays(primitive, 0, 3);
     }
 

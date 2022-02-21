@@ -6,6 +6,7 @@
 #include "Ax/System/Mesh/MeshRenderer.h"
 #include "Ax/System/Math/Random.h"
 #include "Ax/Engine/Component/TestEntity.h"
+#include "Ax/Engine/Component/CubeEntity.h"
 #include "Ax/System/Graphics/Camera.h"
 #include "Ax/System/Graphics/Camera2D.h"
 #include "Ax/System/Graphics/Camera3D.h"
@@ -14,6 +15,7 @@
 namespace Ax::System
 {
     using Ax::Engine::Component::TestEntity;
+    using Ax::Engine::Component::CubeEntity;
     using Ax::System::Math::Random;
 
     class Game
@@ -25,24 +27,25 @@ namespace Ax::System
                 engine.start();
                 engine.initSystems();
 
-                int space = 1000;
+                int space = 100;
 
                 // TODO Abtract this out from the update loop and
                 // into some kind of initializer!
-                for(int i = 0; i <= 10000; i++)
+                for(int i = 0; i <= 100; i++)
                 {
                     int x = Ax::System::Math::Random::randInt(-space, space);
                     int y = Ax::System::Math::Random::randInt(-space, space);
                     int z = Ax::System::Math::Random::randInt(-space, -100 + space);
 
-                    double r = Ax::System::Math::Random::randDouble(0.1,0.4);
+                    double r = Ax::System::Math::Random::randDouble(0.5,0.6);
                     double g = Ax::System::Math::Random::randDouble(0.6,0.9);
                     double b = Ax::System::Math::Random::randDouble(0.8,1);
 
                     double angle = Ax::System::Math::Random::randDouble(0.0,1.0);
                     double scale = Ax::System::Math::Random::randDouble(1.0, 10.0f);
+                    double speed = Ax::System::Math::Random::randDouble(1.0, 100.0f);
 
-                    TestEntity te({x,y,z});
+                    TestEntity te({x,y,0});
                     te.color = {r,g,b};
                     te.transform.angle = angle;
                     te.transform.single_scale = scale;
@@ -75,7 +78,6 @@ namespace Ax::System
                 Ax::System::Graphics::Camera3D camera2d;
                 this->renderer.setCamera(&camera2d);
 
-
                 // - While window is alive
                 while (!glfwWindowShouldClose(engine.getWindow().window() ))
                 {
@@ -107,12 +109,12 @@ namespace Ax::System
 
                     // - Render at maximum possible frames
                     
-                    glClearColor(1.0f,1.0f,1.0f,1.0f);
+                    glClearColor(0.1f,0.1f,0.2f,1.0f);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                     for(auto e : entities)
                     {
-                        this->renderer.draw(e, shader);
+                        this->renderer.draw(&e, shader);
                     }
 
                     //render(); // - Render function
@@ -137,7 +139,7 @@ namespace Ax::System
             double lastFrame = 0.0;
             double delta = 0.0;
             Ax::System::Mesh::MeshRenderer renderer;
-            std::vector<TestEntity> entities;
+            std::vector<CubeEntity> entities;
     };
 
 }

@@ -45,7 +45,7 @@ namespace Ax::System::Mesh {
             void draw(f32 x, f32 y, f32 w, f32 h);
 
             void draw(
-                    const Ax::Engine::Component::TestEntity& entity,
+                    Ax::Engine::Component::Entity* entity,
                     const Ax::System::GL::Shader& shader,
                     GL::Primitive primitive = GL::TRIANGLES
                     );

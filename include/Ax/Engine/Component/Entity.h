@@ -16,6 +16,11 @@ namespace Ax::Engine::Component {
 
         virtual void update(double dt) = 0;
 
+        virtual Transform getTransform() = 0;
+        virtual V3 getColor() = 0;
+        virtual int getVerticies() = 0;
+        virtual GLenum getPrimitive() = 0;
+
         Transform    transform;
     };
 }
