@@ -1,53 +1,20 @@
-CXX = g++
-CXXFLAGS = -std=c++17 -I./include -DMAX=10 -DDEBUG=1
+CXX = clang++
+CXXFLAGS = -std=c++17 -I./include
 SRC_DIR = src
 LDFLAGS = -L. -lglfw -lGL -lX11 -lpthread -lm -ldl
 OUTPUT = -o bin/app
 ENTRY = main.cpp
 GLAD_SRC = $(SRC_DIR)/glad.c
-SYSTEM_NAMESPACE = $(SRC_DIR)/Ax/System
-ENGINE_NAMESPACE = $(SRC_DIR)/Ax/Engine
-SYSTEM_SRC := $(wildcard $(SYSTEM_NAMESPACE)/*.cpp)
-OBJS := Engine.o Window.o Shader.o VertexArray.o BufferObject.o Camera.o Camera2D.o Camera3D.o MeshRenderer.o MeshBuilder.o
+OBJS    = $(patsubst src/%.cpp, obj/%.o, $(wildcard src/*.cpp))
 
-all: binary
+obj/%.o: src/%.cpp
+	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
-binary: $(OBJS)
-	$(CXX) $(CXXFLAGS) $(ENTRY) $(GLAD_SRC) *.o $(OUTPUT) $(LDFLAGS)
+all: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(ENTRY) $(GLAD_SRC) $^ $(OUTPUT) $(LDFLAGS)
 
 debug: $(OBJS)
-	$(CXX) $(CXXFLAGS) -ggdb $(ENTRY) $(GLAD_SRC) *.o $(OUTPUT) $(LDFLAGS)
-
-Engine.o: $(SYSTEM_NAMESPACE)/Engine.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-	
-Window.o: $(SYSTEM_NAMESPACE)/Window.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-
-Shader.o: $(SYSTEM_NAMESPACE)/GL/Shader.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-
-VertexArray.o: $(SYSTEM_NAMESPACE)/GL/VertexArray.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-
-BufferObject.o: $(SYSTEM_NAMESPACE)/GL/BufferObject.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-
-Camera.o: $(SYSTEM_NAMESPACE)/Graphics/Camera.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-
-Camera2D.o: $(SYSTEM_NAMESPACE)/Graphics/Camera2D.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-
-Camera3D.o: $(SYSTEM_NAMESPACE)/Graphics/Camera3D.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-
-MeshRenderer.o: $(SYSTEM_NAMESPACE)/Mesh/MeshRenderer.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-
-MeshBuilder.o: $(SYSTEM_NAMESPACE)/Builder/MeshBuilder.cpp
-	$(CXX) $(CXXFLAGS) -c $<
-
+	$(CXX) $(CXXFLAGS) -ggdb $(ENTRY) $(GLAD_SRC) $^ $(OUTPUT) $(LDFLAGS)
 
 # Cleanup
 .PHONY:clean
