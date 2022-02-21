@@ -13,6 +13,4 @@ struct Config
     std::string title = "No Game Title";
 };
 
-Config config;
-
 #endif
