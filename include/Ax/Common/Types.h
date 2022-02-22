@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "Ax/Common/glm.h"
+#include "Ax/Common/Log.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
