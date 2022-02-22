@@ -2,6 +2,8 @@
 #define AX_VTX_BUFFER_H
 
 #include "Ax/Common/Types.h"
+#include "Ax/GL/BufferTarget.h"
+#include "Ax/GL/BufferConfig.h"
 
 namespace Ax::GL {
 
@@ -13,7 +15,7 @@ namespace Ax::GL {
                   ~VertexBuffer();
 
             void   generate();
-            void   bind();
+            void   bind(Ax::GL::BufferTarget target);
             void   unbind();
 
             void   setAttribPointers();
@@ -21,6 +23,9 @@ namespace Ax::GL {
 
             std::vector<f32> data;
             GLuint id;
+            Ax::GL::BufferConfig config;
+
+
     };
 }
 
