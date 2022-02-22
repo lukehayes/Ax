@@ -21,8 +21,11 @@ int main(int argc, const char *argv[])
         /* Poll for and process events */
         glfwPollEvents();
 
-        glClear(GL_DEPTH_BUFFER_BIT);
-        glClearColor(1,0,0,1);
+
+        glClearColor(0.1f,0.1f,0.2f,1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glfwSwapBuffers(window.getWindow());
     }
 
     glfwSetKeyCallback(window.getWindow(), key_callback);
