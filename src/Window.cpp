@@ -9,7 +9,8 @@ namespace Ax::System
 
     Window::Window() 
         : m_width(config.width),
-          m_height(config.height)
+        m_height(config.height),
+        m_title(config.title)
     {
         this->create();
     }
