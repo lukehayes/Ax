@@ -26,6 +26,7 @@ int main(int argc, const char *argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glfwSwapBuffers(window.getWindow());
+        glfwSetKeyCallback(window.getWindow(), key_callback);
     }
 
     glfwSetKeyCallback(window.getWindow(), key_callback);
