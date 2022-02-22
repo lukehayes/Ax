@@ -21,9 +21,9 @@ namespace Ax::System{
             s32          width();
 
         private:
-            s32          m_width = 800;
-            s32          m_height = 600;
-            const_str    m_title = "Game Title";
+            s32          m_width;
+            s32          m_height;
+            const_str    m_title;
             GLFWwindow*  m_window;
             GLFWmonitor* m_monitor;
     };
