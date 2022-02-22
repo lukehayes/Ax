@@ -7,7 +7,9 @@ Config config;
 namespace Ax::System
 {
 
-    Window::Window() : m_width(config.height), m_height(config.height)
+    Window::Window() 
+        : m_width(config.width),
+          m_height(config.height)
     {
         this->create();
     }
