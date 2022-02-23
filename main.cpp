@@ -2,6 +2,7 @@
 #include "Ax/Window.h"
 #include "Ax/GL/Shader.h"
 #include "Ax/Mesh/Mesh.h"
+#include "Ax/Renderer/Renderer.h"
 
 int wireframe_mode = false;
 
@@ -35,7 +36,54 @@ int main(int argc, const char *argv[])
     glm::translate(model, {0,0,-10});
 
     Ax::Mesh::Mesh mesh;
-    mesh.init();
+    Ax::Renderer::Renderer renderer;
+    //renderer.add(mesh);
+
+    Ax::Mesh::Mesh mesh2;
+    Ax::GL::BufferConfig config;
+    config.vertexSize = 3;
+    //config.vertexCount = 36;
+    mesh2.verticies = {
+                    -1.0f,-1.0f,-1.0f, // triangle 1 : begin
+                        -1.0f,-1.0f, 1.0f,
+                        -1.0f, 1.0f, 1.0f, // triangle 1 : end
+                        1.0f, 1.0f,-1.0f, // triangle 2 : begin
+                        -1.0f,-1.0f,-1.0f,
+                        -1.0f, 1.0f,-1.0f, // triangle 2 : end
+                        1.0f,-1.0f, 1.0f,
+                        -1.0f,-1.0f,-1.0f,
+                        1.0f,-1.0f,-1.0f,
+                        1.0f, 1.0f,-1.0f,
+                        1.0f,-1.0f,-1.0f,
+                        -1.0f,-1.0f,-1.0f,
+                        -1.0f,-1.0f,-1.0f,
+                        -1.0f, 1.0f, 1.0f,
+                        -1.0f, 1.0f,-1.0f,
+                        1.0f,-1.0f, 1.0f,
+                        -1.0f,-1.0f, 1.0f,
+                        -1.0f,-1.0f,-1.0f,
+                        -1.0f, 1.0f, 1.0f,
+                        -1.0f,-1.0f, 1.0f,
+                        1.0f,-1.0f, 1.0f,
+                        1.0f, 1.0f, 1.0f,
+                        1.0f,-1.0f,-1.0f,
+                        1.0f, 1.0f,-1.0f,
+                        1.0f,-1.0f,-1.0f,
+                        1.0f, 1.0f, 1.0f,
+                        1.0f,-1.0f, 1.0f,
+                        1.0f, 1.0f, 1.0f,
+                        1.0f, 1.0f,-1.0f,
+                        -1.0f, 1.0f,-1.0f,
+                        1.0f, 1.0f, 1.0f,
+                        -1.0f, 1.0f,-1.0f,
+                        -1.0f, 1.0f, 1.0f,
+                        1.0f, 1.0f, 1.0f,
+                        -1.0f, 1.0f, 1.0f,
+                        1.0f,-1.0f, 1.0f};
+
+    mesh2.primitive = Ax::GL::Primitive::TRIANGLES;
+    renderer.add(mesh2, config);
+    
 
 
     projection = glm::perspective(
@@ -72,7 +120,7 @@ int main(int argc, const char *argv[])
 
         shader.use();
         shader.setVec3("color", {0.7,0.9,0.4});
-        //model = glm::rotate(model, glm::radians(std::sin(c)), {1,1,1});
+        model = glm::rotate(model, glm::radians(std::sin(c)), {1,1,1});
         //glm::translate(model, {std::cos(c) * 100, std::sin(c) * 100, -std::sin(c) * 100});
         //std::cout << glm::to_string(model) << std::endl;
 
@@ -83,7 +131,7 @@ int main(int argc, const char *argv[])
         glClearColor(0.1f,0.1f,0.1f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
+        renderer.draw();
 
         glfwSwapBuffers(window.getWindow());
         glfwSetKeyCallback(window.getWindow(), key_callback);

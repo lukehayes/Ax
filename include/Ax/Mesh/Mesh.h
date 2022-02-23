@@ -6,6 +6,7 @@
 #include "Ax/GL/VertexBuffer.h"
 #include "Ax/GL/BufferConfig.h"
 #include "Ax/GL/BufferTarget.h"
+#include "Ax/GL/Primitive.h"
 
 namespace Ax::Mesh
 {
@@ -19,6 +20,14 @@ namespace Ax::Mesh
             1.0, -1.0
             })
         {}
+
+        //Mesh(const Mesh& mesh) { std::cout << "COPY" << std::endl;}
+
+        Mesh(const std::vector<float>& verticies) : verticies(verticies)
+        {
+        }
+
+
         ~Mesh() {}
 
         void init()
@@ -42,6 +51,8 @@ namespace Ax::Mesh
         Ax::GL::VertexArray vao;
         Ax::GL::VertexBuffer vbo;
         Ax::GL::BufferConfig config;
+        Ax::GL::Primitive primitive = Ax::GL::Primitive::TRIANGLE_STRIP;
+        int vertexCount = 36;
 
     };
 }
