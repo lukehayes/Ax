@@ -1,9 +1,7 @@
 #include "Ax/Common/Types.h"
 #include "Ax/Window.h"
-#include "Ax/GL/VertexArray.h"
-#include "Ax/GL/VertexBuffer.h"
-#include "Ax/GL/BufferConfig.h"
 #include "Ax/GL/Shader.h"
+#include "Ax/Mesh/Mesh.h"
 
 int wireframe_mode = false;
 
@@ -36,6 +34,9 @@ int main(int argc, const char *argv[])
     glm::mat4 model = glm::mat4(1.0);
     glm::translate(model, {0,0,-10});
 
+    Ax::Mesh::Mesh mesh;
+    mesh.init();
+
 
     projection = glm::perspective(
         glm::radians(45.0f),
@@ -49,32 +50,6 @@ int main(int argc, const char *argv[])
         glm::vec3(0.0f, 0.0f, -1.0f),
         glm::vec3(0.0f, 1.0f,0.0f)
         );
-
-
-    // IMPORTANT
-    Ax::GL::BufferConfig config;
-    config.attributePosition = 0;
-    config.vertexSize = 2;
-    config.vertexStride = 0;
-    config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-
-    Ax::GL::VertexArray vao;
-    vao.generate();
-    vao.bind();
-
-
-    Ax::GL::VertexBuffer vbo;
-    vbo.config = config;
-    vbo.generate();
-    vbo.bind(Ax::GL::BufferTarget::ARRAY_BUFFER);
-    vbo.setBufferData({
-            -1.0, 1.0,
-            -1.0, -1.0,
-            1.0, 1.0,
-            1.0, -1.0
-    });
-    vbo.setAttribPointers();
-
 
     Ax::GL::Shader shader(
         "assets/shaders/VSH-Default.glsl",
