@@ -1,6 +1,9 @@
 #include "Ax/Common/Types.h"
 #include "Ax/Window.h"
 #include "Ax/GL/VertexArray.h"
+#include "Ax/GL/VertexBuffer.h"
+#include "Ax/GL/BufferConfig.h"
+#include "Ax/GL/Shader.h"
 
 int wireframe_mode = false;
 
@@ -31,7 +34,7 @@ int main(int argc, const char *argv[])
     glm::mat4 projection = glm::mat4(1.0);
     glm::mat4 view = glm::mat4(1.0);
     glm::mat4 model = glm::mat4(1.0);
-    glm::translate(model, {0,0,-100});
+    glm::translate(model, {0,0,-10});
 
 
     projection = glm::perspective(
@@ -48,9 +51,10 @@ int main(int argc, const char *argv[])
         );
 
 
+    // IMPORTANT
     Ax::GL::BufferConfig config;
     config.attributePosition = 0;
-    config.vertexSize = 3;
+    config.vertexSize = 2;
     config.vertexStride = 0;
     config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
 
@@ -63,7 +67,12 @@ int main(int argc, const char *argv[])
     vbo.config = config;
     vbo.generate();
     vbo.bind(Ax::GL::BufferTarget::ARRAY_BUFFER);
-    vbo.setBufferData(verticies);
+    vbo.setBufferData({
+            -1.0, 1.0,
+            -1.0, -1.0,
+            1.0, 1.0,
+            1.0, -1.0
+    });
     vbo.setAttribPointers();
 
 
@@ -77,7 +86,7 @@ int main(int argc, const char *argv[])
     shader.setMat4("view", view);
 
     static float c = 0.0;
-    model = glm::translate(model, {0,0,-200});
+    model = glm::translate(model, {0,0,-10.0});
     
     while (!glfwWindowShouldClose(window.getWindow()))
     {
@@ -87,10 +96,9 @@ int main(int argc, const char *argv[])
         c += 0.01;
 
         shader.use();
-        shader.setVec3("color", {0.4,0.7,0.3});
-        model = glm::rotate(model, glm::radians(std::sin(c)), {1,1,1});
+        shader.setVec3("color", {0.7,0.9,0.4});
+        //model = glm::rotate(model, glm::radians(std::sin(c)), {1,1,1});
         //glm::translate(model, {std::cos(c) * 100, std::sin(c) * 100, -std::sin(c) * 100});
-        
         //std::cout << glm::to_string(model) << std::endl;
 
         shader.setMat4("projection", projection);
@@ -100,8 +108,7 @@ int main(int argc, const char *argv[])
         glClearColor(0.1f,0.1f,0.1f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-        glDrawArrays(GL_LINE_STRIP, 0,verticies.size());
+        glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
 
         glfwSwapBuffers(window.getWindow());
         glfwSetKeyCallback(window.getWindow(), key_callback);
