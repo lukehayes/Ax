@@ -15,21 +15,21 @@ namespace Ax::Renderer
         Renderer() {}
         ~Renderer() {}
 
-        void add(const Ax::Mesh::Mesh& mesh, Ax::GL::BufferConfig config) 
+        void add(const Ax::Mesh::Mesh& mesh, const Ax::GL::BufferConfig& config) 
         {
             std::shared_ptr<Ax::Mesh::Mesh> m = std::make_shared<Ax::Mesh::Mesh>(mesh);
             m->config = config;
-            std::cout << m->vertexCount << std::endl;
             m->init();
             this->meshes.push_back(m);
         }
 
         void draw()
         {
-            for(auto& mesh : meshes)
+            for(auto mesh : meshes)
             {
                 mesh->vao.bind();
-                glDrawArrays(mesh->primitive, 0, mesh->vertexCount);
+                glDrawArrays(mesh->vbo.config.primitive, 0, mesh->vertexCount);
+                //mesh->vao.unbind();
             }
         }
 

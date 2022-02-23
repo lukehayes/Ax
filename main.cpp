@@ -36,13 +36,24 @@ int main(int argc, const char *argv[])
     glm::translate(model, {0,0,-10});
 
     Ax::Mesh::Mesh mesh;
+    Ax::GL::BufferConfig conf;
+    mesh.vbo.config.attributePosition = 0;
+    mesh.vbo.config.vertexStride = 0;
+    mesh.vbo.config.vertexSize = 2;
+    mesh.vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
+    mesh.vbo.config.primitive = Ax::GL::Primitive::TRIANGLE_STRIP;
     Ax::Renderer::Renderer renderer;
-    //renderer.add(mesh);
+    //renderer.add(mesh, conf);
 
     Ax::Mesh::Mesh mesh2;
     Ax::GL::BufferConfig config;
-    config.vertexSize = 3;
+    mesh2.vbo.config.attributePosition = 0;
+    mesh2.vbo.config.vertexStride = 0;
+    mesh2.vbo.config.vertexSize = 3;
+    mesh2.vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
+    mesh2.vbo.config.primitive = Ax::GL::Primitive::TRIANGLES;
     //config.vertexCount = 36;
+
     mesh2.verticies = {
                     -1.0f,-1.0f,-1.0f, // triangle 1 : begin
                         -1.0f,-1.0f, 1.0f,

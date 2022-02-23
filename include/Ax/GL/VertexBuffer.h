@@ -23,9 +23,7 @@ namespace Ax::GL {
 
             std::vector<f32> data;
             GLuint id;
-            Ax::GL::BufferConfig config;
-
-
+            BufferConfig config;
     };
 }
 
