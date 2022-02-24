@@ -38,7 +38,7 @@ namespace Ax::Mesh
             // BUFFER CONFIG MUST BE SET!
 
             this->vbo.generate();
-            this->vbo.bind(Ax::GL::BufferTarget::ARRAY_BUFFER);
+            this->vbo.bind(this->vbo.config.target);
             this->vbo.setBufferData(this->verticies);
             this->vbo.setAttribPointers();
         }
@@ -46,9 +46,8 @@ namespace Ax::Mesh
         std::vector<float> verticies;
         Ax::GL::VertexArray vao;
         Ax::GL::VertexBuffer vbo;
-        Ax::GL::BufferConfig config;
         Ax::GL::Primitive primitive = Ax::GL::Primitive::TRIANGLE_STRIP;
-        int vertexCount = 36;
+        int vertexCount;
 
     };
 }

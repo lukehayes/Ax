@@ -18,7 +18,6 @@ namespace Ax::Renderer
         void add(const Ax::Mesh::Mesh& mesh, const Ax::GL::BufferConfig& config) 
         {
             std::shared_ptr<Ax::Mesh::Mesh> m = std::make_shared<Ax::Mesh::Mesh>(mesh);
-            m->config = config;
             m->init();
             this->meshes.push_back(m);
         }
@@ -28,7 +27,7 @@ namespace Ax::Renderer
             for(auto mesh : meshes)
             {
                 mesh->vao.bind();
-                glDrawArrays(mesh->vbo.config.primitive, 0, mesh->vertexCount);
+                glDrawArrays(mesh->primitive, 0, mesh->vertexCount);
                 //mesh->vao.unbind();
             }
         }

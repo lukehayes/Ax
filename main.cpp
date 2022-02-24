@@ -52,7 +52,7 @@ int main(int argc, const char *argv[])
     mesh2.vbo.config.vertexSize = 3;
     mesh2.vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
     mesh2.vbo.config.primitive = Ax::GL::Primitive::TRIANGLES;
-    //config.vertexCount = 36;
+    mesh2.vertexCount = 36;
 
     mesh2.verticies = {
                     -1.0f,-1.0f,-1.0f, // triangle 1 : begin
