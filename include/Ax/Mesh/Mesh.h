@@ -35,12 +35,8 @@ namespace Ax::Mesh
             this->vao.generate();
             this->vao.bind();
 
-            this->config.attributePosition = 0;
-            this->config.vertexSize = 2;
-            this->config.vertexStride = 0;
-            this->config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
+            // BUFFER CONFIG MUST BE SET!
 
-            this->vbo.config = config;
             this->vbo.generate();
             this->vbo.bind(Ax::GL::BufferTarget::ARRAY_BUFFER);
             this->vbo.setBufferData(this->verticies);
