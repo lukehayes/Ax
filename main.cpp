@@ -43,7 +43,7 @@ int main(int argc, const char *argv[])
     mesh.vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
     mesh.vbo.config.primitive = Ax::GL::Primitive::TRIANGLE_STRIP;
     Ax::Renderer::Renderer renderer;
-    //renderer.add(mesh, conf);
+    renderer.add(mesh, conf);
 
     Ax::Mesh::Mesh mesh2;
     Ax::GL::BufferConfig config;
@@ -93,9 +93,7 @@ int main(int argc, const char *argv[])
                         1.0f,-1.0f, 1.0f};
 
     mesh2.primitive = Ax::GL::Primitive::TRIANGLES;
-    renderer.add(mesh2, config);
-    
-
+    //renderer.add(mesh2, config);
 
     projection = glm::perspective(
         glm::radians(45.0f),
