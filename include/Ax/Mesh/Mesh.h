@@ -27,7 +27,6 @@ namespace Ax::Mesh
         {
         }
 
-
         ~Mesh() {}
 
         void init()

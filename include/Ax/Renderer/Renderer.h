@@ -15,7 +15,7 @@ namespace Ax::Renderer
         Renderer() {}
         ~Renderer() {}
 
-        void add(const Ax::Mesh::Mesh& mesh, const Ax::GL::BufferConfig& config) 
+        void add(const Ax::Mesh::Mesh& mesh) 
         {
             std::shared_ptr<Ax::Mesh::Mesh> m = std::make_shared<Ax::Mesh::Mesh>(mesh);
             m->init();
