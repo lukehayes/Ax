@@ -17,6 +17,7 @@ namespace Ax::GL {
             void   generate();
             void   bind();
             void   unbind();
+            void   destroy();
 
             void   setAttribPointers();
             void   setBufferData(std::vector<f32> verticies);

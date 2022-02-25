@@ -27,6 +27,13 @@ namespace Ax::GL {
     void 
     VertexBuffer::unbind() 
     {
+        glBindBuffer(this->config.target, 0);
+        }
+
+    void 
+    VertexBuffer::destroy() 
+    {
+        glDeleteBuffers(1, &this->id);
     }
 
     void 
