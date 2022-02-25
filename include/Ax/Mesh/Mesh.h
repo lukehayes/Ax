@@ -21,7 +21,13 @@ namespace Ax::Mesh
             })
         {}
 
-        //Mesh(const Mesh& mesh) { std::cout << "COPY" << std::endl;}
+        Mesh(const Mesh& mesh) {
+            this->verticies = mesh.verticies;
+            this->vao = mesh.vao;
+            this->vbo = mesh.vbo;
+            this->primitive = mesh.primitive;
+            this->vertexCount = mesh.vertexCount;
+        }
 
         Mesh(const std::vector<float>& verticies) : verticies(verticies)
         {
