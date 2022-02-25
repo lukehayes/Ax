@@ -5,6 +5,8 @@
 #include "Ax/Mesh/CubeMesh.h"
 #include "Ax/Renderer/Renderer.h"
 #include "Ax/Entity/Entity.h"
+#include "Ax/Entity/Entity.h"
+#include "Ax/Math/Random.h"
 
 int wireframe_mode = false;
 
@@ -53,7 +55,8 @@ int main(int argc, const char *argv[])
     mesh.vbo.config.vertexStride = 0;
     mesh.vbo.config.vertexSize = 2;
     mesh.vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-    mesh.vbo.config.primitive = Ax::GL::Primitive::TRIANGLE_STRIP;
+    mesh.vbo.config.primitive = Ax::GL::Primitive::LINES;
+    mesh.vbo.destroy();
     Ax::Renderer::Renderer renderer;
     renderer.add(mesh);
 
@@ -63,7 +66,7 @@ int main(int argc, const char *argv[])
     mesh2.vbo.config.vertexStride = 0;
     mesh2.vbo.config.vertexSize = 3;
     mesh2.vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-    mesh2.vbo.config.primitive = Ax::GL::Primitive::TRIANGLES;
+    mesh2.vbo.config.primitive = Ax::GL::Primitive::POINTS;
     mesh2.vertexCount = 36;
 
     Ax::Mesh::CubeMesh cube;
@@ -97,8 +100,22 @@ int main(int argc, const char *argv[])
     static float c = 0.0;
     model = glm::translate(model, {0,0,-10.0});
 
-    Ax::Entity::Entity entity({0,0,-10});
-    
+    std::vector<Ax::Entity::Entity> entities;
+
+    for(int i = 0; i <=1000; i++)
+    {
+        Ax::Entity::Entity e;
+        e.position.x = Ax::Math::Random::randDouble(-10, 1);
+        e.position.y = Ax::Math::Random::randDouble(-10, 10);
+        e.position.z = -40 + Ax::Math::Random::randDouble(-10, 10);
+
+        e.color.r = Ax::Math::Random::randDouble(0.3, 0.4f);
+        e.color.g = Ax::Math::Random::randDouble(0.3, 0.8f);
+        e.color.b = Ax::Math::Random::randDouble(0.3, 0.9f);
+
+        entities.push_back(e);
+    }
+
     while (!glfwWindowShouldClose(window.getWindow()))
     {
         /* Poll for and process events */
@@ -107,9 +124,6 @@ int main(int argc, const char *argv[])
         c += 0.01;
 
         shader.use();
-        shader.setVec3("color", {0.5,0.7,0.9});
-        model = glm::rotate(model, glm::radians(std::sin(c)), {1,1,1});
-        glm::translate(model, {std::cos(c) * 100, std::sin(c) * 100, -std::sin(c) * 100});
         //std::cout << glm::to_string(model) << std::endl;
 
         shader.setMat4("projection", projection);
@@ -118,9 +132,10 @@ int main(int argc, const char *argv[])
         glClearColor(0.1f,0.1f,0.1f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        std::cout << mx << std::endl;
-
-        renderer.draw(entity, shader, mx, my);
+        for(auto& e : entities)
+        {
+            renderer.drawCube(e, shader, mx, my);
+        }
 
         glfwSwapBuffers(window.getWindow());
         glfwSetKeyCallback(window.getWindow(), key_callback);
