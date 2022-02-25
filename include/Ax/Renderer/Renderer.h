@@ -4,6 +4,7 @@
 #include "Ax/GL/VertexArray.h"
 #include "Ax/GL/VertexBuffer.h"
 #include "Ax/GL/BufferConfig.h"
+#include "Ax/GL/Shader.h"
 #include "Ax/Mesh/Mesh.h"
 #include "Ax/Entity/Entity.h"
 #include <memory>
