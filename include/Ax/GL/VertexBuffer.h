@@ -15,7 +15,7 @@ namespace Ax::GL {
                   ~VertexBuffer();
 
             void   generate();
-            void   bind(Ax::GL::BufferTarget target);
+            void   bind();
             void   unbind();
 
             void   setAttribPointers();

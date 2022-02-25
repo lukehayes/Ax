@@ -18,9 +18,9 @@ namespace Ax::GL {
     }
 
     void 
-    VertexBuffer::bind(GL::BufferTarget target)
+    VertexBuffer::bind()
     {
-        glBindBuffer(target, this->id);
+        glBindBuffer(this->config.target, this->id);
         LOG("Buffer Object ID:", this->id, "Bound");
     }
 

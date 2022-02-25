@@ -43,7 +43,7 @@ namespace Ax::Mesh
             // BUFFER CONFIG MUST BE SET!
 
             this->vbo.generate();
-            this->vbo.bind(this->vbo.config.target);
+            this->vbo.bind();
             this->vbo.setBufferData(this->verticies);
             this->vbo.setAttribPointers();
         }
