@@ -2,6 +2,7 @@
 #include "Ax/Window.h"
 #include "Ax/GL/Shader.h"
 #include "Ax/Mesh/Mesh.h"
+#include "Ax/Mesh/CubeMesh.h"
 #include "Ax/Renderer/Renderer.h"
 
 int wireframe_mode = false;
@@ -54,43 +55,8 @@ int main(int argc, const char *argv[])
     mesh2.vbo.config.primitive = Ax::GL::Primitive::TRIANGLES;
     mesh2.vertexCount = 36;
 
-    mesh2.verticies = {
-                    -1.0f,-1.0f,-1.0f, // triangle 1 : begin
-                        -1.0f,-1.0f, 1.0f,
-                        -1.0f, 1.0f, 1.0f, // triangle 1 : end
-                        1.0f, 1.0f,-1.0f, // triangle 2 : begin
-                        -1.0f,-1.0f,-1.0f,
-                        -1.0f, 1.0f,-1.0f, // triangle 2 : end
-                        1.0f,-1.0f, 1.0f,
-                        -1.0f,-1.0f,-1.0f,
-                        1.0f,-1.0f,-1.0f,
-                        1.0f, 1.0f,-1.0f,
-                        1.0f,-1.0f,-1.0f,
-                        -1.0f,-1.0f,-1.0f,
-                        -1.0f,-1.0f,-1.0f,
-                        -1.0f, 1.0f, 1.0f,
-                        -1.0f, 1.0f,-1.0f,
-                        1.0f,-1.0f, 1.0f,
-                        -1.0f,-1.0f, 1.0f,
-                        -1.0f,-1.0f,-1.0f,
-                        -1.0f, 1.0f, 1.0f,
-                        -1.0f,-1.0f, 1.0f,
-                        1.0f,-1.0f, 1.0f,
-                        1.0f, 1.0f, 1.0f,
-                        1.0f,-1.0f,-1.0f,
-                        1.0f, 1.0f,-1.0f,
-                        1.0f,-1.0f,-1.0f,
-                        1.0f, 1.0f, 1.0f,
-                        1.0f,-1.0f, 1.0f,
-                        1.0f, 1.0f, 1.0f,
-                        1.0f, 1.0f,-1.0f,
-                        -1.0f, 1.0f,-1.0f,
-                        1.0f, 1.0f, 1.0f,
-                        -1.0f, 1.0f,-1.0f,
-                        -1.0f, 1.0f, 1.0f,
-                        1.0f, 1.0f, 1.0f,
-                        -1.0f, 1.0f, 1.0f,
-                        1.0f,-1.0f, 1.0f};
+    Ax::Mesh::CubeMesh cube;
+    //mesh2.verticies = cube.getVerticies();
 
     mesh2.primitive = Ax::GL::Primitive::TRIANGLES;
     renderer.add(mesh2);
