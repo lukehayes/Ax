@@ -4,6 +4,7 @@
 #include "Ax/Mesh/Mesh.h"
 #include "Ax/Mesh/CubeMesh.h"
 #include "Ax/Renderer/Renderer.h"
+#include "Ax/Entity/Entity.h"
 
 int wireframe_mode = false;
 
@@ -21,6 +22,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         wireframe_mode = false;
         glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
     }
+}
+
+
+double mx = 0;
+double my = 0;
+
+static void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    mx = xpos;
+    my = ypos;
 }
 
 void framebuffer_callback(GLFWwindow* window, int width, int height){
@@ -56,7 +67,7 @@ int main(int argc, const char *argv[])
     mesh2.vertexCount = 36;
 
     Ax::Mesh::CubeMesh cube;
-    //mesh2.verticies = cube.getVerticies();
+    mesh2.verticies = cube.getVerticies();
 
     mesh2.primitive = Ax::GL::Primitive::TRIANGLES;
     renderer.add(mesh2);
@@ -85,6 +96,8 @@ int main(int argc, const char *argv[])
 
     static float c = 0.0;
     model = glm::translate(model, {0,0,-10.0});
+
+    Ax::Entity::Entity entity({0,0,-10});
     
     while (!glfwWindowShouldClose(window.getWindow()))
     {
@@ -94,22 +107,24 @@ int main(int argc, const char *argv[])
         c += 0.01;
 
         shader.use();
-        shader.setVec3("color", {0.1,0.3,0.9});
+        shader.setVec3("color", {0.5,0.7,0.9});
         model = glm::rotate(model, glm::radians(std::sin(c)), {1,1,1});
         glm::translate(model, {std::cos(c) * 100, std::sin(c) * 100, -std::sin(c) * 100});
         //std::cout << glm::to_string(model) << std::endl;
 
         shader.setMat4("projection", projection);
         shader.setMat4("view", view);
-        shader.setMat4("model", model);
 
         glClearColor(0.1f,0.1f,0.1f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        renderer.draw();
+        std::cout << mx << std::endl;
+
+        renderer.draw(entity, shader, mx, my);
 
         glfwSwapBuffers(window.getWindow());
         glfwSetKeyCallback(window.getWindow(), key_callback);
+        glfwSetCursorPosCallback(window.getWindow(), mouse_callback);
     }
 
 
