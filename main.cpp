@@ -46,33 +46,19 @@ int main(int argc, const char *argv[])
 
     glm::mat4 projection = glm::mat4(1.0);
     glm::mat4 view = glm::mat4(1.0);
-    glm::mat4 model = glm::mat4(1.0);
-    glm::translate(model, {0,0,-100});
 
-    Ax::Mesh::Mesh mesh;
-    Ax::GL::BufferConfig conf;
-    mesh.vbo.config.attributePosition = 0;
-    mesh.vbo.config.vertexStride = 0;
-    mesh.vbo.config.vertexSize = 2;
-    mesh.vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-    mesh.vbo.config.primitive = Ax::GL::Primitive::LINES;
-    mesh.vbo.destroy();
     Ax::Renderer::Renderer renderer;
-    renderer.add(mesh);
 
     Ax::Mesh::Mesh mesh2;
-    Ax::GL::BufferConfig config;
     mesh2.vbo.config.attributePosition = 0;
     mesh2.vbo.config.vertexStride = 0;
     mesh2.vbo.config.vertexSize = 3;
     mesh2.vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-    mesh2.vbo.config.primitive = Ax::GL::Primitive::POINTS;
+    mesh2.vbo.config.primitive = Ax::GL::Primitive::TRIANGLES;
     mesh2.vertexCount = 36;
 
     Ax::Mesh::CubeMesh cube;
     mesh2.verticies = cube.getVerticies();
-
-    mesh2.primitive = Ax::GL::Primitive::TRIANGLES;
     renderer.add(mesh2);
 
     projection = glm::perspective(
@@ -82,8 +68,12 @@ int main(int argc, const char *argv[])
         1000.0f
         );
 
+    
+    glm::vec3 position = {0,0,10};
+
+
     view = glm::lookAt(
-        glm::vec3(0.0f, 0.0f, 3.0f),
+        position,
         glm::vec3(0.0f, 0.0f, -1.0f),
         glm::vec3(0.0f, 1.0f,0.0f)
         );
@@ -93,28 +83,28 @@ int main(int argc, const char *argv[])
         "assets/shaders/FSH-Default.glsl"
     );
 
-    shader.setMat4("model", model);
     shader.setMat4("projection", projection);
     shader.setMat4("view", view);
 
-    static float c = 0.0;
-    model = glm::translate(model, {0,0,-10.0});
-
     std::vector<Ax::Entity::Entity> entities;
 
-    for(int i = 0; i <=1000; i++)
+    int MAX = 10;
+    float N = 5.0;
+
+    for(int i = 0; i <=MAX; i++)
     {
         Ax::Entity::Entity e;
-        e.position.x = Ax::Math::Random::randDouble(-10, 1);
-        e.position.y = Ax::Math::Random::randDouble(-10, 10);
-        e.position.z = -40 + Ax::Math::Random::randDouble(-10, 10);
-
-        e.color.r = Ax::Math::Random::randDouble(0.3, 0.4f);
-        e.color.g = Ax::Math::Random::randDouble(0.3, 0.8f);
+        e.position.x = Ax::Math::Random::randDouble(-N,N);
+        e.position.y = Ax::Math::Random::randDouble(-N,N);
+        e.position.z = -10 + Ax::Math::Random::randDouble(-N,N);
+        e.color.r = Ax::Math::Random::randDouble(0.1, 0.2f);
+        e.color.g = Ax::Math::Random::randDouble(0.3, 0.95f);
         e.color.b = Ax::Math::Random::randDouble(0.3, 0.9f);
 
         entities.push_back(e);
     }
+
+    static float c = 0.0;
 
     while (!glfwWindowShouldClose(window.getWindow()))
     {
@@ -122,7 +112,6 @@ int main(int argc, const char *argv[])
         glfwPollEvents();
 
         c += 0.01;
-
         shader.use();
         //std::cout << glm::to_string(model) << std::endl;
 
