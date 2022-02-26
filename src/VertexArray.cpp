@@ -10,7 +10,7 @@ namespace Ax::GL {
 
     VertexArray::~VertexArray() 
     {
-        //glDeleteVertexArrays(1, &this->id);
+        glDeleteVertexArrays(1, &this->id);
         LOG("Vertex Array ID:", this->id, "Destroyed");
     }
 
