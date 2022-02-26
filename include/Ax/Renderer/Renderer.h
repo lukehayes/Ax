@@ -30,7 +30,7 @@ namespace Ax::Renderer
             model = glm::translate(model, entity.position);
             model = glm::rotate(model, glm::radians((float)x), {1,1,1});
 
-            std::shared_ptr<Ax::Mesh::Mesh> m = meshes[1];
+            std::shared_ptr<Ax::Mesh::Mesh> m = meshes[0];
             m->vao.bind();
             shader.setMat4("model", model);
             shader.setVec3("color", entity.color);
