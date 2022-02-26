@@ -25,7 +25,6 @@ namespace Ax::Mesh
             this->verticies = mesh.verticies;
             this->vao = mesh.vao;
             this->vbo = mesh.vbo;
-            this->primitive = mesh.primitive;
             this->vertexCount = mesh.vertexCount;
         }
 
@@ -51,7 +50,6 @@ namespace Ax::Mesh
         std::vector<float> verticies;
         Ax::GL::VertexArray vao;
         Ax::GL::VertexBuffer vbo;
-        Ax::GL::Primitive primitive = Ax::GL::Primitive::TRIANGLE_STRIP;
         int vertexCount;
 
     };
