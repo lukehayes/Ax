@@ -13,45 +13,10 @@ namespace Ax::Mesh
     class Mesh
     {
     public:
-        Mesh() : verticies({
-            -1.0, 1.0,
-            -1.0, -1.0,
-            1.0, 1.0,
-            1.0, -1.0
-            })
-        {}
-
-        Mesh(const Mesh& mesh) {
-            this->verticies = mesh.verticies;
-            this->vao = mesh.vao;
-            this->vbo = mesh.vbo;
-            this->vertexCount = mesh.vertexCount;
-        }
-
-        Mesh(const std::vector<float>& verticies) : verticies(verticies)
-        {
-        }
-
+        Mesh() {}
         ~Mesh() {}
 
-        void init()
-        {
-            this->vao.generate();
-            this->vao.bind();
-
-            // BUFFER CONFIG MUST BE SET!
-
-            this->vbo.generate();
-            this->vbo.bind();
-            this->vbo.setBufferData(this->verticies);
-            this->vbo.setAttribPointers();
-        }
-
-        std::vector<float> verticies;
-        Ax::GL::VertexArray vao;
-        Ax::GL::VertexBuffer vbo;
-        int vertexCount;
-
+        virtual void init() = 0;
     };
 }
 
