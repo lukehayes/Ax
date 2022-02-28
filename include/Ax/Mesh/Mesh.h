@@ -12,11 +12,15 @@ namespace Ax::Mesh
 {
     class Mesh
     {
-    public:
-        Mesh() {}
-        ~Mesh() {}
+        public:
+            Mesh() {}
+            ~Mesh() {}
 
-        virtual void init() = 0;
+            virtual Ax::GL::VertexArray getVertexArray() = 0;
+            virtual Ax::GL::VertexBuffer getVertexBuffer() = 0;
+            virtual int getVertexCount() = 0;
+            virtual void init() = 0;
+            virtual VecFloat getVerticies() = 0;
     };
 }
 

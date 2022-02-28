@@ -17,11 +17,11 @@ namespace Ax::Renderer
         Renderer() {}
         ~Renderer() {}
 
-        void add(const Ax::Mesh::Mesh& mesh) 
+        void add(std::shared_ptr<Ax::Mesh::CubeMesh>& mesh) 
         {
-            std::shared_ptr<Ax::Mesh::Mesh> m = std::make_shared<Ax::Mesh::Mesh>(mesh);
-            m->init();
-            this->meshes.push_back(m);
+            //std::shared_ptr<Ax::Mesh::Mesh> m = std::make_shared<Ax::Mesh::Mesh>(mesh);
+            mesh->init();
+            this->meshes.push_back(mesh);
         }
 
         void drawCube(Ax::Entity::Entity& entity, const Ax::GL::Shader& shader, double x, double y)
@@ -30,14 +30,14 @@ namespace Ax::Renderer
             model = glm::translate(model, entity.position);
             model = glm::rotate(model, glm::radians((float)x), {1,1,1});
 
-            std::shared_ptr<Ax::Mesh::Mesh> m = meshes[0];
-            m->vao.bind();
+            std::shared_ptr<Ax::Mesh::CubeMesh> m = meshes[0];
+            m->getVertexArray().bind();
             shader.setMat4("model", model);
             shader.setVec3("color", entity.color);
-            glDrawArrays(m->vbo.config.primitive, 0, m->vertexCount);
+            //glDrawArrays(m->getVertexBuffer().config.primitive, 0, m->getVertexCount());
         }
 
-        std::vector<std::shared_ptr<Ax::Mesh::Mesh>> meshes;
+        std::vector<std::shared_ptr<Ax::Mesh::CubeMesh>> meshes;
     };
 }
 

@@ -50,6 +50,8 @@ namespace Ax::Mesh
             VecFloat verticies;
             Ax::GL::VertexArray vao;
             Ax::GL::VertexBuffer vbo;
+            int vertexCount = 8;
+
     };
 
 }

@@ -49,17 +49,12 @@ int main(int argc, const char *argv[])
 
     Ax::Renderer::Renderer renderer;
 
-    Ax::Mesh::Mesh mesh2;
-    mesh2.vbo.config.attributePosition = 0;
-    mesh2.vbo.config.vertexStride = 0;
-    mesh2.vbo.config.vertexSize = 3;
-    mesh2.vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-    mesh2.vbo.config.primitive = Ax::GL::Primitive::TRIANGLES;
-    mesh2.vertexCount = 36;
+    std::shared_ptr<Ax::Mesh::CubeMesh> cubeMesh;
 
-    Ax::Mesh::CubeMesh cube;
-    mesh2.verticies = cube.getVerticies();
-    renderer.add(mesh2);
+    //mesh2.verticies = cube.getVerticies();
+    renderer.add(cubeMesh);
+
+    std::cout << "-----" << std::endl;
 
     projection = glm::perspective(
         glm::radians(45.0f),
@@ -96,7 +91,7 @@ int main(int argc, const char *argv[])
         Ax::Entity::Entity e;
         e.position.x = Ax::Math::Random::randDouble(-N,N);
         e.position.y = Ax::Math::Random::randDouble(-N,N);
-        e.position.z = -10 + Ax::Math::Random::randDouble(-N,N);
+        e.position.z = Ax::Math::Random::randDouble(-N,N);
         e.color.r = Ax::Math::Random::randDouble(0.1, 0.2f);
         e.color.g = Ax::Math::Random::randDouble(0.3, 0.95f);
         e.color.b = Ax::Math::Random::randDouble(0.3, 0.9f);

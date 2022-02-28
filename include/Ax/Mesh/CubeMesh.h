@@ -50,6 +50,15 @@ namespace Ax::Mesh
                         {}
             ~CubeMesh() {}
 
+            CubeMesh(const CubeMesh& rhs)
+            {
+                std::cout << "CubeMesh Copy" << std::endl;
+                this->verticies = rhs.verticies;
+                this->vao = rhs.vao;
+                this->vbo = rhs.vbo;
+                this->vertexCount = rhs.vertexCount;
+            }
+
             VecFloat getVerticies() const
             {
                 return this->verticies;
@@ -61,6 +70,16 @@ namespace Ax::Mesh
                 this->vao.bind();
 
                 // BUFFER CONFIG MUST BE SET!
+                this->vbo.config.attributePosition = 0;
+                this->vbo.config.vertexStride = 0;
+                this->vbo.config.vertexSize = 3;
+                this->vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
+                this->vbo.config.primitive = Ax::GL::Primitive::TRIANGLES;
+
+                for(auto v : this->verticies)
+                {
+                    std::cout << v << std::endl;
+                }
 
                 this->vbo.generate();
                 this->vbo.bind();
@@ -68,20 +87,33 @@ namespace Ax::Mesh
                 this->vbo.setAttribPointers();
             }
 
-            Ax::GL::VertexArray getVertexArray() 
+            Ax::GL::VertexArray getVertexArray() override
             {
                 return this->vao;
             }
 
-            Ax::GL::VertexBuffer getVertexBuffer()
+            Ax::GL::VertexBuffer getVertexBuffer() override
             {
                 return this->vbo;
             }
+
+            int getVertexCount() override
+            {
+                return this->vertexCount;
+            }
+
+            VecFloat getVerticies() override
+            {
+                return this->verticies;
+            }
+
+
 
         private:
             VecFloat verticies;
             Ax::GL::VertexArray vao;
             Ax::GL::VertexBuffer vbo;
+            int vertexCount = 36;
     };
 
 }

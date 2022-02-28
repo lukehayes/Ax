@@ -1,4 +1,4 @@
-CXX = clang++
+CXX = g++
 CXXFLAGS = -std=c++17 -I./include -DDEBUG=1
 SRC_DIR = src
 LDFLAGS = -L. -lglfw -lGL -lX11 -lpthread -lm -ldl

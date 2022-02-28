@@ -10,22 +10,22 @@ namespace Ax::GL {
         //LOG("Buffer Object ID:", this->id, " Destroyed");
     }
 
-    void 
+    void
     VertexBuffer::generate() 
     {
         glGenBuffers(1, &this->id);
         LOG("Buffer Object ID:", this->id, "Generated");
     }
 
-    void 
+    void
     VertexBuffer::bind()
     {
         glBindBuffer(this->config.target, this->id);
         LOG("Buffer Object ID:", this->id, "Bound");
     }
 
-    void 
-    VertexBuffer::unbind() 
+    void
+    VertexBuffer::unbind()
     {
         glBindBuffer(this->config.target, 0);
         }
@@ -39,6 +39,7 @@ namespace Ax::GL {
     void 
     VertexBuffer::setAttribPointers()
     {
+        std::cout << this->config.vertexSize << std::endl;
         glVertexAttribPointer(
                 this->config.attributePosition,
                 this->config.vertexSize,
