@@ -69,7 +69,7 @@ int main(int argc, const char *argv[])
         );
 
     
-    glm::vec3 position = {0,0,10};
+    glm::vec3 position = {0,0,40};
 
 
     view = glm::lookAt(
