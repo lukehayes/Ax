@@ -14,6 +14,10 @@ namespace Ax::GL {
                    VertexBuffer();
                   ~VertexBuffer();
 
+                  VertexBuffer(const VertexBuffer& rhs) : data(data), id(id), config(config)
+                  {
+                      std::cout << "Copy" << std::endl;
+                  }
             void   generate();
             void   bind();
             void   unbind();

@@ -12,6 +12,7 @@ namespace Ax::GL {
 
                    VertexArray();
                   ~VertexArray();
+                   VertexArray(const VertexArray& rhs);
 
             void   generate();
             void   bind();

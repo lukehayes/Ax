@@ -8,6 +8,11 @@ namespace Ax::GL {
         //this->bind();
     }
 
+    VertexArray::VertexArray(const VertexArray& rhs) : id(rhs.id)
+    {
+        std::cout << this->id << "|" << rhs.id << std::endl;
+    }
+
     VertexArray::~VertexArray() 
     {
         glDeleteVertexArrays(1, &this->id);
