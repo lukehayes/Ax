@@ -30,8 +30,8 @@ namespace Ax::Renderer
             model = glm::translate(model, entity.position);
             model = glm::rotate(model, glm::radians((float)x), {1,1,1});
 
-            std::shared_ptr<Ax::Mesh::CubeMesh> m = meshes[0];
-            m->getVertexArray().bind();
+            std::shared_ptr<Ax::Mesh::CubeMesh> m = meshes.at(0);
+            //m->getVertexArray().bind();
             shader.setMat4("model", model);
             shader.setVec3("color", entity.color);
             glDrawArrays(m->getVertexBuffer().config.primitive, 0, m->getVertexCount());
