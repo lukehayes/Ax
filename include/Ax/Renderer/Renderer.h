@@ -34,7 +34,7 @@ namespace Ax::Renderer
             m->getVertexArray().bind();
             shader.setMat4("model", model);
             shader.setVec3("color", entity.color);
-            //glDrawArrays(m->getVertexBuffer().config.primitive, 0, m->getVertexCount());
+            glDrawArrays(m->getVertexBuffer().config.primitive, 0, m->getVertexCount());
         }
 
         std::vector<std::shared_ptr<Ax::Mesh::CubeMesh>> meshes;
