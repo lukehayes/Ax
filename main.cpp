@@ -5,7 +5,6 @@
 #include "Ax/Mesh/CubeMesh.h"
 #include "Ax/Renderer/Renderer.h"
 #include "Ax/Entity/Entity.h"
-#include "Ax/Entity/Entity.h"
 #include "Ax/Math/Random.h"
 
 int wireframe_mode = false;
@@ -49,12 +48,9 @@ int main(int argc, const char *argv[])
 
     Ax::Renderer::Renderer renderer;
 
-    std::shared_ptr<Ax::Mesh::CubeMesh> cubeMesh = std::make_shared<Ax::Mesh::CubeMesh>();
-
     //mesh2.verticies = cube.getVerticies();
-    renderer.add(cubeMesh);
+    //renderer.add(cubeMesh);
 
-    std::cout << "-----" << std::endl;
 
     projection = glm::perspective(
         glm::radians(45.0f),
