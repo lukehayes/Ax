@@ -19,9 +19,9 @@ namespace Ax::Renderer
 
         void add(std::shared_ptr<Ax::Mesh::CubeMesh>& mesh) 
         {
-            //std::shared_ptr<Ax::Mesh::Mesh> m = std::make_shared<Ax::Mesh::Mesh>(mesh);
-            mesh->init();
-            this->meshes.push_back(mesh);
+            std::shared_ptr<Ax::Mesh::CubeMesh> m = std::make_shared<Ax::Mesh::CubeMesh>();
+            m->init();
+            this->meshes.push_back(m);
         }
 
         void drawCube(Ax::Entity::Entity& entity, const Ax::GL::Shader& shader, double x, double y)
