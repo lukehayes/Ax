@@ -49,7 +49,7 @@ int main(int argc, const char *argv[])
 
     Ax::Renderer::Renderer renderer;
 
-    std::shared_ptr<Ax::Mesh::CubeMesh> cubeMesh;
+    std::shared_ptr<Ax::Mesh::CubeMesh> cubeMesh = std::make_shared<Ax::Mesh::CubeMesh>();
 
     //mesh2.verticies = cube.getVerticies();
     renderer.add(cubeMesh);
