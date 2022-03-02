@@ -17,6 +17,8 @@ namespace Ax::Camera {
         M4 getProjection() const;
         M4 getView() const;
 
+        void updateFPS(double x, double y);
+
         Ax::Component::Transform transform;
 
         private:

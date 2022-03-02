@@ -22,6 +22,25 @@ namespace Ax::Camera {
 
         Camera3D::~Camera3D() {}
 
+        void Camera3D::updateFPS(double x, double y)
+        {
+            V3 direction = {0,0,0};
+            double SENSITIVITY = 0.00000000001;
+
+            direction.x = cos(glm::radians(x)) * cos(glm::radians(y));
+            direction.y = sin(glm::radians(y));
+            direction.z = sin(glm::radians(x)) * cos(glm::radians(y));
+
+            //std::cout << front.x << "||" << front.y << std::endl;
+
+            this->view = glm::lookAt(
+                this->transform.position,
+                direction,
+                glm::vec3(0.0f, 1.0f,0.0f)
+                );
+
+        }
+
         void Camera3D::update(double delta)
         {
             static float c = 0.0;
