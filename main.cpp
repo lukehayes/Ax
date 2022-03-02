@@ -6,6 +6,7 @@
 #include "Ax/Renderer/Renderer.h"
 #include "Ax/Entity/Entity.h"
 #include "Ax/Math/Random.h"
+#include "Ax/Camera/Camera3D.h"
 
 int wireframe_mode = false;
 
@@ -42,40 +43,14 @@ void framebuffer_callback(GLFWwindow* window, int width, int height){
 int main(int argc, const char *argv[])
 {
     Ax::System::Window window;
-
-    glm::mat4 projection = glm::mat4(1.0);
-    glm::mat4 view = glm::mat4(1.0);
-
     Ax::Renderer::Renderer renderer;
+    Ax::Camera::Camera3D camera;
 
-    //mesh2.verticies = cube.getVerticies();
-    //renderer.add(cubeMesh);
-
-
-    projection = glm::perspective(
-        glm::radians(45.0f),
-        800.0f / 600.0f,
-        0.1f,
-        1000.0f
-        );
-
-    
-    glm::vec3 position = {0,0,40};
-
-
-    view = glm::lookAt(
-        position,
-        glm::vec3(0.0f, 0.0f, -1.0f),
-        glm::vec3(0.0f, 1.0f,0.0f)
-        );
 
     Ax::GL::Shader shader(
         "assets/shaders/VSH-Default.glsl",
         "assets/shaders/FSH-Default.glsl"
     );
-
-    shader.setMat4("projection", projection);
-    shader.setMat4("view", view);
 
     std::vector<Ax::Entity::Entity> entities;
 
@@ -95,22 +70,18 @@ int main(int argc, const char *argv[])
         entities.push_back(e);
     }
 
-    static float c = 0.0;
 
     while (!glfwWindowShouldClose(window.getWindow()))
     {
         /* Poll for and process events */
         glfwPollEvents();
 
-        c += 0.01;
-        shader.use();
-        //std::cout << glm::to_string(model) << std::endl;
-
-        shader.setMat4("projection", projection);
-        shader.setMat4("view", view);
-
         glClearColor(0.1f,0.1f,0.1f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        shader.use();
+        shader.setMat4("projection", camera.getProjection());
+        shader.setMat4("view", camera.getView());
 
         for(auto& e : entities)
         {
