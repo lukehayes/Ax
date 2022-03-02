@@ -47,15 +47,12 @@ int main(int argc, const char *argv[])
     Ax::Camera::Camera3D camera;
 
 
-    Ax::GL::Shader shader(
-        "assets/shaders/VSH-Default.glsl",
-        "assets/shaders/FSH-Default.glsl"
-    );
+    Ax::GL::Shader shader;
 
     std::vector<Ax::Entity::Entity> entities;
 
-    int MAX = 10;
-    float N = 5.0;
+    int MAX = 100;
+    float N = 100.0;
 
     for(int i = 0; i <=MAX; i++)
     {
@@ -79,6 +76,8 @@ int main(int argc, const char *argv[])
         glClearColor(0.1f,0.1f,0.1f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        camera.update(1.0f);
+
         shader.use();
         shader.setMat4("projection", camera.getProjection());
         shader.setMat4("view", camera.getView());
@@ -86,6 +85,7 @@ int main(int argc, const char *argv[])
         for(auto& e : entities)
         {
             renderer.drawCube(e, shader, mx, my);
+            renderer.drawCube(e, mx, my);
         }
 
         glfwSwapBuffers(window.getWindow());

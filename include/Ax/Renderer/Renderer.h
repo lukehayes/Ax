@@ -18,7 +18,7 @@ namespace Ax::Renderer
         Renderer() {}
         ~Renderer() {}
 
-        void drawCube(Ax::Entity::Entity& entity, const Ax::GL::Shader& shader, double x, double y)
+        void drawCube(Ax::Entity::Entity& entity, double x, double y)
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, entity.position);
@@ -26,13 +26,13 @@ namespace Ax::Renderer
 
             std::shared_ptr<Ax::GL::VertexArray> vao = this->meshFactory.vertexArrays["cube"];
             vao->bind();
-            shader.setMat4("model", model);
-            shader.setVec3("color", entity.color);
+            this->shader.setMat4("model", model);
+            this->shader.setVec3("color", entity.color);
             //glDrawArrays(m->getVertexBuffer().config.primitive, 0, m->getVertexCount());
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
-        void drawRectangle(Ax::Entity::Entity& entity, const Ax::GL::Shader& shader, double x, double y)
+        void drawRectangle(Ax::Entity::Entity& entity, double x, double y)
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, entity.position);
@@ -40,13 +40,14 @@ namespace Ax::Renderer
 
             std::shared_ptr<Ax::GL::VertexArray> vao = this->meshFactory.vertexArrays["rectangle"];
             vao->bind();
-            shader.setMat4("model", model);
-            shader.setVec3("color", entity.color);
+            this->shader.setMat4("model", model);
+            this->shader.setVec3("color", entity.color);
             //glDrawArrays(m->getVertexBuffer().config.primitive, 0, m->getVertexCount());
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
         }
 
         Ax::Mesh::MeshFactory meshFactory;
+        Ax::GL::Shader shader;
     };
 }
 
