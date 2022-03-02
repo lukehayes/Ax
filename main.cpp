@@ -51,10 +51,8 @@ int main(int argc, const char *argv[])
 
     std::vector<Ax::Entity::Entity> entities;
 
-    int MAX = 100;
     float N = 100.0;
-
-    for(int i = 0; i <=MAX; i++)
+    for(int i = 0; i <=MAX_ENTITIES; i++)
     {
         Ax::Entity::Entity e;
         e.position.x = Ax::Math::Random::randDouble(-N,N);
@@ -84,7 +82,6 @@ int main(int argc, const char *argv[])
 
         for(auto& e : entities)
         {
-            renderer.drawCube(e, shader, mx, my);
             renderer.drawCube(e, mx, my);
         }
 
