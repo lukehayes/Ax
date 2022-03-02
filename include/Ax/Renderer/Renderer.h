@@ -1,11 +1,11 @@
 #ifndef AX_RENDERER_H
 #define AX_RENDERER_H
 
+#include "Ax/Common/Types.h"
 #include "Ax/GL/VertexArray.h"
 #include "Ax/GL/VertexBuffer.h"
 #include "Ax/GL/BufferConfig.h"
 #include "Ax/GL/Shader.h"
-#include "Ax/Mesh/Mesh.h"
 #include "Ax/Entity/Entity.h"
 #include <memory>
 #include "Ax/Mesh/MeshFactory.h"
@@ -17,6 +17,16 @@ namespace Ax::Renderer
     public:
         Renderer() {}
         ~Renderer() {}
+
+        /**
+         * Clear the currenty frame.
+         * @param glm::vec3 color
+         */
+        void clear(V3 color = {0.1f, 0.1f, 0.1f})
+        {
+            glClearColor(color.r, color.g, color.b, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        }
 
         void drawCube(Ax::Entity::Entity& entity, double x, double y)
         {

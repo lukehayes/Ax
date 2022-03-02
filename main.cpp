@@ -72,15 +72,13 @@ int main(int argc, const char *argv[])
         /* Poll for and process events */
         glfwPollEvents();
 
-        glClearColor(0.1f,0.1f,0.1f,1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         camera.update(1.0f);
 
         shader.use();
         shader.setMat4("projection", camera.getProjection());
         shader.setMat4("view", camera.getView());
 
+        renderer.clear();
         for(auto& e : entities)
         {
             renderer.drawCube(e, mx, my);
