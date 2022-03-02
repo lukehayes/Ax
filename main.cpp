@@ -36,6 +36,7 @@ static void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     my = ypos;
 }
 
+// Redraw the window correctly when the window is resized.
 void framebuffer_callback(GLFWwindow* window, int width, int height){
     glViewport(0,0, width, height);
 }
@@ -86,6 +87,7 @@ int main(int argc, const char *argv[])
         }
 
         glfwSwapBuffers(window.getWindow());
+        glfwSetFramebufferSizeCallback(window.getWindow(), framebuffer_callback);
         glfwSetKeyCallback(window.getWindow(), key_callback);
         glfwSetCursorPosCallback(window.getWindow(), mouse_callback);
     }
