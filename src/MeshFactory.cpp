@@ -30,7 +30,6 @@ namespace Ax::Mesh
         vbo.config.vertexStride = 0;
         vbo.config.vertexSize = 3;
         vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-        vbo.config.primitive = Ax::GL::Primitive::TRIANGLES;
 
         vbo.generate();
         vbo.bind();
@@ -56,7 +55,6 @@ namespace Ax::Mesh
         vbo.config.vertexStride = 0;
         vbo.config.vertexSize = 2;
         vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-        vbo.config.primitive = Ax::GL::Primitive::TRIANGLE_STRIP;
 
         vbo.generate();
         vbo.bind();
