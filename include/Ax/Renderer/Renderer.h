@@ -35,7 +35,7 @@ namespace Ax::Renderer
             //model = glm::rotate(model, glm::radians((float)x), {1,1,1});
             model = glm::scale(model, {entity.scale, entity.scale, entity.scale});
 
-            std::shared_ptr<Ax::GL::VertexArray> vao = this->meshFactory.vertexArrays["cube"];
+            std::shared_ptr<Ax::GL::VertexArray> vao = this->vaoMap["cube"];
             vao->bind();
             this->shader.setMat4("model", model);
             this->shader.setVec3("color", entity.color);
@@ -49,7 +49,7 @@ namespace Ax::Renderer
             model = glm::translate(model, entity.position);
             model = glm::rotate(model, glm::radians((float)x), {1,1,1});
 
-            std::shared_ptr<Ax::GL::VertexArray> vao = this->meshFactory.vertexArrays["rectangle"];
+            std::shared_ptr<Ax::GL::VertexArray> vao = this->vaoMap["rectangle"];
             vao->bind();
             this->shader.setMat4("model", model);
             this->shader.setVec3("color", entity.color);
@@ -57,7 +57,7 @@ namespace Ax::Renderer
             glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
         }
 
-        Ax::Mesh::MeshFactory meshFactory;
+        std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> vaoMap;
         Ax::GL::Shader shader;
     };
 }

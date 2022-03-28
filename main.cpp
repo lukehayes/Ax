@@ -44,8 +44,11 @@ void framebuffer_callback(GLFWwindow* window, int width, int height){
 int main(int argc, const char *argv[])
 {
     Ax::System::Window window;
+    Ax::Mesh::MeshFactory factory;
+
     Ax::Renderer::Renderer renderer;
     Ax::Camera::Camera3D camera;
+    renderer.vaoMap = factory.getVAOMap();
 
 
     Ax::GL::Shader shader;

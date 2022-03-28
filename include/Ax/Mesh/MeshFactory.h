@@ -26,7 +26,12 @@ namespace Ax::Mesh
          */
         void createRectangleMesh();
 
+        std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> getVAOMap()
+        {
+            return this->vertexArrays;
+        }
 
+    private:
         std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> vertexArrays;
     };
 }
