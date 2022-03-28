@@ -13,7 +13,6 @@ namespace Ax::GL {
         s32 vertexSize;
         s32 vertexStride;
         BufferTarget target;
-        Primitive primitive;
     };
 }
 
