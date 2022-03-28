@@ -47,45 +47,29 @@ int main(int argc, const char *argv[])
     Ax::Mesh::MeshFactory factory;
 
     Ax::Renderer::Renderer renderer;
-    Ax::Camera::Camera3D camera;
     renderer.vaoMap = factory.getVAOMap();
 
 
+    Ax::Camera::Camera3D camera;
     Ax::GL::Shader shader;
 
-    std::vector<Ax::Entity::Entity> entities;
-
-    float N = 100.0;
-    for(int i = 0; i <=MAX_ENTITIES; i++)
-    {
-        Ax::Entity::Entity e;
-        e.position.x = Ax::Math::Random::randDouble(-N,N);
-        e.position.y = Ax::Math::Random::randDouble(-N,N);
-        e.position.z = Ax::Math::Random::randDouble(-N,N);
-        e.color.r = Ax::Math::Random::randDouble(0.1, 0.2f);
-        e.color.g = Ax::Math::Random::randDouble(0.3, 0.95f);
-        e.color.b = Ax::Math::Random::randDouble(0.3, 0.9f);
-
-        entities.push_back(e);
-    }
-
+    Ax::Entity::Entity e({0,0,0});
+    e.color = {0.2,0.2,0.2};
+    e.scale = 5;
 
     while (!glfwWindowShouldClose(window.getWindow()))
     {
         /* Poll for and process events */
         glfwPollEvents();
 
-        camera.update(1.0f);
+        //camera.update(1.0f);
 
         shader.use();
         shader.setMat4("projection", camera.getProjection());
         shader.setMat4("view", camera.getView());
 
         renderer.clear();
-        for(auto& e : entities)
-        {
-            renderer.drawCube(e, mx, my);
-        }
+        renderer.drawCube(e);
 
         glfwSwapBuffers(window.getWindow());
         glfwSetFramebufferSizeCallback(window.getWindow(), framebuffer_callback);

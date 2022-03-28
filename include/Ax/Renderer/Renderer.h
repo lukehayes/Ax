@@ -22,7 +22,7 @@ namespace Ax::Renderer
          * Clear the currenty frame.
          * @param glm::vec3 color
          */
-        void clear(V3 color = {0.1f, 0.1f, 0.1f})
+        void clear(V3 color = {0.4f, 0.4f, 0.4f})
         {
             glClearColor(color.r, color.g, color.b, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -32,7 +32,7 @@ namespace Ax::Renderer
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, entity.position);
-            //model = glm::rotate(model, glm::radians((float)x), {1,1,1});
+            model = glm::rotate(model, glm::radians((float)45.0f), {1,1,1});
             model = glm::scale(model, {entity.scale, entity.scale, entity.scale});
 
             std::shared_ptr<Ax::GL::VertexArray> vao = this->vaoMap["cube"];
