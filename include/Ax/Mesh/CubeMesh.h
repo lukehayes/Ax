@@ -70,16 +70,6 @@ namespace Ax::Mesh
                 this->vao.bind();
 
                 // BUFFER CONFIG MUST BE SET!
-                this->vbo.config.attributePosition = 0;
-                this->vbo.config.vertexStride = 0;
-                this->vbo.config.vertexSize = 3;
-                this->vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-                this->vbo.config.primitive = Ax::GL::Primitive::TRIANGLES;
-
-                for(auto v : this->verticies)
-                {
-                    std::cout << v << std::endl;
-                }
 
                 this->vbo.generate();
                 this->vbo.bind();
