@@ -28,7 +28,7 @@ namespace Ax::Renderer
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
 
-        void drawCube(Ax::Entity::Entity& entity, double x, double y)
+        void drawCube(Ax::Entity::Entity& entity, const Ax::GL::Primitive& primitive = GL::TRIANGLES)
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, entity.position);
@@ -40,7 +40,7 @@ namespace Ax::Renderer
             this->shader.setMat4("model", model);
             this->shader.setVec3("color", entity.color);
             //glDrawArrays(m->getVertexBuffer().config.primitive, 0, m->getVertexCount());
-            glDrawArrays(GL_TRIANGLES, 0, 36);
+            glDrawArrays(primitive, 0, 36);
         }
 
         void drawRectangle(Ax::Entity::Entity& entity, double x, double y)
