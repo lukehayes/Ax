@@ -32,7 +32,7 @@ namespace Ax::Renderer
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, entity.position);
-            model = glm::rotate(model, glm::radians((float)x), {1,1,1});
+            //model = glm::rotate(model, glm::radians((float)x), {1,1,1});
             model = glm::scale(model, {entity.scale, entity.scale, entity.scale});
 
             std::shared_ptr<Ax::GL::VertexArray> vao = this->meshFactory.vertexArrays["cube"];
