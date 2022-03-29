@@ -25,7 +25,11 @@ namespace Ax::Mesh
 
         Ax::GL::VertexBuffer vbo;
 
+        // ------------------------------------------
         // BUFFER CONFIG MUST BE SET!
+        //
+        // SINGLE LOCATION FOR VBO CONFIG TO BE SET!
+        // ------------------------------------------
         vbo.config.attributePosition = 0;
         vbo.config.vertexStride = 0;
         vbo.config.vertexSize = 3;

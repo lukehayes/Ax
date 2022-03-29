@@ -57,15 +57,7 @@ namespace Ax::Mesh
 
             virtual void init() override
             {
-                this->vao.generate();
-                this->vao.bind();
-
-                // BUFFER CONFIG MUST BE SET!
-
-                this->vbo.generate();
-                this->vbo.bind();
-                this->vbo.setBufferData(this->verticies);
-                this->vbo.setAttribPointers();
+                // TODO Maybe Implement?
             }
 
             Ax::GL::VertexArray getVertexArray() override
