@@ -54,22 +54,45 @@ int main(int argc, const char *argv[])
     Ax::GL::Shader shader;
 
     Ax::Entity::Entity e({0,0,0});
-    e.color = {0.2,0.2,0.2};
+    e.color = {0.2,0.3,0.8};
     e.scale = 5;
+
+    std::vector<Ax::Entity::Entity> entities;
+
+        for(int i = 0; i<= MAX_ENTITIES; i++ )
+        {
+            double x = Ax::Math::Random::randInt(-10,10);
+            double y = Ax::Math::Random::randInt(-10,10);
+            double z = Ax::Math::Random::randInt(-10,10);
+
+            Ax::Entity::Entity e({x,y,z});
+            e.color = {0.2,0.2,0.2};
+
+            entities.push_back(e);
+        }
 
     while (!glfwWindowShouldClose(window.getWindow()))
     {
         /* Poll for and process events */
         glfwPollEvents();
 
-        //camera.update(1.0f);
+        camera.update(1.0f);
 
         shader.use();
         shader.setMat4("projection", camera.getProjection());
         shader.setMat4("view", camera.getView());
 
         renderer.clear();
+
+
+        for(auto &e:entities)
+        {
+            renderer.drawCube(e);
+        }
+
+
         renderer.drawCube(e);
+        //renderer.drawRectangle(e);
 
         glfwSwapBuffers(window.getWindow());
         glfwSetFramebufferSizeCallback(window.getWindow(), framebuffer_callback);
