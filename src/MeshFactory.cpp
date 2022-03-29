@@ -23,7 +23,7 @@ namespace Ax::Mesh
         vao->generate();
         vao->bind();
 
-        Ax::GL::VertexBuffer vbo;
+        Ax::GL::VertexBuffer vbo(mesh.getVerticies(), mesh.getIndicies());
 
         // ------------------------------------------
         // BUFFER CONFIG MUST BE SET!
