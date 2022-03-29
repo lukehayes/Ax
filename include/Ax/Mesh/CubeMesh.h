@@ -50,15 +50,6 @@ namespace Ax::Mesh
                         {}
             ~CubeMesh() {}
 
-            //CubeMesh(const CubeMesh& rhs)
-            //{
-                //std::cout << "CubeMesh Copy" << std::endl;
-                //this->verticies = rhs.verticies;
-                //this->vao = rhs.vao;
-                //this->vbo = rhs.vbo;
-                //this->vertexCount = rhs.vertexCount;
-            //}
-
             VecFloat getVerticies() const
             {
                 return this->verticies;
