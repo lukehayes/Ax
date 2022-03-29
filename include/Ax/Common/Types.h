@@ -36,7 +36,8 @@ using Array2f   =      std::array<f32,2>;
 using Array3f   =      std::array<f32,3>;
 using Array4f   =      std::array<f32,4>;
 using Array8f   =      std::array<f32,8>;
-using VecFloat   =     std::vector<float>;
+using VecFloat  =      std::vector<float>;
+using VecInt    =      std::vector<size_t>;
 
 /*============================================================
 // GLM Specific
