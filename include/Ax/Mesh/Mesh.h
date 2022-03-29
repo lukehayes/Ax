@@ -21,6 +21,7 @@ namespace Ax::Mesh
             virtual int getVertexCount() = 0;
             virtual void init() = 0;
             virtual VecFloat getVerticies() = 0;
+            virtual VecInt getIndicies() = 0;
     };
 }
 

@@ -4,6 +4,11 @@ namespace Ax::GL {
 
     VertexBuffer::VertexBuffer() {}
 
+    VertexBuffer::VertexBuffer(
+           const VecFloat& verticies,
+           const VecInt& indicies
+           ) : verticies(verticies), indicies(indicies){}
+
     VertexBuffer::~VertexBuffer() 
     {
         //glDeleteBuffers(1, &this->id);

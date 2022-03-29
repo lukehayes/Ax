@@ -7,29 +7,30 @@
 
 namespace Ax::GL {
 
-    class VertexBuffer
-    {
-        public:
+class VertexBuffer
+{
+public:
 
-                   VertexBuffer();
-                  ~VertexBuffer();
+   VertexBuffer();
+   VertexBuffer(
+           const VecFloat& verticies,
+           const VecInt& indicies
+           );
+  ~VertexBuffer();
 
-                  //VertexBuffer(const VertexBuffer& rhs) : data(data), id(id), config(config)
-                  //{
-                      //std::cout << "Copy" << std::endl;
-                  //}
-            void   generate();
-            void   bind();
-            void   unbind();
-            void   destroy();
+    void   generate();
+    void   bind();
+    void   unbind();
+    void   destroy();
 
-            void   setAttribPointers();
-            void   setBufferData(std::vector<f32> verticies);
+    void   setAttribPointers();
+    void   setBufferData(std::vector<f32> verticies);
 
-            std::vector<f32> data;
-            GLuint id;
-            BufferConfig config;
-    };
+    std::vector<f32> verticies;
+    std::vector<size_t> indicies;
+    GLuint id;
+    BufferConfig config;
+};
 }
 
 #endif
