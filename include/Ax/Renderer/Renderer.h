@@ -22,7 +22,7 @@ namespace Ax::Renderer
          * Clear the currenty frame.
          * @param glm::vec3 color
          */
-        void clear(V3 color = {0.4f, 0.4f, 0.4f})
+        void clear(V3 color = {0.5f, 0.5f, 0.5f})
         {
             glClearColor(color.r, color.g, color.b, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
