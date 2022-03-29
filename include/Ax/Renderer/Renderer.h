@@ -43,18 +43,18 @@ namespace Ax::Renderer
             glDrawArrays(primitive, 0, 36);
         }
 
-        void drawRectangle(Ax::Entity::Entity& entity, double x, double y)
+        void drawRectangle(Ax::Entity::Entity& entity, const Ax::GL::Primitive& primitive = GL::TRIANGLE_STRIP)
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, entity.position);
-            model = glm::rotate(model, glm::radians((float)x), {1,1,1});
+            model = glm::rotate(model, glm::radians((float)0f), {1,1,1});
 
             std::shared_ptr<Ax::GL::VertexArray> vao = this->vaoMap["rectangle"];
             vao->bind();
             this->shader.setMat4("model", model);
             this->shader.setVec3("color", entity.color);
             //glDrawArrays(m->getVertexBuffer().config.primitive, 0, m->getVertexCount());
-            glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
+            glDrawArrays(primitive, 0, 8);
         }
 
         std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> vaoMap;
