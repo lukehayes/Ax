@@ -66,4 +66,9 @@ namespace Ax::Mesh
 
     }
 
+    std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> MeshFactory::getVAOMap()
+    {
+        return this->vertexArrays;
+    }
+
 }
