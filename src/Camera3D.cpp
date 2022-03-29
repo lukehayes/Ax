@@ -1,5 +1,7 @@
 #include "Ax/Camera/Camera3D.h"
 
+extern double mx;
+extern double my;
 namespace Ax::Camera {
 
     Camera3D::Camera3D():
