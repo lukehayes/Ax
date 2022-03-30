@@ -40,7 +40,8 @@ namespace Ax::Renderer
             this->shader.setMat4("model", model);
             this->shader.setVec3("color", entity.color);
             //glDrawArrays(m->getVertexBuffer().config.primitive, 0, m->getVertexCount());
-            glDrawArrays(primitive, 0, 36);
+            //glDrawArrays(primitive, 0, 36);
+            glDrawElements(primitive, 72, GL_UNSIGNED_INT,0);
         }
 
         void drawRectangle(Ax::Entity::Entity& entity, const Ax::GL::Primitive& primitive = GL::TRIANGLE_STRIP)
