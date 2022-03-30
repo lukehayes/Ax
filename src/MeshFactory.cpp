@@ -1,5 +1,5 @@
 #include "Ax/Mesh/MeshFactory.h"
-#include "Ax/GL/VertexBuffer.h"
+#include "Ax/GL/Buffer.h"
 #include "Ax/Mesh/CubeMesh.h"
 #include "Ax/Mesh/RectangleMesh.h"
 
@@ -21,24 +21,14 @@ namespace Ax::Mesh
         Ax::Mesh::CubeMesh mesh;
         std::shared_ptr<Ax::GL::VertexArray> vao = std::make_shared<Ax::GL::VertexArray>();
         vao->generate();
-        vao->bind();
+        //vao->bind();
 
-        Ax::GL::VertexBuffer vbo(mesh.getVerticies(), mesh.getIndicies());
+        Ax::GL::Buffer buffer(mesh.getVerticies(), mesh.getIndicies());
 
-        // ------------------------------------------
-        // BUFFER CONFIG MUST BE SET!
-        //
-        // SINGLE LOCATION FOR VBO CONFIG TO BE SET!
-        // ------------------------------------------
-        vbo.config.attributePosition = 0;
-        vbo.config.vertexStride = 0;
-        vbo.config.vertexSize = 3;
-        vbo.config.target = Ax::GL::BufferTarget::ARRAY_BUFFER;
-
-        vbo.generate();
-        vbo.bind();
-        vbo.setBufferData(mesh.getVerticies());
-        vbo.setAttribPointers();
+        //buffer.generateVertexBuffer();
+        //buffer.bindVertexBuffer();
+        //buffer.setBufferData();
+        //buffer.setAttribPointers();
 
         this->vertexArrays.insert(std::pair<std::string, std::shared_ptr<Ax::GL::VertexArray>>("cube", vao));
         vao->unbind();
@@ -53,6 +43,7 @@ namespace Ax::Mesh
         vao->bind();
 
         Ax::GL::VertexBuffer vbo;
+        //Ax::GL::VertexBuffer vbo(mesh.getVerticies(), mesh.getIndicies());
 
         // BUFFER CONFIG MUST BE SET!
         vbo.config.attributePosition = 0;
