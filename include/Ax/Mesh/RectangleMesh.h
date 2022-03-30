@@ -9,11 +9,16 @@ namespace Ax::Mesh
     {
         public:
             RectangleMesh() : verticies({
-                    -1.0, 1.0,
-                    -1.0, -1.0,
-                    1.0, 1.0,
-                    1.0, -1.0
-                    }){}
+                    0.5f,  0.5f, 0.0f,  // top right
+                    0.5f, -0.5f, 0.0f,  // bottom right
+                    -0.5f, -0.5f, 0.0f,  // bottom left
+                    -0.5f,  0.5f, 0.0f   // top left
+                    }),
+                indicies({
+                        0, 1, 3,
+                        1, 2, 3
+                        })
+            {}
 
             ~RectangleMesh() {}
 
@@ -22,8 +27,14 @@ namespace Ax::Mesh
                 return this->verticies;
             }
 
+            VecInt getIndicies() const
+            {
+                return this->indicies;
+            }
+
         private:
             VecFloat verticies;
+            VecInt   indicies;
             Ax::GL::VertexArray vao;
             Ax::GL::VertexBuffer vbo;
             int vertexCount = 8;
