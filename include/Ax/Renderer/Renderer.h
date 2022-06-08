@@ -48,7 +48,7 @@ namespace Ax::Renderer
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, entity.position);
-            model = glm::rotate(model, glm::radians((float)0f), {1,1,1});
+            model = glm::rotate(model, glm::radians((float)0.0f), {1,1,1});
 
             std::shared_ptr<Ax::GL::VertexArray> vao = this->vaoMap["rectangle"];
             vao->bind();
