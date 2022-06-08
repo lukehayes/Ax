@@ -41,35 +41,48 @@ void framebuffer_callback(GLFWwindow* window, int width, int height){
     glViewport(0,0, width, height);
 }
 
+void genGL(GLUI* vao, GLUI* vbo)
+{
+    glGenVertexArrays(1, vao);
+    glBindVertexArray(*vao);
+
+    glGenBuffers(1, vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+
+    std::vector<float> verts = {
+        -0.5, 0.5,
+        -0.5, -0.5,
+        0.5, 0.5,
+        0.5, -0.5
+    };
+
+    glEnableVertexAttribArray(0);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * verts.size(), verts.data(), GL_STATIC_DRAW);
+    glVertexAttribPointer(
+            0,
+            2,
+            GL_FLOAT,
+            GL_FALSE,
+            0,
+            0
+            );
+}
+
 int main(int argc, const char *argv[])
 {
     Ax::System::Window window;
-    Ax::Mesh::MeshFactory factory;
-
-    Ax::Renderer::Renderer renderer;
-    renderer.vaoMap = factory.getVAOMap();
-
-
     Ax::Camera::Camera3D camera;
+    Ax::Renderer::Renderer renderer;
     Ax::GL::Shader shader;
 
-    Ax::Entity::Entity e({0,0,0});
-    e.color = {0.2,0.3,0.8};
-    e.scale = 5;
+    GLUI vao;
+    GLUI vbo;
 
-    std::vector<Ax::Entity::Entity> entities;
+    genGL(&vao, &vbo);
 
-        for(int i = 0; i<= MAX_ENTITIES; i++ )
-        {
-            double x = Ax::Math::Random::randInt(-10,10);
-            double y = Ax::Math::Random::randInt(-10,10);
-            double z = Ax::Math::Random::randInt(-10,10);
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, {0,0,-13.0});
 
-            Ax::Entity::Entity e({x,y,z});
-            e.color = {0.2,0.2,0.2};
-
-            entities.push_back(e);
-        }
 
     while (!glfwWindowShouldClose(window.getWindow()))
     {
@@ -77,22 +90,16 @@ int main(int argc, const char *argv[])
         glfwPollEvents();
 
         camera.update(1.0f);
+        model = glm::rotate(model, glm::radians((float)glfwGetTime()), {1,1,1});
 
         shader.use();
         shader.setMat4("projection", camera.getProjection());
         shader.setMat4("view", camera.getView());
+        shader.setMat4("model", model);
 
         renderer.clear();
 
-
-        for(auto &e:entities)
-        {
-            renderer.drawCube(e);
-        }
-
-
-        renderer.drawCube(e);
-        //renderer.drawRectangle(e);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
 
         glfwSwapBuffers(window.getWindow());
         glfwSetFramebufferSizeCallback(window.getWindow(), framebuffer_callback);
