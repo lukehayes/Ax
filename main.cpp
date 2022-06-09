@@ -42,7 +42,7 @@ void framebuffer_callback(GLFWwindow* window, int width, int height){
     glViewport(0,0, width, height);
 }
 
-void genGL(GLUI* vao, GLUI* vbo, GLUI* pVbo)
+void genGL(GLUI* vao, GLUI* vbo)
 {
     glGenVertexArrays(1, vao);
     glBindVertexArray(*vao);
@@ -67,30 +67,6 @@ void genGL(GLUI* vao, GLUI* vbo, GLUI* pVbo)
             0,
             0
             );
-
-   std::vector<float> positions;
-
-   for(int i = 0; i <= MAX_PARTICLES - 1; i++)
-   {
-       for(int j = 0; j <= MAX_PARTICLES - 1; j++)
-       {
-            positions.push_back(i);
-            positions.push_back(j);
-       }
-   }
-
-    glGenBuffers(1, pVbo);
-    glBindBuffer(GL_ARRAY_BUFFER, *pVbo);
-    glEnableVertexAttribArray(1);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * positions.size(), positions.data(), GL_STATIC_DRAW);
-    glVertexAttribPointer(
-            1,
-            2,
-            GL_FLOAT,
-            GL_FALSE,
-            0,
-            0
-            );
 }
 
 int main(int argc, const char *argv[])
@@ -102,9 +78,8 @@ int main(int argc, const char *argv[])
 
     GLUI vao;
     GLUI vbo;
-    GLUI pVbo;
 
-    genGL(&vao, &vbo, &pVbo);
+    genGL(&vao, &vbo);
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, {0,0,-13.0});
@@ -125,8 +100,8 @@ int main(int argc, const char *argv[])
 
         renderer.clear();
 
-        //glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
-        glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0,4, MAX_PARTICLES);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
+        //glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0,4, MAX_PARTICLES);
 
         glfwSwapBuffers(window.getWindow());
         glfwSetFramebufferSizeCallback(window.getWindow(), framebuffer_callback);
