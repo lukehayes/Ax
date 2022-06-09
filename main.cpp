@@ -99,8 +99,8 @@ int main(int argc, const char *argv[])
         shader.setMat4("model", model);
 
         renderer.clear();
-
-        glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
+        renderer.basicDraw(&vao, shader);
+        //glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         //glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0,4, MAX_PARTICLES);
 
         glfwSwapBuffers(window.getWindow());

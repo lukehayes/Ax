@@ -60,7 +60,15 @@ namespace Ax::Renderer
 
         std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> vaoMap;
         Ax::GL::Shader shader;
+
+        void basicDraw(GLUI* vao, Ax::GL::Shader& shader)
+        {
+            glBindVertexArray(*vao);
+            shader.use();
+            glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
+        }
     };
+
 }
 
 
