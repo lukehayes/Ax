@@ -61,6 +61,33 @@ namespace Ax::Mesh
 
     }
 
+    void MeshFactory::createRawRect()
+    {
+        glGenVertexArrays(1, vao);
+        glBindVertexArray(*vao);
+
+        glGenBuffers(1, vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+
+        std::vector<float> verts = {
+            -0.5, 0.5,
+            -0.5, -0.5,
+            0.5, 0.5,
+            0.5, -0.5
+        };
+
+        glEnableVertexAttribArray(0);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * verts.size(), verts.data(), GL_STATIC_DRAW);
+        glVertexAttribPointer(
+                0,
+                2,
+                GL_FLOAT,
+                GL_FALSE,
+                0,
+                0
+                );
+    }
+
     std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> MeshFactory::getVAOMap()
     {
         return this->vertexArrays;
