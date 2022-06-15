@@ -61,10 +61,20 @@ namespace Ax::Renderer
         std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> vaoMap;
         Ax::GL::Shader shader;
 
-        void basicDraw(GLUI* vao, Ax::GL::Shader& shader)
+        void basicDraw(GLUI* vao, Ax::GL::Shader& shader, const Ax::Entity::Entity e)
         {
+            static float c = 0.0;
+            c += 0.001;
+
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, e.position);
+            model = glm::rotate(model, (float)std::sin(c), {1,1,1});
+            model = glm::scale(model, {10,10,10});
             glBindVertexArray(*vao);
             shader.use();
+            this->shader.setMat4("model", model);
+            this->shader.setFloat("c", c);
+            this->shader.setVec3("color", e.color);
             glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         }
     };

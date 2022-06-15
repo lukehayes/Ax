@@ -9,7 +9,7 @@
 #include "Ax/Camera/Camera3D.h"
 
 int wireframe_mode = false;
-constexpr int MAX_PARTICLES = 1000;
+constexpr int ENT = 100;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){    
     if ((key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) && action == GLFW_PRESS){
@@ -85,6 +85,28 @@ int main(int argc, const char *argv[])
     model = glm::translate(model, {0,0,-13.0});
 
 
+    std::vector<Ax::Entity::Entity> positions;
+
+    int N = 50;
+
+    for(int i = 0; i <= ENT; i++)
+    {
+        float x = Ax::Math::Random::randDouble(-N,N);
+        float y = Ax::Math::Random::randDouble(-N,N);
+        float z = Ax::Math::Random::randDouble(-N,N);
+
+        float r = Ax::Math::Random::randDouble(0.1,1.0);
+        float g = Ax::Math::Random::randDouble(0.1,1.0);
+        float b = Ax::Math::Random::randDouble(0.1,1.0);
+
+        //glm::vec3 pos = {x,y,z};
+        Ax::Entity::Entity e{{x,y,z}};
+        e.color = {r,g,b};
+        positions.push_back(e);
+    }
+
+
+
     while (!glfwWindowShouldClose(window.getWindow()))
     {
         /* Poll for and process events */
@@ -99,7 +121,13 @@ int main(int argc, const char *argv[])
         shader.setMat4("model", model);
 
         renderer.clear();
-        renderer.basicDraw(&vao, shader);
+
+        for(auto p : positions)
+        {
+            renderer.basicDraw(&vao, shader, p);
+        }
+
+        //renderer.basicDraw(&vao, shader, {0,10,-100});
         //glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         //glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0,4, MAX_PARTICLES);
 
