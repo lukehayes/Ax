@@ -20,4 +20,4 @@ debug: $(OBJS)
 .PHONY:clean
 clean:
 	rm -rf bin/*
-	rm *.o *.a
+	rm obj/*.o
