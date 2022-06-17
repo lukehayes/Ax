@@ -26,11 +26,6 @@ namespace Ax::Mesh
          */
         void createRectangleMesh();
 
-        /**
-         * Create a raw/simple rectangle mesh.
-         */
-        void createRawRect();
-
         std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> getVAOMap();
 
     private:
