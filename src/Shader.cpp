@@ -71,6 +71,9 @@ namespace Ax::GL
         {
             std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
         }
+
+        // TODO Temporary fix
+        return "";
     }
 
     void Shader::_createShader(s16& id, const_str code, GLenum shaderType, std::string shaderName)
