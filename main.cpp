@@ -9,7 +9,7 @@
 #include "Ax/Camera/Camera3D.h"
 
 int wireframe_mode = false;
-constexpr int ENT = 100;
+constexpr int ENT = 10;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){    
     if ((key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) && action == GLFW_PRESS){
@@ -42,33 +42,6 @@ void framebuffer_callback(GLFWwindow* window, int width, int height){
     glViewport(0,0, width, height);
 }
 
-void genGL(GLUI* vao, GLUI* vbo)
-{
-    glGenVertexArrays(1, vao);
-    glBindVertexArray(*vao);
-
-    glGenBuffers(1, vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, *vbo);
-
-    std::vector<float> verts = {
-        -0.5, 0.5,
-        -0.5, -0.5,
-        0.5, 0.5,
-        0.5, -0.5
-    };
-
-    glEnableVertexAttribArray(0);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * verts.size(), verts.data(), GL_STATIC_DRAW);
-    glVertexAttribPointer(
-            0,
-            2,
-            GL_FLOAT,
-            GL_FALSE,
-            0,
-            0
-            );
-}
-
 int main(int argc, const char *argv[])
 {
     Ax::System::Window window;
@@ -76,35 +49,17 @@ int main(int argc, const char *argv[])
     Ax::Renderer::Renderer renderer;
     Ax::GL::Shader shader;
 
-    GLUI vao;
-    GLUI vbo;
-
-    genGL(&vao, &vbo);
-
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, {0,0,-13.0});
-
-
-    std::vector<Ax::Entity::Entity> positions;
-
-    int N = 50;
-
-    for(int i = 0; i <= ENT; i++)
+    int N = 100;
+    std::vector<Ax::Entity::Entity> entities;
+    for(int i = 0; i <= MAX_ENTITIES; i++)
     {
-        float x = Ax::Math::Random::randDouble(-N,N);
-        float y = Ax::Math::Random::randDouble(-N,N);
-        float z = Ax::Math::Random::randDouble(-N,N);
+        double x = Ax::Math::Random::randDouble(-N,N);
+        double y = Ax::Math::Random::randDouble(-N,N);
+        double z = Ax::Math::Random::randDouble(-N,N);
 
-        float r = Ax::Math::Random::randDouble(0.1,1.0);
-        float g = Ax::Math::Random::randDouble(0.1,1.0);
-        float b = Ax::Math::Random::randDouble(0.1,1.0);
-
-        //glm::vec3 pos = {x,y,z};
         Ax::Entity::Entity e{{x,y,z}};
-        e.color = {r,g,b};
-        positions.push_back(e);
+        entities.push_back(e);
     }
-
 
 
     while (!glfwWindowShouldClose(window.getWindow()))
@@ -112,20 +67,14 @@ int main(int argc, const char *argv[])
         /* Poll for and process events */
         glfwPollEvents();
 
-        camera.update(1.0f);
-        model = glm::rotate(model, glm::radians((float)glfwGetTime()), {1,1,1});
-
-        shader.use();
-        shader.setMat4("projection", camera.getProjection());
-        shader.setMat4("view", camera.getView());
-        shader.setMat4("model", model);
-
         renderer.clear();
 
-        for(auto p : positions)
+        for(auto e:entities)
         {
-            renderer.basicDraw(&vao, shader, p);
+            renderer.basicDraw(&camera, shader, e);
         }
+        //renderer.basicDraw(shader, e);
+        //renderer.drawRectangle(e);
 
         //renderer.basicDraw(&vao, shader, {0,10,-100});
         //glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
