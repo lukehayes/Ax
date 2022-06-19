@@ -10,12 +10,16 @@
 #include <memory>
 #include "Ax/Mesh/MeshFactory.h"
 
+using meshMap = std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>>;
+
 namespace Ax::Renderer
 {
     class Renderer
     {
     public:
-        Renderer() {}
+        Renderer() {
+            this->vaoMap = this->meshFactory.getVAOMap();
+        }
         ~Renderer() {}
 
         /**
@@ -58,26 +62,34 @@ namespace Ax::Renderer
             glDrawArrays(primitive, 0, 8);
         }
 
-        std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> vaoMap;
-        Ax::GL::Shader shader;
-
-        void basicDraw(GLUI* vao, Ax::GL::Shader& shader, const Ax::Entity::Entity e)
+        void basicDraw(Ax::GL::Shader& shader, const Ax::Entity::Entity e)
         {
             static float c = 0.0;
             c += 0.001;
 
+            // Get the pointer to a VAO
+            std::shared_ptr<Ax::GL::VertexArray> vaoObject = this->vaoMap["rectangle"];
+
+            // Set model matrix for the current model
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, e.position);
             model = glm::rotate(model, (float)std::sin(c), {1,1,1});
             model = glm::scale(model, {10,10,10});
-            glBindVertexArray(*vao);
+
+            vaoObject->bind();
+
             shader.use();
             this->shader.setMat4("model", model);
             this->shader.setFloat("c", c);
             this->shader.setVec3("color", e.color);
             glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         }
+
+        meshMap vaoMap;
+        Ax::GL::Shader shader;
+        Ax::Mesh::MeshFactory meshFactory;
     };
+
 
 }
 
