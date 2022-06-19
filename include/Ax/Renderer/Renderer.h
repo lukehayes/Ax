@@ -9,6 +9,7 @@
 #include "Ax/Entity/Entity.h"
 #include <memory>
 #include "Ax/Mesh/MeshFactory.h"
+#include "Ax/Camera/Camera3D.h"
 
 using meshMap = std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>>;
 
@@ -62,10 +63,10 @@ namespace Ax::Renderer
             glDrawArrays(primitive, 0, 8);
         }
 
-        void basicDraw(Ax::GL::Shader& shader, const Ax::Entity::Entity e)
+        void basicDraw(Ax::Camera::Camera3D* camera, Ax::GL::Shader& shader, const Ax::Entity::Entity e)
         {
-            static float c = 0.0;
-            c += 0.001;
+            static double c = 0.0;
+            c += 0.0001;
 
             // Get the pointer to a VAO
             std::shared_ptr<Ax::GL::VertexArray> vaoObject = this->vaoMap["rectangle"];
@@ -79,9 +80,14 @@ namespace Ax::Renderer
             vaoObject->bind();
 
             shader.use();
+
+            camera->update(0.0f);
+            this->shader.setMat4("projection", camera->getProjection());
+            this->shader.setMat4("view", camera->getView());
             this->shader.setMat4("model", model);
             this->shader.setFloat("c", c);
             this->shader.setVec3("color", e.color);
+
             glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         }
 
