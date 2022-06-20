@@ -63,7 +63,7 @@ namespace Ax::Renderer
             glDrawArrays(primitive, 0, 8);
         }
 
-        void basicDraw(Ax::Camera::Camera3D* camera, Ax::GL::Shader& shader, const Ax::Entity::Entity e)
+        void basicDraw(Ax::Camera::Camera3D* camera, Ax::GL::Shader& shader, const Ax::Entity::Entity e, double delta)
         {
             static double c = 0.0;
             c += 0.0001;
@@ -81,11 +81,10 @@ namespace Ax::Renderer
 
             shader.use();
 
-            camera->update(0.0f);
+            camera->update(delta);
             this->shader.setMat4("projection", camera->getProjection());
             this->shader.setMat4("view", camera->getView());
             this->shader.setMat4("model", model);
-            this->shader.setFloat("c", c);
             this->shader.setVec3("color", e.color);
 
             glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
