@@ -10,6 +10,10 @@ namespace Ax::Entity
         public:
             Entity() {}
             Entity(const glm::vec3& pos) : position(pos) {}
+            Entity(const glm::vec3& pos, const glm::vec3& color)
+                : position(pos),
+                  color(color)
+            {}
             ~Entity() {}
 
             glm::vec3 position = {0,0,0};
