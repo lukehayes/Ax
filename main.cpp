@@ -48,16 +48,20 @@ int main(int argc, const char *argv[])
     Ax::Camera::Camera3D camera;
     Ax::Renderer::Renderer renderer;
     Ax::GL::Shader shader;
+    Ax::Entity::Entity e;
 
-    int N = 100;
+    int N = 40;
     std::vector<Ax::Entity::Entity> entities;
     for(int i = 0; i <= MAX_ENTITIES; i++)
     {
         double x = Ax::Math::Random::randDouble(-N,N);
         double y = Ax::Math::Random::randDouble(-N,N);
         double z = Ax::Math::Random::randDouble(-N,N);
+        double r = Ax::Math::Random::randDouble(0.1,0.3);
+        double g = Ax::Math::Random::randDouble(0.6,0.8);
+        double b = Ax::Math::Random::randDouble(0.7,1.0);
 
-        Ax::Entity::Entity e{{x,y,z}};
+        Ax::Entity::Entity e{{x,y,z}, {r,g,b}};
         entities.push_back(e);
     }
 
