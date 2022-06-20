@@ -75,7 +75,7 @@ namespace Ax::Renderer
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, e.position);
             model = glm::rotate(model, (float)std::sin(c), {1,1,1});
-            model = glm::scale(model, {10,10,10});
+            model = glm::scale(model, {e.scale, e.scale, e.scale});
 
             vaoObject->bind();
 
