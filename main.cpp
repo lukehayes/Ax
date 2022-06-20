@@ -65,24 +65,34 @@ int main(int argc, const char *argv[])
         entities.push_back(e);
     }
 
+    double currentTime = glfwGetTime();
+    double previousTime = 0;
+    double delta = 0;
+    const double MS_PER_UPDATE = 0.15f;
 
     while (!glfwWindowShouldClose(window.getWindow()))
     {
         /* Poll for and process events */
         glfwPollEvents();
 
-        renderer.clear();
+        previousTime = currentTime;
+        currentTime = glfwGetTime();
+        delta = currentTime - previousTime;
 
+
+        if(delta > MS_PER_UPDATE)
+        {
+            delta = MS_PER_UPDATE;
+            camera.update(delta);
+        }
+
+        //camera.updateFPS(mx,my);
+        renderer.clear({0.1,0.1,0.1});
+        //renderer.basicDraw(&camera, shader, e);
         for(auto e:entities)
         {
-            renderer.basicDraw(&camera, shader, e);
+            renderer.basicDraw(&camera, shader, e, delta);
         }
-        //renderer.basicDraw(shader, e);
-        //renderer.drawRectangle(e);
-
-        //renderer.basicDraw(&vao, shader, {0,10,-100});
-        //glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
-        //glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0,4, MAX_PARTICLES);
 
         glfwSwapBuffers(window.getWindow());
         glfwSetFramebufferSizeCallback(window.getWindow(), framebuffer_callback);
