@@ -50,18 +50,21 @@ int main(int argc, const char *argv[])
     Ax::GL::Shader shader;
     Ax::Entity::Entity e;
 
-    int N = 40;
+    int N = 100;
     std::vector<Ax::Entity::Entity> entities;
     for(int i = 0; i <= MAX_ENTITIES; i++)
     {
         double x = Ax::Math::Random::randDouble(-N,N);
         double y = Ax::Math::Random::randDouble(-N,N);
         double z = Ax::Math::Random::randDouble(-N,N);
-        double r = Ax::Math::Random::randDouble(0.1,0.3);
+        double r = Ax::Math::Random::randDouble(0.5,0.8);
         double g = Ax::Math::Random::randDouble(0.6,0.8);
         double b = Ax::Math::Random::randDouble(0.7,1.0);
+        double s = Ax::Math::Random::randDouble(1.0,10.0);
 
         Ax::Entity::Entity e{{x,y,z}, {r,g,b}};
+        e.scale = s;
+        //Ax::Entity::Entity e{{x,y,z}};
         entities.push_back(e);
     }
 
@@ -79,7 +82,6 @@ int main(int argc, const char *argv[])
         currentTime = glfwGetTime();
         delta = currentTime - previousTime;
 
-
         if(delta > MS_PER_UPDATE)
         {
             delta = MS_PER_UPDATE;
@@ -87,8 +89,9 @@ int main(int argc, const char *argv[])
         }
 
         //camera.updateFPS(mx,my);
-        renderer.clear({0.1,0.1,0.1});
-        //renderer.basicDraw(&camera, shader, e);
+        renderer.clear({0.3,0.3,0.3});
+        //renderer.basicDraw(&camera, shader, e, delta);
+
         for(auto e:entities)
         {
             renderer.basicDraw(&camera, shader, e, delta);
