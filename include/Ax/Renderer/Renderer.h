@@ -9,13 +9,18 @@
 #include "Ax/Entity/Entity.h"
 #include <memory>
 #include "Ax/Mesh/MeshFactory.h"
+#include "Ax/Camera/Camera3D.h"
+
+using meshMap = std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>>;
 
 namespace Ax::Renderer
 {
     class Renderer
     {
     public:
-        Renderer() {}
+        Renderer() {
+            this->vaoMap = this->meshFactory.getVAOMap();
+        }
         ~Renderer() {}
 
         /**
@@ -48,7 +53,7 @@ namespace Ax::Renderer
         {
             glm::mat4 model = glm::mat4(1.0f);
             model = glm::translate(model, entity.position);
-            model = glm::rotate(model, glm::radians((float)0f), {1,1,1});
+            model = glm::rotate(model, glm::radians((float)0.0f), {1,1,1});
 
             std::shared_ptr<Ax::GL::VertexArray> vao = this->vaoMap["rectangle"];
             vao->bind();
@@ -58,9 +63,39 @@ namespace Ax::Renderer
             glDrawArrays(primitive, 0, 8);
         }
 
-        std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>> vaoMap;
+        void basicDraw(Ax::Camera::Camera3D* camera, Ax::GL::Shader& shader, const Ax::Entity::Entity e, double delta)
+        {
+            static double c = 0.0;
+            c += 0.0001;
+
+            // Get the pointer to a VAO
+            std::shared_ptr<Ax::GL::VertexArray> vaoObject = this->vaoMap["rectangle"];
+
+            // Set model matrix for the current model
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, e.position);
+            model = glm::rotate(model, (float)std::sin(c), {1,1,1});
+            model = glm::scale(model, {e.scale, e.scale, e.scale});
+
+            vaoObject->bind();
+
+            shader.use();
+
+            camera->update(delta);
+            this->shader.setMat4("projection", camera->getProjection());
+            this->shader.setMat4("view", camera->getView());
+            this->shader.setMat4("model", model);
+            this->shader.setVec3("color", e.color);
+
+            glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
+        }
+
+        meshMap vaoMap;
         Ax::GL::Shader shader;
+        Ax::Mesh::MeshFactory meshFactory;
     };
+
+
 }
 
 

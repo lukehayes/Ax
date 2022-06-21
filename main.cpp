@@ -9,6 +9,7 @@
 #include "Ax/Camera/Camera3D.h"
 
 int wireframe_mode = false;
+constexpr int ENT = 10;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){    
     if ((key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) && action == GLFW_PRESS){
@@ -44,55 +45,57 @@ void framebuffer_callback(GLFWwindow* window, int width, int height){
 int main(int argc, const char *argv[])
 {
     Ax::System::Window window;
-    Ax::Mesh::MeshFactory factory;
-
-    Ax::Renderer::Renderer renderer;
-    renderer.vaoMap = factory.getVAOMap();
-
-
     Ax::Camera::Camera3D camera;
+    Ax::Renderer::Renderer renderer;
     Ax::GL::Shader shader;
+    Ax::Entity::Entity e;
 
-    Ax::Entity::Entity e({0,0,0});
-    e.color = {0.2,0.3,0.8};
-    e.scale = 5;
-
+    int N = 100;
     std::vector<Ax::Entity::Entity> entities;
+    for(int i = 0; i <= MAX_ENTITIES; i++)
+    {
+        double x = Ax::Math::Random::randDouble(-N,N);
+        double y = Ax::Math::Random::randDouble(-N,N);
+        double z = Ax::Math::Random::randDouble(-N,N);
+        double r = Ax::Math::Random::randDouble(0.5,0.8);
+        double g = Ax::Math::Random::randDouble(0.6,0.8);
+        double b = Ax::Math::Random::randDouble(0.7,1.0);
+        double s = Ax::Math::Random::randDouble(1.0,10.0);
 
-        for(int i = 0; i<= MAX_ENTITIES; i++ )
-        {
-            double x = Ax::Math::Random::randInt(-10,10);
-            double y = Ax::Math::Random::randInt(-10,10);
-            double z = Ax::Math::Random::randInt(-10,10);
+        Ax::Entity::Entity e{{x,y,z}, {r,g,b}};
+        e.scale = s;
+        //Ax::Entity::Entity e{{x,y,z}};
+        entities.push_back(e);
+    }
 
-            Ax::Entity::Entity e({x,y,z});
-            e.color = {0.2,0.2,0.2};
-
-            entities.push_back(e);
-        }
+    double currentTime = glfwGetTime();
+    double previousTime = 0;
+    double delta = 0;
+    const double MS_PER_UPDATE = 0.15f;
 
     while (!glfwWindowShouldClose(window.getWindow()))
     {
         /* Poll for and process events */
         glfwPollEvents();
 
-        camera.update(1.0f);
+        previousTime = currentTime;
+        currentTime = glfwGetTime();
+        delta = currentTime - previousTime;
 
-        shader.use();
-        shader.setMat4("projection", camera.getProjection());
-        shader.setMat4("view", camera.getView());
-
-        renderer.clear();
-
-
-        for(auto &e:entities)
+        if(delta > MS_PER_UPDATE)
         {
-            renderer.drawCube(e);
+            delta = MS_PER_UPDATE;
+            camera.update(delta);
         }
 
+        //camera.updateFPS(mx,my);
+        renderer.clear({0.3,0.3,0.3});
+        //renderer.basicDraw(&camera, shader, e, delta);
 
-        renderer.drawCube(e);
-        //renderer.drawRectangle(e);
+        for(auto e:entities)
+        {
+            renderer.basicDraw(&camera, shader, e, delta);
+        }
 
         glfwSwapBuffers(window.getWindow());
         glfwSetFramebufferSizeCallback(window.getWindow(), framebuffer_callback);
