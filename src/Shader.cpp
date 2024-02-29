@@ -5,8 +5,8 @@ namespace Ax::GL
 
     Shader::Shader()
     {
-        this->vertexSource   = this->_readShaderFile("assets/shaders/VSH-Default.glsl");
-        this->fragmentSource = this->_readShaderFile("assets/shaders/FSH-Default.glsl");
+        this->vertexSource   = this->_readShaderFile("../assets/shaders/VSH-Default.glsl");
+        this->fragmentSource = this->_readShaderFile("../assets/shaders/FSH-Default.glsl");
 
         _createShader(this->vertexID, this->vertexSource.c_str(), GL_VERTEX_SHADER, "VERTEX");
         _createShader(this->fragmentID, this->fragmentSource.c_str(), GL_FRAGMENT_SHADER, "FRAGMENT");
