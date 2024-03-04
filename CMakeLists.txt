@@ -8,8 +8,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(INCLUDE_DIRS "include")
 set(BIN_NAME "Ax")
 
-add_definitions(-DDEBUG)
-add_definitions(-DMAX_ENTITIES)
+#add_compile_definitions(DEBUG=true)
+#add_compile_definitions(MAX_ENTITIES=100)
+add_definitions(DEBUG=true)
+add_definitions(MAX_ENTITIES=100)
 
 # Find all source files.
 # 
