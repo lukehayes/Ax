@@ -11,6 +11,15 @@
 int wireframe_mode = false;
 constexpr int ENT = 10;
 
+double mx = 0;
+double my = 0;
+
+static void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    mx = xpos;
+    my = ypos;
+}
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods){    
     if ((key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) && action == GLFW_PRESS){
         glfwSetWindowShouldClose(window, GL_TRUE); 
@@ -28,14 +37,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 }
 
 
-double mx = 0;
-double my = 0;
-
-static void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-{
-    mx = xpos;
-    my = ypos;
-}
 
 // Redraw the window correctly when the window is resized.
 void framebuffer_callback(GLFWwindow* window, int width, int height){
