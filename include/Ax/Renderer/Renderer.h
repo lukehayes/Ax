@@ -81,7 +81,11 @@ namespace Ax::Renderer
 
             shader.use();
 
-            camera->update(delta);
+            // Not sure why this was here but it makes rendering happen
+            // twice so have disabled it for now.
+            //
+            //camera->update(delta);
+        //
             this->shader.setMat4("projection", camera->getProjection());
             this->shader.setMat4("view", camera->getView());
             this->shader.setMat4("model", model);
