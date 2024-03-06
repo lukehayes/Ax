@@ -11,6 +11,7 @@
 #include "Ax/Mesh/MeshFactory.h"
 #include "Ax/Camera/Camera3D.h"
 
+
 using meshMap = std::map<std::string, std::shared_ptr<Ax::GL::VertexArray>>;
 
 namespace Ax::Renderer
@@ -36,9 +37,9 @@ namespace Ax::Renderer
         void drawCube(Ax::Entity::Entity& entity, const Ax::GL::Primitive& primitive = GL::TRIANGLES)
         {
             glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, entity.position);
+            model = glm::translate(model, entity.transform.position);
             model = glm::rotate(model, glm::radians((float)45.0f), {1,1,1});
-            model = glm::scale(model, {entity.scale, entity.scale, entity.scale});
+            model = glm::scale(model, entity.transform.scale);
 
             std::shared_ptr<Ax::GL::VertexArray> vao = this->vaoMap["cube"];
             vao->bind();
@@ -52,7 +53,7 @@ namespace Ax::Renderer
         void drawRectangle(Ax::Entity::Entity& entity, const Ax::GL::Primitive& primitive = GL::TRIANGLE_STRIP)
         {
             glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, entity.position);
+            model = glm::translate(model, entity.transform.position);
             model = glm::rotate(model, glm::radians((float)0.0f), {1,1,1});
 
             std::shared_ptr<Ax::GL::VertexArray> vao = this->vaoMap["rectangle"];
@@ -63,7 +64,7 @@ namespace Ax::Renderer
             glDrawArrays(primitive, 0, 8);
         }
 
-        void basicDraw(Ax::Camera::Camera3D* camera, Ax::GL::Shader& shader, const Ax::Entity::Entity e, double delta)
+        void basicDraw(Ax::Camera::Camera3D* camera, Ax::GL::Shader& shader, const Ax::Entity::Entity entity, double delta)
         {
             static double c = 0.0;
             c += 0.0001;
@@ -73,9 +74,9 @@ namespace Ax::Renderer
 
             // Set model matrix for the current model
             glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, e.position);
+            model = glm::translate(model, entity.transform.position);
             model = glm::rotate(model, (float)std::sin(c), {1,1,1});
-            model = glm::scale(model, {e.scale, e.scale, e.scale});
+            model = glm::scale(model, entity.transform.scale);
 
             vaoObject->bind();
 
@@ -89,7 +90,7 @@ namespace Ax::Renderer
             this->shader.setMat4("projection", camera->getProjection());
             this->shader.setMat4("view", camera->getView());
             this->shader.setMat4("model", model);
-            this->shader.setVec3("color", e.color);
+            this->shader.setVec3("color", entity.color);
 
             glDrawArrays(GL_TRIANGLE_STRIP, 0,4);
         }
